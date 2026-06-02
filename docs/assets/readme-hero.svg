@@ -1,0 +1,75 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">AjoClub product workspace</title>
+  <desc id="desc">Animated README hero showing AjoClub moving from landing, catalog, portfolio, leads, admin, and SaaS operations.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F172A"/>
+      <stop offset="0.45" stop-color="#111827"/>
+      <stop offset="1" stop-color="#123524"/>
+    </linearGradient>
+    <linearGradient id="line" x1="215" y1="256" x2="983" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38BDF8"/>
+      <stop offset="0.5" stop-color="#A7F3D0"/>
+      <stop offset="1" stop-color="#FACC15"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="420" rx="28" fill="url(#bg)"/>
+
+  <g opacity="0.34">
+    <circle cx="106" cy="78" r="2" fill="#E5E7EB"/>
+    <circle cx="196" cy="48" r="2" fill="#A7F3D0"/>
+    <circle cx="1030" cy="70" r="2" fill="#FACC15"/>
+    <circle cx="1110" cy="134" r="2" fill="#38BDF8"/>
+    <circle cx="82" cy="346" r="2" fill="#A7F3D0"/>
+    <circle cx="1076" cy="338" r="2" fill="#E5E7EB"/>
+  </g>
+
+  <g>
+    <text x="76" y="98" fill="#F8FAFC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="54" font-weight="800">AjoClub</text>
+    <text x="80" y="138" fill="#CBD5E1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="20">catalog, portfolio, and SaaS platform workspace</text>
+  </g>
+
+  <g transform="translate(78 194)" filter="url(#shadow)">
+    <rect width="262" height="150" rx="18" fill="#F8FAFC"/>
+    <rect x="22" y="24" width="92" height="12" rx="6" fill="#0F172A"/>
+    <rect x="22" y="52" width="202" height="10" rx="5" fill="#CBD5E1"/>
+    <rect x="22" y="74" width="154" height="10" rx="5" fill="#E2E8F0"/>
+    <rect x="22" y="108" width="72" height="26" rx="13" fill="#111827"/>
+    <rect x="108" y="108" width="84" height="26" rx="13" fill="#DCFCE7"/>
+    <text x="22" y="126" fill="#F8FAFC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">Landing</text>
+    <text x="125" y="126" fill="#166534" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">Leads</text>
+  </g>
+
+  <g transform="translate(410 176)" filter="url(#shadow)">
+    <rect width="304" height="186" rx="18" fill="#F8FAFC"/>
+    <text x="24" y="38" fill="#111827" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="800">Catalog Engine</text>
+    <rect x="24" y="58" width="118" height="92" rx="14" fill="#E0F2FE"/>
+    <rect x="158" y="58" width="118" height="92" rx="14" fill="#FEF3C7"/>
+    <rect x="42" y="114" width="78" height="10" rx="5" fill="#0284C7"/>
+    <rect x="176" y="114" width="78" height="10" rx="5" fill="#B45309"/>
+    <rect x="24" y="164" width="238" height="8" rx="4" fill="#E2E8F0"/>
+  </g>
+
+  <g transform="translate(782 194)" filter="url(#shadow)">
+    <rect width="340" height="150" rx="18" fill="#F8FAFC"/>
+    <text x="24" y="38" fill="#111827" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="800">SaaS Operations</text>
+    <rect x="24" y="60" width="58" height="78" rx="10" fill="#BBF7D0"/>
+    <rect x="96" y="88" width="58" height="50" rx="10" fill="#BAE6FD"/>
+    <rect x="168" y="72" width="58" height="66" rx="10" fill="#FDE68A"/>
+    <rect x="240" y="48" width="58" height="90" rx="10" fill="#DDD6FE"/>
+  </g>
+
+  <path d="M215 256 C338 220 376 280 505 256 C616 236 700 232 850 256 C915 266 950 264 983 256" stroke="url(#line)" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+  <circle r="9" fill="#F8FAFC">
+    <animateMotion dur="5s" repeatCount="indefinite" path="M215 256 C338 220 376 280 505 256 C616 236 700 232 850 256 C915 266 950 264 983 256"/>
+  </circle>
+
+  <g opacity="0.92">
+    <text x="80" y="382" fill="#CBD5E1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16">One repo first. Production aware. Client flexible.</text>
+    <text x="894" y="382" fill="#A7F3D0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">Next.js + TypeScript</text>
+  </g>
+</svg>
