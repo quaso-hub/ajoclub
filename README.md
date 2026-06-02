@@ -135,17 +135,7 @@ docs/technical/    setup, architecture, security, deployment
 
 [![AjoClub contributors](https://contrib.rocks/image?repo=quaso-hub/ajoclub)](https://github.com/quaso-hub/ajoclub/graphs/contributors)
 
-Contributor avatars are generated from GitHub history. Use the table below for
-internal ownership, because contribution count does not always match decision
-authority.
-
-| Contributor | Role | Area | Notes |
-| --- | --- | --- | --- |
-| `quaso-hub` | Maintainer | Repository, implementation, technical direction | GitHub owner |
-| `rstu` | Contributor | Project history | Seen in git history |
-
-For fuller attribution later, add `all-contributors` or a GitHub Action that
-updates this section from repository metadata.
+Maintained by [`quaso-hub`](https://github.com/quaso-hub).
 
 ## Working Agreements
 
