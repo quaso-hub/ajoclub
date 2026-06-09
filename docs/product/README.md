@@ -1,77 +1,77 @@
-# Product Documentation
+# Dokumentasi Produk
 
-Scope, roadmap, and delivery notes for AjoClub.
+Scope, roadmap, dan catatan delivery AjoClub.
 
-## What We Build
+## Apa yang Kami Bangun
 
-| Product Type | Tech Approach | Target |
-|-------------|--------------|--------|
-| Landing Pages | Nuxt SSG (static export) | SMBs, startups |
-| Company Profiles | Nuxt SSG + CMS | Corporate clients |
-| SaaS Applications | Nuxt SSR + Supabase | Startups, enterprises |
-| PWA | Nuxt + @vite-pwa/nuxt | Any client needing installable app |
-| Mobile Apps | Nuxt + Capacitor.js | Clients needing Android/iOS |
+| Tipe Produk | Pendekatan Teknis | Target |
+|-------------|------------------|--------|
+| Landing Page | Nuxt SSG (static export) | UMKM, startup |
+| Company Profile | Nuxt SSG + CMS | Perusahaan |
+| SaaS Application | Nuxt SSR + Supabase | Startup, enterprise |
+| PWA | Nuxt + @vite-pwa/nuxt | Klien yang butuh installable app |
+| Mobile App | Nuxt + Capacitor.js | Klien yang butuh Android/iOS |
 
-## Technical Approach Per Product
+## Pendekatan Teknis Per Produk
 
-### Landing Pages / Company Profiles
+### Landing Page / Company Profile
 
-- Build with `nuxt generate` (SSG)
-- Output: static HTML/CSS/JS files
-- Host in single Nginx container (50+ sites, ~30MB RAM total)
-- Custom domain per client via Nginx Proxy Manager
+- Build dengan `nuxt generate` (SSG)
+- Output: file HTML/CSS/JS statis
+- Host di satu container Nginx (50+ site, ~30MB RAM total)
+- Custom domain per klien via Nginx Proxy Manager
 - Auto SSL via Let's Encrypt
-- Load time target: < 1 second
+- Target load time: < 1 detik
 
-### SaaS Applications
+### SaaS Application
 
-- Build with `nuxt build` (SSR)
-- Each SaaS gets own Docker container
-- RAM limit per container: 256-512MB
-- Auth: Supabase Auth (JWT in HttpOnly cookies)
+- Build dengan `nuxt build` (SSR)
+- Setiap SaaS dapat container Docker sendiri
+- Limit RAM per container: 256-512MB
+- Auth: Supabase Auth (JWT di HttpOnly cookies)
 - RBAC: role-based access control
 - Database: PostgreSQL via Supabase/Neon
-- Multitenancy: `client_id` column isolation
+- Multitenancy: isolasi `tenant_id`
 
-### Mobile Apps
+### Mobile App
 
-- Build Nuxt app normally
-- Wrap with Capacitor.js
+- Build Nuxt app seperti biasa
+- Wrap dengan Capacitor.js
 - Output: Android APK/IPA
-- Access native features: camera, GPS, push notifications
-- Single codebase for web + mobile
+- Akses fitur native: kamera, GPS, push notifications
+- Single codebase untuk web + mobile
 
 ### PWA
 
-- Install @vite-pwa/nuxt module
-- Configure service worker
-- Enable offline caching
-- Installable on mobile without app store
+- Install modul @vite-pwa/nuxt
+- Konfigurasi service worker
+- Aktifkan offline caching
+- Bisa diinstall di HP tanpa app store
 
 ## Roadmap
 
-| Phase | Goal | Status |
-|-------|------|--------|
-| 0. Foundation | Repo, Docker, Nuxt scaffold, landing page | Active |
-| 1. Design System | Tailwind config, component library, typography | Planned |
-| 2. First Client | Deploy static site as proof of concept | Planned |
-| 3. SaaS Foundation | Auth, RBAC, database, multitenancy | Planned |
-| 4. Mobile | Capacitor.js integration, Android build | Planned |
-| 5. Scale | Multiple clients, monitoring, automation | Later |
+| Fase | Tujuan | Status |
+|------|--------|--------|
+| 0. Foundation | Repo, Docker, Nuxt scaffold, landing page | Aktif |
+| 1. Design System | Tailwind config, komponen library, typography | Rencana |
+| 2. Client Pertama | Deploy static site sebagai proof of concept | Rencana |
+| 3. SaaS Foundation | Auth, RBAC, database, multitenancy | Rencana |
+| 4. Mobile | Capacitor.js integrasi, Android build | Rencana |
+| 5. Scale | Multi-client, monitoring, otomasi | Nanti |
 
-## Client Onboarding Flow
+## Alur Onboarding Klien
 
-1. Client brief -> scope estimate
-2. Design in Figma (or direct to code for simple sites)
-3. Build with Nuxt.js + Tailwind CSS
-4. Deploy to VPS Docker container
-5. Configure custom domain + SSL
-6. Handoff: access credentials, documentation
+1. Brief klien -> estimasi scope
+2. Desain di Figma (atau langsung kode untuk site sederhana)
+3. Build dengan Nuxt.js + Tailwind CSS
+4. Deploy ke container Docker di VPS
+5. Konfigurasi custom domain + SSL
+6. Handoff: kredensial akses, dokumentasi
 
-## Quality Standards
+## Standar Kualitas
 
-- Lighthouse score: 90+ on all metrics
+- Skor Lighthouse: 90+ di semua metrik
 - Mobile-first responsive design
-- Accessibility: WCAG 2.1 AA minimum
-- Performance: < 2s load time for SSR, < 1s for SSG
-- Security: JWT HttpOnly, RBAC, HTTPS, Cloudflare proxy
+- Aksesibilitas: WCAG 2.1 AA minimum
+- Performa: < 2s load time untuk SSR, < 1s untuk SSG
+- Keamanan: JWT HttpOnly, RBAC, HTTPS, Cloudflare proxy

@@ -1,99 +1,200 @@
-# Technical Documentation
+# Dokumentasi Teknis
 
-Architecture, infrastructure, and deployment decisions for AjoClub.
+Arsitektur, infrastruktur, dan keputusan teknis AjoClub.
 
-## Stack Overview
+## Stack
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| Runtime | Node.js | 20 LTS |
-| Framework | Nuxt.js | 3.17.x |
-| UI Library | Vue.js | 3.5.x |
-| Language | TypeScript | 5.8.x |
-| CSS | Tailwind CSS | 3.4.x |
-| Component Lib | @nuxt/ui | 3.1.x |
-| State | Pinia | 3.0.x |
-| ORM | Prisma | 6.9.x |
-| Database | SQLite (dev) / PostgreSQL (prod) | - |
-| 3D | Three.js | 0.175.x |
-| Animation | GSAP + ScrollTrigger | 3.13.x |
-| Container | Docker | 24+ |
-| Reverse Proxy | Nginx Proxy Manager | latest |
-| Monitoring | Portainer | latest |
-| CDN/Security | Cloudflare | free tier |
+| Layer | Teknologi | Versi | Alasan |
+|-------|-----------|-------|--------|
+| Runtime | Node.js | 20 LTS | Stabil, ekosistem luas |
+| Framework | Nuxt.js | 3.21.x | Vue ecosystem, opinionated, RAM lebih rendah dari Next |
+| UI Library | Vue.js | 3.5.x | Reactive, composition API |
+| Bahasa | TypeScript | 5.8.x | Type safety, support IDE |
+| CSS | Tailwind CSS | 3.4.x | Utility-first, tanpa runtime overhead |
+| Komponen | @nuxt/ui | 3.1.x | Reka UI + Tailwind Variants |
+| State | Pinia | 3.0.x | SSR-safe, DevTools, modular |
+| ORM | Prisma | 6.19.x | Type-safe, migrations, multi-DB |
+| Database | PostgreSQL | 15+ | JSONB, RLS, terbukti di skala besar |
+| Auth | Supabase Auth | latest | JWT + RBAC + social login |
+| 3D | Three.js | 0.175.x | WebGL partikel effects |
+| Animasi | GSAP | 3.13.x | ScrollTrigger, production-grade |
+| Testing | Vitest + Playwright | latest | Unit + E2E |
+| Container | Docker | 24+ | Multi-stage builds |
+| Proxy | Nginx Proxy Manager | latest | Domain routing + auto SSL |
+| Monitoring | Portainer | latest | Docker dashboard |
+| CDN | Cloudflare | free | DNS, SSL, DDoS, edge caching |
 
-## Project Structure
+## Struktur Project
 
 ```
 apps/web/
-  components/          Vue components (auto-imported)
-    Hero3D.vue         Three.js particle sphere hero
-    Navbar.vue         Sticky navigation with scroll effects
-    ServicesSection.vue
-    WorkSection.vue
-    AboutSection.vue
-    ContactSection.vue
-    FooterSection.vue
-  composables/         Vue composables (auto-imported)
-    useThreeScene.ts   Three.js scene management
-    useGsapScroll.ts   GSAP ScrollTrigger utilities
+  app.vue              Root component (useHead, NuxtLayout, NuxtPage)
+  app.config.ts        Konfigurasi tema @nuxt/ui
+  nuxt.config.ts       Konfigurasi Nuxt (modules, routeRules, runtimeConfig)
+  pages/               File-based routing
+  components/          Auto-imported Vue components
+  composables/         Auto-imported logic (useState, useFetch, custom)
+  layouts/             Layout shells
   server/api/          Nitro API endpoints
-    contact.post.ts    Contact form submission
-    contacts.get.ts    List contacts
-  prisma/
-    schema.prisma      Database schema
-  assets/css/
-    main.css           Global styles + Tailwind
-  pages/
-    index.vue          Landing page
-  layouts/
-    default.vue        Default layout
+  server/middleware/    Auth, headers, rate limiting
+  middleware/          Client+server route middleware
+  plugins/             One per cross-cutting concern
+  utils/               Auto-imported pure functions
+  assets/css/          CSS (processed by Vite)
+  public/              Served as-is
+  prisma/              Database schema + migrations
 ```
 
-## Infrastructure
+## Rendering Strategy
 
-### Development
+Gunakan hybrid rendering per route:
 
-```bash
-npm install
-npm run dev         # http://localhost:3000
+```ts
+// nuxt.config.ts
+routeRules: {
+  '/':              { prerender: true },      // SSG - CDN cepat
+  '/about':         { prerender: true },      // SSG
+  '/blog/**':       { prerender: true },      // SSG
+  '/dashboard/**':  { ssr: true },            // SSR - per-user
+  '/admin/**':      { ssr: false },           // SPA - tidak perlu SEO
+  '/api/**':        { cors: true },           // API
+}
 ```
 
-### Production (DigitalOcean VPS)
-
-- VPS: 4 vCPU / 8GB RAM / 160GB NVMe ($48/mo)
-- OS: Ubuntu Server 24.04 LTS minimal CLI
-- Docker multi-container: app + Nginx Proxy Manager + Portainer
-- Database: Supabase or Neon (free tier), not on VPS
-- CDN: Cloudflare proxy (free)
-
-### Docker
-
-```bash
-# Local
-docker compose -f docker/docker-compose.yml up -d
-
-# Production
-docker compose -f docker/docker-compose.prod.yml up -d
-```
+| Tipe Konten | Mode | Alasan |
+|-------------|------|--------|
+| Marketing, docs, blog | SSG (`prerender: true`) | CDN-cepat, hosting gratis |
+| Product pages, news | ISR/SWR | Cukup segar, CDN-cepat |
+| Dashboard, akun | SSR | Personalized, per-user |
+| Admin tools | SPA (`ssr: false`) | Skip SEO, skip render cost |
 
 ## Database
 
-### Local Development (SQLite)
+### Multitenancy
 
-```bash
-npx prisma db push    # Create/update local database
-npx prisma studio     # Open database browser
+Pakai shared schema + `tenant_id` di setiap tabel domain:
+
+```prisma
+model Project {
+  id        String   @id @default(uuid())
+  tenantId  String   @map("tenant_id")    // wajib, NOT NULL
+  name      String
+  // ...
+}
 ```
 
-### Production (PostgreSQL)
+Aturan:
+1. Setiap tabel domain punya `tenant_id` (NOT NULL)
+2. DB trigger: error jika `tenant_id IS NULL` saat INSERT
+3. App middleware: `SET LOCAL app.tenant_id = :tenantId` per request
+4. Setiap query includes `WHERE tenant_id = :tenantId`
 
-Use Supabase or Neon free tier. Update DATABASE_URL in .env.
+### Soft Delete
 
-## Key Decisions
+```prisma
+model Project {
+  // ...
+  deletedAt DateTime? @map("deleted_at")
+}
+```
 
-- Nuxt.js over Next.js: lower RAM usage, better SSG, opinionated conventions
-- Capacitor.js over Flutter/RN: single codebase, no native overhead
-- Docker over K8s: K8s too expensive for free credits
-- External DB: saves VPS RAM, free tier sufficient
-- GSAP over Framer Motion: better scroll-driven animations, framework agnostic
+- Filter default: `WHERE deleted_at IS NULL`
+- Partial index: `CREATE INDEX ... ON projects(id) WHERE deleted_at IS NULL`
+- Retention: hard delete setelah 30-90 hari tergantung tipe data
+
+### Connection Pooling
+
+- Supabase: pakai Supavisor di port 6543 (bukan 5432)
+- Pool size: 15-20 untuk 8GB RAM VPS
+- Prisma: `connection_limit = 10` per instance
+
+## Security
+
+### JWT
+
+- Access token: 15 menit, HttpOnly cookie
+- Refresh token: 7 hari, HttpOnly + SameSite=Strict
+- Rotation: setiap refresh generate token baru
+- Reuse detection: jika token yang sudah dipakai dipresentasikan, revoke seluruh family
+
+### RBAC
+
+- Role: Owner > Admin > Manager > Member
+- Permission: granular key (e.g., `invoice:read`, `user:invite`)
+- Tenant isolation: `tenant_id` di setiap query
+
+### Security Headers
+
+```ts
+// server/middleware/security.ts
+setResponseHeaders(event, {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Content-Security-Policy': "default-src 'self'",
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+})
+```
+
+## Testing
+
+| Layer | Tool | Coverage |
+|-------|------|----------|
+| Unit | Vitest | Composables, utils, validators |
+| Component | Vue Test Utils + Vitest | Komponen kritis |
+| Integration | Vitest + Supertest | API routes |
+| E2E | Playwright | User flows |
+| Visual | Playwright screenshots | Layout regression |
+| Performance | Lighthouse CI | Core Web Vitals |
+
+Prioritas test:
+1. Input validation (Zod schemas)
+2. Auth flows (login, refresh, logout)
+3. Data access (tenant isolation, CRUD)
+4. Critical user flows (contact form, project creation)
+5. Components (hanya yang kompleks)
+
+## Docker
+
+### Multi-stage Build
+
+```dockerfile
+# Stage 1: Build
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+RUN npx nuxt build
+
+# Stage 2: Production
+FROM node:20-alpine
+WORKDIR /app
+RUN addgroup -g 1001 -S nodejs && adduser -S nuxt -u 1001
+COPY --from=build --chown=nuxt:nodejs /app/.output ./.output
+USER nuxt
+EXPOSE 3000
+CMD ["node", ".output/server/index.mjs"]
+```
+
+### Health Check
+
+```ts
+// server/api/health.get.ts
+export default defineEventHandler(() => ({
+  status: 'ok',
+  timestamp: new Date().toISOString(),
+}))
+```
+
+## Keputusan Teknis
+
+| Keputusan | Alasan |
+|-----------|--------|
+| Nuxt.js over Next.js | RAM lebih rendah, SSG lebih baik, convention over configuration |
+| Capacitor over Flutter | Single codebase, tidak perlu native overhead |
+| Docker over K8s | K8s terlalu mahal untuk free credits |
+| External DB | Hemat RAM VPS, free tier cukup |
+| GSAP over Framer Motion | Scroll-driven animations lebih baik, framework agnostic |
+| Shared schema multitenancy | Biaya terendah, cukup untuk <10k tenant |
+| Soft delete + retention | Bisa restore, compliance-friendly |

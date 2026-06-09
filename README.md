@@ -1,30 +1,28 @@
 # AjoClub
 
-[![Stack](https://img.shields.io/badge/stack-Nuxt.js%203%20%2F%20TypeScript-111827?style=for-the-badge)](#stack)
-[![License](https://img.shields.io/badge/license-proprietary-7f1d1d?style=for-the-badge)](#license)
-[![Last Commit](https://img.shields.io/github/last-commit/quaso-hub/ajoclub?style=for-the-badge&color=0f766e)](https://github.com/quaso-hub/ajoclub/commits)
+[![Stack](https://img.shields.io/badge/stack-Nuxt.js%203%20%2F%20TypeScript-111827?style=for-the-badge)](#teknologi)
+[![License](https://img.shields.io/badge/license-proprietary-7f1d1d?style=for-the-badge)](#lisensi)
 
-Digital agency. We build landing pages, SaaS apps, and mobile experiences.
+Agensi digital. Kami bikin landing page, aplikasi SaaS, dan mobile app.
 
-## Stack
+## Teknologi
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| Framework | Nuxt.js 3 | 3.17.x |
-| UI Library | Vue.js | 3.5.x |
-| Language | TypeScript | 5.8.x |
+| Layer | Teknologi | Versi |
+|-------|-----------|-------|
+| Framework | Nuxt.js 3 | 3.21.x |
+| Bahasa | TypeScript | 5.8.x |
 | CSS | Tailwind CSS | 3.4.x |
-| Components | @nuxt/ui | 3.1.x |
+| Komponen | @nuxt/ui | 3.1.x |
 | State | Pinia | 3.0.x |
 | 3D | Three.js | 0.175.x |
-| Animation | GSAP | 3.13.x |
-| ORM | Prisma | 6.9.x |
-| Database | SQLite (dev) / PostgreSQL (prod) | - |
+| Animasi | GSAP | 3.13.x |
+| ORM | Prisma | 6.19.x |
+| Database | PostgreSQL | 15+ |
 | Backend | Nitro (built-in) | - |
-| Containers | Docker + Docker Compose | - |
+| Container | Docker + Docker Compose | - |
 | CDN | Cloudflare | free tier |
 
-## Quick Start
+## Mulai Development
 
 ```bash
 cd apps/web
@@ -32,67 +30,122 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000.
+Buka http://localhost:3000.
 
-## Project Structure
+## Struktur Project
 
 ```
 apps/web/
-  components/          Vue components
-  composables/         Shared logic (Three.js, GSAP)
-  server/api/          Backend API endpoints
-  prisma/              Database schema
-  pages/               Route pages
-  layouts/             Page layouts
-  assets/css/          Global styles
+  components/          Komponen Vue (auto-import)
+  composables/         Logic berbagi (Three.js, GSAP)
+  server/api/          Endpoint backend
+  prisma/              Schema database
+  pages/               Halaman routing
+  layouts/             Layout shell
+  assets/css/          Global style
+  app.config.ts        Konfigurasi tema @nuxt/ui
 docker/
   Dockerfile           Multi-stage production build
-  docker-compose.yml   Local development
-  docker-compose.prod.yml  Production deployment
+  docker-compose.yml   Development lokal
+  docker-compose.prod.yml  Deploy produksi
 docs/
-  business/            Services, pricing, positioning
-  product/             Scope, roadmap, delivery notes
-  technical/           Architecture, infrastructure, stack
+  business/            Layanan, pricing, positioning
+  product/             Scope, roadmap, delivery
+  technical/           Arsitektur, infrastruktur, stack
 ```
 
-## Features
+## Fitur
 
-- 3D particle hero with Three.js (mouse-reactive, 2000 particles)
-- GSAP scroll animations (fade-up, stagger, parallax, text reveal)
-- Contact form with SQLite backend (Prisma ORM)
+- Hero 3D partikel dengan Three.js (2000 partikel, mouse-reactive)
+- Animasi scroll GSAP (fade-up, stagger, parallax)
+- Form kontak dengan backend SQLite (Prisma ORM)
 - Responsive design (mobile/tablet/desktop)
-- Dark theme with premium typography (Inter + JetBrains Mono)
+- Dark theme dengan typography premium (Inter + JetBrains Mono)
 
 ## Development
 
 ```bash
 # Database
-npx prisma db push      # Create local database
+npx prisma db push      # Buat/update database lokal
 npx prisma studio       # Browse database
 
 # Build
-npm run build           # Production build
-npm run preview         # Preview production build
+npm run build           # Build produksi
+npm run preview         # Preview build produksi
+
+# Testing
+npx vitest              # Unit tests
+npx playwright test     # E2E tests
 ```
 
 ## Docker
 
 ```bash
-# Local
+# Lokal
 docker compose -f docker/docker-compose.yml up -d
 
-# Production
+# Produksi
 docker compose -f docker/docker-compose.prod.yml up -d
 ```
 
-## Documentation
+## Dokumentasi
 
-| Document | Location |
-|----------|----------|
-| Business | `docs/business/` |
-| Product | `docs/product/` |
-| Technical | `docs/technical/` |
+| Dokumen | Lokasi |
+|---------|--------|
+| Bisnis | `docs/business/` |
+| Produk | `docs/product/` |
+| Teknis | `docs/technical/` |
 
-## License
+## Arsitektur
 
-Private. No open-source license.
+```
+[Cloudflare DNS/CDN]
+        │
+        ▼
+[VPS: App Server] ─── 4 vCPU / 8GB RAM / 160GB NVMe
+  ├── Docker
+  │   ├── Nginx Proxy Manager (routing + SSL)
+  │   ├── Portainer (monitoring)
+  │   ├── Container: Client A (Nuxt SSR)
+  │   ├── Container: Client B (Nuxt SSR)
+  │   ├── Container: Static Sites (Nginx)
+  │   └── Container: Backend API (jika perlu)
+  └── Ubuntu Server 24.04 LTS minimal CLI
+
+[Supabase / Neon] ─── PostgreSQL (free tier)
+  ├── Auth (JWT + RBAC)
+  ├── Storage (file upload)
+  └── Database (multitenancy dengan tenant_id)
+```
+
+## Roadmap
+
+| Fase | Tujuan | Status |
+|------|--------|--------|
+| 0. Foundation | Repo, Docker, Nuxt scaffold, landing page | Aktif |
+| 1. Design System | Tailwind config, komponen library, typography | Rencana |
+| 2. Client Pertama | Deploy static site sebagai proof of concept | Rencana |
+| 3. SaaS Foundation | Auth, RBAC, database, multitenancy | Rencana |
+| 4. Mobile | Capacitor.js integrasi, Android build | Rencana |
+| 5. Scale | Multi-client, monitoring, otomasi | Nanti |
+
+## Tim
+
+| Role | Fokus |
+|------|-------|
+| Frontend | Vue.js, Nuxt.js, Tailwind CSS, UI/UX |
+| Backend | Nitro, NestJS, API design, database |
+| DevOps | Docker, VPS, CI/CD, monitoring |
+| Design / Client | Hubungan klien, desain, manajemen project |
+
+## Kontribusi
+
+- Branch: `feat/web-foundation`, `fix/auth-bug`
+- PR: satu fitur per PR
+- Commit: `feat:`, `fix:`, `docs:`, `chore:`
+- Bahasa: TypeScript di mana-mana
+- Rahasia: jangan pernah masuk git
+
+## Lisensi
+
+Proprietary. Tidak ada lisensi open-source.

@@ -1,91 +1,91 @@
-# Business Documentation
+# Dokumentasi Bisnis
 
-Positioning, services, and operational notes for AjoClub.
+Positioning, layanan, dan catatan operasional AjoClub.
 
-## About
+## Tentang
 
-AjoClub is a 4-person digital agency. We build websites, web apps, mobile apps, and SaaS platforms for clients. Our stack is unified around TypeScript, which lets us deliver fast across frontend, backend, and mobile.
+AjoClub adalah agensi digital 4 orang. Kami bikin website, web app, mobile app, dan platform SaaS untuk klien. Stack kami terunifikasi di sekitar TypeScript, yang memungkinkan delivery cepat di frontend, backend, dan mobile.
 
-## Services
+## Layanan
 
 ### Web Development
 
-- Landing pages and marketing sites
-- Company profiles and corporate websites
-- E-commerce storefronts
+- Landing page dan marketing site
+- Company profile dan website corporate
+- E-commerce storefront
 - Content management systems
 
 ### Application Development
 
-- SaaS platforms with multi-tenant architecture
-- Dashboard and analytics tools
+- Platform SaaS dengan arsitektur multi-tenant
+- Dashboard dan analytics tools
 - Internal business tools
-- API development and integration
+- API development dan integrasi
 
 ### Mobile Development
 
-- Hybrid mobile apps (Android + iOS from single codebase)
+- Hybrid mobile apps (Android + iOS dari single codebase)
 - Progressive Web Apps (installable, offline-capable)
-- Push notifications and native feature access
+- Push notifications dan akses fitur native
 
 ### Infrastructure
 
-- VPS setup and management
+- Setup dan manajemen VPS
 - Docker containerization
-- Domain and SSL configuration
-- CDN and security (Cloudflare)
+- Domain dan SSL configuration
+- CDN dan keamanan (Cloudflare)
 
-## Pricing Model
+## Model Pricing
 
-| Service | Approach |
-|---------|----------|
-| Landing Page | Fixed price, based on complexity |
-| Company Profile | Fixed price, includes CMS if needed |
-| SaaS MVP | Scoped per project, phased delivery |
-| Mobile App | Per-project, shares codebase with web |
-| Maintenance | Monthly retainer |
+| Layanan | Pendekatan |
+|---------|-----------|
+| Landing Page | Harga tetap, berdasarkan kompleksitas |
+| Company Profile | Harga tetap, termasuk CMS jika perlu |
+| SaaS MVP | Per-project, phased delivery |
+| Mobile App | Per-project, share codebase dengan web |
+| Maintenance | Retainer bulanan |
 
-## Operating Model
+## Model Operasional
 
 ```
-Client Brief
-    |
-    v
-Scope & Estimate
-    |
-    v
-Design & Build (Nuxt.js + TypeScript)
-    |
-    v
-Deploy (Docker on DigitalOcean VPS)
-    |
-    v
+Brief Klien
+    │
+    ▼
+Scope & Estimasi
+    │
+    ▼
+Desain & Build (Nuxt.js + TypeScript)
+    │
+    ▼
+Deploy (Docker di DigitalOcean VPS)
+    │
+    ▼
 Domain + SSL + Cloudflare
-    |
-    v
+    │
+    ▼
 Handoff & Maintenance
 ```
 
-## Infrastructure Budget
+## Budget Infrastruktur
 
-- Total credits: $800 (4 x $200 GitHub Student Developer Pack)
-- Strategy: relay one account at a time (~22 months free)
-- Monthly burn: ~$60/month (VPS $48 + DB $12 or free tier)
-- No upfront cost during development phase
+- Total kredit: $800 (4 x $200 GitHub Student Developer Pack)
+- Strategi: relay satu akun sekaligus (~22 bulan gratis)
+- Burn bulanan: ~$60/bulan (VPS $48 + DB $12 atau free tier)
+- Tanpa biaya di muka selama fase development
 
-## Team
+## Tim
 
-| Role | Focus |
+| Role | Fokus |
 |------|-------|
 | Frontend | Vue.js, Nuxt.js, Tailwind CSS, UI/UX |
 | Backend | Nitro, NestJS, API design, database |
 | DevOps | Docker, VPS, CI/CD, monitoring |
-| Design / Client | Client relations, design, project management |
+| Desain / Client | Hubungan klien, desain, manajemen project |
 
 ## Working Agreements
 
 - Conventional commits: feat:, fix:, docs:, chore:
-- One feature per PR
-- TypeScript everywhere
-- No secrets in git
-- Client stacks can vary; AjoClub default is Nuxt.js
+- Satu fitur per PR
+- TypeScript di mana-mana
+- Rahasia tidak boleh masuk git
+- Stack klien bisa bervariasi; default AjoClub adalah Nuxt.js
