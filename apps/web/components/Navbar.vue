@@ -31,24 +31,24 @@ onUnmounted(() => {
 <template>
   <nav
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-    :class="isScrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'"
+    :class="isScrolled ? 'bg-[var(--popover)]/90 backdrop-blur-xl border-b border-[var(--border)]' : 'bg-transparent'"
   >
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="#" class="text-xl font-bold tracking-tight">
-        <span class="text-white">Ajo</span><span class="text-cyan-400">Club</span>
+      <a href="#" class="text-xl font-bold tracking-tight text-[var(--foreground)]">
+        AjoClub
       </a>
 
       <div class="hidden md:flex items-center gap-8">
         <button
           v-for="link in links"
           :key="link.href"
-          class="text-sm text-white/60 hover:text-white transition-colors duration-300 tracking-wide uppercase"
+          class="text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors duration-300 tracking-wide uppercase"
           @click="scrollTo(link.href)"
         >
           {{ link.label }}
         </button>
         <button
-          class="px-5 py-2.5 bg-cyan-400 text-black text-sm font-semibold rounded-full hover:bg-cyan-300 transition-colors duration-300"
+          class="px-5 py-2.5 bg-[var(--primary)] text-[var(--primary-foreground)] text-sm font-semibold rounded-[var(--radius)] hover:opacity-90 transition-opacity duration-300"
           @click="scrollTo('#contact')"
         >
           Start a Project
@@ -56,15 +56,10 @@ onUnmounted(() => {
       </div>
 
       <button
-        class="md:hidden text-white"
+        class="md:hidden text-[var(--foreground)]"
         @click="isMobileMenuOpen = !isMobileMenuOpen"
       >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             v-if="!isMobileMenuOpen"
             stroke-linecap="round"
@@ -91,18 +86,18 @@ onUnmounted(() => {
     >
       <div
         v-if="isMobileMenuOpen"
-        class="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/5 px-6 pb-6"
+        class="md:hidden bg-[var(--popover)]/95 backdrop-blur-xl border-b border-[var(--border)] px-6 pb-6"
       >
         <button
           v-for="link in links"
           :key="link.href"
-          class="block w-full text-left py-3 text-white/70 hover:text-white transition-colors"
+          class="block w-full text-left py-3 text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
           @click="scrollTo(link.href)"
         >
           {{ link.label }}
         </button>
         <button
-          class="w-full mt-4 px-5 py-3 bg-cyan-400 text-black font-semibold rounded-full"
+          class="w-full mt-4 px-5 py-3 bg-[var(--primary)] text-[var(--primary-foreground)] font-semibold rounded-[var(--radius)]"
           @click="scrollTo('#contact')"
         >
           Start a Project

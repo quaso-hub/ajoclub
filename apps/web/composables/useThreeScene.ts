@@ -9,6 +9,35 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
   let mouse = { x: 0, y: 0 }
   let targetRotation = { x: 0, y: 0 }
 
+  function getThemeColors(): THREE.Color[] {
+    const styles = getComputedStyle(document.documentElement)
+    const primary = styles.getPropertyValue('--primary').trim()
+    const accent = styles.getPropertyValue('--accent').trim()
+    const muted = styles.getPropertyValue('--muted-foreground').trim()
+
+    const colors: THREE.Color[] = []
+    const tempEl = document.createElement('div')
+
+    tempEl.style.color = primary
+    document.body.appendChild(tempEl)
+    const computed = getComputedStyle(tempEl).color
+    document.body.removeChild(tempEl)
+
+    const match = computed.match(/\d+/g)
+    if (match && match.length >= 3) {
+      colors.push(new THREE.Color(`rgb(${match[0]}, ${match[1]}, ${match[2]})`))
+    }
+    else {
+      colors.push(new THREE.Color(0xe11d48))
+    }
+
+    colors.push(new THREE.Color(0xfb7185))
+    colors.push(new THREE.Color(0xfda4af))
+    colors.push(new THREE.Color(0x9f1239))
+
+    return colors
+  }
+
   function init() {
     if (!containerRef.value) return
 
@@ -44,12 +73,7 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
     const colors = new Float32Array(count * 3)
     const sizes = new Float32Array(count)
 
-    const colorPalette = [
-      new THREE.Color(0x00f0ff),
-      new THREE.Color(0x8b5cf6),
-      new THREE.Color(0xf97316),
-      new THREE.Color(0x10b981),
-    ]
+    const colorPalette = getThemeColors()
 
     for (let i = 0; i < count; i++) {
       const i3 = i * 3
@@ -91,11 +115,11 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
     const ambient = new THREE.AmbientLight(0xffffff, 0.2)
     scene.add(ambient)
 
-    const point1 = new THREE.PointLight(0x00f0ff, 2, 50)
+    const point1 = new THREE.PointLight(0xe11d48, 2, 50)
     point1.position.set(10, 10, 10)
     scene.add(point1)
 
-    const point2 = new THREE.PointLight(0x8b5cf6, 2, 50)
+    const point2 = new THREE.PointLight(0xfb7185, 2, 50)
     point2.position.set(-10, -10, 10)
     scene.add(point2)
   }

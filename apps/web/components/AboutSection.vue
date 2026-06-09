@@ -23,18 +23,18 @@ const principles = [
 </script>
 
 <template>
-  <section id="about" class="py-32 bg-black relative overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-cyan-400/5 rounded-full blur-[120px]" />
+  <section id="about" class="py-32 bg-[var(--background)] relative overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[var(--primary)]/5 rounded-full blur-[120px]" />
 
     <div class="max-w-7xl mx-auto px-6 relative">
       <div class="mb-20">
-        <p class="text-cyan-400 text-sm font-mono tracking-widest uppercase mb-4 about-title">
+        <p class="text-[var(--primary)] text-sm font-mono tracking-widest uppercase mb-4 about-title">
           About Us
         </p>
-        <h2 class="text-4xl md:text-5xl font-bold text-white about-title">
+        <h2 class="text-4xl md:text-5xl font-bold text-[var(--foreground)] about-title">
           A small team with
           <br />
-          <span class="text-white/40">big ambitions.</span>
+          <span class="text-[var(--muted-foreground)]">big ambitions.</span>
         </h2>
       </div>
 
@@ -42,12 +42,12 @@ const principles = [
         <div
           v-for="stat in stats"
           :key="stat.label"
-          class="text-center p-6 rounded-2xl border border-white/5 bg-white/[0.02] stat-card"
+          class="text-center p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] stat-card"
         >
-          <div class="text-4xl md:text-5xl font-bold text-white mb-2">
+          <div class="text-4xl md:text-5xl font-bold text-[var(--foreground)] mb-2">
             {{ stat.value }}
           </div>
-          <div class="text-sm text-white/40 font-mono uppercase tracking-wider">
+          <div class="text-sm text-[var(--muted-foreground)] font-mono uppercase tracking-wider">
             {{ stat.label }}
           </div>
         </div>
@@ -59,13 +59,13 @@ const principles = [
           :key="i"
           class="principle-card"
         >
-          <div class="text-6xl font-bold text-white/5 mb-4">
+          <div class="text-6xl font-bold text-[var(--muted)]/50 mb-4">
             {{ String(i + 1).padStart(2, '0') }}
           </div>
-          <h3 class="text-lg font-semibold text-white mb-3">
+          <h3 class="text-lg font-semibold text-[var(--foreground)] mb-3">
             {{ principle.title }}
           </h3>
-          <p class="text-white/40 text-sm leading-relaxed">
+          <p class="text-[var(--muted-foreground)] text-sm leading-relaxed">
             {{ principle.description }}
           </p>
         </div>

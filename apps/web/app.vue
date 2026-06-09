@@ -5,9 +5,11 @@ useHead({
   titleTemplate: (title) => title ? `${title} — ${config.public.appName}` : config.public.appName,
   htmlAttrs: {
     lang: 'en',
+    class: 'dark',
+    'data-theme': 'dark',
   },
   bodyAttrs: {
-    class: 'bg-black text-white antialiased',
+    class: 'antialiased',
   },
 })
 </script>
