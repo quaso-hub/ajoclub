@@ -1,0 +1,36 @@
+{
+  "name": "@ajoclub/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "typecheck": "nuxt typecheck",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "nuxt": "^3.17.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.0",
+    "@nuxt/ui": "^3.0.0",
+    "@pinia/nuxt": "^0.10.0",
+    "pinia": "^3.0.0",
+    "three": "^0.172.0",
+    "@types/three": "^0.172.0",
+    "gsap": "^3.12.0",
+    "@prisma/client": "^6.9.0"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.0.0",
+    "@nuxtjs/tailwindcss": "^6.13.0",
+    "typescript": "^5.7.0",
+    "vue-tsc": "^2.2.0",
+    "prisma": "^6.9.0"
+  }
+}

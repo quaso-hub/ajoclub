@@ -1,0 +1,41 @@
+# Local development
+services:
+  web:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ../apps/web:/app
+      - /app/node_modules
+    command: pnpm dev
+
+  # Nginx Proxy Manager — manage domains + SSL via web UI
+  npm:
+    image: jc21/nginx-proxy-manager:latest
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    volumes:
+      - npm-data:/data
+      - npm-letsencrypt:/etc/letsencrypt
+    restart: unless-stopped
+
+  # Portainer — Docker monitoring dashboard
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    restart: unless-stopped
+
+volumes:
+  npm-data:
+  npm-letsencrypt:
+  portainer-data:

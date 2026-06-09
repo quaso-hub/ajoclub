@@ -1,0 +1,12 @@
+node_modules
+.next
+.nuxt
+.output
+dist
+.git
+.local
+*.md
+!README.md
+.env
+.env.*
+!.env.example

@@ -1,0 +1,70 @@
+# Production deployment on DigitalOcean VPS
+# Usage: docker compose -f docker-compose.prod.yml up -d
+
+services:
+  # Main AjoClub web app (Nuxt SSR)
+  web:
+    image: quasohub/ajoclub-web:latest
+    container_name: ajoclub-web
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+    networks:
+      - proxy
+
+  # Static sites container (Nginx, hosts 50+ client sites)
+  static-sites:
+    image: nginx:alpine
+    container_name: static-sites
+    restart: unless-stopped
+    mem_limit: 64m
+    volumes:
+      - ./nginx/static-sites.conf:/etc/nginx/nginx.conf:ro
+      - static-data:/usr/share/nginx/html
+    networks:
+      - proxy
+
+  # Nginx Proxy Manager — domain routing + auto SSL
+  npm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
+    mem_limit: 256m
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    volumes:
+      - npm-data:/data
+      - npm-letsencrypt:/etc/letsencrypt
+    networks:
+      - proxy
+
+  # Portainer — monitoring dashboard (lightweight)
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    mem_limit: 128m
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    name: proxy
+
+volumes:
+  npm-data:
+  npm-letsencrypt:
+  portainer-data:
+  static-data:

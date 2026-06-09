@@ -141,3 +141,27 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Prisma
+*.db
+*.db-journal
+
+# ============================================
+# LOCAL PLANNING & MEMORY (never commit)
+# ============================================
+.local/
+Konteks_Awal.md
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
