@@ -12,25 +12,30 @@
     "typecheck": "nuxt typecheck",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "nuxt": "^3.17.4",
-    "vue": "^3.5.16",
-    "vue-router": "^4.5.1",
     "@nuxt/ui": "^3.1.1",
     "@pinia/nuxt": "^0.10.1",
+    "@prisma/client": "^6.9.0",
+    "gsap": "^3.13.0",
+    "nuxt": "^3.17.4",
     "pinia": "^3.0.2",
     "three": "^0.175.0",
-    "gsap": "^3.13.0",
-    "@prisma/client": "^6.9.0",
-    "valibot": "^1.0.0"
+    "valibot": "^1.0.0",
+    "vue": "^3.5.16",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.4.1",
+    "@nuxt/test-utils": "^4.0.3",
     "@types/three": "^0.175.0",
+    "@vue/test-utils": "^2.4.11",
+    "prisma": "^6.9.0",
     "typescript": "^5.8.3",
-    "vue-tsc": "^2.2.10",
-    "prisma": "^6.9.0"
+    "vitest": "^4.1.8",
+    "vue-tsc": "^2.2.10"
   }
 }

@@ -28,6 +28,12 @@ export default defineNuxtConfig({
     },
   },
 
+  routeRules: {
+    '/': { prerender: true },
+    '/about': { prerender: true },
+    '/api/**': { cors: true },
+  },
+
   css: ['~/assets/css/main.css'],
 
   runtimeConfig: {
