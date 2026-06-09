@@ -1,112 +1,112 @@
 <script setup lang="ts">
-const form = reactive({ name: '', email: '', project: '', message: '' })
+import * as v from 'valibot'
+import type { FormSubmitEvent } from '@nuxt/ui'
+
+const schema = v.object({
+  name: v.pipe(v.string(), v.minLength(1, 'Name is required')),
+  email: v.pipe(v.string(), v.email('Invalid email')),
+  project: v.optional(v.string()),
+  message: v.pipe(v.string(), v.minLength(1, 'Message is required')),
+})
+type Schema = v.InferOutput<typeof schema>
+
+const state = reactive({ name: '', email: '', project: '', message: '' })
 const isSubmitting = ref(false)
 const isSubmitted = ref(false)
-const errorMessage = ref('')
+const toast = useToast()
 
-async function handleSubmit() {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   isSubmitting.value = true
-  errorMessage.value = ''
   try {
-    const res = await $fetch('/api/contact', { method: 'POST', body: form })
+    const res = await $fetch('/api/contact', { method: 'POST', body: event.data })
     if (res.success) {
       isSubmitted.value = true
-      form.name = ''; form.email = ''; form.project = ''; form.message = ''
+      state.name = ''; state.email = ''; state.project = ''; state.message = ''
+      toast.add({ title: 'Message sent!', color: 'success' })
     }
   }
   catch (e: unknown) {
     const err = e as { data?: { message?: string } }
-    errorMessage.value = err.data?.message || 'Something went wrong.'
+    toast.add({ title: err.data?.message || 'Something went wrong', color: 'error' })
   }
   finally { isSubmitting.value = false }
 }
 </script>
 
 <template>
-  <section id="contact" class="py-32 bg-zinc-950 relative">
-    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
+  <section id="contact" class="py-32 bg-(--ui-bg) relative">
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-(--ui-border) to-transparent" />
 
-    <div class="max-w-7xl mx-auto px-6">
+    <UContainer>
       <div class="grid md:grid-cols-2 gap-16">
         <div>
-          <p class="text-rose-400 text-sm font-mono tracking-widest uppercase mb-4 contact-title">Get in Touch</p>
-          <h2 class="text-4xl md:text-5xl font-bold text-zinc-100 mb-6 contact-title">
-            Let's build<br /><span class="text-zinc-500">something great.</span>
+          <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-4 contact-title">Get in Touch</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 contact-title">
+            Let's build<br /><span class="text-(--ui-text-muted)">something great.</span>
           </h2>
-          <p class="text-zinc-400 mb-12 max-w-md contact-title">
+          <p class="text-(--ui-text-muted) mb-12 max-w-md contact-title">
             Landing page, SaaS platform, or mobile app. One team, one stack, fast delivery.
           </p>
 
           <div class="space-y-6 contact-info">
             <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-lg bg-rose-500/10 flex items-center justify-center">
-                <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+              <div class="w-10 h-10 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center">
+                <UIcon name="i-lucide-mail" class="w-5 h-5 text-(--ui-primary)" />
               </div>
               <div>
-                <p class="text-sm text-zinc-500">Email</p>
-                <p class="text-zinc-200">hello@ajoclub.dev</p>
+                <p class="text-sm text-(--ui-text-muted)">Email</p>
+                <p>hello@ajoclub.dev</p>
               </div>
             </div>
             <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-lg bg-rose-500/10 flex items-center justify-center">
-                <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+              <div class="w-10 h-10 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center">
+                <UIcon name="i-lucide-map-pin" class="w-5 h-5 text-(--ui-primary)" />
               </div>
               <div>
-                <p class="text-sm text-zinc-500">Location</p>
-                <p class="text-zinc-200">Remote / Worldwide</p>
+                <p class="text-sm text-(--ui-text-muted)">Location</p>
+                <p>Remote / Worldwide</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="contact-form">
-          <div v-if="isSubmitted" class="p-8 rounded-xl border border-rose-500/20 bg-rose-500/5 text-center">
-            <svg class="w-12 h-12 text-rose-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <h3 class="text-xl font-semibold text-zinc-100 mb-2">Message Sent</h3>
-            <p class="text-zinc-400">We'll get back to you within 24 hours.</p>
-            <button class="mt-6 px-6 py-2 text-sm text-rose-400 border border-rose-500/30 rounded-lg hover:bg-rose-500/10 transition-colors" @click="isSubmitted = false">
-              Send another
-            </button>
-          </div>
+          <UCard v-if="isSubmitted" :ui="{ body: 'p-8 text-center' }">
+            <UIcon name="i-lucide-check-circle" class="w-12 h-12 text-(--ui-primary) mx-auto mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Message Sent</h3>
+            <p class="text-(--ui-text-muted)">We'll get back to you within 24 hours.</p>
+            <UButton variant="outline" class="mt-6" @click="isSubmitted = false">Send another</UButton>
+          </UCard>
 
-          <form v-else class="space-y-6" @submit.prevent="handleSubmit">
-            <div>
-              <label class="block text-sm text-zinc-400 mb-2">Name</label>
-              <input v-model="form.name" type="text" required class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-rose-500 transition-colors" placeholder="Your name" />
-            </div>
-            <div>
-              <label class="block text-sm text-zinc-400 mb-2">Email</label>
-              <input v-model="form.email" type="email" required class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-rose-500 transition-colors" placeholder="you@company.com" />
-            </div>
-            <div>
-              <label class="block text-sm text-zinc-400 mb-2">Project Type</label>
-              <select v-model="form.project" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:outline-none focus:border-rose-500 transition-colors">
-                <option value="" disabled>Select type</option>
-                <option value="landing">Landing Page</option>
-                <option value="saas">SaaS Application</option>
-                <option value="mobile">Mobile App</option>
-                <option value="pwa">PWA</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm text-zinc-400 mb-2">Message</label>
-              <textarea v-model="form.message" rows="4" required class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-rose-500 transition-colors resize-none" placeholder="Tell us about your project..." />
-            </div>
-            <p v-if="errorMessage" class="text-red-400 text-sm">{{ errorMessage }}</p>
-            <button type="submit" :disabled="isSubmitting" class="w-full px-8 py-4 bg-rose-500 text-white font-semibold rounded-lg hover:bg-rose-600 transition-colors disabled:opacity-50">
+          <UForm v-else :schema="schema" :state="state" class="space-y-6" @submit="onSubmit">
+            <UFormField label="Name" name="name" required>
+              <UInput v-model="state.name" placeholder="Your name" />
+            </UFormField>
+            <UFormField label="Email" name="email" required>
+              <UInput v-model="state.email" type="email" placeholder="you@company.com" />
+            </UFormField>
+            <UFormField label="Project Type" name="project">
+              <USelect
+                v-model="state.project"
+                :items="[
+                  { label: 'Landing Page', value: 'landing' },
+                  { label: 'SaaS Application', value: 'saas' },
+                  { label: 'Mobile App', value: 'mobile' },
+                  { label: 'PWA', value: 'pwa' },
+                  { label: 'Other', value: 'other' },
+                ]"
+                placeholder="Select type"
+              />
+            </UFormField>
+            <UFormField label="Message" name="message" required>
+              <UTextarea v-model="state.message" :rows="4" placeholder="Tell us about your project..." />
+            </UFormField>
+            <UButton type="submit" block :loading="isSubmitting" size="xl">
               {{ isSubmitting ? 'Sending...' : 'Send Message' }}
-            </button>
-          </form>
+            </UButton>
+          </UForm>
         </div>
       </div>
-    </div>
+    </UContainer>
   </section>
 </template>

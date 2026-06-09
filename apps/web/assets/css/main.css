@@ -1,16 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@nuxt/ui";
 
-@layer base {
-  :root {
-    --ui-primary: oklch(0.4607 0.1853 4.0994);
-    --ui-bg: oklch(0.2409 0.0201 307.5346);
-    --ui-bg-muted: oklch(0.2634 0.0219 309.4748);
-    --ui-text: oklch(0.8398 0.0387 309.5391);
-    --ui-text-muted: oklch(0.7940 0.0372 307.1032);
-    --ui-border: oklch(0.3286 0.0154 343.4461);
-  }
+@theme static {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
 html {
@@ -27,18 +20,6 @@ canvas {
 }
 
 ::selection {
-  background: oklch(0.4607 0.1853 4.0994 / 0.3);
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: oklch(0.2409 0.0201 307.5346);
-}
-
-::-webkit-scrollbar-thumb {
-  background: oklch(0.3286 0.0154 343.4461);
-  border-radius: 3px;
+  background: var(--ui-primary);
+  color: var(--ui-bg);
 }

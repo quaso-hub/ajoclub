@@ -23,11 +23,11 @@
     "pinia": "^3.0.2",
     "three": "^0.175.0",
     "gsap": "^3.13.0",
-    "@prisma/client": "^6.9.0"
+    "@prisma/client": "^6.9.0",
+    "valibot": "^1.0.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.4.1",
-    "@nuxtjs/tailwindcss": "^6.13.2",
     "@types/three": "^0.175.0",
     "typescript": "^5.8.3",
     "vue-tsc": "^2.2.10",

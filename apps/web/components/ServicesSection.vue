@@ -1,63 +1,67 @@
 <script setup lang="ts">
 const services = [
   {
-    icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+    icon: 'i-lucide-monitor',
     title: 'Web Applications',
-    description: 'SaaS platforms, dashboards, and dynamic web apps built with Nuxt.js and TypeScript. Server-side rendering, real-time data, and bulletproof auth.',
+    description: 'SaaS platforms, dashboards, and dynamic web apps. SSR, real-time data, bulletproof auth.',
     tags: ['Nuxt.js', 'TypeScript', 'SSR'],
   },
   {
-    icon: 'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
+    icon: 'i-lucide-smartphone',
     title: 'Mobile Apps',
-    description: 'Hybrid mobile apps that feel native. One codebase for Android and iOS using Capacitor.js. Camera, GPS, push notifications included.',
+    description: 'Hybrid mobile apps that feel native. One codebase for Android and iOS via Capacitor.',
     tags: ['Capacitor', 'Android', 'iOS'],
   },
   {
-    icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z',
+    icon: 'i-lucide-layout',
     title: 'Landing Pages',
-    description: 'High-converting landing pages and company profiles. Static generation for instant load times. SEO optimized out of the box.',
+    description: 'High-converting landing pages and company profiles. Static generation for instant load.',
     tags: ['SSG', 'SEO', 'Performance'],
   },
   {
-    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    icon: 'i-lucide-shield-check',
     title: 'PWA & Offline',
-    description: 'Progressive Web Apps that install on any device. Offline support, push notifications, and app-like experience without the app store.',
+    description: 'Progressive Web Apps that install on any device. Offline support, push notifications.',
     tags: ['PWA', 'Offline', 'Installable'],
   },
 ]
 </script>
 
 <template>
-  <section id="services" class="py-32 bg-zinc-950">
-    <div class="max-w-7xl mx-auto px-6">
+  <section id="services" class="py-32 bg-(--ui-bg)">
+    <UContainer>
       <div class="mb-20">
-        <p class="text-rose-400 text-sm font-mono tracking-widest uppercase mb-4 service-title">What we do</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-zinc-100 service-title">
+        <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-4 service-title">
+          What we do
+        </p>
+        <h2 class="text-4xl md:text-5xl font-bold service-title">
           Full-stack capability.<br />
-          <span class="text-zinc-500">One team. One language.</span>
+          <span class="text-(--ui-text-muted)">One team. One language.</span>
         </h2>
       </div>
 
       <div class="grid md:grid-cols-2 gap-6">
-        <div
+        <UCard
           v-for="(service, i) in services"
           :key="i"
-          class="group relative p-8 rounded-xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 hover:border-zinc-700 transition-all duration-500 service-card"
+          class="group service-card"
+          :ui="{
+            root: 'transition-all duration-300 hover:ring-(--ui-primary)/30',
+            body: 'p-8',
+          }"
         >
-          <div class="w-12 h-12 rounded-lg bg-rose-500/10 flex items-center justify-center mb-6 group-hover:bg-rose-500/20 transition-colors">
-            <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" :d="service.icon" />
-            </svg>
+          <div class="w-12 h-12 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center mb-6 group-hover:bg-(--ui-primary)/20 transition-colors">
+            <UIcon :name="service.icon" class="w-6 h-6 text-(--ui-primary)" />
           </div>
-          <h3 class="text-xl font-semibold text-zinc-100 mb-3">{{ service.title }}</h3>
-          <p class="text-zinc-400 mb-6 leading-relaxed">{{ service.description }}</p>
+          <h3 class="text-xl font-semibold mb-3">{{ service.title }}</h3>
+          <p class="text-(--ui-text-muted) mb-6 leading-relaxed">{{ service.description }}</p>
           <div class="flex flex-wrap gap-2">
-            <span v-for="tag in service.tags" :key="tag" class="px-3 py-1 text-xs font-mono text-rose-300 bg-rose-500/10 rounded-full">
+            <UBadge v-for="tag in service.tags" :key="tag" variant="soft" color="primary">
               {{ tag }}
-            </span>
+            </UBadge>
           </div>
-        </div>
+        </UCard>
       </div>
-    </div>
+    </UContainer>
   </section>
 </template>
