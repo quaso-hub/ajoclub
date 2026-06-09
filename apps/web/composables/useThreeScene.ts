@@ -9,51 +9,14 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
   let mouse = { x: 0, y: 0 }
   let targetRotation = { x: 0, y: 0 }
 
-  function getThemeColors(): THREE.Color[] {
-    const styles = getComputedStyle(document.documentElement)
-    const primary = styles.getPropertyValue('--primary').trim()
-    const accent = styles.getPropertyValue('--accent').trim()
-    const muted = styles.getPropertyValue('--muted-foreground').trim()
-
-    const colors: THREE.Color[] = []
-    const tempEl = document.createElement('div')
-
-    tempEl.style.color = primary
-    document.body.appendChild(tempEl)
-    const computed = getComputedStyle(tempEl).color
-    document.body.removeChild(tempEl)
-
-    const match = computed.match(/\d+/g)
-    if (match && match.length >= 3) {
-      colors.push(new THREE.Color(`rgb(${match[0]}, ${match[1]}, ${match[2]})`))
-    }
-    else {
-      colors.push(new THREE.Color(0xe11d48))
-    }
-
-    colors.push(new THREE.Color(0xfb7185))
-    colors.push(new THREE.Color(0xfda4af))
-    colors.push(new THREE.Color(0x9f1239))
-
-    return colors
-  }
-
   function init() {
     if (!containerRef.value) return
 
     scene = new THREE.Scene()
-    camera = new THREE.PerspectiveCamera(
-      75,
-      containerRef.value.clientWidth / containerRef.value.clientHeight,
-      0.1,
-      1000,
-    )
+    camera = new THREE.PerspectiveCamera(75, containerRef.value.clientWidth / containerRef.value.clientHeight, 0.1, 1000)
     camera.position.z = 30
 
-    renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-    })
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     renderer.setSize(containerRef.value.clientWidth, containerRef.value.clientHeight)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setClearColor(0x000000, 0)
@@ -71,9 +34,13 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
     const count = 2000
     const positions = new Float32Array(count * 3)
     const colors = new Float32Array(count * 3)
-    const sizes = new Float32Array(count)
 
-    const colorPalette = getThemeColors()
+    const palette = [
+      new THREE.Color(0xf43f5e), // rose-500
+      new THREE.Color(0xfb7185), // rose-400
+      new THREE.Color(0xe11d48), // rose-600
+      new THREE.Color(0xfda4af), // rose-300
+    ]
 
     for (let i = 0; i < count; i++) {
       const i3 = i * 3
@@ -85,18 +52,15 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
       positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
       positions[i3 + 2] = radius * Math.cos(phi)
 
-      const color = colorPalette[Math.floor(Math.random() * colorPalette.length)]
+      const color = palette[Math.floor(Math.random() * palette.length)]
       colors[i3] = color.r
       colors[i3 + 1] = color.g
       colors[i3 + 2] = color.b
-
-      sizes[i] = Math.random() * 2 + 0.5
     }
 
     const geometry = new THREE.BufferGeometry()
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
-    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1))
 
     const material = new THREE.PointsMaterial({
       size: 0.15,
@@ -112,21 +76,18 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
   }
 
   function addLights() {
-    const ambient = new THREE.AmbientLight(0xffffff, 0.2)
-    scene.add(ambient)
-
-    const point1 = new THREE.PointLight(0xe11d48, 2, 50)
-    point1.position.set(10, 10, 10)
-    scene.add(point1)
-
-    const point2 = new THREE.PointLight(0xfb7185, 2, 50)
-    point2.position.set(-10, -10, 10)
-    scene.add(point2)
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2))
+    const p1 = new THREE.PointLight(0xf43f5e, 2, 50)
+    p1.position.set(10, 10, 10)
+    scene.add(p1)
+    const p2 = new THREE.PointLight(0xe11d48, 2, 50)
+    p2.position.set(-10, -10, 10)
+    scene.add(p2)
   }
 
-  function onMouseMove(event: MouseEvent) {
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
+  function onMouseMove(e: MouseEvent) {
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1
+    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
   }
 
   function onResize() {
@@ -144,18 +105,14 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
 
     particles.rotation.x += 0.001
     particles.rotation.y += 0.002
-
     particles.rotation.x += (targetRotation.x - particles.rotation.x) * 0.02
     particles.rotation.y += (targetRotation.y - particles.rotation.y) * 0.02
 
-    const positions = particles.geometry.attributes.position.array as Float32Array
-    const time = Date.now() * 0.0003
-
-    for (let i = 0; i < positions.length; i += 3) {
-      const radius = Math.sqrt(
-        positions[i] ** 2 + positions[i + 1] ** 2 + positions[i + 2] ** 2,
-      )
-      positions[i + 1] += Math.sin(time + radius * 0.1) * 0.01
+    const pos = particles.geometry.attributes.position.array as Float32Array
+    const t = Date.now() * 0.0003
+    for (let i = 0; i < pos.length; i += 3) {
+      const r = Math.sqrt(pos[i] ** 2 + pos[i + 1] ** 2 + pos[i + 2] ** 2)
+      pos[i + 1] += Math.sin(t + r * 0.1) * 0.01
     }
     particles.geometry.attributes.position.needsUpdate = true
 
@@ -166,12 +123,7 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
     if (animationId) cancelAnimationFrame(animationId)
     window.removeEventListener('mousemove', onMouseMove)
     window.removeEventListener('resize', onResize)
-    if (renderer) {
-      renderer.dispose()
-      if (containerRef.value && renderer.domElement.parentNode === containerRef.value) {
-        containerRef.value.removeChild(renderer.domElement)
-      }
-    }
+    renderer?.dispose()
     if (particles) {
       particles.geometry.dispose()
       ;(particles.material as THREE.PointsMaterial).dispose()

@@ -7,67 +7,37 @@ const stats = [
 ]
 
 const principles = [
-  {
-    title: 'One Language, Full Stack',
-    description: 'TypeScript from database to UI. No context switching, no translation layers. Our team moves fast because everyone speaks the same language.',
-  },
-  {
-    title: 'Build Once, Deploy Everywhere',
-    description: 'Web, mobile, and PWA from a single codebase. Capacitor wraps our Nuxt apps into native mobile experiences without maintaining separate codebases.',
-  },
-  {
-    title: 'Performance by Default',
-    description: 'Static generation for landing pages. Server-side rendering for apps. Every millisecond counts. We optimize for Core Web Vitals from day one.',
-  },
+  { title: 'One Language, Full Stack', description: 'TypeScript from database to UI. No context switching, no translation layers.' },
+  { title: 'Build Once, Deploy Everywhere', description: 'Web, mobile, and PWA from a single codebase via Capacitor.js.' },
+  { title: 'Performance by Default', description: 'Static generation for landing pages. SSR for apps. Core Web Vitals from day one.' },
 ]
 </script>
 
 <template>
-  <section id="about" class="py-32 bg-[var(--background)] relative overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[var(--primary)]/5 rounded-full blur-[120px]" />
+  <section id="about" class="py-32 bg-zinc-950 relative overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-rose-500/5 rounded-full blur-[120px]" />
 
     <div class="max-w-7xl mx-auto px-6 relative">
       <div class="mb-20">
-        <p class="text-[var(--primary)] text-sm font-mono tracking-widest uppercase mb-4 about-title">
-          About Us
-        </p>
-        <h2 class="text-4xl md:text-5xl font-bold text-[var(--foreground)] about-title">
-          A small team with
-          <br />
-          <span class="text-[var(--muted-foreground)]">big ambitions.</span>
+        <p class="text-rose-400 text-sm font-mono tracking-widest uppercase mb-4 about-title">About Us</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-zinc-100 about-title">
+          A small team with<br />
+          <span class="text-zinc-500">big ambitions.</span>
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-4 gap-6 mb-20">
-        <div
-          v-for="stat in stats"
-          :key="stat.label"
-          class="text-center p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] stat-card"
-        >
-          <div class="text-4xl md:text-5xl font-bold text-[var(--foreground)] mb-2">
-            {{ stat.value }}
-          </div>
-          <div class="text-sm text-[var(--muted-foreground)] font-mono uppercase tracking-wider">
-            {{ stat.label }}
-          </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-20">
+        <div v-for="stat in stats" :key="stat.label" class="text-center p-6 rounded-xl border border-zinc-800 bg-zinc-900/50 stat-card">
+          <div class="text-3xl md:text-5xl font-bold text-zinc-100 mb-2">{{ stat.value }}</div>
+          <div class="text-xs md:text-sm text-zinc-500 font-mono uppercase tracking-wider">{{ stat.label }}</div>
         </div>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <div
-          v-for="(principle, i) in principles"
-          :key="i"
-          class="principle-card"
-        >
-          <div class="text-6xl font-bold text-[var(--muted)]/50 mb-4">
-            {{ String(i + 1).padStart(2, '0') }}
-          </div>
-          <h3 class="text-lg font-semibold text-[var(--foreground)] mb-3">
-            {{ principle.title }}
-          </h3>
-          <p class="text-[var(--muted-foreground)] text-sm leading-relaxed">
-            {{ principle.description }}
-          </p>
+        <div v-for="(p, i) in principles" :key="i" class="principle-card">
+          <div class="text-6xl font-bold text-zinc-800 mb-4">{{ String(i + 1).padStart(2, '0') }}</div>
+          <h3 class="text-lg font-semibold text-zinc-100 mb-3">{{ p.title }}</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">{{ p.description }}</p>
         </div>
       </div>
     </div>

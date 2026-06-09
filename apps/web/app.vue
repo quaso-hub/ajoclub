@@ -6,10 +6,9 @@ useHead({
   htmlAttrs: {
     lang: 'en',
     class: 'dark',
-    'data-theme': 'dark',
   },
   bodyAttrs: {
-    class: 'antialiased',
+    class: 'bg-zinc-950 text-zinc-100 antialiased',
   },
 })
 </script>

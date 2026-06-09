@@ -28,16 +28,13 @@ const services = [
 </script>
 
 <template>
-  <section id="services" class="py-32 bg-[var(--background)]">
+  <section id="services" class="py-32 bg-zinc-950">
     <div class="max-w-7xl mx-auto px-6">
       <div class="mb-20">
-        <p class="text-[var(--primary)] text-sm font-mono tracking-widest uppercase mb-4 service-title">
-          What we do
-        </p>
-        <h2 class="text-4xl md:text-5xl font-bold text-[var(--foreground)] service-title">
-          Full-stack capability.
-          <br />
-          <span class="text-[var(--muted-foreground)]">One team. One language.</span>
+        <p class="text-rose-400 text-sm font-mono tracking-widest uppercase mb-4 service-title">What we do</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-zinc-100 service-title">
+          Full-stack capability.<br />
+          <span class="text-zinc-500">One team. One language.</span>
         </h2>
       </div>
 
@@ -45,27 +42,17 @@ const services = [
         <div
           v-for="(service, i) in services"
           :key="i"
-          class="group relative p-8 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--accent)]/30 transition-all duration-500 service-card"
+          class="group relative p-8 rounded-xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 hover:border-zinc-700 transition-all duration-500 service-card"
         >
-          <div class="w-12 h-12 rounded-[var(--radius)] bg-[var(--primary)]/10 flex items-center justify-center mb-6 group-hover:bg-[var(--primary)]/20 transition-colors">
-            <svg class="w-6 h-6 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-12 h-12 rounded-lg bg-rose-500/10 flex items-center justify-center mb-6 group-hover:bg-rose-500/20 transition-colors">
+            <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" :d="service.icon" />
             </svg>
           </div>
-
-          <h3 class="text-xl font-semibold text-[var(--foreground)] mb-3">
-            {{ service.title }}
-          </h3>
-          <p class="text-[var(--muted-foreground)] mb-6 leading-relaxed">
-            {{ service.description }}
-          </p>
-
+          <h3 class="text-xl font-semibold text-zinc-100 mb-3">{{ service.title }}</h3>
+          <p class="text-zinc-400 mb-6 leading-relaxed">{{ service.description }}</p>
           <div class="flex flex-wrap gap-2">
-            <span
-              v-for="tag in service.tags"
-              :key="tag"
-              class="px-3 py-1 text-xs font-mono text-[var(--primary)] bg-[var(--primary)]/10 rounded-[var(--radius)]"
-            >
+            <span v-for="tag in service.tags" :key="tag" class="px-3 py-1 text-xs font-mono text-rose-300 bg-rose-500/10 rounded-full">
               {{ tag }}
             </span>
           </div>
