@@ -1,48 +1,23 @@
-import { PrismaClient } from '@prisma/client'
+import { z } from 'zod'
 
-const prisma = new PrismaClient()
+const bodySchema = z.object({
+  name: z.string().min(1).max(255),
+  email: z.string().email().max(255),
+  project: z.string().max(100).optional(),
+  message: z.string().min(1).max(5000),
+})
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
+  const body = await readValidatedBody(event, bodySchema.parse)
 
-  if (!body.name || !body.email || !body.message) {
-    throw createError({
-      statusCode: 400,
-      message: 'Name, email, and message are required.',
-    })
-  }
+  const contact = await prisma.contact.create({
+    data: {
+      name: body.name,
+      email: body.email,
+      project: body.project || null,
+      message: body.message,
+    },
+  })
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(body.email)) {
-    throw createError({
-      statusCode: 400,
-      message: 'Invalid email address.',
-    })
-  }
-
-  try {
-    const contact = await prisma.contact.create({
-      data: {
-        name: body.name,
-        email: body.email,
-        project: body.project || null,
-        message: body.message,
-      },
-    })
-
-    return {
-      success: true,
-      id: contact.id,
-    }
-  }
-  catch (error) {
-    console.error('Contact form error:', error)
-    throw createError({
-      statusCode: 500,
-      message: 'Failed to save contact. Please try again.',
-    })
-  }
-  finally {
-    await prisma.$disconnect()
-  }
+  return { success: true, id: contact.id }
 })
