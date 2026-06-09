@@ -148,6 +148,7 @@ vite.config.ts.timestamp-*
 
 # AI agent instructions (internal use only)
 AGENTS.md
+KEWARASAN.MD
 
 # ============================================
 # LOCAL PLANNING & MEMORY (never commit)
