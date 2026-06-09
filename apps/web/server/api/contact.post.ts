@@ -8,16 +8,26 @@ const bodySchema = z.object({
 })
 
 export default defineEventHandler(async (event) => {
-  const body = await readValidatedBody(event, bodySchema.parse)
+  try {
+    const body = await readValidatedBody(event, bodySchema.parse)
 
-  const contact = await prisma.contact.create({
-    data: {
-      name: body.name,
-      email: body.email,
-      project: body.project || null,
-      message: body.message,
-    },
-  })
+    const contact = await prisma.contact.create({
+      data: {
+        name: body.name,
+        email: body.email,
+        project: body.project || null,
+        message: body.message,
+      },
+    })
 
-  return { success: true, id: contact.id }
+    return { success: true, id: contact.id }
+  }
+  catch (error) {
+    // Don't expose internal errors to client
+    console.error('Contact form error:', error)
+    throw createError({
+      statusCode: 500,
+      message: 'Failed to submit. Please try again.',
+    })
+  }
 })

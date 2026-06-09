@@ -1,12 +1,18 @@
 const rateLimit = new Map<string, { count: number; resetTime: number }>()
 
-const WINDOW_MS = 60 * 1000 // 1 minute
-const MAX_REQUESTS = 100 // per window
+const WINDOW_MS = 60 * 1000
+const MAX_REQUESTS = 100
+
+// Purge expired entries every 60s to prevent memory leak
+setInterval(() => {
+  const now = Date.now()
+  for (const [key, entry] of rateLimit) {
+    if (now > entry.resetTime) rateLimit.delete(key)
+  }
+}, 60_000)
 
 export default defineEventHandler((event) => {
   const path = getRequestURL(event).pathname
-
-  // Only rate limit API endpoints
   if (!path.startsWith('/api/')) return
 
   const ip = getRequestIP(event) || 'unknown'

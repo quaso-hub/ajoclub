@@ -123,11 +123,26 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
     if (animationId) cancelAnimationFrame(animationId)
     window.removeEventListener('mousemove', onMouseMove)
     window.removeEventListener('resize', onResize)
-    renderer?.dispose()
+
+    // Dispose all scene children
+    if (scene) {
+      scene.traverse((obj) => {
+        if (obj instanceof THREE.Mesh) {
+          obj.geometry?.dispose()
+          if (obj.material) {
+            const mats = Array.isArray(obj.material) ? obj.material : [obj.material]
+            mats.forEach(m => m.dispose())
+          }
+        }
+      })
+    }
+
     if (particles) {
       particles.geometry.dispose()
       ;(particles.material as THREE.PointsMaterial).dispose()
     }
+
+    renderer?.dispose()
   }
 
   return { init, destroy }

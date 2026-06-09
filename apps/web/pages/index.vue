@@ -78,6 +78,11 @@ onMounted(() => {
     })
   })
 })
+
+onUnmounted(() => {
+  ScrollTrigger.getAll().forEach(st => st.kill())
+  gsap.killTweensOf('*')
+})
 </script>
 
 <template>

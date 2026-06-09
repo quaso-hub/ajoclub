@@ -31,13 +31,19 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { prerender: true },
     '/about': { prerender: true },
-    '/api/**': { cors: true },
+    '/api/**': {
+      cors: {
+        origin: [process.env.PUBLIC_URL || 'http://localhost:3000'],
+        methods: ['GET', 'POST'],
+        credentials: true,
+      },
+    },
   },
 
   css: ['~/assets/css/main.css'],
 
   runtimeConfig: {
-    databaseUrl: process.env.DATABASE_URL || 'file:./prisma/dev.db',
+    databaseUrl: process.env.DATABASE_URL,
     supabaseUrl: process.env.SUPABASE_URL || '',
     supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
     public: {
@@ -45,9 +51,5 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: {
-    experimental: {
-      tasks: true,
-    },
-  },
+  nitro: {},
 })

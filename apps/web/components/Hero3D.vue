@@ -2,7 +2,11 @@
 const canvasContainer = ref<HTMLElement | null>(null)
 const { init, destroy } = useThreeScene(canvasContainer)
 
-onMounted(() => nextTick(() => init()))
+function scrollTo(id: string) {
+  document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+
+onMounted(() => init())
 onUnmounted(() => destroy())
 </script>
 
@@ -25,13 +29,13 @@ onUnmounted(() => destroy())
           Landing pages, SaaS apps, and mobile experiences. One team, one stack, zero compromises.
         </p>
         <div class="flex flex-wrap gap-4 hero-text">
-          <UButton size="xl" @click="document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })">
+          <UButton size="xl" @click="scrollTo('#services')">
             See our work
             <template #trailing>
               <UIcon name="i-lucide-arrow-right" />
             </template>
           </UButton>
-          <UButton size="xl" variant="outline" color="neutral" @click="document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })">
+          <UButton size="xl" variant="outline" color="neutral" @click="scrollTo('#contact')">
             Get in touch
           </UButton>
         </div>

@@ -25,9 +25,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       toast.add({ title: 'Message sent!', color: 'success' })
     }
   }
-  catch (e: unknown) {
-    const err = e as { data?: { message?: string } }
-    toast.add({ title: err.data?.message || 'Something went wrong', color: 'error' })
+  catch {
+    toast.add({ title: 'Something went wrong. Please try again.', color: 'error' })
   }
   finally { isSubmitting.value = false }
 }
