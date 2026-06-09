@@ -146,6 +146,9 @@ vite.config.ts.timestamp-*
 *.db
 *.db-journal
 
+# AI agent instructions (internal use only)
+AGENTS.md
+
 # ============================================
 # LOCAL PLANNING & MEMORY (never commit)
 # ============================================
