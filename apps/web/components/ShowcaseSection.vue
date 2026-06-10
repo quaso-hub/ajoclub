@@ -13,6 +13,7 @@ const templates = [
   {
     id: 1,
     title: 'Company Profile',
+    slug: 'company-profile',
     category: 'corporate',
     description: 'Clean, professional presence for established businesses.',
     gradient: 'from-blue-600 to-indigo-700',
@@ -22,6 +23,7 @@ const templates = [
   {
     id: 2,
     title: 'Landing Page',
+    slug: 'landing-page',
     category: 'creative',
     description: 'High-conversion pages that turn visitors into leads.',
     gradient: 'from-rose-500 to-orange-500',
@@ -31,6 +33,7 @@ const templates = [
   {
     id: 3,
     title: 'Wedding Page',
+    slug: 'wedding',
     category: 'events',
     description: 'Elegant celebration pages with RSVP and photo galleries.',
     gradient: 'from-pink-400 to-rose-500',
@@ -40,6 +43,7 @@ const templates = [
   {
     id: 4,
     title: 'SaaS Dashboard',
+    slug: 'saas',
     category: 'saas',
     description: 'Data-rich interfaces with real-time updates and charts.',
     gradient: 'from-violet-500 to-purple-600',
@@ -49,6 +53,7 @@ const templates = [
   {
     id: 5,
     title: 'Restaurant',
+    slug: 'restaurant',
     category: 'creative',
     description: 'Appetizing menus, online ordering, and reservation systems.',
     gradient: 'from-amber-500 to-orange-600',
@@ -58,6 +63,7 @@ const templates = [
   {
     id: 6,
     title: 'Portfolio',
+    slug: 'portfolio',
     category: 'creative',
     description: 'Showcase work with interactive galleries and case studies.',
     gradient: 'from-emerald-500 to-teal-600',
@@ -67,6 +73,7 @@ const templates = [
   {
     id: 7,
     title: 'Event / Brochure',
+    slug: 'event',
     category: 'events',
     description: 'Information-rich pages for conferences, festivals, and launches.',
     gradient: 'from-cyan-500 to-blue-600',
@@ -76,6 +83,7 @@ const templates = [
   {
     id: 8,
     title: 'Hajatan / Celebration',
+    slug: 'celebration',
     category: 'events',
     description: 'Festive pages for graduations, birthdays, and milestones.',
     gradient: 'from-yellow-500 to-amber-600',
@@ -124,10 +132,11 @@ const filteredTemplates = computed(() => {
 
       <!-- Template Grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <div
+        <NuxtLink
           v-for="template in filteredTemplates"
           :key="template.id"
-          class="group glass-card overflow-hidden hover:scale-[1.03] transition-all duration-300 cursor-pointer showcase-card"
+          :to="`/showcase/${template.slug}`"
+          class="group glass-card overflow-hidden hover:scale-[1.03] transition-all duration-300 cursor-pointer showcase-card block"
         >
           <div class="h-48 bg-gradient-to-br flex items-center justify-center relative" :class="template.gradient">
             <div class="absolute inset-0 bg-black/10" />
@@ -142,7 +151,7 @@ const filteredTemplates = computed(() => {
               </UBadge>
             </div>
           </div>
-        </div>
+        </NuxtLink>
       </div>
 
       <!-- CTA -->
