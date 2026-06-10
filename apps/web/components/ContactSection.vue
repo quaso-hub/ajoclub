@@ -37,7 +37,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-(--ui-border) to-transparent" />
 
     <UContainer>
-      <div class="grid md:grid-cols-2 gap-16">
+      <div class="grid lg:grid-cols-2 gap-16">
         <div>
           <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-4 contact-title">Get in Touch</p>
           <h2 class="text-4xl md:text-5xl font-bold mb-6 contact-title">
@@ -49,40 +49,49 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
           <div class="space-y-6 contact-info">
             <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center">
+              <div class="w-12 h-12 rounded-xl bg-(--ui-primary)/10 flex items-center justify-center">
                 <UIcon name="i-lucide-mail" class="w-5 h-5 text-(--ui-primary)" />
               </div>
               <div>
                 <p class="text-sm text-(--ui-text-muted)">Email</p>
-                <p>hello@ajoclub.dev</p>
+                <p class="font-medium">hello@ajoclub.dev</p>
               </div>
             </div>
             <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center">
+              <div class="w-12 h-12 rounded-xl bg-(--ui-primary)/10 flex items-center justify-center">
                 <UIcon name="i-lucide-map-pin" class="w-5 h-5 text-(--ui-primary)" />
               </div>
               <div>
                 <p class="text-sm text-(--ui-text-muted)">Location</p>
-                <p>Remote / Worldwide</p>
+                <p class="font-medium">Remote / Worldwide</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-(--ui-primary)/10 flex items-center justify-center">
+                <UIcon name="i-lucide-clock" class="w-5 h-5 text-(--ui-primary)" />
+              </div>
+              <div>
+                <p class="text-sm text-(--ui-text-muted)">Response Time</p>
+                <p class="font-medium">Within 24 hours</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="contact-form">
-          <UCard v-if="isSubmitted" :ui="{ body: 'p-8 text-center' }">
-            <UIcon name="i-lucide-check-circle" class="w-12 h-12 text-(--ui-primary) mx-auto mb-4" />
-            <h3 class="text-xl font-semibold mb-2">Message Sent</h3>
-            <p class="text-(--ui-text-muted)">We'll get back to you within 24 hours.</p>
-            <UButton variant="outline" class="mt-6" @click="isSubmitted = false">Send another</UButton>
-          </UCard>
+          <div v-if="isSubmitted" class="glass-card p-8 text-center">
+            <UIcon name="i-lucide-check-circle" class="w-16 h-16 text-(--ui-primary) mx-auto mb-4" />
+            <h3 class="text-2xl font-semibold mb-2">Message Sent</h3>
+            <p class="text-(--ui-text-muted) mb-6">We'll get back to you within 24 hours.</p>
+            <UButton variant="outline" @click="isSubmitted = false">Send another</UButton>
+          </div>
 
-          <UForm v-else :schema="schema" :state="state" class="space-y-6" @submit="onSubmit">
+          <UForm v-else :schema="schema" :state="state" class="glass-card p-8 space-y-6" @submit="onSubmit">
             <UFormField label="Name" name="name" required>
-              <UInput v-model="state.name" placeholder="Your name" />
+              <UInput v-model="state.name" placeholder="Your name" size="lg" />
             </UFormField>
             <UFormField label="Email" name="email" required>
-              <UInput v-model="state.email" type="email" placeholder="you@company.com" />
+              <UInput v-model="state.email" type="email" placeholder="you@company.com" size="lg" />
             </UFormField>
             <UFormField label="Project Type" name="project">
               <USelect
@@ -95,10 +104,11 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
                   { label: 'Other', value: 'other' },
                 ]"
                 placeholder="Select type"
+                size="lg"
               />
             </UFormField>
             <UFormField label="Message" name="message" required>
-              <UTextarea v-model="state.message" :rows="4" placeholder="Tell us about your project..." />
+              <UTextarea v-model="state.message" :rows="4" placeholder="Tell us about your project..." size="lg" />
             </UFormField>
             <UButton type="submit" block :loading="isSubmitting" size="xl">
               {{ isSubmitting ? 'Sending...' : 'Send Message' }}
