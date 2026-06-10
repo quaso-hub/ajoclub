@@ -5,10 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 const canvasContainer = ref<HTMLElement | null>(null)
 const heroContent = ref<HTMLElement | null>(null)
 const { init, destroy } = useThreeScene(canvasContainer)
-
-function scrollTo(id: string) {
-  document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
-}
+const { scrollTo } = useScrollTo()
 
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger)

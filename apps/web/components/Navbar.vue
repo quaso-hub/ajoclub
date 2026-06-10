@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
+const { scrollTo } = useScrollTo()
 
 const links = [
   { label: 'Services', href: '#services' },
@@ -13,9 +14,9 @@ function handleScroll() {
   isScrolled.value = window.scrollY > 50
 }
 
-function scrollTo(href: string) {
+function handleScrollTo(href: string) {
   isMobileMenuOpen.value = false
-  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+  scrollTo(href)
 }
 
 onMounted(() => window.addEventListener('scroll', handleScroll))
@@ -35,12 +36,12 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
           v-for="link in links"
           :key="link.href"
           class="text-sm text-(--ui-text-muted) hover:text-(--ui-text) transition-colors uppercase tracking-wide cursor-pointer"
-          @click="scrollTo(link.href)"
+          @click="handleScrollTo(link.href)"
         >
           {{ link.label }}
         </button>
         <ThemeToggle />
-        <UButton size="sm" @click="scrollTo('#contact')">Start a Project</UButton>
+        <UButton size="sm" @click="handleScrollTo('#contact')">Start a Project</UButton>
       </div>
 
       <div class="md:hidden flex items-center gap-2">
@@ -70,11 +71,11 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
             v-for="link in links"
             :key="link.href"
             class="block w-full text-left py-3 text-(--ui-text-muted) hover:text-(--ui-text) transition-colors cursor-pointer"
-            @click="scrollTo(link.href)"
+            @click="handleScrollTo(link.href)"
           >
             {{ link.label }}
           </button>
-          <UButton block @click="scrollTo('#contact')">Start a Project</UButton>
+          <UButton block @click="handleScrollTo('#contact')">Start a Project</UButton>
         </UContainer>
       </div>
     </Transition>

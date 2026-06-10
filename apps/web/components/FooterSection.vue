@@ -1,14 +1,12 @@
 <script setup lang="ts">
+const { scrollTo } = useScrollTo()
+
 const links = [
   { label: 'Services', href: '#services' },
   { label: 'Work', href: '#work' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ]
-
-function scrollTo(href: string) {
-  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
-}
 </script>
 
 <template>
