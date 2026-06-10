@@ -10,8 +10,8 @@ Arsitektur, infrastruktur, dan keputusan teknis AjoClub.
 | Framework | Nuxt.js | 3.21.x | Vue ecosystem, opinionated, RAM lebih rendah dari Next |
 | UI Library | Vue.js | 3.5.x | Reactive, composition API |
 | Bahasa | TypeScript | 5.8.x | Type safety, support IDE |
-| CSS | Tailwind CSS | 3.4.x | Utility-first, tanpa runtime overhead |
-| Komponen | @nuxt/ui | 3.1.x | Reka UI + Tailwind Variants |
+| CSS | Tailwind CSS | 4.3.x | Utility-first, CSS-first config (v4) |
+| Komponen | @nuxt/ui | 3.3.x | Reka UI + Tailwind Variants + dark mode |
 | State | Pinia | 3.0.x | SSR-safe, DevTools, modular |
 | ORM | Prisma | 6.19.x | Type-safe, migrations, multi-DB |
 | Database | PostgreSQL | 15+ | JSONB, RLS, terbukti di skala besar |
