@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-proprietary-7f1d1d?style=for-the-badge)](#lisensi)
 [![GitHub last commit](https://img.shields.io/github/last-commit/quaso-hub/ajoclub?style=for-the-badge&color=0f766e)](https://github.com/quaso-hub/ajoclub/commits)
 
-Agensi digital 4 orang. Kami bikin landing page, SaaS, dan mobile app.
+Kami bikin landing page, SaaS, dan mobile app.
 
 ## Teknologi
 
