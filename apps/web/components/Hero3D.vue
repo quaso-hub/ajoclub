@@ -1,21 +1,47 @@
 <script setup lang="ts">
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 const canvasContainer = ref<HTMLElement | null>(null)
+const heroContent = ref<HTMLElement | null>(null)
 const { init, destroy } = useThreeScene(canvasContainer)
 
 function scrollTo(id: string) {
   document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
 }
 
-onMounted(() => init())
-onUnmounted(() => destroy())
+onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger)
+  init()
+
+  // Hero content fade out on scroll
+  if (heroContent.value) {
+    gsap.to(heroContent.value, {
+      opacity: 0,
+      y: -80,
+      ease: 'power2.in',
+      scrollTrigger: {
+        trigger: heroContent.value,
+        start: 'top top',
+        end: '+=400',
+        scrub: true,
+      },
+    })
+  }
+})
+
+onUnmounted(() => {
+  ScrollTrigger.getAll().forEach(st => st.kill())
+  destroy()
+})
 </script>
 
 <template>
-  <section class="relative min-h-screen flex items-center overflow-hidden bg-(--ui-bg)">
+  <section class="relative h-screen flex items-center overflow-hidden bg-(--ui-bg)">
     <div ref="canvasContainer" class="absolute inset-0 z-0" />
-    <div class="absolute inset-0 bg-gradient-to-b from-(--ui-bg)/40 via-transparent to-(--ui-bg) z-[1]" />
+    <div class="absolute inset-0 bg-gradient-to-b from-(--ui-bg)/30 via-transparent to-(--ui-bg) z-[1]" />
 
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-32">
+    <div ref="heroContent" class="relative z-10 w-full max-w-7xl mx-auto px-6">
       <div class="max-w-3xl">
         <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-6 hero-text">
           Digital Agency

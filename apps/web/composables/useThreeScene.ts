@@ -1,13 +1,18 @@
 import * as THREE from 'three'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 
 export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
   let scene: THREE.Scene
   let camera: THREE.PerspectiveCamera
   let renderer: THREE.WebGLRenderer
+  let composer: EffectComposer
   let animationId: number
   let particles: THREE.Points
   let mouse = { x: 0, y: 0 }
   let targetRotation = { x: 0, y: 0 }
+  let scrollProgress = 0
 
   function init() {
     if (!containerRef.value) return
@@ -22,29 +27,46 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
     renderer.setClearColor(0x000000, 0)
     containerRef.value.appendChild(renderer.domElement)
 
+    // Post-processing: bloom for premium glow
+    composer = new EffectComposer(renderer)
+    composer.addPass(new RenderPass(scene, camera))
+
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(containerRef.value.clientWidth, containerRef.value.clientHeight),
+      0.8,  // strength
+      0.4,  // radius
+      0.85, // threshold
+    )
+    composer.addPass(bloomPass)
+
     createParticles()
     addLights()
     animate()
 
     window.addEventListener('mousemove', onMouseMove)
     window.addEventListener('resize', onResize)
+    window.addEventListener('scroll', onScroll)
   }
 
   function createParticles() {
-    const count = 2000
+    const count = 3000
     const positions = new Float32Array(count * 3)
     const colors = new Float32Array(count * 3)
+    const sizes = new Float32Array(count)
+    const seeds = new Float32Array(count)
 
     const palette = [
       new THREE.Color(0xf43f5e), // rose-500
       new THREE.Color(0xfb7185), // rose-400
       new THREE.Color(0xe11d48), // rose-600
       new THREE.Color(0xfda4af), // rose-300
+      new THREE.Color(0xffffff), // white sparks
     ]
 
     for (let i = 0; i < count; i++) {
       const i3 = i * 3
-      const radius = 15 + Math.random() * 15
+      // Sphere distribution with some clustering
+      const radius = 12 + Math.random() * 12
       const theta = Math.random() * Math.PI * 2
       const phi = Math.acos(2 * Math.random() - 1)
 
@@ -56,19 +78,25 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
       colors[i3] = color.r
       colors[i3 + 1] = color.g
       colors[i3 + 2] = color.b
+
+      sizes[i] = Math.random() * 3 + 0.5
+      seeds[i] = Math.random()
     }
 
     const geometry = new THREE.BufferGeometry()
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1))
+    geometry.setAttribute('seed', new THREE.BufferAttribute(seeds, 1))
 
     const material = new THREE.PointsMaterial({
-      size: 0.15,
+      size: 0.12,
       vertexColors: true,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.9,
       blending: THREE.AdditiveBlending,
       sizeAttenuation: true,
+      depthWrite: false,
     })
 
     particles = new THREE.Points(geometry, material)
@@ -76,13 +104,16 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
   }
 
   function addLights() {
-    scene.add(new THREE.AmbientLight(0xffffff, 0.2))
-    const p1 = new THREE.PointLight(0xf43f5e, 2, 50)
-    p1.position.set(10, 10, 10)
+    scene.add(new THREE.AmbientLight(0xffffff, 0.15))
+    const p1 = new THREE.PointLight(0xf43f5e, 3, 60)
+    p1.position.set(15, 15, 15)
     scene.add(p1)
-    const p2 = new THREE.PointLight(0xe11d48, 2, 50)
-    p2.position.set(-10, -10, 10)
+    const p2 = new THREE.PointLight(0xe11d48, 2, 60)
+    p2.position.set(-15, -15, 15)
     scene.add(p2)
+    const p3 = new THREE.PointLight(0xfb7185, 1.5, 40)
+    p3.position.set(0, 20, -10)
+    scene.add(p3)
   }
 
   function onMouseMove(e: MouseEvent) {
@@ -90,41 +121,61 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
     mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
   }
 
+  function onScroll() {
+    const heroHeight = containerRef.value?.clientHeight || window.innerHeight
+    scrollProgress = Math.min(window.scrollY / heroHeight, 1)
+  }
+
   function onResize() {
     if (!containerRef.value) return
     camera.aspect = containerRef.value.clientWidth / containerRef.value.clientHeight
     camera.updateProjectionMatrix()
     renderer.setSize(containerRef.value.clientWidth, containerRef.value.clientHeight)
+    composer.setSize(containerRef.value.clientWidth, containerRef.value.clientHeight)
   }
 
   function animate() {
     animationId = requestAnimationFrame(animate)
 
-    targetRotation.x += (mouse.y * 0.3 - targetRotation.x) * 0.05
-    targetRotation.y += (mouse.x * 0.3 - targetRotation.y) * 0.05
+    const time = Date.now() * 0.0003
 
-    particles.rotation.x += 0.001
-    particles.rotation.y += 0.002
-    particles.rotation.x += (targetRotation.x - particles.rotation.x) * 0.02
-    particles.rotation.y += (targetRotation.y - particles.rotation.y) * 0.02
+    // Mouse follow (smooth)
+    targetRotation.x += (mouse.y * 0.4 - targetRotation.x) * 0.03
+    targetRotation.y += (mouse.x * 0.4 - targetRotation.y) * 0.03
 
-    const pos = particles.geometry.attributes.position.array as Float32Array
-    const t = Date.now() * 0.0003
-    for (let i = 0; i < pos.length; i += 3) {
-      const r = Math.sqrt(pos[i] ** 2 + pos[i + 1] ** 2 + pos[i + 2] ** 2)
-      pos[i + 1] += Math.sin(t + r * 0.1) * 0.01
+    // Scroll response: camera pulls back, particles spread
+    const scrollEase = scrollProgress * scrollProgress // ease-in
+    camera.position.z = 30 - scrollEase * 15
+    particles.rotation.x += 0.0008
+    particles.rotation.y += 0.0015
+    particles.rotation.x += (targetRotation.x - particles.rotation.x) * 0.015
+    particles.rotation.y += (targetRotation.y - particles.rotation.y) * 0.015
+
+    // Particle wave animation
+    const positions = particles.geometry.attributes.position.array as Float32Array
+    const seeds = particles.geometry.attributes.seed.array as Float32Array
+    for (let i = 0; i < positions.length; i += 3) {
+      const r = Math.sqrt(positions[i] ** 2 + positions[i + 1] ** 2 + positions[i + 2] ** 2)
+      const seed = seeds[i / 3]
+      // Gentle wave + scroll-driven spread
+      positions[i + 1] += Math.sin(time + r * 0.15 + seed * 6.28) * 0.008
+      positions[i] += Math.cos(time * 0.7 + r * 0.1) * 0.004
+      // Scroll: particles drift outward
+      const drift = scrollEase * 0.02 * seed
+      positions[i] += Math.sign(positions[i]) * drift
+      positions[i + 1] += Math.sign(positions[i + 1]) * drift
     }
     particles.geometry.attributes.position.needsUpdate = true
 
-    renderer.render(scene, camera)
+    composer.render()
   }
 
   function destroy() {
     if (animationId) cancelAnimationFrame(animationId)
     window.removeEventListener('mousemove', onMouseMove)
     window.removeEventListener('resize', onResize)
+    window.removeEventListener('scroll', onScroll)
 
-    // Dispose all scene children
     if (scene) {
       scene.traverse((obj) => {
         if (obj instanceof THREE.Mesh) {
@@ -142,8 +193,9 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
       ;(particles.material as THREE.PointsMaterial).dispose()
     }
 
+    composer?.dispose()
     renderer?.dispose()
   }
 
-  return { init, destroy }
+  return { init, destroy, scrollProgress: computed(() => scrollProgress) }
 }

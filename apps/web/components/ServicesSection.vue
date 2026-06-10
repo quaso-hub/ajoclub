@@ -28,7 +28,7 @@ const services = [
 </script>
 
 <template>
-  <section id="services" class="py-32 bg-(--ui-bg)">
+  <section id="services" class="py-32 bg-(--ui-bg) relative">
     <UContainer>
       <div class="mb-20">
         <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-4 service-title">
@@ -41,16 +41,12 @@ const services = [
       </div>
 
       <div class="grid md:grid-cols-2 gap-6">
-        <UCard
+        <div
           v-for="(service, i) in services"
           :key="i"
-          class="group service-card"
-          :ui="{
-            root: 'transition-all duration-300 hover:ring-(--ui-primary)/30',
-            body: 'p-8',
-          }"
+          class="glass-card p-8 group hover:scale-[1.02] transition-all duration-300 service-card"
         >
-          <div class="w-12 h-12 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center mb-6 group-hover:bg-(--ui-primary)/20 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-(--ui-primary)/10 flex items-center justify-center mb-6 group-hover:bg-(--ui-primary)/20 transition-colors">
             <UIcon :name="service.icon" class="w-6 h-6 text-(--ui-primary)" />
           </div>
           <h3 class="text-xl font-semibold mb-3">{{ service.title }}</h3>
@@ -60,7 +56,7 @@ const services = [
               {{ tag }}
             </UBadge>
           </div>
-        </UCard>
+        </div>
       </div>
     </UContainer>
   </section>
