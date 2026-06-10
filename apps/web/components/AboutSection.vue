@@ -1,15 +1,15 @@
 <script setup lang="ts">
 const stats = [
-  { value: '4', label: 'Team Members', icon: 'i-lucide-users' },
-  { value: '1', label: 'Unified Stack', icon: 'i-lucide-layers' },
-  { value: '100%', label: 'TypeScript', icon: 'i-lucide-code' },
-  { value: '0', label: 'Compromises', icon: 'i-lucide-shield' },
+  { value: '<24jam', label: 'Waktu Respon', icon: 'i-lucide-clock' },
+  { value: '2-4mgg', label: 'Rata-rata Selesai', icon: 'i-lucide-calendar-check' },
+  { value: '100%', label: 'Klien Puas', icon: 'i-lucide-heart' },
+  { value: 'Gratis', label: 'Revisi Desain', icon: 'i-lucide-refresh-cw' },
 ]
 
 const principles = [
-  { title: 'One Language, Full Stack', description: 'TypeScript from database to UI. No context switching, no translation layers. Everyone speaks the same language.', icon: 'i-lucide-code-2' },
-  { title: 'Build Once, Deploy Everywhere', description: 'Web, mobile, and PWA from a single codebase via Capacitor.js. One team, one codebase, every platform.', icon: 'i-lucide-smartphone' },
-  { title: 'Performance by Default', description: 'Static generation for landing pages. SSR for apps. Core Web Vitals from day one. Every millisecond counts.', icon: 'i-lucide-zap' },
+  { title: 'Kami Jelaskan dengan Bahasa Manusia', description: 'Tidak ada jargon teknis yang membingungkan. Kami jelaskan semuanya dengan cara yang Anda pahami.', icon: 'i-lucide-message-circle' },
+  { title: 'Anda Pemilik Kodenya, Selamanya', description: 'Tidak ada lock-in. Kode dan data adalah milik Anda. Kapan pun mau pindah, ambil semuanya.', icon: 'i-lucide-key' },
+  { title: 'Kami Tidak Hilang Setelah Launch', description: 'Support berlanjut setelah website live. Ada pertanyaan? Kami balas dalam hitungan jam, bukan hari.', icon: 'i-lucide-headphones' },
 ]
 </script>
 
@@ -19,10 +19,10 @@ const principles = [
 
     <UContainer class="relative">
       <div class="mb-20">
-        <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-4 about-title">About Us</p>
+        <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-4 about-title">Tentang Kami</p>
         <h2 class="text-4xl md:text-5xl font-bold about-title">
-          A small team with<br />
-          <span class="text-(--ui-text-muted)">big ambitions.</span>
+          Tim kecil, hasil besar.<br />
+          <span class="text-(--ui-text-muted)">Kami serius dengan setiap project.</span>
         </h2>
       </div>
 
@@ -33,7 +33,7 @@ const principles = [
           class="glass-card p-6 text-center group hover:scale-[1.03] transition-all duration-300 stat-card"
         >
           <UIcon :name="stat.icon" class="w-6 h-6 text-(--ui-primary) mx-auto mb-3 opacity-60" />
-          <div class="text-3xl md:text-4xl font-bold mb-2">{{ stat.value }}</div>
+          <div class="text-2xl md:text-3xl font-bold mb-2">{{ stat.value }}</div>
           <div class="text-xs text-(--ui-text-muted) font-mono uppercase tracking-wider">{{ stat.label }}</div>
         </div>
       </div>
@@ -44,7 +44,6 @@ const principles = [
             <div class="w-10 h-10 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center">
               <UIcon :name="p.icon" class="w-5 h-5 text-(--ui-primary)" />
             </div>
-            <span class="text-5xl font-bold text-(--ui-text-muted)/10">{{ String(i + 1).padStart(2, '0') }}</span>
           </div>
           <h3 class="text-lg font-semibold mb-3">{{ p.title }}</h3>
           <p class="text-(--ui-text-muted) text-sm leading-relaxed">{{ p.description }}</p>

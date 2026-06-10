@@ -41,25 +41,25 @@ onUnmounted(() => {
     <div ref="heroContent" class="relative z-10 w-full max-w-7xl mx-auto px-6">
       <div class="max-w-3xl">
         <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-6 hero-text">
-          Digital Agency
+          AjoClub
         </p>
         <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-8 hero-text">
-          We build<br />
-          <span class="text-(--ui-primary)">digital</span><br />
-          experiences.
+          Website yang<br />
+          <span class="text-(--ui-primary)">bekerja</span><br />
+          untuk Anda.
         </h1>
         <p class="text-lg md:text-xl text-(--ui-text-muted) max-w-xl mb-12 hero-text">
-          Landing pages, SaaS apps, and mobile experiences. One team, one stack, zero compromises.
+          Kami bikin website yang cepat, aman, dan mudah diupdate. Tanpa jargon teknis, tanpa biaya tersembunyi.
         </p>
         <div class="flex flex-wrap gap-4 hero-text">
-          <UButton size="xl" @click="scrollTo('#services')">
-            See our work
+          <UButton size="xl" @click="scrollTo('#showcase')">
+            Lihat hasil kerja kami
             <template #trailing>
               <UIcon name="i-lucide-arrow-right" />
             </template>
           </UButton>
           <UButton size="xl" variant="outline" color="neutral" @click="scrollTo('#contact')">
-            Get in touch
+            Konsultasi gratis
           </UButton>
         </div>
       </div>

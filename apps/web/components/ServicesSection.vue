@@ -1,28 +1,28 @@
 <script setup lang="ts">
 const services = [
   {
-    icon: 'i-lucide-monitor',
-    title: 'Web Applications',
-    description: 'SaaS platforms, dashboards, and dynamic web apps. SSR, real-time data, bulletproof auth.',
-    tags: ['Nuxt.js', 'TypeScript', 'SSR'],
+    icon: 'i-lucide-globe',
+    title: 'Website yang Loading-nya Secepat Kilat',
+    description: 'Bukan cuma cantik, tapi juga cepat. Visitor tidak suka menunggu — kami pastikan website Anda loading di bawah 2 detik.',
+    tags: ['Landing Page', 'Company Profile', 'E-commerce'],
   },
   {
     icon: 'i-lucide-smartphone',
-    title: 'Mobile Apps',
-    description: 'Hybrid mobile apps that feel native. One codebase for Android and iOS via Capacitor.',
-    tags: ['Capacitor', 'Android', 'iOS'],
-  },
-  {
-    icon: 'i-lucide-layout',
-    title: 'Landing Pages',
-    description: 'High-converting landing pages and company profiles. Static generation for instant load.',
-    tags: ['SSG', 'SEO', 'Performance'],
+    title: 'Bisa Dipakai di HP, Tablet, dan Laptop',
+    description: 'Desain yang menyesuaikan layar. Tidak ada lagi teks kecil, tombol susah ditekan, atau layout berantakan di mobile.',
+    tags: ['Responsive', 'Mobile-First', 'Touch-Friendly'],
   },
   {
     icon: 'i-lucide-shield-check',
-    title: 'PWA & Offline',
-    description: 'Progressive Web Apps that install on any device. Offline support, push notifications.',
-    tags: ['PWA', 'Offline', 'Installable'],
+    title: 'Aman dan Mudah Diupdate',
+    description: 'Anda bisa ganti teks dan gambar sendiri tanpa perlu programmer. Sistem kami aman dan tidak gampang diretas.',
+    tags: ['CMS', 'SSL', 'Backup'],
+  },
+  {
+    icon: 'i-lucide-zap',
+    title: 'Siap dalam Hitungan Minggu, Bukan Bulan',
+    description: 'Kami tidak suka proses yang berbelit. Brief → desain → revisi → launch. Selesai dalam 2-4 minggu untuk project standar.',
+    tags: ['Fast Delivery', 'Clear Process', 'No Surprises'],
   },
 ]
 </script>
@@ -32,11 +32,11 @@ const services = [
     <UContainer>
       <div class="mb-20">
         <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-4 service-title">
-          What we do
+          Apa yang Kami Lakukan
         </p>
         <h2 class="text-4xl md:text-5xl font-bold service-title">
-          Full-stack capability.<br />
-          <span class="text-(--ui-text-muted)">One team. One language.</span>
+          Website yang bekerja untuk Anda,<br />
+          <span class="text-(--ui-text-muted)">bukan sebaliknya.</span>
         </h2>
       </div>
 

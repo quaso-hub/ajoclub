@@ -44,6 +44,21 @@ onMounted(() => {
       once: true,
     })
 
+    // Showcase cards: stagger batch
+    ScrollTrigger.batch('.showcase-card', {
+      onEnter: (batch) => gsap.from(batch, { y: 80, opacity: 0, scale: 0.95, stagger: 0.08, duration: 0.6, ease: 'power3.out' }),
+      start: 'top 85%',
+      once: true,
+    })
+
+    // Showcase title
+    gsap.utils.toArray('.showcase-title').forEach((el) => {
+      gsap.from(el as HTMLElement, {
+        y: 50, opacity: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: el as HTMLElement, start: 'top 85%' },
+      })
+    })
+
     // Work cards: stagger batch with scale
     ScrollTrigger.batch('.work-card', {
       onEnter: (batch) => gsap.from(batch, { y: 80, opacity: 0, scale: 0.95, stagger: 0.12, duration: 0.7, ease: 'power3.out' }),
@@ -92,11 +107,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div>
+    <div>
     <Navbar />
     <Hero3D />
+    <ShowcaseSection />
     <ServicesSection />
-    <WorkSection />
     <AboutSection />
     <ContactSection />
     <FooterSection />
