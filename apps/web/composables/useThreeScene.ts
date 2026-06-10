@@ -2,6 +2,68 @@ import * as THREE from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
+
+// Chromatic aberration shader (Active Theory style)
+const ChromaticAberrationShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    amount: { value: 0.002 },
+    angle: { value: 0.0 },
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform float amount;
+    uniform float angle;
+    varying vec2 vUv;
+    void main() {
+      vec2 offset = amount * vec2(cos(angle), sin(angle));
+      float r = texture2D(tDiffuse, vUv + offset).r;
+      float g = texture2D(tDiffuse, vUv).g;
+      float b = texture2D(tDiffuse, vUv - offset).b;
+      float a = texture2D(tDiffuse, vUv).a;
+      gl_FragColor = vec4(r, g, b, a);
+    }
+  `,
+}
+
+// Film grain shader (subtle texture)
+const FilmGrainShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    time: { value: 0.0 },
+    intensity: { value: 0.03 },
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform float time;
+    uniform float intensity;
+    varying vec2 vUv;
+    float rand(vec2 co) {
+      return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+    }
+    void main() {
+      vec4 color = texture2D(tDiffuse, vUv);
+      float grain = rand(vUv + time) * intensity;
+      color.rgb += grain - intensity * 0.5;
+      gl_FragColor = color;
+    }
+  `,
+}
 
 export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
   let scene: THREE.Scene
@@ -10,6 +72,8 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
   let composer: EffectComposer
   let animationId: number
   let particles: THREE.Points
+  let chromaPass: ShaderPass
+  let grainPass: ShaderPass
   let mouse = { x: 0, y: 0 }
   let targetRotation = { x: 0, y: 0 }
   let scrollProgress = 0
@@ -38,6 +102,16 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
       0.85, // threshold
     )
     composer.addPass(bloomPass)
+
+    // Chromatic aberration (subtle RGB split, mouse-responsive)
+    chromaPass = new ShaderPass(ChromaticAberrationShader)
+    chromaPass.uniforms.amount.value = 0.0015
+    composer.addPass(chromaPass)
+
+    // Film grain (subtle texture)
+    grainPass = new ShaderPass(FilmGrainShader)
+    grainPass.uniforms.intensity.value = 0.025
+    composer.addPass(grainPass)
 
     createParticles()
     addLights()
@@ -166,6 +240,11 @@ export function useThreeScene(containerRef: Ref<HTMLElement | null>) {
       positions[i + 1] += Math.sign(positions[i + 1]) * drift
     }
     particles.geometry.attributes.position.needsUpdate = true
+
+    // Update post-processing uniforms
+    chromaPass.uniforms.angle.value = Math.atan2(mouse.y, mouse.x)
+    chromaPass.uniforms.amount.value = 0.001 + Math.abs(mouse.x) * 0.001
+    grainPass.uniforms.time.value = time * 10
 
     composer.render()
   }
