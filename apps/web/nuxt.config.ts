@@ -7,6 +7,17 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
 
+  colorMode: {
+    preference: 'system',
+    fallback: 'dark',
+    storage: 'cookie',
+    cookieAttrs: {
+      'max-age': '31536000',
+      path: '/',
+      SameSite: 'Lax',
+    },
+  },
+
   app: {
     head: {
       title: 'AjoClub — Digital Agency',
@@ -14,7 +25,6 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'We build landing pages, SaaS apps, and mobile experiences.' },
-        { name: 'theme-color', content: '#000000' },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -50,6 +60,4 @@ export default defineNuxtConfig({
       appName: 'AjoClub',
     },
   },
-
-  nitro: {},
 })

@@ -25,12 +25,12 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 <template>
   <nav
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-    :class="isScrolled ? 'bg-(--ui-bg) border-b border-(--ui-border)' : 'bg-transparent'"
+    :class="isScrolled ? 'bg-(--ui-bg)/90 backdrop-blur-xl border-b border-(--ui-border)' : 'bg-transparent'"
   >
-    <UContainer class="h-20 flex items-center justify-between">
-      <a href="#" class="text-xl font-bold">AjoClub</a>
+    <UContainer class="h-16 flex items-center justify-between">
+      <a href="#" class="text-lg font-bold">AjoClub</a>
 
-      <div class="hidden md:flex items-center gap-8">
+      <div class="hidden md:flex items-center gap-6">
         <button
           v-for="link in links"
           :key="link.href"
@@ -39,16 +39,20 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
         >
           {{ link.label }}
         </button>
-        <UButton @click="scrollTo('#contact')">Start a Project</UButton>
+        <ThemeToggle />
+        <UButton size="sm" @click="scrollTo('#contact')">Start a Project</UButton>
       </div>
 
-      <UButton
-        class="md:hidden"
-        variant="ghost"
-        color="neutral"
-        icon="i-lucide-menu"
-        @click="isMobileMenuOpen = !isMobileMenuOpen"
-      />
+      <div class="md:hidden flex items-center gap-2">
+        <ThemeToggle />
+        <UButton
+          variant="ghost"
+          color="neutral"
+          icon="i-lucide-menu"
+          size="sm"
+          @click="isMobileMenuOpen = !isMobileMenuOpen"
+        />
+      </div>
     </UContainer>
 
     <Transition
