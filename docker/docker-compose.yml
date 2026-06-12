@@ -8,10 +8,12 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=development
+      - DATABASE_URL=file:./dev.db
     volumes:
       - ../apps/web:/app
       - /app/node_modules
-    command: pnpm dev
+      - /app/.nuxt
+    command: npx nuxt dev --host 0.0.0.0
 
   # Nginx Proxy Manager — manage domains + SSL via web UI
   npm:

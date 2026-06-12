@@ -41,7 +41,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
           {{ link.label }}
         </button>
         <ThemeToggle />
-        <UButton size="sm" @click="handleScrollTo('#contact')">Start a Project</UButton>
+        <UButton size="sm" @click="handleScrollTo('#contact')">Chat WhatsApp</UButton>
       </div>
 
       <div class="md:hidden flex items-center gap-2">
@@ -75,7 +75,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
           >
             {{ link.label }}
           </button>
-          <UButton block @click="handleScrollTo('#contact')">Start a Project</UButton>
+          <UButton block @click="handleScrollTo('#contact')">Chat WhatsApp</UButton>
         </UContainer>
       </div>
     </Transition>

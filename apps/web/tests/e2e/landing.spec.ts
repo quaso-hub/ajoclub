@@ -12,7 +12,7 @@ test.describe('Landing Page', () => {
   test('has hero section with heading', async ({ page }) => {
     const heading = page.locator('h1')
     await expect(heading).toBeVisible()
-    await expect(heading).toContainText('digital')
+    await expect(heading).toContainText('Website yang bikin brand')
   })
 
   test('has services section', async ({ page }) => {
@@ -42,36 +42,22 @@ test.describe('Landing Page', () => {
 
   test('can scroll to services section', async ({ page }) => {
     await page.locator('button', { hasText: 'Services' }).first().click()
-    await page.waitForTimeout(1000)
+    await page.waitForTimeout(2500)
     const services = page.locator('#services')
     await expect(services).toBeInViewport()
   })
 
-  test('can submit contact form', async ({ page }) => {
+  test('has WhatsApp contact CTA with the current number', async ({ page }) => {
     await page.locator('#contact').scrollIntoViewIfNeeded()
     await page.waitForTimeout(500)
 
-    await page.locator('input[placeholder="Your name"]').fill('Test User')
-    await page.locator('input[placeholder="you@company.com"]').fill('test@example.com')
-    await page.locator('textarea[placeholder*="Tell us about"]').fill('Test message')
-
-    await page.locator('button[type="submit"]').click()
-    await page.waitForTimeout(2000)
-
-    // Should show success message
-    const success = page.locator('text=Message Sent')
-    await expect(success).toBeVisible()
+    const cta = page.locator('#contact a[href*="wa.me/6285188627365"]')
+    await expect(cta).toBeVisible()
   })
 
-  test('validates contact form fields', async ({ page }) => {
-    await page.locator('#contact').scrollIntoViewIfNeeded()
-    await page.waitForTimeout(500)
-
-    // Try to submit empty form
-    await page.locator('button[type="submit"]').click()
-
-    // Should show validation errors
-    const nameError = page.locator('text=Name is required')
-    await expect(nameError).toBeVisible()
+  test('can open portfolio detail page', async ({ page }) => {
+    await page.locator('#work').scrollIntoViewIfNeeded()
+    await page.locator('a[href="/portfolio/immersive-studio-showroom"]').click()
+    await expect(page.locator('h1')).toContainText('Immersive Studio Showroom')
   })
 })

@@ -12,6 +12,7 @@
     "typecheck": "nuxt typecheck",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -40,6 +41,7 @@
     "@types/three": "^0.175.0",
     "@vue/test-utils": "^2.4.11",
     "prisma": "^6.9.0",
+    "tsx": "^4.22.4",
     "typescript": "^5.8.3",
     "vitest": "^4.1.8",
     "vue-tsc": "^2.2.10"

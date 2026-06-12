@@ -5,9 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 definePageMeta({ layout: false })
 
 useHead({
-  title: 'AjoClub — Digital Agency',
+  title: 'AjoClub - Jasa Bikin Website',
   meta: [
-    { name: 'description', content: 'Landing pages, SaaS apps, and mobile experiences. One team, one stack, zero compromises.' },
+    { name: 'description', content: 'Jasa bikin website: landing page, company profile, SaaS, dashboard. Satu tim, satu stack, dari diskusi sampai online.' },
   ],
 })
 
@@ -80,18 +80,9 @@ onMounted(() => {
       once: true,
     })
 
-    // Contact info: slide from left
-    gsap.from('.contact-info', {
-      x: -50,
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: '.contact-info', start: 'top 85%' },
-    })
-
-    // Contact form: slide from right
+    // Contact section: slide up
     gsap.from('.contact-form', {
-      x: 50,
+      y: 60,
       opacity: 0,
       duration: 1,
       ease: 'power3.out',
@@ -111,9 +102,11 @@ onUnmounted(() => {
     <Navbar />
     <Hero3D />
     <ShowcaseSection />
+    <WorkSection />
     <ServicesSection />
     <AboutSection />
     <ContactSection />
     <FooterSection />
+    <WhatsAppFAB />
   </div>
 </template>

@@ -1,150 +1,100 @@
 <script setup lang="ts">
-const categories = [
-  { id: 'all', label: 'All' },
-  { id: 'corporate', label: 'Corporate' },
-  { id: 'creative', label: 'Creative' },
-  { id: 'events', label: 'Events' },
-  { id: 'saas', label: 'SaaS' },
-]
+const { scrollTo } = useScrollTo()
 
 const activeCategory = ref('all')
 
-const templates = [
-  {
-    id: 1,
-    title: 'Company Profile',
-    slug: 'company-profile',
-    category: 'corporate',
-    description: 'Clean, professional presence for established businesses.',
-    gradient: 'from-blue-600 to-indigo-700',
-    icon: 'i-lucide-building-2',
-    tags: ['Corporate', 'Professional'],
-  },
-  {
-    id: 2,
-    title: 'Landing Page',
-    slug: 'landing-page',
-    category: 'creative',
-    description: 'High-conversion pages that turn visitors into leads.',
-    gradient: 'from-rose-500 to-orange-500',
-    icon: 'i-lucide-rocket',
-    tags: ['Marketing', 'Conversion'],
-  },
-  {
-    id: 3,
-    title: 'Wedding Page',
-    slug: 'wedding',
-    category: 'events',
-    description: 'Elegant celebration pages with RSVP and photo galleries.',
-    gradient: 'from-pink-400 to-rose-500',
-    icon: 'i-lucide-heart',
-    tags: ['Wedding', 'Celebration'],
-  },
-  {
-    id: 4,
-    title: 'SaaS Dashboard',
-    slug: 'saas',
-    category: 'saas',
-    description: 'Data-rich interfaces with real-time updates and charts.',
-    gradient: 'from-violet-500 to-purple-600',
-    icon: 'i-lucide-bar-chart-3',
-    tags: ['SaaS', 'Dashboard'],
-  },
-  {
-    id: 5,
-    title: 'Restaurant',
-    slug: 'restaurant',
-    category: 'creative',
-    description: 'Appetizing menus, online ordering, and reservation systems.',
-    gradient: 'from-amber-500 to-orange-600',
-    icon: 'i-lucide-utensils',
-    tags: ['Food', 'Hospitality'],
-  },
-  {
-    id: 6,
-    title: 'Portfolio',
-    slug: 'portfolio',
-    category: 'creative',
-    description: 'Showcase work with interactive galleries and case studies.',
-    gradient: 'from-emerald-500 to-teal-600',
-    icon: 'i-lucide-palette',
-    tags: ['Creative', 'Portfolio'],
-  },
-  {
-    id: 7,
-    title: 'Event / Brochure',
-    slug: 'event',
-    category: 'events',
-    description: 'Information-rich pages for conferences, festivals, and launches.',
-    gradient: 'from-cyan-500 to-blue-600',
-    icon: 'i-lucide-calendar',
-    tags: ['Event', 'Info'],
-  },
-  {
-    id: 8,
-    title: 'Hajatan / Celebration',
-    slug: 'celebration',
-    category: 'events',
-    description: 'Festive pages for graduations, birthdays, and milestones.',
-    gradient: 'from-yellow-500 to-amber-600',
-    icon: 'i-lucide-party-popper',
-    tags: ['Celebration', 'Personal'],
-  },
-]
+const { data: categoriesData } = await useFetch('/api/portfolio/categories')
+const { data: templatesData, status: templatesStatus } = await useFetch('/api/showcase/templates')
+
+const categories = computed(() => [
+  { slug: 'all', label: 'Semua' },
+  ...(categoriesData.value?.categories || []),
+])
 
 const filteredTemplates = computed(() => {
+  const templates = templatesData.value?.templates || []
   if (activeCategory.value === 'all') return templates
-  return templates.filter(t => t.category === activeCategory.value)
+  return templates.filter((t: { category?: { slug: string } }) => t.category?.slug === activeCategory.value)
 })
 </script>
 
 <template>
   <section id="showcase" class="py-32 bg-(--ui-bg) relative overflow-hidden">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-(--ui-primary)/3 rounded-full blur-[150px]" />
+    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-(--ui-primary)/50 to-transparent" />
+    <div class="absolute top-1/3 right-[-15%] w-[650px] h-[650px] bg-(--ui-primary)/8 rounded-full blur-[140px]" />
 
     <UContainer class="relative">
-      <div class="mb-16">
+      <div class="mb-16 max-w-3xl">
         <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-4 showcase-title">
-          Our Work
+          Template
         </p>
         <h2 class="text-4xl md:text-5xl font-bold showcase-title">
-          Every business is different.<br />
-          <span class="text-(--ui-text-muted)">Your website should be too.</span>
+          Pilih jenis website yang cocok.
         </h2>
         <p class="text-(--ui-text-muted) mt-4 max-w-xl showcase-title">
-          Browse what we've built. Each project is tailored to the client's needs, not a template with their logo pasted on.
+          Setiap template punya struktur yang berbeda. Klik untuk lihat contoh dan detailnya.
         </p>
       </div>
 
-      <!-- Category Filter -->
       <div class="flex flex-wrap gap-2 mb-12">
         <UButton
           v-for="cat in categories"
-          :key="cat.id"
-          :variant="activeCategory === cat.id ? 'solid' : 'outline'"
-          :color="activeCategory === cat.id ? 'primary' : 'neutral'"
+          :key="cat.slug"
+          :variant="activeCategory === cat.slug ? 'solid' : 'outline'"
+          :color="activeCategory === cat.slug ? 'primary' : 'neutral'"
           size="sm"
-          @click="activeCategory = cat.id"
+          @click="activeCategory = cat.slug"
         >
           {{ cat.label }}
         </UButton>
       </div>
 
-      <!-- Template Grid -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Loading state -->
+      <div v-if="templatesStatus === 'pending'" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div v-for="i in 6" :key="i" class="glass-card overflow-hidden animate-pulse">
+          <div class="h-56 bg-(--ui-bg-elevated)" />
+          <div class="p-5 space-y-3">
+            <div class="h-5 bg-(--ui-bg-elevated) rounded w-3/4" />
+            <div class="h-4 bg-(--ui-bg-elevated) rounded w-full" />
+            <div class="flex gap-2">
+              <div class="h-6 bg-(--ui-bg-elevated) rounded w-16" />
+              <div class="h-6 bg-(--ui-bg-elevated) rounded w-20" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div v-else-if="!filteredTemplates.length" class="glass-card p-12 text-center">
+        <UIcon name="i-lucide-inbox" class="w-12 h-12 text-(--ui-text-muted) mx-auto mb-4" />
+        <p class="text-(--ui-text-muted)">Belum ada template di kategori ini.</p>
+      </div>
+
+      <!-- Template grid -->
+      <div v-else class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         <NuxtLink
           v-for="template in filteredTemplates"
           :key="template.id"
           :to="`/showcase/${template.slug}`"
-          class="group glass-card overflow-hidden hover:scale-[1.03] transition-all duration-300 cursor-pointer showcase-card block"
+          class="group glass-card overflow-hidden hover:-translate-y-1 transition-all duration-300 cursor-pointer showcase-card block"
         >
-          <div class="h-48 bg-gradient-to-br flex items-center justify-center relative" :class="template.gradient">
-            <div class="absolute inset-0 bg-black/10" />
-            <UIcon :name="template.icon" class="relative w-16 h-16 text-white/80" />
+          <div class="h-56 relative overflow-hidden" :style="{ '--accent': template.accentColor }">
+            <ScenePreview
+              :preset="template.scenePreset"
+              :accent="template.accentColor"
+              :label="`${template.title} scene preview`"
+              class="absolute inset-0"
+            />
+            <div class="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/60" />
+            <div class="absolute left-5 top-5 flex items-center gap-2">
+              <div class="w-11 h-11 rounded-xl bg-white/10 backdrop-blur border border-white/15 flex items-center justify-center">
+                <UIcon :name="template.icon" class="w-5 h-5 text-white" />
+              </div>
+            </div>
           </div>
           <div class="p-5">
             <h3 class="font-semibold mb-2">{{ template.title }}</h3>
-            <p class="text-(--ui-text-muted) text-sm mb-4 leading-relaxed">{{ template.description }}</p>
+            <p class="text-(--ui-text-muted) text-sm mb-4 leading-relaxed">{{ template.summary }}</p>
             <div class="flex flex-wrap gap-1.5">
               <UBadge v-for="tag in template.tags" :key="tag" variant="soft" color="primary" size="sm">
                 {{ tag }}
@@ -154,11 +104,10 @@ const filteredTemplates = computed(() => {
         </NuxtLink>
       </div>
 
-      <!-- CTA -->
       <div class="text-center mt-16">
-        <p class="text-(--ui-text-muted) mb-6">Don't see what you need? We build custom solutions too.</p>
-        <UButton size="xl" @click="document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })">
-          Let's talk about your project
+        <p class="text-(--ui-text-muted) mb-6">Tidak menemukan yang cocok? Ceritakan kebutuhan Anda.</p>
+        <UButton size="xl" @click="scrollTo('#contact')">
+          Chat WhatsApp
         </UButton>
       </div>
     </UContainer>

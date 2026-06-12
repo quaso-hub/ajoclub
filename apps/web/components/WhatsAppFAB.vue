@@ -1,0 +1,91 @@
+<script setup lang="ts">
+const isVisible = ref(false)
+const isOpen = ref(false)
+const { buildUrl, sectionMessage } = useWhatsApp()
+
+const actions = [
+  {
+    label: 'Mau bikin website',
+    detail: 'Landing, company profile, toko online',
+    icon: 'i-lucide-globe',
+    href: computed(() => buildUrl('Halo, saya mau tanya soal bikin website.')),
+  },
+  {
+    label: 'Butuh SaaS / dashboard',
+    detail: 'Aplikasi internal, CRM, sistem operasional',
+    icon: 'i-lucide-layout-dashboard',
+    href: computed(() => buildUrl('Halo, saya butuh aplikasi web / dashboard.')),
+  },
+  {
+    label: 'Punya website, mau diperbaiki',
+    detail: 'Desain jelek, lambat, susah diupdate',
+    icon: 'i-lucide-wrench',
+    href: computed(() => buildUrl('Halo, website saya sudah ada tapi perlu diperbaiki.')),
+  },
+]
+
+onMounted(() => {
+  setTimeout(() => {
+    isVisible.value = true
+  }, 2000)
+})
+</script>
+
+<template>
+  <Transition
+    enter-active-class="transition-all duration-500 ease-out"
+    leave-active-class="transition-all duration-300 ease-in"
+    enter-from-class="opacity-0 translate-y-4 scale-90"
+    leave-to-class="opacity-0 translate-y-4 scale-90"
+  >
+    <div
+      v-if="isVisible"
+      class="fixed bottom-5 right-5 z-50"
+    >
+      <Transition
+        enter-active-class="transition-all duration-300 ease-out"
+        leave-active-class="transition-all duration-200 ease-in"
+        enter-from-class="opacity-0 translate-y-4 scale-95"
+        leave-to-class="opacity-0 translate-y-4 scale-95"
+      >
+        <div
+          v-if="isOpen"
+          class="absolute bottom-full right-0 mb-4 w-[min(calc(100vw-2.5rem),320px)] glass-card p-3 shadow-2xl"
+        >
+          <div class="px-2 pb-3">
+            <p class="text-sm font-semibold">Mau mulai dari mana?</p>
+            <p class="text-xs text-(--ui-text-muted)">Pilih konteks, nanti pesan WhatsApp otomatis lebih jelas.</p>
+          </div>
+          <a
+            v-for="action in actions"
+            :key="action.label"
+            :href="action.href.value"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-(--ui-bg-elevated) transition-colors"
+          >
+            <span class="w-10 h-10 rounded-lg bg-green-500/10 text-green-500 flex items-center justify-center">
+              <UIcon :name="action.icon" class="w-5 h-5" />
+            </span>
+            <span class="min-w-0">
+              <span class="block text-sm font-medium">{{ action.label }}</span>
+              <span class="block text-xs text-(--ui-text-muted)">{{ action.detail }}</span>
+            </span>
+            <UIcon name="i-lucide-external-link" class="w-4 h-4 text-(--ui-text-muted) ml-auto" />
+          </a>
+        </div>
+      </Transition>
+
+      <button
+        type="button"
+        class="flex items-center justify-center w-15 h-15 bg-green-500 hover:bg-green-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-500/25"
+        :aria-expanded="isOpen"
+        aria-label="Buka pilihan chat WhatsApp"
+        @click="isOpen = !isOpen"
+        @keydown.escape="isOpen = false"
+      >
+        <UIcon :name="isOpen ? 'i-lucide-x' : 'i-lucide-message-circle'" class="w-7 h-7 text-white" />
+      </button>
+    </div>
+  </Transition>
+</template>

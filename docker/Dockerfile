@@ -1,9 +1,10 @@
 # Stage 1: Build
 FROM node:20-alpine AS build
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY apps/web/package.json apps/web/package-lock.json ./
 RUN npm ci
-COPY . .
+COPY apps/web/ .
+RUN npx prisma generate
 RUN npx nuxt build
 
 # Stage 2: Production

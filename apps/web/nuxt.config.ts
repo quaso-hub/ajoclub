@@ -1,3 +1,5 @@
+const env = (globalThis as unknown as { process?: { env?: Record<string, string | undefined> } }).process?.env ?? {}
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
   devtools: { enabled: true },
@@ -11,20 +13,15 @@ export default defineNuxtConfig({
     preference: 'system',
     fallback: 'dark',
     storage: 'cookie',
-    cookieAttrs: {
-      'max-age': '31536000',
-      path: '/',
-      SameSite: 'Lax',
-    },
   },
 
   app: {
     head: {
-      title: 'AjoClub — Digital Agency',
+      title: 'AjoClub - Jasa Bikin Website',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'We build landing pages, SaaS apps, and mobile experiences.' },
+        { name: 'description', content: 'Jasa bikin website: landing page, company profile, SaaS, dashboard. Satu tim, satu stack.' },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -39,25 +36,23 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': { prerender: true },
+    '/': { ssr: true },
     '/about': { prerender: true },
-    '/api/**': {
-      cors: {
-        origin: [process.env.PUBLIC_URL || 'http://localhost:3000'],
-        methods: ['GET', 'POST'],
-        credentials: true,
-      },
-    },
+    '/portfolio/**': { ssr: true },
+    '/api/**': { cors: true },
   },
 
   css: ['~/assets/css/main.css'],
 
   runtimeConfig: {
-    databaseUrl: process.env.DATABASE_URL,
-    supabaseUrl: process.env.SUPABASE_URL || '',
-    supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
+    databaseUrl: env.DATABASE_URL,
+    supabaseUrl: env.SUPABASE_URL || '',
+    supabaseAnonKey: env.SUPABASE_ANON_KEY || '',
+    adminAuthToken: env.ADMIN_AUTH_TOKEN || '',
+    adminEmail: env.ADMIN_EMAIL || '',
     public: {
-      appName: 'AjoClub',
+      appName: env.NUXT_PUBLIC_APP_NAME || 'AjoClub',
+      whatsappPhone: env.NUXT_PUBLIC_WHATSAPP_PHONE || '6285188627365',
     },
   },
 })
