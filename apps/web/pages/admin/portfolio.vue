@@ -1,176 +1,216 @@
 <script setup lang="ts">
-interface AdminPortfolioItem {
-  id: string
-  title: string
-  slug: string
-  summary: string
-  status: string
-  source: string
-  scenePreset: string
-}
+definePageMeta({ layout: false })
 
-definePageMeta({ layout: 'default' })
+useHead({
+  title: 'Kelola Portfolio - AjoClub Admin',
+})
 
-const token = ref('')
-const isLoading = ref(false)
-const error = ref('')
-const items = ref<AdminPortfolioItem[]>([])
-const form = reactive({
+const { data: portfolioData, refresh, status: portfolioStatus } = await useFetch('/api/admin/portfolio')
+const { data: categoriesData } = await useFetch('/api/admin/categories')
+const { data: templatesData } = await useFetch('/api/admin/templates')
+
+const items = computed(() => portfolioData.value?.items || [])
+const categories = computed(() => categoriesData.value?.categories || [])
+const templates = computed(() => templatesData.value?.templates || [])
+
+const isCreating = ref(false)
+const newItem = ref({
   title: '',
   slug: '',
   summary: '',
-  source: 'INTERNAL_DEMO',
-  scenePreset: 'cinematic-scroll',
+  categoryId: '',
+  templateId: '',
 })
 
-function adminHeaders(): Record<string, string> {
-  return token.value ? { 'x-admin-token': token.value } : {}
-}
+async function createDraft() {
+  if (!newItem.value.title || !newItem.value.slug || !newItem.value.summary) return
 
-async function loadItems() {
-  error.value = ''
-  isLoading.value = true
-  try {
-    const response = await $fetch<{ items: AdminPortfolioItem[] }>('/api/admin/portfolio', {
-      headers: adminHeaders(),
-    })
-    items.value = response.items
-  }
-  catch (err) {
-    error.value = err instanceof Error ? err.message : 'Failed to load admin portfolio'
-  }
-  finally {
-    isLoading.value = false
-  }
-}
-
-async function createItem() {
-  error.value = ''
-  isLoading.value = true
+  isCreating.value = true
   try {
     await $fetch('/api/admin/portfolio', {
       method: 'POST',
-      headers: adminHeaders(),
-      body: { ...form },
+      body: {
+        title: newItem.value.title,
+        slug: newItem.value.slug,
+        summary: newItem.value.summary,
+        categoryId: newItem.value.categoryId || undefined,
+        templateId: newItem.value.templateId || undefined,
+      },
     })
-    form.title = ''
-    form.slug = ''
-    form.summary = ''
-    await loadItems()
+    newItem.value = { title: '', slug: '', summary: '', categoryId: '', templateId: '' }
+    await refresh()
   }
-  catch (err) {
-    error.value = err instanceof Error ? err.message : 'Failed to create portfolio item'
+  catch (e) {
+    console.error('Create failed:', e)
   }
   finally {
-    isLoading.value = false
+    isCreating.value = false
   }
 }
 
-async function changeStatus(id: string, action: 'publish' | 'unpublish' | 'archive') {
-  error.value = ''
-  isLoading.value = true
-  try {
-    await $fetch(`/api/admin/portfolio/${id}/${action}`, {
-      method: 'POST',
-      headers: adminHeaders(),
-    })
-    await loadItems()
-  }
-  catch (err) {
-    error.value = err instanceof Error ? err.message : `Failed to ${action} portfolio item`
-  }
-  finally {
-    isLoading.value = false
-  }
+async function publishItem(id: string) {
+  await $fetch(`/api/admin/portfolio/${id}/publish`, { method: 'POST' })
+  await refresh()
 }
 
-useHead({
-  title: 'Portfolio Admin - AjoClub',
-})
+async function unpublishItem(id: string) {
+  await $fetch(`/api/admin/portfolio/${id}/unpublish`, { method: 'POST' })
+  await refresh()
+}
+
+async function archiveItem(id: string) {
+  await $fetch(`/api/admin/portfolio/${id}/archive`, { method: 'POST' })
+  await refresh()
+}
+
+async function deleteItem(id: string) {
+  if (!confirm('Hapus portfolio ini?')) return
+  await $fetch(`/api/admin/portfolio/${id}`, { method: 'DELETE' })
+  await refresh()
+}
+
+function generateSlug(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
 </script>
 
 <template>
-  <UContainer class="py-14">
-    <div class="mb-10">
-      <UBadge variant="soft" color="primary" class="mb-4">Admin / Portfolio</UBadge>
-      <h1 class="text-4xl font-bold mb-4">Portfolio Manager</h1>
-      <p class="text-(--ui-text-muted) max-w-2xl">
-        Kelola item portfolio dinamis. Untuk production, token development ini diganti Supabase Auth session + RBAC server-side.
-      </p>
-    </div>
-
-    <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-6 items-start">
-      <form class="glass-card p-6 space-y-4" @submit.prevent="createItem">
-        <h2 class="font-semibold text-lg">Create draft</h2>
-        <UFormField label="Admin token">
-          <UInput v-model="token" type="password" placeholder="ADMIN_AUTH_TOKEN" />
-        </UFormField>
-        <UFormField label="Title">
-          <UInput v-model="form.title" placeholder="Client launch system" required />
-        </UFormField>
-        <UFormField label="Slug">
-          <UInput v-model="form.slug" placeholder="client-launch-system" required />
-        </UFormField>
-        <UFormField label="Summary">
-          <UTextarea v-model="form.summary" placeholder="Short portfolio summary" required />
-        </UFormField>
-        <div class="grid sm:grid-cols-2 gap-3">
-          <UFormField label="Source">
-            <USelect
-              v-model="form.source"
-              :items="['TEMPLATE', 'INTERNAL_DEMO', 'CONCEPT', 'CLIENT_WORK']"
-            />
-          </UFormField>
-          <UFormField label="Scene">
-            <USelect
-              v-model="form.scenePreset"
-              :items="['orbit-product', 'shader-portal', 'case-timeline', 'particle-morph', 'cinematic-scroll']"
-            />
-          </UFormField>
+  <div class="min-h-screen bg-zinc-950 text-white">
+    <header class="border-b border-zinc-800">
+      <UContainer class="h-14 sm:h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <NuxtLink to="/admin" class="text-base sm:text-lg font-bold">AjoClub</NuxtLink>
+          <UBadge variant="soft" color="primary" size="sm">Portfolio</UBadge>
         </div>
-        <UButton type="submit" block :loading="isLoading">Create portfolio draft</UButton>
-        <UButton type="button" variant="outline" color="neutral" block :loading="isLoading" @click="loadItems">
-          Load admin items
+        <UButton variant="ghost" color="neutral" size="sm" to="/admin" icon="i-lucide-arrow-left">
+          Kembali
         </UButton>
-      </form>
+      </UContainer>
+    </header>
 
-      <div class="space-y-4">
-        <UAlert
-          v-if="error"
-          color="error"
-          variant="soft"
-          title="Admin request failed"
-          :description="error"
-        />
-
-        <div v-if="!items.length" class="glass-card p-8 text-center">
-          <UIcon name="i-lucide-database" class="w-8 h-8 text-(--ui-primary) mx-auto mb-4" />
-          <h2 class="font-semibold mb-2">No database items loaded yet</h2>
-          <p class="text-sm text-(--ui-text-muted)">
-            Masukkan token lalu load. Public site tetap memakai fixture portfolio sampai DB dipush/seed.
-          </p>
+    <main class="py-8 sm:py-12">
+      <UContainer>
+        <!-- Create form -->
+        <div class="rounded-xl border border-zinc-800 p-5 sm:p-6 mb-8">
+          <h2 class="text-lg font-semibold mb-4 text-white">Buat Portfolio Baru</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4">
+            <UInput
+              v-model="newItem.title"
+              placeholder="Judul"
+              size="sm"
+              @update:model-value="newItem.slug = generateSlug($event)"
+            />
+            <UInput v-model="newItem.slug" placeholder="slug-url" size="sm" />
+            <USelect
+              v-model="newItem.categoryId"
+              :items="categories.map(c => ({ label: c.label, value: c.id }))"
+              placeholder="Kategori"
+              size="sm"
+            />
+            <USelect
+              v-model="newItem.templateId"
+              :items="templates.map(t => ({ label: t.title, value: t.id }))"
+              placeholder="Template"
+              size="sm"
+            />
+          </div>
+          <UTextarea v-model="newItem.summary" placeholder="Ringkasan singkat" :rows="2" size="sm" class="mb-4" />
+          <UButton
+            size="sm"
+            :loading="isCreating"
+            :disabled="!newItem.title || !newItem.slug || !newItem.summary"
+            @click="createDraft"
+          >
+            Buat Draft
+          </UButton>
         </div>
 
-        <article v-for="item in items" :key="item.id" class="glass-card p-5">
-          <div class="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <div class="flex flex-wrap gap-2 mb-3">
-                <UBadge color="primary" variant="soft">{{ item.status }}</UBadge>
-                <UBadge color="neutral" variant="outline">{{ item.source }}</UBadge>
-                <UBadge color="neutral" variant="outline">{{ item.scenePreset }}</UBadge>
+        <!-- Portfolio list -->
+        <div class="rounded-xl border border-zinc-800 overflow-hidden">
+          <div class="p-4 sm:p-5 border-b border-zinc-800">
+            <h2 class="text-lg font-semibold text-white">Daftar Portfolio</h2>
+          </div>
+
+          <!-- Skeleton -->
+          <div v-if="portfolioStatus === 'pending'" class="divide-y divide-zinc-800">
+            <div v-for="i in 4" :key="i" class="p-4 sm:p-5 animate-pulse">
+              <div class="flex items-center gap-4">
+                <div class="h-5 bg-zinc-800 rounded w-32" />
+                <div class="h-5 bg-zinc-800 rounded w-20" />
+                <div class="h-5 bg-zinc-800 rounded w-16 ml-auto" />
               </div>
-              <h2 class="font-semibold text-lg">{{ item.title }}</h2>
-              <p class="text-sm text-(--ui-text-muted) mt-1">{{ item.summary }}</p>
-              <p class="text-xs text-(--ui-text-muted) mt-3">/{{ item.slug }}</p>
-            </div>
-            <div class="flex flex-wrap gap-2">
-              <UButton size="xs" @click="changeStatus(item.id, 'publish')">Publish</UButton>
-              <UButton size="xs" variant="outline" color="neutral" @click="changeStatus(item.id, 'unpublish')">Draft</UButton>
-              <UButton size="xs" variant="outline" color="warning" @click="changeStatus(item.id, 'archive')">Archive</UButton>
             </div>
           </div>
-        </article>
-      </div>
-    </div>
-  </UContainer>
+
+          <!-- Empty -->
+          <div v-else-if="!items.length" class="p-8 text-center">
+            <UIcon name="i-lucide-inbox" class="w-8 h-8 text-zinc-600 mx-auto mb-3" />
+            <p class="text-zinc-400 text-sm">Belum ada portfolio.</p>
+          </div>
+
+          <!-- Items -->
+          <div v-else class="divide-y divide-zinc-800">
+            <div
+              v-for="item in items"
+              :key="item.id"
+              class="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
+            >
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                  <h3 class="font-semibold text-white text-sm sm:text-base truncate">{{ item.title }}</h3>
+                  <UBadge
+                    :color="item.status === 'PUBLISHED' ? 'success' : item.status === 'ARCHIVED' ? 'warning' : 'neutral'"
+                    variant="soft"
+                    size="sm"
+                  >
+                    {{ item.status }}
+                  </UBadge>
+                </div>
+                <p class="text-zinc-400 text-xs sm:text-sm truncate">{{ item.summary }}</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <UButton
+                  v-if="item.status !== 'PUBLISHED'"
+                  size="xs"
+                  color="success"
+                  variant="soft"
+                  @click="publishItem(item.id)"
+                >
+                  Publish
+                </UButton>
+                <UButton
+                  v-if="item.status === 'PUBLISHED'"
+                  size="xs"
+                  color="warning"
+                  variant="soft"
+                  @click="unpublishItem(item.id)"
+                >
+                  Unpublish
+                </UButton>
+                <UButton
+                  v-if="item.status !== 'ARCHIVED'"
+                  size="xs"
+                  color="neutral"
+                  variant="soft"
+                  @click="archiveItem(item.id)"
+                >
+                  Archive
+                </UButton>
+                <UButton
+                  size="xs"
+                  color="error"
+                  variant="soft"
+                  icon="i-lucide-trash-2"
+                  @click="deleteItem(item.id)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </UContainer>
+    </main>
+  </div>
 </template>

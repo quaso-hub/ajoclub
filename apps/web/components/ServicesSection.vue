@@ -2,57 +2,56 @@
 const services = [
   {
     icon: 'i-lucide-globe',
-    title: 'Website company profile',
-    description: 'Company profile, landing page, atau microsite. Dari desain sampai deploy, termasuk copywriting dan SEO dasar.',
+    title: 'Website',
+    description: 'Company profile, landing page, microsite. Dari desain sampai deploy.',
     tags: ['Nuxt 3', 'Tailwind', 'SEO'],
   },
   {
     icon: 'i-lucide-layout-dashboard',
-    title: 'SaaS & dashboard',
-    description: 'Aplikasi web untuk operasional internal: CRUD, role-based access, API, dan database.',
+    title: 'SaaS & Dashboard',
+    description: 'Aplikasi web untuk operasional: CRUD, role-based access, API.',
     tags: ['Prisma', 'PostgreSQL', 'RBAC'],
   },
   {
     icon: 'i-lucide-smartphone',
-    title: 'Mobile app (hybrid)',
-    description: 'Aplikasi mobile pakai Capacitor.js. Satu codebase untuk Android dan iOS.',
+    title: 'Mobile App',
+    description: 'Hybrid app pakai Capacitor.js. Satu codebase, Android + iOS.',
     tags: ['Capacitor', 'Vue', 'PWA'],
   },
   {
     icon: 'i-lucide-terminal',
-    title: 'Deploy & infra',
-    description: 'Docker, VPS, domain, SSL, CI/CD. Kami setup dari nol sampai online.',
-    tags: ['Docker', 'Nginx', 'GitHub Actions'],
+    title: 'Deploy & Infra',
+    description: 'Docker, VPS, domain, SSL, CI/CD. Setup dari nol sampai online.',
+    tags: ['Docker', 'Nginx', 'CI/CD'],
   },
 ]
 </script>
 
 <template>
-  <section id="services" class="py-32 bg-(--ui-bg) relative">
+  <section id="services" class="py-20 sm:py-32 bg-zinc-950">
     <UContainer>
-      <div class="mb-20">
-        <p class="text-(--ui-primary) text-sm font-mono tracking-widest uppercase mb-4 service-title">
+      <div class="mb-12 sm:mb-20">
+        <p class="text-sky-400 text-xs sm:text-sm font-mono tracking-widest uppercase mb-3 sm:mb-4 service-title">
           Layanan
         </p>
-        <h2 class="text-4xl md:text-5xl font-bold service-title">
-          Apa yang kami kerjakan<br />
-          <span class="text-(--ui-text-muted)">dari awal sampai online.</span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold service-title leading-tight">
+          Apa yang kami kerjakan.
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
         <div
           v-for="(service, i) in services"
           :key="i"
-          class="glass-card p-8 group hover:-translate-y-1 transition-all duration-300 service-card"
+          class="group p-6 sm:p-8 rounded-xl border border-zinc-800 hover:border-zinc-700 bg-zinc-900/50 hover:bg-zinc-900 transition-all duration-300 service-card cursor-pointer"
         >
-          <div class="w-12 h-12 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center mb-6 group-hover:bg-(--ui-primary)/20 transition-colors">
-            <UIcon :name="service.icon" class="w-6 h-6 text-(--ui-primary)" />
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-sky-500/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-sky-500/20 transition-colors">
+            <UIcon :name="service.icon" class="w-5 h-5 sm:w-6 sm:h-6 text-sky-400" />
           </div>
-          <h3 class="text-xl font-semibold mb-3">{{ service.title }}</h3>
-          <p class="text-(--ui-text-muted) mb-6 leading-relaxed">{{ service.description }}</p>
-          <div class="flex flex-wrap gap-2">
-            <UBadge v-for="tag in service.tags" :key="tag" variant="soft" color="primary">
+          <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-white">{{ service.title }}</h3>
+          <p class="text-sm sm:text-base text-zinc-400 mb-4 sm:mb-6 leading-relaxed">{{ service.description }}</p>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            <UBadge v-for="tag in service.tags" :key="tag" variant="soft" color="primary" size="sm">
               {{ tag }}
             </UBadge>
           </div>

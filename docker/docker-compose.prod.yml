@@ -14,10 +14,15 @@ services:
       - DATABASE_URL=${DATABASE_URL}
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - ADMIN_AUTH_TOKEN=${ADMIN_AUTH_TOKEN}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - NUXT_PUBLIC_WHATSAPP_PHONE=${NUXT_PUBLIC_WHATSAPP_PHONE}
+      - NUXT_PUBLIC_APP_NAME=${NUXT_PUBLIC_APP_NAME}
     networks:
       - proxy
 
-  # Static sites container (Nginx, hosts 50+ client sites)
+  # Static sites container (Nginx, hosts client sites)
   static-sites:
     image: nginx:alpine
     container_name: static-sites

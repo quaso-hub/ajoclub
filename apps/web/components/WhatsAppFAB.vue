@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const isVisible = ref(false)
 const isOpen = ref(false)
-const { buildUrl, sectionMessage } = useWhatsApp()
+const { buildUrl } = useWhatsApp()
 
 const actions = [
   {
@@ -17,7 +17,7 @@ const actions = [
     href: computed(() => buildUrl('Halo, saya butuh aplikasi web / dashboard.')),
   },
   {
-    label: 'Punya website, mau diperbaiki',
+    label: 'Website sudah ada, mau diperbaiki',
     detail: 'Desain jelek, lambat, susah diupdate',
     icon: 'i-lucide-wrench',
     href: computed(() => buildUrl('Halo, website saya sudah ada tapi perlu diperbaiki.')),
@@ -40,7 +40,7 @@ onMounted(() => {
   >
     <div
       v-if="isVisible"
-      class="fixed bottom-5 right-5 z-50"
+      class="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50"
     >
       <Transition
         enter-active-class="transition-all duration-300 ease-out"
@@ -50,11 +50,11 @@ onMounted(() => {
       >
         <div
           v-if="isOpen"
-          class="absolute bottom-full right-0 mb-4 w-[min(calc(100vw-2.5rem),320px)] glass-card p-3 shadow-2xl"
+          class="absolute bottom-full right-0 mb-3 w-[calc(100vw-2rem)] sm:w-80 rounded-xl border border-zinc-800 bg-zinc-900 p-3 shadow-2xl"
         >
           <div class="px-2 pb-3">
-            <p class="text-sm font-semibold">Mau mulai dari mana?</p>
-            <p class="text-xs text-(--ui-text-muted)">Pilih konteks, nanti pesan WhatsApp otomatis lebih jelas.</p>
+            <p class="text-sm font-semibold text-white">Mau mulai dari mana?</p>
+            <p class="text-xs text-zinc-400">Pilih konteks, pesan WhatsApp otomatis lebih jelas.</p>
           </div>
           <a
             v-for="action in actions"
@@ -62,29 +62,29 @@ onMounted(() => {
             :href="action.href.value"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-(--ui-bg-elevated) transition-colors"
+            class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-zinc-800 transition-colors"
           >
-            <span class="w-10 h-10 rounded-lg bg-green-500/10 text-green-500 flex items-center justify-center">
-              <UIcon :name="action.icon" class="w-5 h-5" />
+            <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-green-500/10 text-green-500 flex items-center justify-center shrink-0">
+              <UIcon :name="action.icon" class="w-4 h-4 sm:w-5 sm:h-5" />
             </span>
             <span class="min-w-0">
-              <span class="block text-sm font-medium">{{ action.label }}</span>
-              <span class="block text-xs text-(--ui-text-muted)">{{ action.detail }}</span>
+              <span class="block text-sm font-medium text-white">{{ action.label }}</span>
+              <span class="block text-xs text-zinc-400">{{ action.detail }}</span>
             </span>
-            <UIcon name="i-lucide-external-link" class="w-4 h-4 text-(--ui-text-muted) ml-auto" />
+            <UIcon name="i-lucide-external-link" class="w-4 h-4 text-zinc-500 ml-auto shrink-0" />
           </a>
         </div>
       </Transition>
 
       <button
         type="button"
-        class="flex items-center justify-center w-15 h-15 bg-green-500 hover:bg-green-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-500/25"
+        class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-green-500 hover:bg-green-600 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-green-500/25"
         :aria-expanded="isOpen"
         aria-label="Buka pilihan chat WhatsApp"
         @click="isOpen = !isOpen"
         @keydown.escape="isOpen = false"
       >
-        <UIcon :name="isOpen ? 'i-lucide-x' : 'i-lucide-message-circle'" class="w-7 h-7 text-white" />
+        <UIcon :name="isOpen ? 'i-lucide-x' : 'i-lucide-message-circle'" class="w-5 h-5 sm:w-6 sm:h-6 text-white" />
       </button>
     </div>
   </Transition>

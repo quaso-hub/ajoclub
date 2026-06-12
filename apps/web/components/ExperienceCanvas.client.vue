@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import * as THREE from 'three'
-import type { ScenePreset, MotionIntensity } from '~/utils/portfolio'
+
+type ScenePreset = 'orbit-product' | 'shader-portal' | 'case-timeline' | 'particle-morph' | 'cinematic-scroll'
+type MotionIntensity = 'calm' | 'balanced' | 'immersive'
 
 const props = withDefaults(defineProps<{
   preset?: ScenePreset
@@ -11,7 +13,7 @@ const props = withDefaults(defineProps<{
   preset: 'particle-morph',
   accent: '#fb7185',
   intensity: 'balanced',
-  label: 'Interactive AjoClub 3D scene',
+  label: 'AjoClub 3D scene',
 })
 
 const root = ref<HTMLElement | null>(null)
@@ -42,10 +44,10 @@ function supportsWebGL() {
 function qualityProfile() {
   const width = window.innerWidth
   const dpr = window.devicePixelRatio || 1
-  if (isReducedMotion.value) return { particles: 240, dpr: 1, bloom: false }
-  if (width < 768) return { particles: 520, dpr: 1, bloom: false }
-  if (dpr > 1.5) return { particles: 900, dpr: 1.35, bloom: false }
-  return { particles: 1300, dpr: 1.5, bloom: true }
+  if (isReducedMotion.value) return { particles: 240, dpr: 1 }
+  if (width < 768) return { particles: 520, dpr: 1 }
+  if (dpr > 1.5) return { particles: 900, dpr: 1.35 }
+  return { particles: 1300, dpr: 1.5 }
 }
 
 function presetGeometry() {
