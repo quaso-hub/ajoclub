@@ -1,141 +1,1079 @@
 <script setup lang="ts">
+/**
+ * architecture-3.vue — Ruang Studio
+ * Interior studio. Fraunces italic H1, Inter body, JetBrains Mono metadata.
+ * 8 sections: Hero+3D, Layanan, Proyek, Material, Quiz, Galeri, Kontak, Footer
+ * Palette: ruang (light, terracotta accent)
+ * Typography: ruang (Fraunces italic + Inter + JetBrains Mono)
+ */
+import { ref, computed, reactive } from 'vue'
+import { toCss } from '~/utils/palettes'
+
 definePageMeta({ layout: false })
-useHead({
-  title: 'Ruang Studio',
-  htmlAttrs: { lang: 'id' },
-  link: [
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap' },
-  ],
+
+const theme = useTemplateTheme('architecture-3')
+const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
+
+const accentCss = toCss(palette.accent)
+const accentSoftCss = toCss(palette.accentSoft)
+const fgCss = toCss(palette.fg)
+const bgCss = toCss(palette.bg)
+const surfaceCss = toCss(palette.surface)
+const surfaceElevatedCss = toCss(palette.surfaceElevated)
+const mutedCss = toCss(palette.muted)
+const borderCss = toCss(palette.border)
+const accentFgCss = toCss(palette.accentFg)
+
+// ============================================================
+// STATE
+// ============================================================
+const heroLoaded = ref(false)
+const lightboxOpen = ref(false)
+const lightboxIndex = ref(0)
+
+// Quiz state
+const quizStep = ref(0)
+const quizAnswers = ref<number[]>([])
+const quizDone = ref(false)
+
+onMounted(() => { setTimeout(() => { heroLoaded.value = true }, 150) })
+
+// ============================================================
+// DATA — Layanan
+// ============================================================
+const layanan = [
+  { icon: 'i-lucide-pen-tool', title: 'Desain Interior', desc: 'Dari konsep hingga penataan akhir. Moodboard, denah furniture, daftar belanja, dan rencana pencahayaan.' },
+  { icon: 'i-lucide-message-circle', title: 'Konsultasi', desc: 'Sesi 60 menit dengan desainer. Analisis ruangan, rekomendasi gaya, dan estimasi anggaran.' },
+  { icon: 'i-lucide-paintbrush', title: 'Styling', desc: 'Penataan akhir dengan aksesori, tanaman, tekstil, dan seni. Ruangan langsung siap ditempati.' },
+  { icon: 'i-lucide-cube', title: 'Visualisasi', desc: 'Render 3D fotorealistik sebelum eksekusi. Lihat hasilnya sebelum mengeluarkan anggaran.' },
+]
+
+// ============================================================
+// DATA — Proyek
+// ============================================================
+const proyek = [
+  { name: 'Ruang Kerja Minimalis', style: 'Minimalis', location: 'Jakarta Selatan', year: '2025', desc: 'Kantor rumah 18 m\u00B2 dengan meja kayu jati custom dan rak dinding tersembunyi. Cahaya alami dari jendela utama dimanfaatkan sepenuhnya tanpa lampu di siang hari.' },
+  { name: 'Apartemen Studio', style: 'Skandinavia', location: 'Bandung', year: '2024', desc: 'Unit 28 m\u00B2 di Cipete yang terasa lapang berkat palet warna terang dan furnitur multifungsi. Dapur terbuka menyatu dengan area duduk tanpa sekat fisik.' },
+  { name: 'Rumah Keluarga', style: 'Klasik', location: 'BSD City', year: '2024', desc: 'Rumah tiga kamar untuk keluarga muda dengan ruang bermain anak yang terintegrasi dengan ruang keluarga. Material lokal mendominasi: batu palimanan dan kayu jati.' },
+  { name: 'Kafe Industrial', style: 'Industrial', location: 'Bandung', year: '2023', desc: 'Kafe 85 m\u00B2 di Dago dengan dinding bata ekspos, meja besi tempa, dan pencahayaan gantung Edison. Suasana hangat yang tidak terasa dingin meskipun gaya industrial.' },
+  { name: 'Butik Fashion', style: 'Boho', location: 'Kemang, Jakarta', year: '2023', desc: 'Butik 45 m\u00B2 dengan rak rotan anyaman, cermin lengkung besar, dan lantai teraso. Setiap sudut dirancang sebagai spot foto untuk pengunjung.' },
+  { name: 'Villa Pantai', style: 'Boho', location: 'Canggu, Bali', year: '2025', desc: 'Villa liburan dengan pintu geser kaca yang membuka ke taman tropis. Material utama: kayu kelapa, linen putih, dan anyaman bambu dari pengrajin lokal Tabanan.' },
+]
+
+// ============================================================
+// DATA — Material (6 Indonesian materials)
+// ============================================================
+const materials = [
+  { name: 'Jati Jepara', origin: 'Jepara, Jawa Tengah', desc: 'Kayu jati tua reclaimed dari perahu nelayan dan rumah lama. Seratnya unik, tahan rayap, dan makin indah seiring waktu.', color: '#8B6914', category: 'Kayu' },
+  { name: 'Linen', origin: 'Eropa (diimport via Jakarta)', desc: 'Kain linen natural untuk tirai, sarung bantal, dan taplak. Teksturnya lembut, bernapas, dan makin lentur setelah dicuci beberapa kali.', color: '#D4C5A9', category: 'Tekstil' },
+  { name: 'Palimanan', origin: 'Cirebon, Jawa Barat', desc: 'Batu kapur lunak berwarna krem kekuningan. Cocok untuk dinding aksen dan lantai teras. Harganya terjangkau dibanding marmer impor.', color: '#E8D5B7', category: 'Batu' },
+  { name: 'Kuningan', origin: 'Yogyakarta', desc: 'Logam kuningan yang dipatenkan secara alami untuk pegangan pintu, lampu gantung, dan aksen furnitur. Warnanya berubah dari emas ke cokelat gelap seiring waktu.', color: '#B8860B', category: 'Logam' },
+  { name: 'Keramik', origin: 'Plered, Jawa Barat', desc: 'Keramik buatan tangan dengan glazur tidak rata. Setiap keping punya warna sedikit berbeda, menciptakan pola hidup di dinding dapur atau kamar mandi.', color: '#C4A882', category: 'Keramik' },
+  { name: 'Batu Alam', origin: 'Bali & Lombok', desc: 'Batu kali dan batu paras untuk taman, kamar mandi, dan dinding luar. Tahan cuaca, tidak licin, dan memberikan tekstur alami pada setiap ruangan.', color: '#9B8B7A', category: 'Batu' },
+]
+
+// ============================================================
+// DATA — Quiz (5 questions, 4 options each)
+// ============================================================
+const quizQuestions = [
+  {
+    q: 'Kalau Anda masuk ruangan yang ideal, perasaan pertama yang muncul?',
+    options: ['Tenang dan rapi', 'Hangat dan penuh karakter', 'Megah dan elegan', 'Bebas dan penuh warna'],
+  },
+  {
+    q: 'Warna yang paling membuat Anda nyaman?',
+    options: ['Putih, krem, abu-abu terang', 'Cokelat kayu, hijau zaitun, krem', 'Hitam, emas, marmer gelap', 'Terracotta, mustard, hijau sage'],
+  },
+  {
+    q: 'Material apa yang Anda sentuh duluan kalau masuk toko furnitur?',
+    options: ['Kayu berwarna terang', 'Kayu jati tua atau batu alam', 'Marmer atau logam mengkilap', 'Rotan, linen, atau anyaman'],
+  },
+  {
+    q: 'Suasana seperti apa yang Anda mau saat pulang kerja?',
+    options: ['Seperti hotel yang rapi dan tenang', 'Seperti rumah nenek yang hangat', 'Seperti lobi hotel bintang lima', 'Seperti kafe di Bali yang santai'],
+  },
+  {
+    q: 'Berapa anggaran yang Anda siapkan untuk satu ruangan?',
+    options: ['Di bawah Rp 50 juta', 'Rp 50 - 150 juta', 'Rp 150 - 300 juta', 'Di atas Rp 300 juta'],
+  },
+]
+
+const quizStyles = ['Minimalis', 'Klasik', 'Industrial', 'Boho']
+const quizStyleDescriptions: Record<string, string> = {
+  Minimalis: 'Anda suka ruangan yang bersih, fungsional, dan tidak berlebihan. Sedikit elemen, dampak besar.',
+  Klasik: 'Anda menghargai kemewahan yang tidak mencolok. Material berkualitas, detail halus, dan kesan abadi.',
+  Industrial: 'Anda menyukai kejujuran material. Bata ekspos, besi tempa, dan beton yang tidak ditutupi.',
+  Boho: 'Anda merasa bebas dengan tekstur, pola, dan tanaman. Ruangan yang terasa hidup dan personal.',
+}
+
+const quizResult = computed(() => {
+  if (!quizDone.value) return null
+  const counts = [0, 0, 0, 0]
+  quizAnswers.value.forEach((a) => { counts[a]++ })
+  const maxIdx = counts.indexOf(Math.max(...counts))
+  const style = quizStyles[maxIdx]
+  return { style, desc: quizStyleDescriptions[style] }
 })
 
-const isLoaded = ref(false)
-onMounted(() => { setTimeout(() => { isLoaded.value = true }, 500) })
+function answerQuiz(optionIdx: number) {
+  quizAnswers.value.push(optionIdx)
+  if (quizStep.value < quizQuestions.length - 1) {
+    quizStep.value++
+  } else {
+    quizDone.value = true
+  }
+}
 
-const projects = [
-  { name: 'Villa Andara', type: 'Residensial', location: 'Bali', year: '2025', materials: 'Jati, batu alam, kuningan' },
-  { name: 'Hotel Tugu Malang', type: 'Hospitality', location: 'Malang', year: '2024', materials: 'Bambu, batu vulkanik, katun' },
-  { name: 'Café Nusa', type: 'Komersial', location: 'Bandung', year: '2024', materials: 'Terrazzo, rotan, keramik' },
-]
-const services = [
-  { title: 'Residensial', desc: 'Rumah, villa, apartemen. Dari konsep sampai penataan furnitur.' },
-  { title: 'Hospitality', desc: 'Hotel, restoran, café. Desain yang mendukung pengalaman tamu.' },
-  { title: 'Komersial', desc: 'Kantor, retail, co-working. Ruang yang mendukung cara kerja.' },
+function resetQuiz() {
+  quizStep.value = 0
+  quizAnswers.value = []
+  quizDone.value = false
+}
+
+// ============================================================
+// DATA — Galeri (8 photos)
+// ============================================================
+const galeri = [
+  { label: 'Ruang Tamu', angle: 15 },
+  { label: 'Dapur', angle: 45 },
+  { label: 'Kamar Tidur', angle: 75 },
+  { label: 'Kamar Mandi', angle: 105 },
+  { label: 'Ruang Kerja', angle: 135 },
+  { label: 'Teras', angle: 165 },
+  { label: 'Ruang Makan', angle: 195 },
+  { label: 'Taman Dalam', angle: 225 },
 ]
 
-const fabOpen = ref(false)
-const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, saya tertarik dengan template Ruang Studio. Bisa diskusi?')
+// ============================================================
+// DATA — Sample box
+// ============================================================
+const sampleBoxOpen = ref(false)
+
+// ============================================================
+// HELPERS
+// ============================================================
+const waUrl = computed(() => {
+  const msg = 'Halo Ruang Studio, saya tertarik untuk memulai proyek interior. Bisa diskusi?'
+  return 'https://wa.me/6285188627365?text=' + encodeURIComponent(msg)
+})
 </script>
 
 <template>
-  <div class="min-h-screen antialiased" style="background: #F8F4ED; color: #2C2620; font-family: 'Outfit', system-ui, sans-serif;">
-    <TemplateBack />
+  <div
+    :style="{
+      ...styles,
+      '--ruang-accent': accentCss,
+      '--ruang-accent-soft': accentSoftCss,
+      '--ruang-accent-fg': accentFgCss,
+    }"
+  >
+    <TmplBack />
 
-    <nav class="fixed top-0 inset-x-0 z-40 backdrop-blur-md" style="background: rgba(248,244,237,0.85);">
-      <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        <span class="text-sm font-semibold" style="font-family: 'JetBrains Mono', monospace;">Ruang Studio</span>
-        <div class="hidden md:flex items-center gap-8 text-[11px] tracking-[0.2em] uppercase text-gray-600">
-          <a href="#proyek" class="hover:text-gray-900 transition-colors">Proyek</a>
-          <a href="#layanan" class="hover:text-gray-900 transition-colors">Layanan</a>
-          <a href="#kontak" class="hover:text-gray-900 transition-colors">Kontak</a>
+    <!-- ===== NAV ===== -->
+    <TmplNavbar
+      brand="Ruang Studio"
+      :links="[
+        { label: 'Layanan', href: '#layanan' },
+        { label: 'Proyek', href: '#proyek' },
+        { label: 'Material', href: '#material' },
+        { label: 'Kuis', href: '#kuis' },
+        { label: 'Galeri', href: '#galeri' },
+        { label: 'Kontak', href: '#kontak' },
+      ]"
+      :accent="accentCss"
+      :bg="surfaceElevatedCss"
+      :text="fgCss"
+      style="glass"
+      :show-theme-toggle="false"
+      :show-whatsapp-cta="true"
+      whatsapp-message="Halo Ruang Studio, saya mau tanya soal desain interior."
+    />
+
+    <!-- ===== SECTION 1: HERO + 3D ===== -->
+    <section id="hero" class="ruang-hero" data-section>
+      <div class="ruang-hero__inner">
+        <div class="ruang-hero__text">
+          <Transition appear enter-active-class="transition-all duration-1000 ease-out" enter-from-class="opacity-0 translate-y-6" enter-to-class="opacity-100 translate-y-0">
+            <div v-if="heroLoaded">
+              <p class="ruang-hero__label" :style="monoStyle">Studio Desain Interior &middot; Jakarta &amp; Bandung</p>
+              <h1 :style="h1Style" class="ruang-hero__title">Ruangan yang<br>Merasakan Anda.</h1>
+              <p class="ruang-hero__sub">Desain interior untuk apartemen, rumah, dan ruang kerja. 6 gaya desain. 1 filosofi: ruangan yang terasa personal, bukan sekadar cantik di foto.</p>
+              <div class="ruang-hero__ctas">
+                <a href="#kuis" class="ruang-btn ruang-btn--primary" :style="{ background: accentCss, color: accentFgCss }">Temukan Gaya Anda</a>
+                <a href="#proyek" class="ruang-btn ruang-btn--ghost" :style="{ borderColor: accentCss, color: accentCss }">Lihat Proyek</a>
+              </div>
+            </div>
+          </Transition>
+        </div>
+
+        <!-- 3D Material Sphere placeholder -->
+        <div class="ruang-hero__sphere-wrap">
+          <div class="ruang-hero__sphere">
+            <div
+              v-for="(m, i) in materials"
+              :key="m.name"
+              class="ruang-hero__sphere-petal"
+              :style="{
+                background: m.color,
+                transform: `rotate(${i * 60}deg) translateY(-100px)`,
+                animationDelay: `${i * 0.2}s`,
+              }"
+            />
+            <span class="ruang-hero__sphere-label" :style="monoStyle">Material Sphere</span>
+          </div>
         </div>
       </div>
-    </nav>
+      <div class="ruang-hero__scroll" :style="monoStyle">Scroll</div>
+    </section>
 
-    <!-- Hero -->
-    <section class="pt-16 pb-12">
-      <div class="max-w-6xl mx-auto px-6 pt-16">
-        <template v-if="!isLoaded">
-          <div class="h-4 w-32 bg-amber-200 rounded mb-4 animate-pulse" />
-          <div class="h-12 w-3/4 bg-gray-200 rounded mb-6 animate-pulse" />
-          <div class="h-5 w-full bg-gray-200 rounded mb-2 animate-pulse" />
-          <div class="h-5 w-2/3 bg-gray-200 rounded animate-pulse" />
-        </template>
-
-        <template v-else>
-          <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-4" style="font-family: 'JetBrains Mono', monospace;">Studio desain interior · Bandung</p>
-          <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">Ruang Studio</h1>
-          <p class="text-lg text-gray-600 max-w-xl leading-relaxed">Desain interior residensial dan hospitality. Berbasis di Bandung, bekerja di seluruh Asia.</p>
-        </template>
+    <!-- ===== SECTION 2: LAYANAN ===== -->
+    <section id="layanan" class="ruang-section" data-section>
+      <div class="ruang-container">
+        <p class="ruang-label" :style="monoStyle">Layanan</p>
+        <h2 :style="h2Style" class="ruang-h2">Empat cara kami membantu.</h2>
+        <div class="ruang-layanan-grid">
+          <article
+            v-for="(s, i) in layanan"
+            :key="s.title"
+            class="ruang-layanan-card"
+            :style="{ borderColor: borderCss }"
+          >
+            <div class="ruang-layanan-icon" :style="{ background: accentSoftCss, color: accentCss }">
+              <UIcon :name="s.icon" class="w-5 h-5" />
+            </div>
+            <span class="ruang-layanan-num" :style="monoStyle">0{{ i + 1 }}</span>
+            <h3 class="ruang-layanan-title">{{ s.title }}</h3>
+            <p class="ruang-layanan-desc">{{ s.desc }}</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- Proyek -->
-    <section id="proyek" class="py-16 border-t border-gray-200/60">
-      <div class="max-w-6xl mx-auto px-6">
-        <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-8" style="font-family: 'JetBrains Mono', monospace;">Proyek Terpilih</p>
-        <div class="space-y-16">
-          <article v-for="(p, i) in projects" :key="p.name" class="grid md:grid-cols-2 gap-8 items-start group cursor-pointer">
-            <div class="aspect-[4/3] rounded-xl overflow-hidden" :style="{ background: `linear-gradient(${135+i*30}deg, #D4C4A8, #A67150)` }">
-              <div class="w-full h-full flex items-center justify-center">
-                <span class="text-[9px] tracking-[0.2em] uppercase text-white/40">Foto interior</span>
-              </div>
+    <!-- ===== SECTION 3: PROYEK ===== -->
+    <section id="proyek" class="ruang-section ruang-section--alt" :style="{ background: surfaceCss }" data-section>
+      <div class="ruang-container">
+        <p class="ruang-label" :style="monoStyle">Proyek</p>
+        <h2 :style="h2Style" class="ruang-h2">Enam ruangan, enam cerita.</h2>
+        <div class="ruang-proyek-grid">
+          <article
+            v-for="(p, i) in proyek"
+            :key="p.name"
+            class="ruang-proyek-card"
+          >
+            <div
+              class="ruang-proyek-img"
+              :style="{
+                background: `linear-gradient(${135 + i * 30}deg, ${accentSoftCss}, ${mutedCss})`,
+              }"
+            >
+              <span class="ruang-proyek-img-label" :style="monoStyle">Foto interior</span>
             </div>
-            <div>
-              <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-2" style="font-family: 'JetBrains Mono', monospace;">{{ p.type }} · {{ p.year }}</p>
-              <h3 class="text-2xl font-semibold mb-2 group-hover:text-amber-700 transition-colors">{{ p.name }}</h3>
-              <p class="text-sm text-gray-500 mb-2">{{ p.location }}</p>
-              <p class="text-sm text-gray-600 italic">Material: {{ p.materials }}</p>
+            <div class="ruang-proyek-info">
+              <div class="ruang-proyek-meta">
+                <span class="ruang-proyek-tag" :style="{ background: accentSoftCss, color: accentCss }">{{ p.style }}</span>
+                <span :style="monoStyle" class="ruang-proyek-loc">{{ p.location }}</span>
+              </div>
+              <h3 class="ruang-proyek-name">{{ p.name }}</h3>
+              <p class="ruang-proyek-desc">{{ p.desc }}</p>
+              <span :style="monoStyle" class="ruang-proyek-year">{{ p.year }}</span>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Layanan -->
-    <section id="layanan" class="py-20 border-t border-gray-200/60" style="background: #EDE7DD;">
-      <div class="max-w-6xl mx-auto px-6">
-        <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-8" style="font-family: 'JetBrains Mono', monospace;">Layanan</p>
-        <div class="grid md:grid-cols-3 gap-4">
-          <div v-for="s in services" :key="s.title" class="p-5 border border-gray-300/40 rounded-xl">
-            <h3 class="text-lg font-semibold mb-2">{{ s.title }}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">{{ s.desc }}</p>
+    <!-- ===== SECTION 4: MATERIAL ===== -->
+    <section id="material" class="ruang-section" data-section>
+      <div class="ruang-container">
+        <p class="ruang-label" :style="monoStyle">Material</p>
+        <h2 :style="h2Style" class="ruang-h2">Material Indonesia yang kami pakai.</h2>
+        <p class="ruang-section-sub">Semua material diambil dari radius 300 km dari lokasi proyek. Bukan karena murah, tapi karena tahan lama dan mudah dirawat.</p>
+        <div class="ruang-material-grid">
+          <article
+            v-for="m in materials"
+            :key="m.name"
+            class="ruang-material-card"
+            :style="{ borderColor: borderCss }"
+          >
+            <div class="ruang-material-swatch" :style="{ background: m.color }" />
+            <div class="ruang-material-info">
+              <span class="ruang-material-cat" :style="monoStyle">{{ m.category }}</span>
+              <h3 class="ruang-material-name">{{ m.name }}</h3>
+              <p class="ruang-material-origin" :style="monoStyle">{{ m.origin }}</p>
+              <p class="ruang-material-desc">{{ m.desc }}</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Sample Box -->
+        <div class="ruang-sample-box" :style="{ background: surfaceElevatedCss, borderColor: borderCss }">
+          <div>
+            <h3 class="ruang-sample-title">Pesan Kotak Sampel Material</h3>
+            <p class="ruang-sample-desc">Dapatkan 6 sampel material (5 &times; 5 cm) langsung ke alamat Anda. Pegang, raba, dan rasakan sebelum memutuskan.</p>
+          </div>
+          <button
+            class="ruang-btn ruang-btn--primary"
+            :style="{ background: accentCss, color: accentFgCss }"
+            @click="sampleBoxOpen = !sampleBoxOpen"
+          >
+            {{ sampleBoxOpen ? 'Tutup' : 'Pesan Sampel' }}
+          </button>
+        </div>
+        <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 -translate-y-2" leave-to-class="opacity-0 -translate-y-2">
+          <div v-if="sampleBoxOpen" class="ruang-sample-detail" :style="{ background: surfaceCss, borderColor: borderCss }">
+            <p class="ruang-sample-detail-text">Kotak sampel dikirim dalam 3-5 hari kerja. Isi 6 material: Jati Jepara, Linen, Palimanan, Kuningan, Keramik, Batu Alam. Gratis ongkir Jabodetabek.</p>
+            <a :href="waUrl" target="_blank" rel="noopener" class="ruang-btn ruang-btn--primary" :style="{ background: accentCss, color: accentFgCss }">Pesan via WhatsApp</a>
+          </div>
+        </Transition>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 5: QUIZ ===== -->
+    <section id="kuis" class="ruang-section ruang-section--alt" :style="{ background: surfaceCss }" data-section>
+      <div class="ruang-container ruang-container--narrow">
+        <p class="ruang-label" :style="monoStyle">Kuis Gaya</p>
+        <h2 :style="h2Style" class="ruang-h2">Belum tahu gaya Anda?</h2>
+        <p class="ruang-section-sub">Jawab 5 pertanyaan. Kami beri tahu gaya interior yang paling cocok.</p>
+
+        <!-- Progress -->
+        <div v-if="!quizDone" class="ruang-quiz-progress">
+          <div
+            class="ruang-quiz-progress-bar"
+            :style="{ width: `${((quizStep + 1) / quizQuestions.length) * 100}%`, background: accentCss }"
+          />
+        </div>
+
+        <!-- Question -->
+        <div v-if="!quizDone" class="ruang-quiz-q">
+          <p class="ruang-quiz-step" :style="monoStyle">Pertanyaan {{ quizStep + 1 }} dari {{ quizQuestions.length }}</p>
+          <h3 class="ruang-quiz-question">{{ quizQuestions[quizStep].q }}</h3>
+          <div class="ruang-quiz-options">
+            <button
+              v-for="(opt, oi) in quizQuestions[quizStep].options"
+              :key="oi"
+              class="ruang-quiz-opt"
+              :style="{ borderColor: borderCss }"
+              @click="answerQuiz(oi)"
+            >
+              <span class="ruang-quiz-opt-letter" :style="monoStyle">{{ String.fromCharCode(65 + oi) }}</span>
+              {{ opt }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <Transition enter-active-class="transition-all duration-500 ease-out" enter-from-class="opacity-0 scale-95" enter-to-class="opacity-100 scale-100">
+          <div v-if="quizDone && quizResult" class="ruang-quiz-result">
+            <p class="ruang-quiz-result-label" :style="monoStyle">Gaya Anda</p>
+            <h3 class="ruang-quiz-result-style" :style="{ color: accentCss }">{{ quizResult.style }}</h3>
+            <p class="ruang-quiz-result-desc">{{ quizResult.desc }}</p>
+            <div class="ruang-quiz-result-actions">
+              <a href="#proyek" class="ruang-btn ruang-btn--primary" :style="{ background: accentCss, color: accentFgCss }">Lihat Proyek {{ quizResult.style }}</a>
+              <button class="ruang-btn ruang-btn--ghost" :style="{ borderColor: accentCss, color: accentCss }" @click="resetQuiz">Ulangi Kuis</button>
+            </div>
+          </div>
+        </Transition>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 6: GALERI ===== -->
+    <section id="galeri" class="ruang-section" data-section>
+      <div class="ruang-container">
+        <p class="ruang-label" :style="monoStyle">Galeri</p>
+        <h2 :style="h2Style" class="ruang-h2">Potongan dari ruangan yang sudah hidup.</h2>
+        <div class="ruang-galeri-grid">
+          <button
+            v-for="(g, i) in galeri"
+            :key="g.label"
+            class="ruang-galeri-item"
+            @click="lightboxIndex = i; lightboxOpen = true"
+          >
+            <div
+              class="ruang-galeri-img"
+              :style="{
+                background: `linear-gradient(${g.angle}deg, ${accentSoftCss}, ${mutedCss}, ${surfaceCss})`,
+              }"
+            >
+              <span class="ruang-galeri-img-label" :style="monoStyle">{{ g.label }}</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <TmplLightbox
+      :images="galeri.map(g => ({ src: '', alt: g.label, caption: g.label }))"
+      :open-index="lightboxOpen ? lightboxIndex : -1"
+      @close="lightboxOpen = false"
+    />
+
+    <!-- ===== SECTION 7: KONTAK ===== -->
+    <section id="kontak" class="ruang-section ruang-section--alt" :style="{ background: surfaceCss }" data-section>
+      <div class="ruang-container">
+        <div class="ruang-kontak-grid">
+          <div class="ruang-kontak-info">
+            <p class="ruang-label" :style="monoStyle">Kontak</p>
+            <h2 :style="h2Style" class="ruang-h2">Mulai proyek Anda.</h2>
+            <p class="ruang-kontak-sub">Balas dalam 48 jam. Konsultasi pertama 60 menit, gratis. Tidak ada kewajiban untuk lanjut.</p>
+            <div class="ruang-kontak-detail">
+              <div>
+                <span class="ruang-kontak-detail-label" :style="monoStyle">Studio</span>
+                <p>Jl. Cipete Raya No. 88, Jakarta Selatan 12410</p>
+                <p>Buka dengan janji temu &middot; Senin-Sabtu 10.00-19.00</p>
+              </div>
+              <div>
+                <span class="ruang-kontak-detail-label" :style="monoStyle">WhatsApp</span>
+                <p>+62 851-8862-7365</p>
+              </div>
+              <div>
+                <span class="ruang-kontak-detail-label" :style="monoStyle">Email</span>
+                <p>halo@ruangstudio.id</p>
+              </div>
+            </div>
+            <a :href="waUrl" target="_blank" rel="noopener" class="ruang-btn ruang-btn--primary ruang-kontak-wa" :style="{ background: accentCss, color: accentFgCss }">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Chat WhatsApp
+            </a>
+          </div>
+
+          <div class="ruang-kontak-form-wrap" :style="{ background: surfaceElevatedCss, borderColor: borderCss }">
+            <TmplForm
+              :fields="[
+                { key: 'nama', label: 'Nama', type: 'text', placeholder: 'Nama lengkap', required: true },
+                { key: 'email', label: 'Email', type: 'email', placeholder: 'email@contoh.com', required: true },
+                { key: 'wa', label: 'WhatsApp', type: 'tel', placeholder: '+62 8xx-xxxx-xxxx', required: true },
+                { key: 'tipe', label: 'Tipe Ruangan', type: 'select', options: ['Apartemen', 'Rumah', 'Kantor', 'Kafe / Restoran', 'Lainnya'], required: true },
+                { key: 'luas', label: 'Luas (m\u00B2)', type: 'text', placeholder: 'contoh: 45' },
+                { key: 'lokasi', label: 'Lokasi', type: 'text', placeholder: 'contoh: Kemang, Jakarta Selatan' },
+                { key: 'gaya', label: 'Gaya yang Diminati', type: 'select', options: ['Minimalis', 'Skandinavia', 'Industrial', 'Boho', 'Klasik', 'Belum tahu'] },
+                { key: 'pesan', label: 'Pesan', type: 'textarea', placeholder: 'Ceritakan ruangan Anda...' },
+              ]"
+              submit-label="Kirim Pesan"
+              :accent="accentCss"
+              whatsapp-message-prefix="Halo Ruang Studio, saya ingin konsultasi desain interior."
+            />
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tentang -->
-    <section class="py-16 border-t border-gray-200/60">
-      <div class="max-w-2xl mx-auto px-6">
-        <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-6" style="font-family: 'JetBrains Mono', monospace;">Tentang</p>
-        <p class="text-lg leading-[1.7] text-gray-700">
-          Ruang Studio adalah praktik desain interior 4 orang. Kami kerja sama dengan pemilik rumah, developer hotel, dan brand F&B. Pendekatan kami dimulai dari material: apa yang tersedia lokal, apa yang menua dengan baik, apa yang terasa benar.
-        </p>
-      </div>
-    </section>
+    <!-- ===== SECTION 8: FOOTER ===== -->
+    <TmplFooter
+      brand-name="Ruang Studio"
+      variant="columns"
+      :accent="accentCss"
+      :bg="fgCss"
+      :text="bgCss"
+      signature="Desain interior untuk apartemen, rumah, dan ruang kerja. Jakarta & Bandung."
+      :links="[
+        { label: 'Layanan', href: '#layanan' },
+        { label: 'Proyek', href: '#proyek' },
+        { label: 'Material', href: '#material' },
+        { label: 'Kuis Gaya', href: '#kuis' },
+        { label: 'Galeri', href: '#galeri' },
+        { label: 'Kontak', href: '#kontak' },
+      ]"
+    />
 
-    <!-- Kontak -->
-    <section id="kontak" class="py-20 border-t border-gray-200/60 text-center">
-      <h2 class="text-3xl font-semibold mb-4">Mulai proyek.</h2>
-      <p class="text-base text-gray-600 mb-8 max-w-md mx-auto">Balas dalam 48 jam. Konsultasi pertama gratis.</p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <a href="https://wa.me/6285188627365" target="_blank" rel="noopener" class="bg-amber-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-amber-800 transition-colors">WhatsApp</a>
-        <a href="mailto:halo@ruangstudio.id" class="border border-gray-400 px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">Email</a>
-      </div>
-    </section>
-
-    <footer class="py-10 text-center" style="background: #2C2620; color: #F8F4ED;">
-      <p class="text-sm opacity-60">Ruang Studio</p>
-      <p class="text-[9px] tracking-[0.3em] uppercase opacity-40 mt-2">© 2026 Bandung · Template by AjoClub</p>
-    </footer>
-
-    <!-- FAB -->
-    <div class="fixed bottom-5 right-5 z-50">
-      <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 translate-y-4 scale-95" leave-to-class="opacity-0 translate-y-4 scale-95">
-        <div v-if="fabOpen" class="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 p-4">
-          <p class="text-sm font-semibold text-gray-900 mb-2">Tertarik dengan template ini?</p>
-          <p class="text-xs text-gray-500 mb-3">Chat langsung untuk diskusi fitur, harga, dan customisasi.</p>
-          <a :href="waUrl" target="_blank" rel="noopener" class="flex items-center gap-2 w-full px-4 py-2.5 bg-emerald-500 text-white rounded-lg text-sm font-medium hover:bg-emerald-600 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Chat WhatsApp
-          </a>
-        </div>
-      </Transition>
-      <button @click="fabOpen = !fabOpen" class="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-lg flex items-center justify-center transition-colors">
-        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </button>
-    </div>
+    <!-- ===== WHATSAPP FAB ===== -->
+    <TmplWhatsAppFab
+      :accent="accentCss"
+      :actions="[
+        { label: 'Mau desain interior', detail: 'Apartemen, rumah, kantor', icon: 'i-lucide-pen-tool', message: 'Halo Ruang Studio, saya mau konsultasi desain interior.' },
+        { label: 'Pesan sampel material', detail: 'Kotak 6 sampel dikirim ke alamat', icon: 'i-lucide-box', message: 'Halo Ruang Studio, saya mau pesan kotak sampel material.' },
+        { label: 'Tanya harga', detail: 'Konsultasi, desain, atau build', icon: 'i-lucide-tag', message: 'Halo Ruang Studio, saya mau tanya soal harga layanan.' },
+      ]"
+    />
   </div>
 </template>
+
+<style>
+/* ===== RUANG STUDIO GLOBAL ===== */
+.ruang-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+@media (min-width: 768px) {
+  .ruang-container { padding: 0 2.5rem; }
+}
+.ruang-container--narrow {
+  max-width: 720px;
+}
+
+.ruang-section {
+  padding: 5rem 0;
+}
+@media (min-width: 768px) {
+  .ruang-section { padding: 7.5rem 0; }
+}
+
+.ruang-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+
+.ruang-h2 {
+  margin-bottom: 1.25rem;
+  text-wrap: balance;
+}
+
+.ruang-section-sub {
+  max-width: 560px;
+  opacity: 0.7;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+/* ===== BUTTONS ===== */
+.ruang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 200ms ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+.ruang-btn--primary:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.ruang-btn--ghost {
+  background: transparent;
+  border-width: 1px;
+}
+.ruang-btn--ghost:hover {
+  background: var(--ruang-accent-soft, rgba(0,0,0,0.04));
+}
+
+/* ===== HERO ===== */
+.ruang-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 1.25rem 3rem;
+}
+@media (min-width: 768px) {
+  .ruang-hero {
+    padding: 8rem 2.5rem 4rem;
+  }
+}
+.ruang-hero__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .ruang-hero__inner {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+.ruang-hero__label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 1.25rem;
+}
+.ruang-hero__title {
+  margin-bottom: 1.5rem;
+}
+.ruang-hero__sub {
+  max-width: 480px;
+  opacity: 0.7;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+.ruang-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.ruang-hero__scroll {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  animation: ruang-scroll-bounce 2s ease-in-out infinite;
+}
+@keyframes ruang-scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* 3D Sphere placeholder */
+.ruang-hero__sphere-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ruang-hero__sphere {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, var(--ruang-accent-soft, #f5ebe0), var(--ruang-accent, #b47a5c) 120%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: ruang-sphere-rotate 20s linear infinite;
+}
+@media (min-width: 768px) {
+  .ruang-hero__sphere { width: 360px; height: 360px; }
+}
+@keyframes ruang-sphere-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.ruang-hero__sphere-petal {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  top: 50%;
+  left: 50%;
+  margin: -24px 0 0 -24px;
+  opacity: 0.85;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  animation: ruang-petal-float 4s ease-in-out infinite alternate;
+}
+@keyframes ruang-petal-float {
+  0% { opacity: 0.85; }
+  100% { opacity: 1; }
+}
+.ruang-hero__sphere-label {
+  position: absolute;
+  bottom: -2rem;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  animation: none;
+  transform: rotate(0deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ruang-hero__sphere { animation: none; }
+  .ruang-hero__scroll { animation: none; }
+}
+
+/* ===== LAYANAN ===== */
+.ruang-layanan-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .ruang-layanan-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .ruang-layanan-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.ruang-layanan-card {
+  padding: 1.5rem;
+  border: 1px solid;
+  border-radius: 14px;
+  transition: all 300ms cubic-bezier(0.65, 0, 0.35, 1);
+  position: relative;
+}
+.ruang-layanan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+}
+.ruang-layanan-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.ruang-layanan-num {
+  display: block;
+  font-size: 11px;
+  opacity: 0.4;
+  margin-bottom: 0.5rem;
+}
+.ruang-layanan-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.ruang-layanan-desc {
+  font-size: 14px;
+  opacity: 0.65;
+  line-height: 1.55;
+}
+
+/* ===== PROYEK ===== */
+.ruang-proyek-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .ruang-proyek-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .ruang-proyek-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.ruang-proyek-card {
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 300ms cubic-bezier(0.65, 0, 0.35, 1);
+  cursor: pointer;
+}
+.ruang-proyek-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+.ruang-proyek-card:hover .ruang-proyek-img {
+  transform: scale(1.03);
+}
+.ruang-proyek-img {
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.ruang-proyek-img-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.3;
+}
+.ruang-proyek-info {
+  padding: 1.25rem 0.25rem;
+}
+.ruang-proyek-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.ruang-proyek-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}
+.ruang-proyek-loc {
+  font-size: 11px;
+  opacity: 0.5;
+}
+.ruang-proyek-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.ruang-proyek-desc {
+  font-size: 13px;
+  opacity: 0.6;
+  line-height: 1.55;
+  margin-bottom: 0.75rem;
+}
+.ruang-proyek-year {
+  font-size: 11px;
+  opacity: 0.4;
+}
+
+/* ===== MATERIAL ===== */
+.ruang-material-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .ruang-material-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .ruang-material-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.ruang-material-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid;
+  border-radius: 14px;
+  transition: all 300ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.ruang-material-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+}
+.ruang-material-swatch {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+.ruang-material-info {
+  flex: 1;
+  min-width: 0;
+}
+.ruang-material-cat {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+.ruang-material-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0.15rem 0 0.25rem;
+}
+.ruang-material-origin {
+  font-size: 11px;
+  opacity: 0.45;
+  margin-bottom: 0.35rem;
+}
+.ruang-material-desc {
+  font-size: 13px;
+  opacity: 0.6;
+  line-height: 1.5;
+}
+
+/* Sample Box */
+.ruang-sample-box {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  border: 1px solid;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.ruang-sample-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+.ruang-sample-desc {
+  font-size: 14px;
+  opacity: 0.65;
+  max-width: 480px;
+}
+.ruang-sample-detail {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  border: 1px solid;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.ruang-sample-detail-text {
+  font-size: 14px;
+  opacity: 0.7;
+  flex: 1;
+  min-width: 240px;
+}
+
+/* ===== QUIZ ===== */
+.ruang-quiz-progress {
+  height: 3px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+.ruang-quiz-progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ruang-quiz-q {
+  margin-bottom: 1.5rem;
+}
+.ruang-quiz-step {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 0.75rem;
+}
+.ruang-quiz-question {
+  font-family: var(--tmpl-font-display, 'Fraunces', Georgia, serif);
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.35;
+  margin-bottom: 1.5rem;
+}
+.ruang-quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+@media (min-width: 640px) {
+  .ruang-quiz-options { grid-template-columns: repeat(2, 1fr); }
+}
+.ruang-quiz-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  color: inherit;
+  transition: all 200ms ease;
+  text-align: left;
+}
+.ruang-quiz-opt:hover {
+  border-color: var(--ruang-accent, #b47a5c);
+  background: var(--ruang-accent-soft, rgba(180,122,92,0.08));
+}
+.ruang-quiz-opt-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.04);
+  flex-shrink: 0;
+}
+
+/* Quiz Result */
+.ruang-quiz-result {
+  text-align: center;
+  padding: 2rem 0;
+}
+.ruang-quiz-result-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 0.75rem;
+}
+.ruang-quiz-result-style {
+  font-family: var(--tmpl-font-display, 'Fraunces', Georgia, serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+.ruang-quiz-result-desc {
+  max-width: 400px;
+  margin: 0 auto 2rem;
+  opacity: 0.7;
+  line-height: 1.6;
+}
+.ruang-quiz-result-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ===== GALERI ===== */
+.ruang-galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+@media (min-width: 640px) {
+  .ruang-galeri-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1024px) {
+  .ruang-galeri-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.ruang-galeri-item {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+.ruang-galeri-img {
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 400ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.ruang-galeri-item:hover .ruang-galeri-img {
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.ruang-galeri-img-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.3;
+}
+
+/* ===== KONTAK ===== */
+.ruang-kontak-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+@media (min-width: 768px) {
+  .ruang-kontak-grid { grid-template-columns: 1fr 1fr; }
+}
+.ruang-kontak-sub {
+  opacity: 0.65;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+.ruang-kontak-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.ruang-kontak-detail-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+.ruang-kontak-detail p {
+  font-size: 14px;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+.ruang-kontak-wa {
+  display: inline-flex;
+}
+.ruang-kontak-form-wrap {
+  padding: 1.5rem;
+  border: 1px solid;
+  border-radius: 14px;
+}
+@media (min-width: 768px) {
+  .ruang-kontak-form-wrap { padding: 2rem; }
+}
+</style>
