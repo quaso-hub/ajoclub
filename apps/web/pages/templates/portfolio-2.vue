@@ -21,18 +21,18 @@ const filterOptions = ['Semua', 'Identitas', 'Web', 'Editorial', 'Pameran', 'Cet
 const visibleCount = ref(6)
 
 const caseStudies = [
-  { id: 1, title: 'Fragile Beauty', client: 'Museum MACAN', year: '2024', sector: 'Identitas, Pameran', desc: 'Sistem identitas untuk pameran seni kontemporer. Kunjungan naik 2,1 kali lipat.', tags: ['Identitas', 'Pameran'] },
-  { id: 2, title: 'After Modernism', client: 'Galeri Nasional', year: '2023', sector: 'Identitas, Cetak', desc: 'Redesign katalog retrospektif. Penjualan katalog naik 40%.', tags: ['Identitas', 'Cetak'] },
-  { id: 3, title: 'Cosmopolis', client: 'Jakarta Biennale', year: '2024', sector: 'Identitas, Web', desc: 'Identitas dan situs web untuk biennale internasional. 850 ribu kunjungan situs.', tags: ['Identitas', 'Web'] },
-  { id: 4, title: 'Daily Ritual', client: 'Commune Coffee', year: '2025', sector: 'Identitas, Editorial', desc: 'Sistem brand untuk jaringan kopi spesialti. Langganan naik 18%.', tags: ['Identitas', 'Editorial'] },
-  { id: 5, title: 'Reopened', client: 'Tugu Kunstkring Paleis', year: '2023', sector: 'Identitas, Pameran', desc: 'Identitas untuk pembukaan kembali gedung heritage. Diliput Eye Magazine.', tags: ['Identitas', 'Pameran'] },
-  { id: 6, title: 'Currency Stories', client: 'Museum Bank Indonesia', year: '2024', sector: 'Pameran, Cetak', desc: 'Desain pameran tetap tentang sejarah mata uang Indonesia.', tags: ['Pameran', 'Cetak'] },
-  { id: 7, title: 'Cover Redesign', client: 'Tempo Magazine', year: '2023', sector: 'Editorial', desc: 'Redesign sampul majalah mingguan. Langganan naik 22%.', tags: ['Editorial'] },
-  { id: 8, title: 'Origin Series', client: 'Kopi Kenangan', year: '2024', sector: 'Identitas, Cetak', desc: 'Seri kemasan edisi terbatas untuk kopi single-origin. Diliput It\'s Nice That.', tags: ['Identitas', 'Cetak'] },
-  { id: 9, title: 'Hand-set Type', client: 'Mailing Batu', year: '2025', sector: 'Identitas', desc: 'Typeface display custom untuk studio percetakan letterpress. Diliput Print Magazine.', tags: ['Identitas'] },
-  { id: 10, title: 'Provenance', client: 'Bandung Design Biennale', year: '2024', sector: 'Identitas, Web', desc: 'Identitas dan platform digital untuk bienale desain. 12 ribu pengunjung.', tags: ['Identitas', 'Web'] },
-  { id: 11, title: 'Modernist Auction', client: 'Sotheby\'s Indonesia', year: '2025', sector: 'Identitas', desc: 'Sistem identitas untuk lelang seni modernis Indonesia. Diliput Wallpaper*.', tags: ['Identitas'] },
-  { id: 12, title: 'Reading Reborn', client: 'Gramedia', year: '2023', sector: 'Identitas', desc: 'Rebrand untuk divisi penerbitan. Diliput Brand New.', tags: ['Identitas'] },
+  { id: 1, title: 'Fragile Beauty', client: 'Museum MACAN', year: '2024', sector: 'Identitas, Pameran', desc: 'Identitas pameran seni kontemporer. Kunjungan naik 2,1x.', tags: ['Identitas', 'Pameran'] },
+  { id: 2, title: 'After Modernism', client: 'Galeri Nasional', year: '2023', sector: 'Identitas, Cetak', desc: 'Redesign katalog retrospektif. Penjualan naik 40%.', tags: ['Identitas', 'Cetak'] },
+  { id: 3, title: 'Cosmopolis', client: 'Jakarta Biennale', year: '2024', sector: 'Identitas, Web', desc: 'Identitas dan situs web biennale. 850rb kunjungan.', tags: ['Identitas', 'Web'] },
+  { id: 4, title: 'Daily Ritual', client: 'Commune Coffee', year: '2025', sector: 'Identitas, Editorial', desc: 'Brand system kopi spesialti. Langganan naik 18%.', tags: ['Identitas', 'Editorial'] },
+  { id: 5, title: 'Reopened', client: 'Tugu Kunstkring Paleis', year: '2023', sector: 'Identitas, Pameran', desc: 'Identitas pembukaan gedung heritage. Diliput Eye Magazine.', tags: ['Identitas', 'Pameran'] },
+  { id: 6, title: 'Currency Stories', client: 'Museum Bank Indonesia', year: '2024', sector: 'Pameran, Cetak', desc: 'Pameran tetap sejarah mata uang Indonesia.', tags: ['Pameran', 'Cetak'] },
+  { id: 7, title: 'Cover Redesign', client: 'Tempo Magazine', year: '2023', sector: 'Editorial', desc: 'Redesign sampul majalah. Langganan naik 22%.', tags: ['Editorial'] },
+  { id: 8, title: 'Origin Series', client: 'Kopi Kenangan', year: '2024', sector: 'Identitas, Cetak', desc: 'Kemasan edisi terbatas kopi single-origin. Diliput It\'s Nice That.', tags: ['Identitas', 'Cetak'] },
+  { id: 9, title: 'Hand-set Type', client: 'Mailing Batu', year: '2025', sector: 'Identitas', desc: 'Typeface custom studio letterpress. Diliput Print Magazine.', tags: ['Identitas'] },
+  { id: 10, title: 'Provenance', client: 'Bandung Design Biennale', year: '2024', sector: 'Identitas, Web', desc: 'Identitas dan platform digital bienale. 12rb pengunjung.', tags: ['Identitas', 'Web'] },
+  { id: 11, title: 'Modernist Auction', client: 'Sotheby\'s Indonesia', year: '2025', sector: 'Identitas', desc: 'Identitas lelang seni modernis. Diliput Wallpaper*.', tags: ['Identitas'] },
+  { id: 12, title: 'Reading Reborn', client: 'Gramedia', year: '2023', sector: 'Identitas', desc: 'Rebrand divisi penerbitan. Diliput Brand New.', tags: ['Identitas'] },
 ]
 
 const filteredCases = computed(() => {
@@ -43,40 +43,40 @@ const filteredCases = computed(() => {
 })
 
 const services = [
-  { num: '01', title: 'Identitas Brand', desc: 'Sistem visual yang bertahan lebih lama dari tren. Logo, tipografi, palet warna, dan pedoman penggunaan.' },
-  { num: '02', title: 'Desain Editorial', desc: 'Tata letak majalah, buku, dan katalog. Dari konsep sampai file siap cetak.' },
-  { num: '03', title: 'Desain Web', desc: 'Situs web yang dibangun dengan pertimbangan editorial. Responsif, cepat, mudah dikelola.' },
-  { num: '04', title: 'Desain Pameran', desc: 'Sistem signage, grafis dinding, dan pengalaman visual untuk museum dan galeri.' },
-  { num: '05', title: 'Tipografi Custom', desc: 'Typeface yang dibuat khusus untuk brand atau proyek. Dari sketsa sampai font file.' },
-  { num: '06', title: 'Cetak & Produksi', desc: 'Pemilihan kertas, percetakan, dan finishing. Kami dampingi sampai hasilnya sesuai harapan.' },
+  { num: '01', title: 'Identitas Brand', desc: 'Sistem visual yang bertahan lama. Logo, tipografi, palet warna, pedoman.' },
+  { num: '02', title: 'Desain Editorial', desc: 'Tata letak majalah, buku, dan katalog. Konsep sampai siap cetak.' },
+  { num: '03', title: 'Desain Web', desc: 'Situs web dengan pertimbangan editorial. Responsif dan mudah dikelola.' },
+  { num: '04', title: 'Desain Pameran', desc: 'Signage, grafis dinding, dan visual untuk museum dan galeri.' },
+  { num: '05', title: 'Tipografi Custom', desc: 'Typeface khusus untuk brand atau proyek. Sketsa sampai font file.' },
+  { num: '06', title: 'Cetak & Produksi', desc: 'Pemilihan kertas, percetakan, dan finishing. Kami dampingi sampai selesai.' },
 ]
 
 const processSteps = [
-  { num: '01', title: 'Percakapan', desc: 'Kami mulai dengan mendengar. Apa yang ingin Anda sampaikan, kepada siapa, dan mengapa sekarang.' },
-  { num: '02', title: 'Riset & Arah', desc: 'Kami pelajari konteks Anda. Pesaing, audiens, dan budaya di sekitar brand Anda. Lalu kami tentukan arah desain.' },
-  { num: '03', title: 'Desain & Iterasi', desc: 'Kami presentasikan konsep, lalu dengarkan masukan Anda. Biasanya dua sampai tiga putaran revisi.' },
-  { num: '04', title: 'Serah Terima', desc: 'File final, pedoman penggunaan, dan panduan produksi. Kami juga bantu koordinasi dengan vendor cetak atau pengembang web.' },
+  { num: '01', title: 'Percakapan', desc: 'Kami mulai dengan mendengar. Apa yang ingin Anda sampaikan, kepada siapa.' },
+  { num: '02', title: 'Riset & Arah', desc: 'Kami pelajari konteks Anda — pesaing, audiens, budaya. Lalu tentukan arah.' },
+  { num: '03', title: 'Desain & Iterasi', desc: 'Konsep dipresentasikan, masukan didengar. Dua sampai tiga putaran revisi.' },
+  { num: '04', title: 'Serah Terima', desc: 'File final, pedoman, dan panduan produksi. Kami bantu koordinasi vendor.' },
 ]
 
 const conversations = [
   {
     name: 'Adjie Kurniawan',
     role: 'Pendiri, Studio Daida',
-    excerpt: 'Waktu saya balik dari London, saya pikir Indonesia butuh studio yang bicara pelan tapi jelas. Bukan yang paling keras, tapi yang paling tepat. Desain editorial itu soal memberi ruang pada konten, bukan mendominasinya.',
+    excerpt: 'Indonesia butuh studio yang bicara pelan tapi jelas. Desain editorial soal memberi ruang pada konten, bukan mendominasinya.',
     topic: 'Kembali dari Pentagram',
     readTime: '12 menit',
   },
   {
     name: 'Mira Anindya',
     role: 'Direktur Editorial',
-    excerpt: 'Klien datang ke kami karena mereka lelah dengan desain yang terlihat bagus tapi tidak punya substansi. Mereka ingin sesuatu yang bisa dibaca, dipahami, dan diingat. Itu yang kami cari setiap hari.',
+    excerpt: 'Klien datang karena lelah desain yang bagus tapi tanpa substansi. Mereka ingin sesuatu yang bisa dibaca, dipahami, dan diingat.',
     topic: 'Desain Editorial Indonesia',
     readTime: '9 menit',
   },
   {
     name: 'Bagas Satrio',
     role: 'Tipografer',
-    excerpt: 'Setiap brand punpa ritme tersendiri. Typeface yang baik harus menangkap ritme itu. Bukan sekadar huruf yang indah, tapi huruf yang terasa benar ketika Anda membacanya.',
+    excerpt: 'Setiap brand punya ritme tersendiri. Typeface yang baik harus menangkap ritme itu — huruf yang terasa benar saat dibaca.',
     topic: 'Typeface untuk Brand Budaya',
     readTime: '8 menit',
   },
@@ -90,7 +90,7 @@ const klienNames = [
 ]
 
 const faqItems = [
-  { q: 'Berapa lama proyek biasanya selesai?', a: 'Tergantung ruang lingkup. Identitas brand biasanya 8 sampai 12 minggu. Proyek editorial 4 sampai 6 minggu. Kami akan memberikan estimasi waktu setelah percakapan awal.' },
+  { q: 'Berapa lama proyek biasanya selesai?', a: 'Identitas 8–12 minggu. Editorial 4–6 minggu. Estimasi pasti setelah percakapan awal.' },
   { q: 'Apakah Anda hanya mengerjakan proyek budaya?', a: 'Tidak. Meskipun banyak klien kami berasal dari sektor budaya dan hospitality, kami juga mengerjakan proyek untuk brand komersial, institusi keuangan, dan perusahaan teknologi.' },
   { q: 'Bagaimana cara memulai?', a: 'Kirim email ke hello@daida.id dengan deskripsi singkat tentang proyek Anda. Kami akan merespons dalam 48 jam dan menjadwalkan percakapan.' },
   { q: 'Apakah Anda mengerjakan proyek di luar Bandung?', a: 'Ya. Kami mengerjakan proyek di seluruh Indonesia dan sesekali di luar negeri. Sebagian besar proses bisa dilakukan secara remote.' },
@@ -152,8 +152,9 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
             Brand, web, dan<br>editorial craft<br>sejak 2014.
           </h1>
           <p class="daida-hero__sub">
-            Studio desain di Bandung. Kami membantu brand, museum, dan penerbit membangun sistem visual yang jelas dan bertahan lama.
+            Studio desain di Bandung. Brand, web, dan editorial craft untuk museum, penerbit, dan brand komersial.
           </p>
+          <p class="daida-hero__tagline">"Desain yang bercerita."</p>
           <div class="daida-hero__ctas">
             <a href="#karya" class="daida-btn daida-btn--primary" :style="{ background: accentHex }">Lihat karya</a>
             <a href="#percakapan" class="daida-btn daida-btn--ghost">Baca percakapan</a>
@@ -335,7 +336,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
           <div class="daida-contact__info">
             <p :style="monoStyle" class="daida-label">07 &mdash; Hubungi Kami</p>
             <h2 :style="h2Style" class="daida-section__title">Ceritakan proyek Anda</h2>
-            <p class="daida-contact__text">Kami merespons dalam 48 jam. Waktu Bandung. Tanpa pitch deck.</p>
+            <p class="daida-contact__text">Kami merespons dalam 48 jam.</p>
             <div class="daida-contact__details">
               <p><strong>Email</strong><br><a href="mailto:hello@daida.id" :style="{ color: accentHex }">hello@daida.id</a></p>
               <p><strong>Telepon</strong><br>+62 22 720 4321</p>
@@ -355,7 +356,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
               submit-label="Kirim Pesan"
               :accent="accentHex"
               whatsapp-phone="62227204321"
-              whatsapp-message-prefix="Halo Studio Daida, saya ingin berdiskusi tentang proyek:"
+              whatsapp-message-prefix="Halo, saya ingin berdiskusi tentang proyek:"
             />
           </div>
         </div>
@@ -423,7 +424,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
   margin-bottom: 1rem;
 }
 .daida-section {
-  padding: clamp(3.5rem, 7vw, 6rem) 0;
+  padding: clamp(5rem, 10vw, 8rem) 0;
 }
 .daida-section__header {
   margin-bottom: clamp(2rem, 4vw, 3.5rem);
@@ -443,7 +444,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
   justify-content: center;
   height: 48px;
   padding: 0 1.75rem;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -492,7 +493,15 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
   line-height: 1.65;
   opacity: 0.7;
   max-width: 520px;
+  margin: 0 0 0.75rem;
+}
+.daida-hero__tagline {
+  font-family: var(--tmpl-font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  opacity: 0.45;
   margin: 0 0 2rem;
+  letter-spacing: -0.01em;
 }
 .daida-hero__ctas {
   display: flex;
@@ -507,7 +516,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
   gap: 1rem;
 }
 .daida-skel {
-  border-radius: 8px;
+  border-radius: 6px;
   animation: pulse 1.8s ease-in-out infinite;
   background: color-mix(in srgb, currentColor 8%, transparent);
 }
@@ -530,7 +539,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
 .daida-filter__btn {
   padding: 0.5rem 1.1rem;
   border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-  border-radius: 999px;
+  border-radius: 6px;
   background: transparent;
   color: inherit;
   font-family: var(--tmpl-font-mono);
@@ -557,11 +566,11 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
   .daida-cases-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1024px) {
-  .daida-cases-grid { grid-template-columns: repeat(3, 1fr); }
+  .daida-cases-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; }
 }
 .daida-case-card {
   border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 6px;
   overflow: hidden;
   transition: transform 300ms ease, box-shadow 300ms ease;
   cursor: pointer;
@@ -634,7 +643,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
 .daida-services-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem 3rem;
+  gap: 2rem 3rem;
 }
 @media (min-width: 640px) {
   .daida-services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -672,16 +681,16 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
 .daida-process-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2.5rem;
 }
 @media (min-width: 640px) {
-  .daida-process-grid { grid-template-columns: repeat(2, 1fr); }
+  .daida-process-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 4rem; }
 }
 @media (min-width: 1024px) {
   .daida-process-grid { grid-template-columns: repeat(4, 1fr); }
 }
 .daida-step {
-  text-align: center;
+  text-align: left;
 }
 .daida-step__num {
   font-size: 12px;
@@ -691,7 +700,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
 .daida-step__line {
   width: 32px;
   height: 2px;
-  margin: 1rem auto;
+  margin: 1rem 0;
   border-radius: 1px;
 }
 .daida-step__title {
@@ -706,9 +715,6 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
   line-height: 1.6;
   opacity: 0.6;
   margin: 0;
-  max-width: 280px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* ============ CONVERSATIONS ============ */
@@ -718,12 +724,12 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
   gap: 2.5rem;
 }
 @media (min-width: 768px) {
-  .daida-conversations-grid { grid-template-columns: repeat(3, 1fr); }
+  .daida-conversations-grid { grid-template-columns: repeat(2, 1fr); }
 }
 .daida-conversation {
   padding: 2rem;
   border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 6px;
   background: var(--tmpl-surface-elevated);
 }
 .daida-conversation__header {
@@ -856,7 +862,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
 .daida-contact__form-wrap {
   padding: 2rem;
   border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 6px;
   background: var(--tmpl-surface-elevated);
 }
 
@@ -876,7 +882,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
   padding: 1.25rem;
   background: var(--tmpl-surface-elevated);
   border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
-  border-radius: 14px;
+  border-radius: 6px;
   box-shadow: 0 16px 48px color-mix(in srgb, currentColor 12%, transparent);
 }
 .daida-fab__title {
@@ -895,7 +901,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
   justify-content: center;
   width: 100%;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 6px;
   color: #fff;
   font-size: 13px;
   font-weight: 600;
@@ -906,7 +912,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
 .daida-fab__btn {
   width: 56px;
   height: 56px;
-  border-radius: 999px;
+  border-radius: 6px;
   border: 0;
   display: flex;
   align-items: center;

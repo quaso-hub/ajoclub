@@ -36,10 +36,10 @@ const rsvpMessage = 'Halo, saya ingin konfirmasi kehadiran di pernikahan Anindya
 // 12 SECTIONS DATA
 // ============================================================
 const loveStory = [
-  { year: '2019', text: 'Bertemu pertama kali di pernikahan teman-teman. Saling tidak kenal satu pun. Tapi kopi yang sama.' },
-  { year: '2021', text: 'Pindah ke Bandung bareng. Ngekos di Cihampelas, makan nasi goreng tiap malam. Tidak bosan.' },
-  { year: '2024', text: 'Dia melamar di Pantai Pandawa, Bali, saat matahari terbenam. Kami tidak ingat apa yang dikatakan, hanya iya.' },
-  { year: '2026', text: 'Akad nikah. Resepsi. Makan malam. Dan seterusnya.' },
+  { year: '2019', text: 'Bertemu di pernikahan teman. Saling tidak kenal. Tapi kopi yang sama.' },
+  { year: '2021', text: 'Pindah ke Bandung. Ngekos di Cihampelas, nasi goreng tiap malam.' },
+  { year: '2024', text: 'Lamaran di Pantai Pandawa, Bali. Matahari terbenam. Hanya iya.' },
+  { year: '2026', text: 'Akad nikah. Resepsi. Dan seterusnya.' },
 ]
 
 const acara = [
@@ -286,7 +286,6 @@ function openLiveStream() {
 
         <div class="ar-hero__content">
           <p class="ar-hero__opening" :style="monoStyle">Bismillahirrahmanirrahim</p>
-          <p class="ar-hero__opening" :style="monoStyle">Assalamualaikum Warahmatullahi Wabarakatuh</p>
 
           <h1 :style="h1Style" class="ar-hero__names text-balance">
             <span class="ar-hero__name">Anindya</span>
@@ -294,8 +293,7 @@ function openLiveStream() {
             <span class="ar-hero__name">Rama</span>
           </h1>
 
-          <p class="ar-hero__date" :style="monoStyle">Sabtu &middot; 14 &middot; Maret &middot; 2026</p>
-          <p class="ar-hero__city" :style="monoStyle">Bandung, Indonesia</p>
+          <p class="ar-hero__date" :style="monoStyle">Sabtu &middot; 14 Maret 2026 &middot; Bandung</p>
 
           <div class="ar-hero__countdown">
             <TmplCountdown target="2026-03-14T08:00:00+07:00" variant="blocks" label="Pintu akad dibuka dalam" />
@@ -365,7 +363,7 @@ function openLiveStream() {
       <section id="rsvp" class="ar-rsvp">
         <p class="ar-eyebrow" :style="monoStyle">Konfirmasi</p>
         <h2 :style="h1Style" class="ar-rsvp__title text-balance">Bisa hadir?</h2>
-        <p class="ar-rsvp__sub">Mohon konfirmasi sebelum 28 Februari 2026.</p>
+        <p class="ar-rsvp__sub">Konfirmasi sebelum 28 Februari 2026.</p>
 
         <TmplForm
           :fields="rsvpFields"
@@ -381,8 +379,8 @@ function openLiveStream() {
       <!-- ============================== -->
       <section id="amplop" class="ar-amplop">
         <p class="ar-eyebrow" :style="monoStyle">Amplop</p>
-        <h2 :style="h1Style" class="ar-amplop__title text-balance">Kehadiran Anda sudah lebih dari cukup.</h2>
-        <p class="ar-amplop__sub">Namun jika ingin mengirim kado, kami menyediakan tiga rekening berikut.</p>
+        <h2 :style="h1Style" class="ar-amplop__title text-balance">Amplop Digital</h2>
+        <p class="ar-amplop__sub">Jika ingin mengirim kado.</p>
 
         <ul class="ar-amplop__banks">
           <li v-for="bank in banks" :key="bank.id" class="ar-bank" :class="{ 'ar-bank--copied': copiedBank === bank.id }">
@@ -410,16 +408,14 @@ function openLiveStream() {
       <section class="ar-actions">
         <div class="ar-actions__grid">
           <div class="ar-action">
-            <p class="ar-eyebrow" :style="monoStyle">Tambah ke kalender</p>
-            <p class="ar-action__sub">Simpan tanggal acaranya supaya tidak lupa.</p>
+            <p class="ar-eyebrow" :style="monoStyle">Kalender</p>
             <button type="button" class="ar-action__btn" @click="downloadICS">
               <UIcon name="i-lucide-calendar-plus" class="w-4 h-4" />
               Download .ics
             </button>
           </div>
           <div class="ar-action">
-            <p class="ar-eyebrow" :style="monoStyle">Siaran langsung</p>
-            <p class="ar-action__sub">Siaran langsung akad dan resepsi via YouTube. Link akan dikirimkan H-1.</p>
+            <p class="ar-eyebrow" :style="monoStyle">Siaran Langsung</p>
             <button type="button" class="ar-action__btn" @click="openLiveStream">
               <UIcon name="i-lucide-video" class="w-4 h-4" />
               Buka link
@@ -433,7 +429,7 @@ function openLiveStream() {
       <!-- ============================== -->
       <section class="ar-signoff">
         <p :style="h1Style" class="ar-signoff__text text-balance">
-          &ldquo;Terima kasih. Sampai jumpa di hari istimewa kami.&rdquo;
+          &ldquo;Sampai jumpa di hari kami.&rdquo;
         </p>
         <p :style="monoStyle" class="ar-signoff__byline">Dengan cinta &middot; Anindya &amp; Rama</p>
       </section>
@@ -506,7 +502,7 @@ function openLiveStream() {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6rem 1.5rem 4rem;
+  padding: 8rem 1.5rem 6rem;
   overflow: hidden;
   background:
     radial-gradient(ellipse at 50% 35%, color-mix(in oklch, var(--tmpl-accent) 8%, transparent), transparent 60%),
@@ -527,15 +523,12 @@ function openLiveStream() {
   max-width: 36rem;
 }
 .ar-hero__opening {
-  font-size: 9px;
-  letter-spacing: 0.32em;
+  font-size: 10px;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   font-weight: 400;
   opacity: 0.55;
-  margin: 0 0 0.6rem;
-}
-.ar-hero__opening:last-of-type {
-  margin-bottom: 2.5rem;
+  margin: 0 0 2.5rem;
 }
 .ar-hero__names {
   font-size: clamp(3.5rem, 12vw, 9rem);
@@ -558,18 +551,10 @@ function openLiveStream() {
 }
 .ar-hero__date {
   font-size: 11px;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   font-weight: 400;
-  opacity: 0.7;
-  margin: 0 0 0.4rem;
-}
-.ar-hero__city {
-  font-size: 9px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  font-weight: 400;
-  opacity: 0.4;
+  opacity: 0.6;
   margin: 0 0 3rem;
 }
 .ar-hero__countdown {
@@ -580,7 +565,7 @@ function openLiveStream() {
 /* CERITA — Love story timeline                                  */
 /* ============================================================ */
 .ar-cerita {
-  padding: 8rem 1.5rem;
+  padding: 10rem 1.5rem;
   max-width: 38rem;
   margin: 0 auto;
   text-align: center;
@@ -610,7 +595,7 @@ function openLiveStream() {
   align-items: baseline;
 }
 .ar-cerita__year {
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.18em;
   font-weight: 500;
   opacity: 0.5;
@@ -632,7 +617,7 @@ function openLiveStream() {
 /* ACARA — 3 events                                              */
 /* ============================================================ */
 .ar-acara {
-  padding: 8rem 1.5rem;
+  padding: 10rem 1.5rem;
   background: color-mix(in oklch, var(--tmpl-accent) 4%, var(--tmpl-bg));
   text-align: center;
 }
@@ -668,7 +653,7 @@ function openLiveStream() {
   position: absolute;
   left: 0;
   top: 2.5rem;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.2em;
   opacity: 0.4;
 }
@@ -690,7 +675,7 @@ function openLiveStream() {
   color: var(--tmpl-fg);
 }
 .ar-acara__location {
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.7;
   margin: 0;
   line-height: 1.5;
@@ -700,7 +685,7 @@ function openLiveStream() {
 /* GALERI — Photos with lightbox                                 */
 /* ============================================================ */
 .ar-galeri {
-  padding: 8rem 1.5rem;
+  padding: 10rem 1.5rem;
   max-width: 80rem;
   margin: 0 auto;
   text-align: center;
@@ -742,7 +727,7 @@ function openLiveStream() {
   justify-content: center;
   aspect-ratio: 3 / 4;
   background: linear-gradient(135deg, color-mix(in oklch, var(--tmpl-accent) 8%, var(--tmpl-bg)) 0%, color-mix(in oklch, var(--tmpl-fg) 4%, var(--tmpl-bg)) 100%);
-  border-radius: 2px;
+  border-radius: 4px;
   position: relative;
   overflow: hidden;
   transition: transform 400ms ease;
@@ -758,7 +743,7 @@ function openLiveStream() {
 }
 .ar-galeri__photo-label {
   position: relative;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   font-weight: 400;
@@ -766,7 +751,7 @@ function openLiveStream() {
   z-index: 1;
 }
 .ar-galeri__caption {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   font-style: italic;
   line-height: 1.4;
@@ -780,7 +765,7 @@ function openLiveStream() {
 /* RSVP                                                          */
 /* ============================================================ */
 .ar-rsvp {
-  padding: 8rem 1.5rem;
+  padding: 10rem 1.5rem;
   max-width: 36rem;
   margin: 0 auto;
   text-align: center;
@@ -795,7 +780,7 @@ function openLiveStream() {
   color: var(--tmpl-fg);
 }
 .ar-rsvp__sub {
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.7;
   margin: 0 0 3rem;
   line-height: 1.5;
@@ -808,7 +793,7 @@ function openLiveStream() {
 /* AMPLOP — Banks with copy                                      */
 /* ============================================================ */
 .ar-amplop {
-  padding: 8rem 1.5rem;
+  padding: 10rem 1.5rem;
   background: color-mix(in oklch, var(--tmpl-accent) 4%, var(--tmpl-bg));
   text-align: center;
 }
@@ -825,7 +810,7 @@ function openLiveStream() {
   margin-right: auto;
 }
 .ar-amplop__sub {
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.7;
   margin: 0 0 3rem;
   line-height: 1.5;
@@ -846,7 +831,7 @@ function openLiveStream() {
   padding: 1.5rem;
   background: var(--tmpl-bg);
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 6px;
+  border-radius: 4px;
   text-align: left;
   transition: border-color 200ms ease, transform 200ms ease;
 }
@@ -867,7 +852,7 @@ function openLiveStream() {
   font-size: 10px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   opacity: 0.7;
   margin: 0;
 }
@@ -881,10 +866,10 @@ function openLiveStream() {
   border-radius: 4px;
   color: inherit;
   font: inherit;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: all 200ms ease;
 }
@@ -906,7 +891,7 @@ function openLiveStream() {
   font-variant-numeric: tabular-nums;
 }
 .ar-bank__holder {
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.06em;
   opacity: 0.6;
   margin: 0;
@@ -916,7 +901,7 @@ function openLiveStream() {
 /* ACTIONS — Add to calendar + live stream                       */
 /* ============================================================ */
 .ar-actions {
-  padding: 6rem 1.5rem;
+  padding: 10rem 1.5rem;
   max-width: 64rem;
   margin: 0 auto;
 }
@@ -932,11 +917,11 @@ function openLiveStream() {
   text-align: center;
   padding: 2rem 1.5rem;
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 8px;
+  border-radius: 4px;
   background: var(--tmpl-surface);
 }
 .ar-action__sub {
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.7;
   line-height: 1.5;
   margin: 0 0 1.25rem;
@@ -951,10 +936,10 @@ function openLiveStream() {
   padding: 0.7rem 1.25rem;
   background: transparent;
   border: 1px solid color-mix(in oklch, currentColor 20%, transparent);
-  border-radius: 999px;
+  border-radius: 4px;
   color: var(--tmpl-fg);
   font: inherit;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
@@ -971,7 +956,7 @@ function openLiveStream() {
 /* SIGNOFF                                                      */
 /* ============================================================ */
 .ar-signoff {
-  padding: 10rem 1.5rem 8rem;
+  padding: 12rem 1.5rem 10rem;
   text-align: center;
   max-width: 40rem;
   margin: 0 auto;

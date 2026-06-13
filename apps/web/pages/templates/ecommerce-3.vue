@@ -81,10 +81,10 @@ interface Seller {
 }
 
 const sellers: Seller[] = [
-  { id: 'kain-warisan', name: 'Kain Warisan', location: 'Solo, Jawa Tengah', productCount: 45, rating: 4.9, since: 2018, verified: true, description: 'Batik tulis asli Solo. Setiap kain dikerjakan tangan oleh pengrajin generasi ketiga.', gradient: 'linear-gradient(135deg, #E8D5C0 0%, #C09A6B 100%)' },
-  { id: 'rajut-nusantara', name: 'Rajut Nusantara', location: 'Bandung, Jawa Barat', productCount: 32, rating: 4.8, since: 2020, verified: true, description: 'Tas rajut handmade dari tali kur dan benang katun lokal. Warna natural, desain minimalis.', gradient: 'linear-gradient(135deg, #D4C4A8 0%, #9C8C70 100%)' },
-  { id: 'tanah-liat-studio', name: 'Tanah Liat Studio', location: 'Cirebon, Jawa Barat', productCount: 34, rating: 4.9, since: 2019, verified: true, description: 'Keramik fungsional buatan tangan di roda tradisional. Setiap pieces unik, tidak ada yang sama persis.', gradient: 'linear-gradient(135deg, #B8C8D8 0%, #607898 100%)' },
-  { id: 'kopi-gayo', name: 'Kopi Gayo Asli', location: 'Aceh Tengah, Aceh', productCount: 18, rating: 4.8, since: 2017, verified: true, description: 'Kopi arabika Gayo langsung dari kebun petani di dataran tinggi Aceh. Roasted fresh setiap minggu.', gradient: 'linear-gradient(135deg, #6B4226 0%, #2D1B0E 100%)' },
+  { id: 'kain-warisan', name: 'Kain Warisan', location: 'Solo, Jawa Tengah', productCount: 45, rating: 4.9, since: 2018, verified: true, description: 'Batik tulis asli Solo. Dikerjakan tangan oleh pengrajin generasi ketiga.', gradient: 'linear-gradient(135deg, #E8D5C0 0%, #C09A6B 100%)' },
+  { id: 'rajut-nusantara', name: 'Rajut Nusantara', location: 'Bandung, Jawa Barat', productCount: 32, rating: 4.8, since: 2020, verified: true, description: 'Tas rajut handmade dari tali kur dan benang katun lokal.', gradient: 'linear-gradient(135deg, #D4C4A8 0%, #9C8C70 100%)' },
+  { id: 'tanah-liat-studio', name: 'Tanah Liat Studio', location: 'Cirebon, Jawa Barat', productCount: 34, rating: 4.9, since: 2019, verified: true, description: 'Keramik fungsional buatan tangan di roda tradisional.', gradient: 'linear-gradient(135deg, #B8C8D8 0%, #607898 100%)' },
+  { id: 'kopi-gayo', name: 'Kopi Gayo Asli', location: 'Aceh Tengah, Aceh', productCount: 18, rating: 4.8, since: 2017, verified: true, description: 'Kopi arabika Gayo langsung dari kebun petani. Roasted fresh setiap minggu.', gradient: 'linear-gradient(135deg, #6B4226 0%, #2D1B0E 100%)' },
 ]
 
 // ============================================================
@@ -113,19 +113,19 @@ const flashDeals: FlashDeal[] = [
 // DATA: Testimonials
 // ============================================================
 const testimonials = [
-  { name: 'Rina S.', location: 'Jakarta', text: 'Pertama kali beli batik tulis online. Ternyata kualitasnya lebih bagus dari foto. Kainnya tebal, warnanya tajam. Pasti order lagi.', rating: 5, product: 'Batik Tulis Madura' },
-  { name: 'Dimas P.', location: 'Bandung', text: 'Keramik dari Tanah Liat Studio jadi hadiah ulang tahun istri. Dia suka banget. Packagingnya juga aman, sampai utuh.', rating: 5, product: 'Mangkuk Keramik Tangan' },
-  { name: 'Sari W.', location: 'Yogyakarta', text: 'Sambal roa Manado ini bikin nagih. Sudah 3 kali repeat order. Pengiriman cepat, botolnya kedap udara.', rating: 5, product: 'Sambal Roa Manado' },
+  { name: 'Rina S.', location: 'Jakarta', text: 'Batik tulis online pertama. Kualitas lebih bagus dari foto — kain tebal, warna tajam.', rating: 5, product: 'Batik Tulis Madura' },
+  { name: 'Dimas P.', location: 'Bandung', text: 'Keramik jadi hadiah ulang tahun istri. Packaging aman, sampai utuh.', rating: 5, product: 'Mangkuk Keramik Tangan' },
+  { name: 'Sari W.', location: 'Yogyakarta', text: 'Sambal roa bikin nagih. Sudah 3 kali repeat order. Pengiriman cepat.', rating: 5, product: 'Sambal Roa Manado' },
 ]
 
 // ============================================================
 // DATA: FAQ
 // ============================================================
 const faqs = [
-  { q: 'Bagaimana cara beli dari beberapa penjual sekaligus?', a: 'Tambahkan produk ke keranjang. Saat checkout, pesanan otomatis terpisah per penjual. Kamu bisa chat setiap penjual langsung via WhatsApp untuk konfirmasi stok dan ongkir.' },
-  { q: 'Apakah semua produk di Bazaar handmade?', a: 'Sebagian besar produk dibuat tangan oleh pengrajin lokal. Untuk produk yang bukan handmade (seperti elektronik atau makanan), kami sudah verifikasi kualitasnya sebelum listing.' },
-  { q: 'Bagaimana jika produk yang saya terima rusak?', a: 'Hubungi penjual via WhatsApp dalam 3 hari setelah barang diterima. Penjual wajib mengganti atau refund jika kerusakan terjadi saat pengiriman. Bazaar bantu mediasi jika diperlukan.' },
-  { q: 'Apakah bisa custom order?', a: 'Banyak penjual di Bazaar yang menerima custom order. Cari badge "Bisa Custom" di halaman produk, atau langsung chat penjual untuk tanya kemungkinan custom.' },
+  { q: 'Bagaimana beli dari beberapa penjual?', a: 'Tambah ke keranjang. Checkout otomatis terpisah per penjual. Chat penjual via WhatsApp untuk konfirmasi.' },
+  { q: 'Apakah semua produk handmade?', a: 'Sebagian besar dibuat tangan oleh pengrajin lokal. Produk non-handmade sudah diverifikasi kualitasnya.' },
+  { q: 'Produk yang diterima rusak?', a: 'Hubungi penjual via WhatsApp dalam 3 hari. Penjual wajib ganti atau refund. Bazaar bantu mediasi.' },
+  { q: 'Bisa custom order?', a: 'Banyak penjual menerima custom. Cari badge "Bisa Custom" atau chat penjual langsung.' },
 ]
 
 const openFaq = ref<number | null>(null)
@@ -281,7 +281,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- TOAST -->
     <!-- ============================================================ -->
     <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 -translate-y-4" leave-to-class="opacity-0 -translate-y-4">
-      <div v-if="toastVisible" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl text-sm font-medium shadow-lg border" :style="{ background: toCss(palette.surfaceElevated), borderColor: toCss(palette.border), color: toCss(palette.fg) }">
+      <div v-if="toastVisible" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-lg text-sm font-medium shadow-lg border" :style="{ background: toCss(palette.surfaceElevated), borderColor: toCss(palette.border), color: toCss(palette.fg) }">
         <span class="mr-2" :style="{ color: toCss(palette.accent) }">&#10003;</span>{{ toastMessage }}
       </div>
     </Transition>
@@ -289,22 +289,22 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- HERO + 3D SPHERE -->
     <!-- ============================================================ -->
-    <section class="pt-24 pb-16 md:pt-32 md:pb-24">
+    <section class="pt-24 pb-20 md:pt-32 md:pb-28">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
           <!-- Left: Copy -->
-          <div>
+          <div class="lg:col-span-3">
             <p class="text-[11px] tracking-[0.14em] uppercase font-medium mb-4" :style="{ color: toCss(palette.accent) }">Temukan kerajinan dari 38 kota</p>
             <h1 :style="{ ...h1Style, color: toCss(palette.fg) }" class="mb-5">
-              Buat tangan, dari tangan pertama.
+              Semua ada. Dari semua penjual.
             </h1>
             <p class="text-base md:text-lg max-w-xl mb-8" :style="{ color: toCss(palette.muted), lineHeight: '1.6' }">
-              2.400+ produk dari penjual independen Indonesia. Setiap item punya cerita, punya pembuat, punya asal-usul. Bukan pabrik. Bukan massal.
+              2.400+ produk dari penjual independen Indonesia. Setiap item punya cerita, punya pembuat.
             </p>
 
             <!-- Search -->
             <div class="relative max-w-lg">
-              <div class="flex items-center rounded-xl border px-4 py-3 gap-3 transition-all" :style="{ background: toCss(palette.surface), borderColor: searchFocused ? toCss(palette.accent) : toCss(palette.border) }">
+              <div class="flex items-center rounded-lg border px-4 py-3 gap-3 transition-all" :style="{ background: toCss(palette.surface), borderColor: searchFocused ? toCss(palette.accent) : toCss(palette.border) }">
                 <svg class="w-5 h-5 flex-shrink-0" :style="{ color: toCss(palette.muted) }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <input
                   v-model="searchQuery"
@@ -318,7 +318,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
               </div>
               <!-- Search dropdown -->
               <Transition enter-active-class="transition-all duration-200 ease-out" leave-active-class="transition-all duration-150 ease-in" enter-from-class="opacity-0 -translate-y-2" leave-to-class="opacity-0 -translate-y-2">
-                <div v-if="searchFocused && searchResults.length > 0" class="absolute top-full left-0 right-0 mt-2 rounded-xl border shadow-xl z-30 overflow-hidden" :style="{ background: toCss(palette.surfaceElevated), borderColor: toCss(palette.border) }">
+                <div v-if="searchFocused && searchResults.length > 0" class="absolute top-full left-0 right-0 mt-2 rounded-lg border shadow-xl z-30 overflow-hidden" :style="{ background: toCss(palette.surfaceElevated), borderColor: toCss(palette.border) }">
                   <button
                     v-for="r in searchResults"
                     :key="r.id"
@@ -354,7 +354,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
           </div>
 
           <!-- Right: 3D Sphere -->
-          <div class="hidden lg:flex items-center justify-center">
+          <div class="hidden lg:flex lg:col-span-2 items-center justify-center">
             <div class="relative w-[400px] h-[400px]">
               <canvas ref="sphereCanvas" class="w-full h-full" />
               <div v-if="!sphereReady" class="absolute inset-0 flex items-center justify-center">
@@ -369,7 +369,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- KATEGORI (6 categories) -->
     <!-- ============================================================ -->
-    <section id="kategori" class="py-16 md:py-20 border-t" :style="{ borderColor: toCss(palette.border) }">
+    <section id="kategori" class="py-20 md:py-28 border-t" :style="{ borderColor: toCss(palette.border) }">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="flex items-end justify-between mb-10">
           <div>
@@ -392,7 +392,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
             v-for="cat in categories"
             :key="cat.id"
             type="button"
-            class="group flex flex-col items-center gap-3 p-6 rounded-2xl border transition-all cursor-pointer"
+            class="group flex flex-col items-center gap-3 p-6 rounded-lg border transition-all cursor-pointer"
             :style="{
               background: activeCategory === cat.id ? toCss(palette.accentSoft) : toCss(palette.surface),
               borderColor: activeCategory === cat.id ? toCss(palette.accent) : toCss(palette.border),
@@ -410,7 +410,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- PRODUK TERBARU (12 products) -->
     <!-- ============================================================ -->
-    <section id="produk" class="py-16 md:py-20 border-t" :style="{ borderColor: toCss(palette.border), background: toCss(palette.surface) }">
+    <section id="produk" class="py-20 md:py-28 border-t" :style="{ borderColor: toCss(palette.border), background: toCss(palette.surface) }">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="flex items-end justify-between mb-10">
           <div>
@@ -420,30 +420,31 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
           <p class="text-sm" :style="{ color: toCss(palette.muted) }">{{ filteredProducts.length }} produk</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
           <article
-            v-for="p in filteredProducts"
+            v-for="(p, i) in filteredProducts"
             :key="p.id"
             class="group cursor-pointer"
+            :class="{ 'lg:col-span-2 lg:row-span-2': i === 0 }"
           >
             <!-- Image -->
-            <div class="relative aspect-[3/4] rounded-2xl mb-3 overflow-hidden" :style="{ background: p.gradient }">
+            <div class="relative aspect-[3/4] rounded-lg mb-3 overflow-hidden" :style="{ background: p.gradient }">
               <div class="absolute inset-0 flex items-center justify-center opacity-20 text-6xl select-none">
                 {{ categories.find(c => c.id === p.category)?.icon || '📦' }}
               </div>
               <!-- Badges -->
               <div class="absolute top-3 left-3 flex flex-col gap-1.5">
-                <span v-if="p.badge" class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide text-white" :style="{ background: toCss(palette.accent) }">{{ p.badge }}</span>
-                <span v-if="p.freeShipping" class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide" :style="{ background: toCss(palette.accentSoft), color: toCss(palette.accent) }">Gratis Ongkir</span>
+                <span v-if="p.badge" class="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide text-white" :style="{ background: toCss(palette.accent) }">{{ p.badge }}</span>
+                <span v-if="p.freeShipping" class="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide" :style="{ background: toCss(palette.accentSoft), color: toCss(palette.accent) }">Gratis Ongkir</span>
               </div>
               <!-- Wishlist -->
-              <button type="button" class="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Tambahkan ke wishlist">
+              <button type="button" class="absolute top-3 right-3 w-8 h-8 rounded-lg flex items-center justify-center bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Tambahkan ke wishlist">
                 <svg class="w-4 h-4" :style="{ color: toCss(palette.fg) }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
               </button>
               <!-- Quick add -->
               <button
                 type="button"
-                class="absolute bottom-3 left-3 right-3 py-2.5 rounded-xl text-xs font-semibold text-white opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0"
+                class="absolute bottom-3 left-3 right-3 py-2.5 rounded-lg text-xs font-semibold text-white opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0"
                 :style="{ background: toCss(palette.accent) }"
                 @click.stop="addToCart(p)"
               >
@@ -472,7 +473,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- PENJUAL TERATAS (4 sellers) -->
     <!-- ============================================================ -->
-    <section id="penjual" class="py-16 md:py-20 border-t" :style="{ borderColor: toCss(palette.border) }">
+    <section id="penjual" class="py-20 md:py-28 border-t" :style="{ borderColor: toCss(palette.border) }">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="mb-10">
           <p class="text-[11px] tracking-[0.14em] uppercase font-medium mb-2" :style="{ color: toCss(palette.accent) }">Komunitas</p>
@@ -480,10 +481,10 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <article v-for="s in sellers" :key="s.id" class="group rounded-2xl border overflow-hidden transition-all hover:shadow-lg cursor-pointer" :style="{ borderColor: toCss(palette.border) }">
+          <article v-for="s in sellers" :key="s.id" class="group rounded-lg border overflow-hidden transition-all hover:shadow-lg cursor-pointer" :style="{ borderColor: toCss(palette.border) }">
             <!-- Banner -->
             <div class="h-28 relative" :style="{ background: s.gradient }">
-              <div class="absolute -bottom-8 left-5 w-16 h-16 rounded-xl border-4 flex items-center justify-center text-2xl" :style="{ background: toCss(palette.surfaceElevated), borderColor: toCss(palette.surfaceElevated) }">
+              <div class="absolute -bottom-8 left-5 w-16 h-16 rounded-lg border-4 flex items-center justify-center text-2xl" :style="{ background: toCss(palette.surfaceElevated), borderColor: toCss(palette.surfaceElevated) }">
                 {{ s.name.charAt(0) }}
               </div>
             </div>
@@ -512,7 +513,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- PROMO (3 flash deals) -->
     <!-- ============================================================ -->
-    <section id="promo" class="py-16 md:py-20 border-t" :style="{ borderColor: toCss(palette.border), background: toCss(palette.surface) }">
+    <section id="promo" class="py-20 md:py-28 border-t" :style="{ borderColor: toCss(palette.border), background: toCss(palette.surface) }">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="flex items-end justify-between mb-10">
           <div>
@@ -523,11 +524,11 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <article v-for="d in flashDeals" :key="d.id" class="group rounded-2xl border overflow-hidden cursor-pointer transition-all hover:shadow-lg" :style="{ borderColor: toCss(palette.border) }">
+          <article v-for="d in flashDeals" :key="d.id" class="group rounded-lg border overflow-hidden cursor-pointer transition-all hover:shadow-lg" :style="{ borderColor: toCss(palette.border) }">
             <!-- Image -->
             <div class="aspect-[16/9] relative" :style="{ background: d.gradient }">
-              <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold text-white" :style="{ background: toCss(palette.accent) }">-{{ d.discount }}%</div>
-              <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-medium backdrop-blur-sm bg-white/80" :style="{ color: toCss(palette.fg) }">Sisa {{ d.stock }}</div>
+              <div class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[10px] font-bold text-white" :style="{ background: toCss(palette.accent) }">-{{ d.discount }}%</div>
+              <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg text-[10px] font-medium backdrop-blur-sm bg-white/80" :style="{ color: toCss(palette.fg) }">Sisa {{ d.stock }}</div>
             </div>
             <!-- Info -->
             <div class="p-4">
@@ -538,8 +539,8 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
                 <span class="text-xs line-through" :style="{ color: toCss(palette.muted) }">{{ formatRp(d.originalPrice) }}</span>
               </div>
               <!-- Progress bar -->
-              <div class="h-1.5 rounded-full overflow-hidden mb-2" :style="{ background: toCss(palette.border) }">
-                <div class="h-full rounded-full" :style="{ width: `${(d.sold / (d.sold + d.stock)) * 100}%`, background: toCss(palette.accent) }" />
+              <div class="h-1.5 rounded-lg overflow-hidden mb-2" :style="{ background: toCss(palette.border) }">
+                <div class="h-full rounded-lg" :style="{ width: `${(d.sold / (d.sold + d.stock)) * 100}%`, background: toCss(palette.accent) }" />
               </div>
               <p class="text-[11px]" :style="{ color: toCss(palette.muted) }">{{ d.sold }} terjual</p>
             </div>
@@ -551,15 +552,15 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- TESTIMONI -->
     <!-- ============================================================ -->
-    <section class="py-16 md:py-20 border-t" :style="{ borderColor: toCss(palette.border) }">
+    <section class="py-20 md:py-28 border-t" :style="{ borderColor: toCss(palette.border) }">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="mb-10">
           <p class="text-[11px] tracking-[0.14em] uppercase font-medium mb-2" :style="{ color: toCss(palette.accent) }">Ulasan</p>
           <h2 :style="{ ...h2Style, color: toCss(palette.fg) }">Kata Pembeli</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <article v-for="(t, i) in testimonials" :key="i" class="rounded-2xl border p-6" :style="{ borderColor: toCss(palette.border), background: toCss(palette.surface) }">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-5">
+          <article v-for="(t, i) in testimonials" :key="i" class="rounded-lg border p-6" :class="{ 'md:col-span-3': i === 0, 'md:col-span-2': i === 1, 'md:col-span-5 md:grid md:grid-cols-2 md:gap-5': i === 2 }" :style="{ borderColor: toCss(palette.border), background: toCss(palette.surface) }">
             <!-- Stars -->
             <div class="flex gap-0.5 mb-4">
               <svg v-for="s in t.rating" :key="s" class="w-4 h-4" :style="{ color: toCss(palette.accent) }" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -580,7 +581,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- FAQ -->
     <!-- ============================================================ -->
-    <section id="faq" class="py-16 md:py-20 border-t" :style="{ borderColor: toCss(palette.border), background: toCss(palette.surface) }">
+    <section id="faq" class="py-20 md:py-28 border-t" :style="{ borderColor: toCss(palette.border), background: toCss(palette.surface) }">
       <div class="max-w-3xl mx-auto px-5 md:px-8">
         <div class="mb-10 text-center">
           <p class="text-[11px] tracking-[0.14em] uppercase font-medium mb-2" :style="{ color: toCss(palette.accent) }">Bantuan</p>
@@ -588,7 +589,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
         </div>
 
         <div class="space-y-3">
-          <div v-for="(f, i) in faqs" :key="i" class="rounded-xl border overflow-hidden" :style="{ borderColor: toCss(palette.border) }">
+          <div v-for="(f, i) in faqs" :key="i" class="rounded-lg border overflow-hidden" :style="{ borderColor: toCss(palette.border) }">
             <button
               type="button"
               class="flex items-center justify-between w-full px-5 py-4 text-left"
@@ -640,20 +641,20 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <button
       v-if="cartCount > 0"
       type="button"
-      class="fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-transform hover:scale-105 lg:hidden"
+      class="fixed bottom-5 right-5 z-40 w-14 h-14 rounded-lg shadow-xl flex items-center justify-center transition-transform hover:scale-105 lg:hidden"
       :style="{ background: toCss(palette.accent), color: toCss(palette.accentFg) }"
       @click="cartOpen = true"
       aria-label="Buka keranjang"
     >
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-      <span class="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center" :style="{ background: toCss(palette.accentFg), color: toCss(palette.accent) }">{{ cartCount }}</span>
+      <span class="absolute -top-1 -right-1 w-5 h-5 rounded-lg text-[10px] font-bold flex items-center justify-center" :style="{ background: toCss(palette.accentFg), color: toCss(palette.accent) }">{{ cartCount }}</span>
     </button>
 
     <!-- Desktop cart button in nav area -->
     <button
       v-if="cartCount > 0"
       type="button"
-      class="hidden lg:flex fixed bottom-5 right-5 z-40 items-center gap-3 px-5 py-3 rounded-full shadow-xl transition-transform hover:scale-105"
+      class="hidden lg:flex fixed bottom-5 right-5 z-40 items-center gap-3 px-5 py-3 rounded-lg shadow-xl transition-transform hover:scale-105"
       :style="{ background: toCss(palette.accent), color: toCss(palette.accentFg) }"
       @click="cartOpen = true"
     >

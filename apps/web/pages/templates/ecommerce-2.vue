@@ -31,7 +31,7 @@ const products: Product[] = [
     id: 'serum-vitamin-c',
     name: 'Serum Vitamin C 10%',
     price: 129000,
-    description: 'Serum pencerah dengan L-Ascorbic Acid stabil. Membantu meratakan warna kulit dan melindungi dari radikal bebas setiap pagi.',
+    description: 'L-Ascorbic Acid stabil untuk mencerahkan dan melindungi dari radikal bebas.',
     keyIngredients: ['L-Ascorbic Acid 10%', 'Ferulic Acid 0.5%', 'Vitamin E 1%'],
     tags: ['Bestseller', 'BPOM'],
     volume: '30ml',
@@ -40,7 +40,7 @@ const products: Product[] = [
     id: 'moisturizer-barrier',
     name: 'Moisturizer Barrier Repair',
     price: 119000,
-    description: 'Krim pelembap dengan Ceramide NP dan Squalane untuk memperbaiki skin barrier. Tekstur ringan, cepat meresap, tidak lengket.',
+    description: 'Ceramide NP + Squalane untuk memperbaiki skin barrier. Ringan, cepat meresap.',
     keyIngredients: ['Ceramide NP 2%', 'Squalane 5%', 'Panthenol 2%'],
     tags: ['BPOM', 'Halal'],
     volume: '50ml',
@@ -49,7 +49,7 @@ const products: Product[] = [
     id: 'sunscreen-spf50',
     name: 'Sunscreen SPF 50+ PA++++',
     price: 89000,
-    description: 'Tabir surya hybrid yang ringan di kulit. Tidak meninggalkan whitecast, cocok untuk kulit berminyak dan sensitif.',
+    description: 'Tabir surya hybrid ringan. Tanpa whitecast, cocok untuk kulit berminyak.',
     keyIngredients: ['Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine', 'Niacinamide 2%', 'Centella Asiatica'],
     tags: ['Daily Use', 'BPOM', 'Halal'],
     volume: '50ml',
@@ -58,7 +58,7 @@ const products: Product[] = [
     id: 'cleanser-gentle',
     name: 'Cleanser Gentle Foam',
     price: 79000,
-    description: 'Pembersih wajah dengan pH 5.5 yang tidak mengeringkan kulit. Membersihkan sisa makeup dan kotoran tanpa merusak skin barrier.',
+    description: 'pH 5.5, tidak mengeringkan. Membersihkan tanpa merusak skin barrier.',
     keyIngredients: ['Cocamidopropyl Betaine', 'Sodium Hyaluronate', 'Allantoin'],
     tags: ['BPOM', 'Halal'],
     volume: '100ml',
@@ -67,7 +67,7 @@ const products: Product[] = [
     id: 'toner-exfoliating',
     name: 'Toner Exfoliating AHA BHA',
     price: 99000,
-    description: 'Toner eksfoliasi lembut untuk mempercepat pergantian sel kulit. Membantu mengangkat sel kulit mati dan menyamarkan noda hitam.',
+    description: 'Eksfoliasi lembut untuk pergantian sel kulit. Menyamarkan noda hitam.',
     keyIngredients: ['Glycolic Acid 5%', 'Salicylic Acid 0.5%', 'Centella Asiatica'],
     tags: ['For Night Use', 'BPOM'],
     volume: '100ml',
@@ -76,7 +76,7 @@ const products: Product[] = [
     id: 'eye-cream-caffeine',
     name: 'Eye Cream Caffeine + Peptide',
     price: 149000,
-    description: 'Krim mata dengan Caffeine dan Matrixyl untuk mengurangi lingkaran hitam dan garis halus di area mata.',
+    description: 'Caffeine + Matrixyl untuk mengurangi lingkaran hitam dan garis halus.',
     keyIngredients: ['Caffeine 3%', 'Matrixyl 2%', 'Niacinamide 3%'],
     tags: ['BPOM', 'Halal'],
     volume: '15ml',
@@ -237,7 +237,7 @@ function initBottleScene() {
 
     // Cap
     ctx!.beginPath()
-    ctx!.roundRect(bx - 14, by - bh * 0.85, 28, 18, 3)
+    ctx!.roundRect(bx - 14, by - bh * 0.85, 28, 18, 8)
     ctx!.fillStyle = '#b8944a'
     ctx!.fill()
 
@@ -342,13 +342,13 @@ const navLinks = [
         <div class="order-2 md:order-1 text-center md:text-left">
           <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Skincare Indonesia · Sejak 2015</p>
 
-          <h1 :style="{ ...h1Style, color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">
-            Bahan terbuka.<br>
-            <span :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Hasil nyata.</span>
+          <h1 :style="{ ...h1Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">
+            Bahan yang jujur.<br>
+            <span :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Harga yang jujur.</span>
           </h1>
 
-          <p class="mt-5 text-base md:text-lg leading-relaxed max-w-md mx-auto md:mx-0" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">
-            Setiap tetes diformulasikan dengan bahan aktif yang bisa kamu baca sendiri. Tidak ada proprietary blend, tidak ada markup 10x.
+          <p class="mt-5 text-base leading-relaxed max-w-sm mx-auto md:mx-0" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">
+            Bahan aktif yang bisa kamu baca sendiri. Tidak ada proprietary blend.
           </p>
 
           <div class="mt-8 flex flex-wrap gap-3 justify-center md:justify-start">
@@ -364,10 +364,10 @@ const navLinks = [
             >Lihat Semua Produk</a>
           </div>
 
-          <div class="mt-6 flex flex-wrap gap-4 justify-center md:justify-start text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">
-            <span>✓ BPOM Terdaftar</span>
-            <span>✓ Halal MUI</span>
-            <span>✓ Refill 20% off</span>
+          <div class="mt-6 flex flex-wrap gap-5 justify-center md:justify-start text-[11px] tracking-wide" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">
+            <span>BPOM</span>
+            <span>Halal MUI</span>
+            <span>Refill −20%</span>
           </div>
         </div>
       </div>
@@ -376,35 +376,36 @@ const navLinks = [
     <!-- ============================================================ -->
     <!-- SECTION 2: Cerita (Brand Story)                                -->
     <!-- ============================================================ -->
-    <section id="cerita" class="py-20 md:py-28 border-t" :style="{ borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
-      <div class="max-w-2xl mx-auto px-6 text-center">
-        <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Cerita Kami</p>
-        <h2 :style="{ ...h2Style, color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }" class="mb-10">Dari Laboratorium ke Tangan Kamu</h2>
-
-        <div class="space-y-5 text-left md:text-justify leading-[1.7] text-base" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">
-          <p>SOMETHINC dimulai di Jakarta pada 2015. Founder kami, Anne, tidak percaya bahwa skincare yang bagus harus berharga ribuan dolar. Maka dia membuat satu serum niacinamide 10% dengan bahan yang bisa dibaca siapa pun, dengan harga yang jujur.</p>
-          <p>Serum itu masih ada di lineup kami sampai hari ini. Bukan karena nostalgia, tapi karena formulanya tetap bekerja. Bahan yang sama, hasil yang sama, harga yang tetap transparan.</p>
-          <p>Kami tidak pakai bahan yang tidak bisa kami jelaskan. Tidak ada "proprietary blend" yang isinya rahasia. Setiap konsentrasi dicantumkan. Setiap bahan punya alasan.</p>
-          <p>Sekarang lebih dari 2 juta produk sudah terjual, dari Jakarta ke seluruh Indonesia. Tapi prinsipnya tetap sama: bahan terbuka, harga jujur, hasil yang bisa diukur.</p>
+    <section id="cerita" class="py-24 md:py-32 border-t" :style="{ borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
+      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-5 gap-12 items-start">
+        <div class="md:col-span-2">
+          <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Cerita Kami</p>
+          <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Dari Laboratorium ke Tangan Kamu</h2>
+          <p class="mt-6 text-sm font-medium" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">— Anne Avianti, Founder</p>
         </div>
 
-        <p class="mt-8 text-sm italic font-medium" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">— Anne Avianti, Founder SOMETHINC</p>
+        <div class="md:col-span-3 space-y-5 leading-[1.7] text-base" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">
+          <p>SOMETHINC dimulai di Jakarta, 2015. Satu serum niacinamide — bahan yang bisa dibaca siapa pun, harga yang jujur.</p>
+          <p>Formula itu masih ada di lineup kami. Bukan nostalgia, tapi karena tetap bekerja.</p>
+          <p>Tidak ada proprietary blend. Setiap konsentrasi dicantumkan. Setiap bahan punya alasan.</p>
+          <p>Dua juta produk sudah terjual. Prinsipnya tetap sama: <strong :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">bahan terbuka, harga jujur.</strong></p>
+        </div>
       </div>
     </section>
 
     <!-- ============================================================ -->
     <!-- SECTION 3: Produk (6 skincare products)                       -->
     <!-- ============================================================ -->
-    <section id="produk" class="py-20 md:py-28" :style="{ background: `oklch(${palette.surface.l}% ${palette.surface.c} ${palette.surface.h})` }">
+    <section id="produk" class="py-24 md:py-32" :style="{ background: `oklch(${palette.surface.l}% ${palette.surface.c} ${palette.surface.h})` }">
       <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-12">
           <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-4" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Produk Kami</p>
-          <h2 :style="{ ...h2Style, color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">6 produk. Tidak perlu lebih.</h2>
-          <p class="mt-3 text-sm max-w-md mx-auto" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Setiap produk dirancang untuk satu fungsi spesifik. Tidak ada filler, tidak ada langkah yang tidak perlu.</p>
+          <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">6 produk. Tidak perlu lebih.</h2>
+          <p class="mt-3 text-sm max-w-sm mx-auto" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Satu fungsi spesifik per produk. Tidak ada filler.</p>
         </div>
 
         <!-- Refill subscription toggle -->
-        <div class="max-w-md mx-auto mb-10 p-5 rounded-2xl border" :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
+        <div class="max-w-md mx-auto mb-10 p-5 rounded-lg border" :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
           <div class="flex items-center justify-between">
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Langganan Refill</p>
@@ -427,7 +428,7 @@ const navLinks = [
           <article
             v-for="product in products"
             :key="product.id"
-            class="group rounded-2xl border overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            class="group rounded-lg border overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }"
           >
             <!-- Product image placeholder -->
@@ -488,12 +489,12 @@ const navLinks = [
     <!-- ============================================================ -->
     <!-- SECTION 4: Bahan (Ingredient Glossary)                        -->
     <!-- ============================================================ -->
-    <section id="bahan" class="py-20 md:py-28 border-t" :style="{ borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
+    <section id="bahan" class="py-24 md:py-32 border-t" :style="{ borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
       <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-12">
           <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-4" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Bahan Aktif</p>
-          <h2 :style="{ ...h2Style, color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">12 bahan yang kami pakai. Tidak lebih.</h2>
-          <p class="mt-3 text-sm max-w-lg mx-auto" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Setiap produk hanya menggunakan bahan yang sudah terbukti. Tidak ada wewangian sintetis, tidak ada pewarna, tidak ada filler.</p>
+          <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">12 bahan. Tidak lebih.</h2>
+          <p class="mt-3 text-sm max-w-md mx-auto" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Tanpa wewangian sintetis, pewarna, atau filler.</p>
         </div>
 
         <!-- Ingredient cards grid -->
@@ -501,7 +502,7 @@ const navLinks = [
           <div
             v-for="ing in ingredients"
             :key="ing.inci"
-            class="p-5 rounded-2xl border transition-all duration-200 hover:-translate-y-0.5"
+            class="p-5 rounded-lg border transition-all duration-200 hover:-translate-y-0.5"
             :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }"
           >
             <div class="flex items-start justify-between mb-2">
@@ -538,12 +539,12 @@ const navLinks = [
     <!-- ============================================================ -->
     <!-- SECTION 5: Routine Finder (Quiz)                              -->
     <!-- ============================================================ -->
-    <section id="quiz" class="py-20 md:py-28" :style="{ background: `oklch(${palette.surface.l}% ${palette.surface.c} ${palette.surface.h})` }">
+    <section id="quiz" class="py-24 md:py-32" :style="{ background: `oklch(${palette.surface.l}% ${palette.surface.c} ${palette.surface.h})` }">
       <div class="max-w-xl mx-auto px-6">
         <div class="text-center mb-10">
           <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-4" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Cari Rutin Kamu</p>
-          <h2 :style="{ ...h2Style, color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Routine Finder</h2>
-          <p class="mt-3 text-sm" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Jawab 4 pertanyaan. Kami rekomendasikan produk yang cocok untuk kulitmu.</p>
+          <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Routine Finder</h2>
+          <p class="mt-3 text-sm" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">4 pertanyaan. Rekomendasi untuk kulitmu.</p>
         </div>
 
         <!-- Quiz states -->
@@ -577,7 +578,7 @@ const navLinks = [
               v-for="opt in quizQuestions[quizStep === 'q1' ? 0 : quizStep === 'q2' ? 1 : quizStep === 'q3' ? 2 : 3].options"
               :key="opt"
               @click="answerQuiz(opt)"
-              class="w-full text-left px-5 py-3.5 rounded-xl border text-sm transition-all duration-200 hover:-translate-y-0.5"
+              class="w-full text-left px-5 py-3.5 rounded-lg border text-sm transition-all duration-200 hover:-translate-y-0.5"
               :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})`, color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }"
             >{{ opt }}</button>
           </div>
@@ -585,7 +586,7 @@ const navLinks = [
 
         <!-- Result -->
         <div v-if="quizStep === 'result'" class="text-center">
-          <div class="mb-6 p-5 rounded-2xl" :style="{ background: `oklch(${palette.accentSoft.l}% ${palette.accentSoft.c} ${palette.accentSoft.h})` }">
+          <div class="mb-6 p-5 rounded-lg" :style="{ background: `oklch(${palette.accentSoft.l}% ${palette.accentSoft.c} ${palette.accentSoft.h})` }">
             <p class="text-sm font-medium mb-1" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Rekomendasi untuk kamu</p>
             <p class="text-sm" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">{{ quizRecommendation?.note }}</p>
           </div>
@@ -594,7 +595,7 @@ const navLinks = [
             <div
               v-for="p in quizRecommendedProducts"
               :key="p.id"
-              class="flex items-center gap-4 p-4 rounded-xl border text-left"
+              class="flex items-center gap-4 p-4 rounded-lg border text-left"
               :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }"
             >
               <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" :style="{ background: `oklch(${palette.surface.l}% ${palette.surface.c} ${palette.surface.h})` }">
@@ -620,20 +621,20 @@ const navLinks = [
     <!-- ============================================================ -->
     <!-- SECTION 6: Testimoni (3 reviews)                              -->
     <!-- ============================================================ -->
-    <section id="testimoni" class="py-20 md:py-28 border-t" :style="{ borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
+    <section id="testimoni" class="py-24 md:py-32 border-t" :style="{ borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
       <div class="max-w-5xl mx-auto px-6">
-        <div class="text-center mb-12">
+        <div class="mb-12">
           <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-4" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Testimoni</p>
-          <h2 :style="{ ...h2Style, color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Kata mereka yang sudah coba</h2>
+          <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Kata mereka yang sudah coba</h2>
         </div>
 
         <div class="grid md:grid-cols-3 gap-5">
           <!-- Review 1 -->
-          <div class="p-6 rounded-2xl border" :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
+          <div class="p-6 rounded-lg border" :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
             <div class="flex gap-0.5 mb-3">
               <svg v-for="n in 5" :key="n" class="w-4 h-4" :style="{ color: `oklch(72% 0.15 75)` }" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
             </div>
-            <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Kulitku berubah setelah 2 minggu pakai Serum Vitamin C. Bruntusan hilang, pori-pori mengecil, dan warna kulit lebih rata. Harganya juga masuk akal."</p>
+            <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Kulit berubah setelah 2 minggu. Bruntusan hilang, warna kulit lebih rata. Harganya masuk akal."</p>
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Siti Rahmawati</p>
               <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Jakarta · Pembeli Terverifikasi</p>
@@ -641,11 +642,11 @@ const navLinks = [
           </div>
 
           <!-- Review 2 -->
-          <div class="p-6 rounded-2xl border" :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
+          <div class="p-6 rounded-lg border" :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
             <div class="flex gap-0.5 mb-3">
               <svg v-for="n in 5" :key="n" class="w-4 h-4" :style="{ color: `oklch(72% 0.15 75)` }" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
             </div>
-            <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Awalnya ragu karena harga terjangkau, tapi setelah coba Moisturizer Barrier Repair langsung jatuh cinta. Tekstur ringan, cepat meresap, tidak lengket sama sekali."</p>
+            <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Harga terjangkau tapi kualitas nyata. Tekstur ringan, cepat meresap, tidak lengket."</p>
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Dinda Permata</p>
               <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Bandung · Pembeli Terverifikasi</p>
@@ -653,11 +654,11 @@ const navLinks = [
           </div>
 
           <!-- Review 3 -->
-          <div class="p-6 rounded-2xl border" :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
+          <div class="p-6 rounded-lg border" :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
             <div class="flex gap-0.5 mb-3">
               <svg v-for="n in 5" :key="n" class="w-4 h-4" :style="{ color: `oklch(72% 0.15 75)` }" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
             </div>
-            <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Sunscreen ini akhirnya yang bikin aku rajin pakai tabir surya. Tidak whitecast, tidak berminyak, dan harganya bikin tidak sayang pakai setiap hari."</p>
+            <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Tidak whitecast, tidak berminyak. Harganya bikin tidak sayang pakai setiap hari."</p>
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Rina Wulandari</p>
               <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Surabaya · Pembeli Terverifikasi</p>
@@ -670,18 +671,18 @@ const navLinks = [
     <!-- ============================================================ -->
     <!-- SECTION 7: FAQ                                                -->
     <!-- ============================================================ -->
-    <section id="faq" class="py-20 md:py-28" :style="{ background: `oklch(${palette.surface.l}% ${palette.surface.c} ${palette.surface.h})` }">
+    <section id="faq" class="py-24 md:py-32" :style="{ background: `oklch(${palette.surface.l}% ${palette.surface.c} ${palette.surface.h})` }">
       <div class="max-w-2xl mx-auto px-6">
         <div class="text-center mb-10">
           <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-4" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Pertanyaan Umum</p>
-          <h2 :style="{ ...h2Style, color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">FAQ</h2>
+          <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">FAQ</h2>
         </div>
 
         <div class="space-y-3">
           <div
             v-for="(faq, idx) in faqs"
             :key="idx"
-            class="rounded-xl border overflow-hidden"
+            class="rounded-lg border overflow-hidden"
             :style="{ borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }"
           >
             <button

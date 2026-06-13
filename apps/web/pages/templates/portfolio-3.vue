@@ -32,7 +32,7 @@ const cases = [
     project: 'Turun Tangan',
     year: 2024,
     tags: ['Brand', 'Web'],
-    desc: 'Website tur untuk band rock Indonesia. 47 kota. Jadwal, tiket, tanpa basa-basi.',
+    desc: 'Website tur band rock. 47 kota. Jadwal, tiket, langsung.',
     metric: '120K tiket terjual',
   },
   {
@@ -41,7 +41,7 @@ const cases = [
     project: 'Menari Dengan Bayangan',
     year: 2024,
     tags: ['Web', 'Motion'],
-    desc: 'Visual album interaktif. Setiap lagu punya halaman sendiri. Scroll = mendengarkan.',
+    desc: 'Visual album interaktif. Scroll = mendengarkan.',
     metric: '2.1M page views',
   },
   {
@@ -50,7 +50,7 @@ const cases = [
     project: 'Percakapan Publik',
     year: 2023,
     tags: ['Brand', 'Editorial'],
-    desc: 'Sistem identitas untuk seri podcast. Tipografi besar, warna jujur, tanpa dekorasi.',
+    desc: 'Identitas seri podcast. Tipografi besar, warna jujur.',
     metric: '8 episode, 340K pendengar',
   },
   {
@@ -59,7 +59,7 @@ const cases = [
     project: 'Solar',
     year: 2023,
     tags: ['Web', 'Motion'],
-    desc: 'Landing page untuk album baru. Video latar, lirik bergerak, pre-order terintegrasi.',
+    desc: 'Landing page album. Video, lirik bergerak, pre-order.',
     metric: '18K pre-order dalam 2 minggu',
   },
   {
@@ -68,7 +68,7 @@ const cases = [
     project: 'Arsip Visual',
     year: 2024,
     tags: ['Brand', 'Web'],
-    desc: 'Katalog online untuk studio film dokumenter. Filter berdasarkan tahun, genre, durasi.',
+    desc: 'Katalog film dokumenter. Filter tahun, genre, durasi.',
     metric: '200+ film terarsip',
   },
   {
@@ -77,7 +77,7 @@ const cases = [
     project: 'Menu Tanpa Omong Kosong',
     year: 2023,
     tags: ['Brand', 'Editorial'],
-    desc: 'Redesign menu dan identitas kedai kopi lokal. Harga jelas, foto jujur, tanpa filter.',
+    desc: 'Redesign menu kopi. Harga jelas, foto jujur.',
     metric: '+31% penjualan bulan pertama',
   },
   {
@@ -86,7 +86,7 @@ const cases = [
     project: 'Poster Archive',
     year: 2022,
     tags: ['Web', 'Editorial'],
-    desc: 'Database poster gig dan festival musik Indonesia. Pencarian berdasarkan kota, band, tahun.',
+    desc: 'Database poster gig Indonesia. Cari kota, band, tahun.',
     metric: '5.000+ poster terindeks',
   },
   {
@@ -95,7 +95,7 @@ const cases = [
     project: 'Ruang Kerja Bersama',
     year: 2022,
     tags: ['Brand', 'Web'],
-    desc: 'Website dan sistem booking untuk co-working space di Yogyakarta. Langsung, tanpa formulir panjang.',
+    desc: 'Booking co-working Yogyakarta. Langsung, tanpa formulir.',
     metric: '85% occupancy rate',
   },
 ]
@@ -118,33 +118,31 @@ const services = [
   {
     num: '01',
     title: 'Identitas Visual',
-    desc: 'Logo, warna, tipografi. Bukan hiasan. Fungsi. Sistem yang bisa dipakai siapa saja tanpa panduan 50 halaman.',
+    desc: 'Logo, warna, tipografi. Bukan hiasan. Fungsi.',
   },
   {
     num: '02',
     title: 'Desain Web',
-    desc: 'Website yang dimuat cepat dan langsung menyampaikan pesan. Tanpa animasi berlebihan. Tanpa template WordPress.',
+    desc: 'Cepat, langsung, tanpa template.',
   },
   {
     num: '03',
     title: 'Editorial',
-    desc: 'Buku, zine, katalog, laporan tahunan. Tipografi yang benar. Grid yang jujur. Cetak atau digital.',
+    desc: 'Buku, zine, katalog. Grid jujur. Cetak atau digital.',
   },
   {
     num: '04',
     title: 'Pengembangan Web',
-    desc: 'Kode bersih, performa tinggi, bisa diakses semua orang. Nuxt, Vue, Supabase. Tidak ada yang tidak perlu.',
+    desc: 'Kode bersih, performa tinggi. Nuxt, Vue, Supabase.',
   },
 ]
 
 // ============================================================
-// MANIFESTO — 4 paragraphs
+// MANIFESTO — 2 paragraphs
 // ============================================================
 const manifesto = [
-  'Kami tidak membuat presentasi untuk memenangkan klien. Kami membuat pekerjaan yang berbicara sendiri. Jika kamu perlu 20 slide untuk menjelaskan mengapa desain itu bagus, desainnya belum selesai.',
-  'Kami tidak mengikuti tren. Tren datang dan pergi dalam 6 bulan. Identitas yang baik bertahan 10 tahun. Kami memilih yang kedua.',
-  'Kami tidak bekerja untuk semua orang. Kami bekerja untuk orang yang tahu apa yang mereka inginkan dan mau percaya pada proses. Jika kamu mencari "yang aman", cari studio lain.',
-  'Kami tidak janji revisi tanpa batas. Revisi tanpa batas berarti kamu tidak tahu apa yang kamu mau. Kami lebih suka duduk bersama, mendefinisikan masalah, lalu menyelesaikannya sekali dan benar.',
+  'Kami membuat pekerjaan yang berbicara sendiri. Jika kamu perlu 20 slide untuk menjelaskan desain, desainnya belum selesai.',
+  'Kami tidak bekerja untuk semua orang. Kami bekerja untuk yang tahu apa yang mereka mau. Yang aman? Cari studio lain.',
 ]
 
 // ============================================================
@@ -163,22 +161,22 @@ const team = [
   {
     name: 'Hana Kartika',
     role: 'Pendiri / Tipografi',
-    bio: 'Mantan dosen ISI Yogyakarta. Spesialis huruf dan tata letak. Percaya bahwa satu huruf yang benar lebih kuat dari seribu elemen dekoratif.',
+    bio: 'Mantan dosen ISI Yogyakarta. Spesialis huruf dan tata letak. Satu huruf yang benar lebih kuat dari seribu elemen.',
   },
   {
     name: 'Reza Aditya',
     role: 'Pendiri / Kode',
-    bio: 'Full-stack developer yang lebih suka terminal daripada Figma. Membangun sistem, bukan halaman. Vue, Nuxt, Supabase.',
+    bio: 'Full-stack developer. Membangun sistem, bukan halaman. Vue, Nuxt, Supabase.',
   },
   {
     name: 'Gilang Pratama',
     role: 'Suara & Audio',
-    bio: 'Sound designer dan produser. Membuat sonik identitas untuk brand dan ruang. Pernah kerja untuk 3 museum dan 12 band.',
+    bio: 'Sound designer. Sonik identitas untuk brand dan ruang. 3 museum, 12 band.',
   },
   {
     name: 'Sekar Wangi',
     role: 'Editorial',
-    bio: 'Penulis dan editor. Mengelola naskah, buku, dan konten digital. Percaya bahwa setiap kata harus punya alasan untuk ada.',
+    bio: 'Penulis dan editor. Naskah, buku, konten digital. Setiap kata punya alasan.',
   },
 ]
 
@@ -400,11 +398,11 @@ onBeforeUnmount(() => {
     <!-- ============================================================ -->
     <!-- 1. HERO — Massive Inter Black -->
     <!-- ============================================================ -->
-    <section id="top" class="relative overflow-hidden" style="min-height: 100svh; display: flex; align-items: center;">
+    <section id="top" class="relative overflow-hidden" style="min-height: 100svh;">
       <!-- 3D canvas behind text -->
       <div ref="canvasHost" class="absolute inset-0 z-0" style="pointer-events: none;" />
 
-      <div class="relative z-10 w-full" style="max-width: 1200px; margin: 0 auto; padding: 6rem 2rem 4rem;">
+      <div class="relative z-10 w-full" style="padding: 8rem 2rem 5rem;">
         <template v-if="!isLoaded">
           <div style="height: 1.5rem; width: 10rem; background: var(--idx-border); margin-bottom: 2rem;" />
           <div style="height: 5rem; width: 80%; background: var(--idx-border); margin-bottom: 1rem;" />
@@ -417,12 +415,12 @@ onBeforeUnmount(() => {
             Yogyakarta, Indonesia &middot; 2021
           </p>
 
-          <h1 :style="{ ...h1Style, color: 'var(--idx-fg)' }" style="margin-bottom: 1.5rem;">
+          <h1 :style="{ ...h1Style, color: 'var(--idx-fg)', fontFamily: 'var(--idx-display)', fontWeight: 900 }" style="margin-bottom: 1.5rem;">
             INI BUKAN<br />PORTOFOLIO.<br />INI MANIFESTO.
           </h1>
 
           <p :style="monoStyle" style="font-size: 14px; max-width: 480px; color: var(--idx-muted); margin-bottom: 2.5rem; line-height: 1.6;">
-            47 proyek. 12 klien. 0 pitch deck. Kami tidak menjual mimpi. Kami menyelesaikan masalah.
+            47 proyek. 12 klien. 0 pitch deck.
           </p>
 
           <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
@@ -450,12 +448,12 @@ onBeforeUnmount(() => {
     <!-- 2. STUDI KASUS — 8 cards, flat grid -->
     <!-- ============================================================ -->
     <section id="karya" style="border-top: 2px solid var(--idx-fg);">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;">
+      <div style="padding: 5rem 2rem;">
         <!-- Section header -->
         <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;">
           <div>
             <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">01</span>
-            <h2 :style="h2Style" style="margin-top: 0.5rem;">Studi Kasus</h2>
+            <h2 :style="h2Style" style="margin-top: 0.5rem; font-family: var(--idx-display); font-weight: 900;">Studi Kasus</h2>
           </div>
           <!-- Filter -->
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
@@ -513,11 +511,11 @@ onBeforeUnmount(() => {
               {{ c.name }}
             </p>
 
-            <h3 style="font-family: var(--idx-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1rem;">
+            <h3 style="font-family: var(--idx-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.75rem;">
               {{ c.project }}
             </h3>
 
-            <p :style="monoStyle" style="font-size: 13px; color: var(--idx-muted); margin-bottom: 1.5rem; line-height: 1.6;">
+            <p :style="monoStyle" style="font-size: 13px; color: var(--idx-muted); margin-bottom: 1rem; line-height: 1.6;">
               {{ c.desc }}
             </p>
 
@@ -545,9 +543,9 @@ onBeforeUnmount(() => {
     <!-- 3. LAYANAN — 4 items -->
     <!-- ============================================================ -->
     <section id="layanan" style="border-top: 2px solid var(--idx-fg);">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;">
+      <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">02</span>
-        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem;">Layanan</h2>
+        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem; font-family: var(--idx-display); font-weight: 900;">Layanan</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0;">
           <div
@@ -575,15 +573,15 @@ onBeforeUnmount(() => {
     <!-- 4. MANIFESTO — 4 paragraphs -->
     <!-- ============================================================ -->
     <section id="manifesto" style="border-top: 2px solid var(--idx-fg); background: var(--idx-fg); color: var(--idx-bg);">
-      <div style="max-width: 800px; margin: 0 auto; padding: 6rem 2rem;">
+      <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">03</span>
-        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem;">Manifesto</h2>
+        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem; font-family: var(--idx-display); font-weight: 900;">Manifesto</h2>
 
         <div v-for="(p, i) in manifesto" :key="i" style="margin-bottom: 3rem;">
           <span :style="monoStyle" style="font-size: 64px; font-weight: 700; line-height: 1; color: var(--idx-accent); opacity: 0.3; display: block; margin-bottom: 1rem;">
             {{ String(i + 1).padStart(2, '0') }}
           </span>
-          <p :style="monoStyle" style="font-size: 16px; line-height: 1.7; opacity: 0.9;">
+          <p :style="monoStyle" style="font-size: 14px; line-height: 1.7; opacity: 0.9;">
             {{ p }}
           </p>
         </div>
@@ -594,9 +592,9 @@ onBeforeUnmount(() => {
     <!-- 5. KLIEN — flat list -->
     <!-- ============================================================ -->
     <section style="border-top: 2px solid var(--idx-fg);">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;">
+      <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">04</span>
-        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem;">Klien</h2>
+        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem; font-family: var(--idx-display); font-weight: 900;">Klien</h2>
 
         <div style="display: flex; flex-wrap: wrap; gap: 0;">
           <span
@@ -616,9 +614,9 @@ onBeforeUnmount(() => {
     <!-- 6. TIM — 4 founders -->
     <!-- ============================================================ -->
     <section id="tim" style="border-top: 2px solid var(--idx-fg);">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;">
+      <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">05</span>
-        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem;">Tim</h2>
+        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem; font-family: var(--idx-display); font-weight: 900;">Tim</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0;">
           <div
@@ -650,11 +648,11 @@ onBeforeUnmount(() => {
     <!-- 7. KONTAK -->
     <!-- ============================================================ -->
     <section id="kontak" style="border-top: 2px solid var(--idx-fg);">
-      <div style="max-width: 800px; margin: 0 auto; padding: 6rem 2rem;">
+      <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">06</span>
-        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 2rem;">Kontak</h2>
+        <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 2rem; font-family: var(--idx-display); font-weight: 900;">Kontak</h2>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
           <div>
             <p :style="monoStyle" style="font-size: 14px; line-height: 1.8;">
               hello@indeks.id<br />
@@ -686,8 +684,8 @@ onBeforeUnmount(() => {
     <!-- ============================================================ -->
     <!-- 8. FOOTER -->
     <!-- ============================================================ -->
-    <footer style="border-top: 2px solid var(--idx-fg); padding: 2rem;">
-      <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+    <footer style="border-top: 2px solid var(--idx-fg); padding: 2rem 2rem;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--idx-muted);">
           &copy; {{ currentYear }} INDEKS &middot; Yogyakarta
         </span>
@@ -706,6 +704,9 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+/* Brutalist: zero border radius everywhere */
+* { border-radius: 0 !important; }
+
 /* Glitch hover effect on case cards */
 .case-card:hover {
   background: color-mix(in srgb, var(--idx-accent) 4%, transparent);

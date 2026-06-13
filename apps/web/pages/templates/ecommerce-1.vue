@@ -42,7 +42,7 @@ const products: Product[] = [
       { name: 'Sage', hex: '#9CAF88' },
     ],
     sizes: ['S', 'M', 'L', 'XL'],
-    description: 'Kaos katun 24s dengan potongan oversize. Jahitan rantai di keliman. Dicetak di Bandung, dikirim 3-5 hari kerja.',
+    description: 'Katun 24s, potongan oversize. Jahitan rantai di keliman.',
     gradient: 'linear-gradient(145deg, #F5F0E8 0%, #E8E0D0 40%, #D4C9B5 100%)',
   },
   {
@@ -57,7 +57,7 @@ const products: Product[] = [
       { name: 'Olive', hex: '#6B7B4A' },
     ],
     sizes: ['S', 'M', 'L', 'XL'],
-    description: 'Hoodie dengan loop terry katun 460gsm. Kantong depan model kanguru. Tali tudung dari katun tebal, bukan tali sintetis.',
+    description: 'Loop terry katun 460gsm. Kantong kanguru, tali katun tebal.',
     gradient: 'linear-gradient(145deg, #F0EBE0 0%, #D9D0C0 40%, #C4BAA8 100%)',
   },
   {
@@ -72,7 +72,7 @@ const products: Product[] = [
       { name: 'Sage', hex: '#9CAF88' },
     ],
     sizes: ['One Size'],
-    description: 'Tote dari kanvas lokal 16oz. Jahitan ganda di strap. Kantong dalam untuk laptop 14 inci.',
+    description: 'Kanvas lokal 16oz. Jahitan ganda, kantong laptop 14".',
     gradient: 'linear-gradient(145deg, #EDE8DC 0%, #D8D0BE 40%, #C2B8A4 100%)',
   },
   {
@@ -87,7 +87,7 @@ const products: Product[] = [
       { name: 'Hitam', hex: '#1A1A1A' },
     ],
     sizes: ['One Size'],
-    description: 'Selempang dari kulit sapi lokal. Hardware kuningan. Tali bisa diatur 90-130cm.',
+    description: 'Kulit sapi lokal. Hardware kuningan, tali 90-130cm.',
     gradient: 'linear-gradient(145deg, #C4956A 0%, #A87D58 40%, #8C6540 100%)',
   },
   {
@@ -102,7 +102,7 @@ const products: Product[] = [
       { name: 'Navy', hex: '#1E2A3A' },
     ],
     sizes: ['One Size'],
-    description: 'Topi 5-panel dari katun twill. Bordir "Erigo" kecil di samping. Adjustable strap di belakang.',
+    description: 'Katun twill 5-panel. Bordir Erigo, strap adjustable.',
     gradient: 'linear-gradient(145deg, #F0EBE0 0%, #DED5C4 40%, #CCBFA8 100%)',
   },
   {
@@ -117,7 +117,7 @@ const products: Product[] = [
       { name: 'Terracotta', hex: '#C0704A' },
     ],
     sizes: ['One Size'],
-    description: 'Syal wol 100% dari Biak. Tenunan tangan 4 minggu per piece. Setiap syal sedikit berbeda.',
+    description: 'Wol 100% dari Biak. Tenunan tangan 4 minggu per piece.',
     gradient: 'linear-gradient(145deg, #F5F0E8 0%, #E0D5C5 40%, #CBBAA5 100%)',
   },
 ]
@@ -201,11 +201,11 @@ function updateCartItems(items: CartItem[]) {
 // FAQ
 // ============================================================
 const faqs = [
-  { q: 'Berapa lama pengiriman?', a: '3-5 hari kerja untuk Jawa. 5-7 hari untuk luar Jawa. Semua paket dikirim dari Bandung.' },
-  { q: 'Bisa tukar ukuran?', a: 'Bisa. Tukar dalam 7 hari setelah terima, selama belum dicuci dan tag masih terpasang. Ongkir tukar ditanggung pembeli.' },
-  { q: 'Bahan dan perawatan?', a: 'Semua produk dari bahan lokal. Cuci air dingin, jangan pakai pengering. Setrika suhu rendah untuk kanvas dan wol.' },
-  { q: 'Apakah ada toko fisik?', a: 'Belum. Kamijual langsung dari workshop di Bandung. Kalau mau lihat langsung, bisa janjian ke workshop.' },
-  { q: 'Bagaimana cara pesan custom order?', a: 'Hubungi kami lewat WhatsApp. Sampaikan kebutuhan, tim desainer akan merespons dalam 1-2 hari kerja.' },
+  { q: 'Berapa lama pengiriman?', a: '3-5 hari kerja (Jawa), 5-7 hari (luar Jawa). Dikirim dari Bandung.' },
+  { q: 'Bisa tukar ukuran?', a: 'Bisa, 7 hari setelah terima. Belum dicuci, tag terpasang. Ongkir tukar ditanggung pembeli.' },
+  { q: 'Bahan dan perawatan?', a: 'Semua bahan lokal. Cuci air dingin, jangan pengering. Setrika suhu rendah.' },
+  { q: 'Ada toko fisik?', a: 'Belum. Langsung dari workshop Bandung. Bisa janjian ke workshop untuk lihat langsung.' },
+  { q: 'Cara pesan custom order?', a: 'Hubungi WhatsApp. Tim desainer merespons 1-2 hari kerja.' },
 ]
 
 // ============================================================
@@ -261,25 +261,21 @@ function showToast(msg: string) {
         </div>
 
         <div class="erigo-hero__content" :class="{ 'erigo-hero__content--loaded': heroLoaded }">
-          <p class="erigo-eyebrow" :style="monoStyle">BARANG YANG DIRANCANG, BUKAN DIBUAT</p>
+          <p class="erigo-eyebrow" :style="monoStyle">DIRANCANG, BUKAN DIBUAT</p>
 
           <h1 :style="h1Style" class="erigo-h1 text-balance">
             <span class="erigo-h1__line">Erigo Goods.</span>
-            <span class="erigo-h1__line erigo-h1__line--sub">Barang sehari-hari dari Bandung.</span>
+            <span class="erigo-h1__line erigo-h1__line--sub">Objek yang tenang.</span>
           </h1>
 
-          <p class="erigo-lede">
-            Katun lokal, jahitan yang dipikirkan, harga yang masuk akal. Tidak lebih, tidak kurang.
-          </p>
+          <p class="erigo-lede">Katun lokal, jahitan dipikirkan, harga masuk akal.</p>
 
           <div class="erigo-cta">
             <a href="#produk" class="erigo-btn erigo-btn--primary">
               Lihat semua
               <UIcon name="i-lucide-arrow-down" class="w-4 h-4" />
             </a>
-            <button type="button" class="erigo-btn erigo-btn--ghost" @click="consultOpen = true">
-              Bicara dengan desainer
-            </button>
+            <button type="button" class="erigo-btn erigo-btn--ghost" @click="consultOpen = true">Konsultasi</button>
           </div>
         </div>
       </section>
@@ -298,7 +294,7 @@ function showToast(msg: string) {
       <section id="kategori" class="erigo-section erigo-categories">
         <div class="erigo-section-head">
           <p class="erigo-eyebrow" :style="monoStyle">01 / KATEGORI</p>
-          <h2 :style="h2Style" class="text-balance">Tiga kategori, <em>semua dari Bandung.</em></h2>
+          <h2 :style="h2Style" class="text-balance">Tiga kategori.</h2>
         </div>
 
         <div class="erigo-chips">
@@ -329,7 +325,7 @@ function showToast(msg: string) {
       <section id="produk" class="erigo-section erigo-products">
         <div class="erigo-section-head">
           <p class="erigo-eyebrow" :style="monoStyle">02 / PRODUK</p>
-          <h2 :style="h2Style" class="text-balance">Barang yang kami <em>pakai sendiri.</em></h2>
+          <h2 :style="h2Style" class="text-balance">Yang kami <em>pakai.</em></h2>
         </div>
 
         <div class="erigo-product-grid">
@@ -420,13 +416,13 @@ function showToast(msg: string) {
       <section id="testimoni" class="erigo-section erigo-testimonials">
         <div class="erigo-section-head">
           <p class="erigo-eyebrow" :style="monoStyle">03 / DARI PEMBELI</p>
-          <h2 :style="h2Style" class="text-balance">Yang mereka <em>rasakan</em> setelah pakai.</h2>
+          <h2 :style="h2Style" class="text-balance">Yang mereka <em>rasakan.</em></h2>
         </div>
 
         <div class="erigo-testimonial-grid">
           <blockquote class="erigo-testimonial">
             <p class="erigo-testimonial__text">
-              "Pesan tote kanvas dan selempang kulit. Pengiriman 4 hari, sampai sebelum puasa. Kualitas jahitan bagus, strap-nya tidak tipis. Saya pakai tiap hari ke kantor."
+              "Tote kanvas dan selempang kulit, sampai sebelum puasa. Jahitan bagus, strap tidak tipis. Pakai tiap hari ke kantor."
             </p>
             <footer class="erigo-testimonial__footer">
               <div>
@@ -438,7 +434,7 @@ function showToast(msg: string) {
 
           <blockquote class="erigo-testimonial">
             <p class="erigo-testimonial__text">
-              "Hoodie-nya tebal tapi breathable, tidak gerah. Saya beli tiga warna sekaligus setelah coba satu."
+              "Hoodie tebal tapi breathable. Beli tiga warna setelah coba satu."
             </p>
             <footer class="erigo-testimonial__footer">
               <div>
@@ -450,7 +446,7 @@ function showToast(msg: string) {
 
           <blockquote class="erigo-testimonial">
             <p class="erigo-testimonial__text">
-              "Detail kecil yang membuat barang ini terasa 'dirancang', bukan 'dibuat'. Klaim 'made in Indonesia' sering dilebih-lebihkan, tapi Erigo bener-bener."
+              "Detail kecil yang terasa 'dirancang', bukan 'dibuat'. Klaim 'made in Indonesia' sering dilebih-lebihkan, tapi Erigo bener-bener."
             </p>
             <footer class="erigo-testimonial__footer">
               <div>
@@ -468,7 +464,7 @@ function showToast(msg: string) {
       <section id="faq" class="erigo-section erigo-faq-section">
         <div class="erigo-section-head">
           <p class="erigo-eyebrow" :style="monoStyle">04 / PERTANYAAN</p>
-          <h2 :style="h2Style" class="text-balance">Yang sering <em>ditanya</em> sebelum beli.</h2>
+          <h2 :style="h2Style" class="text-balance">Yang sering <em>ditanya.</em></h2>
         </div>
 
         <ul class="erigo-faq">
@@ -513,7 +509,7 @@ function showToast(msg: string) {
       <TmplFooter
         brand-name="Erigo Goods"
         variant="signoff"
-        signoff="Barang yang dipikirkan, dari Bandung."
+        signoff="Objek yang tenang, dari Bandung."
         signature="Dibuat di Bandung"
         accent="var(--tmpl-accent)"
         bg="var(--tmpl-bg)"
@@ -558,8 +554,8 @@ function showToast(msg: string) {
           <button type="button" class="erigo-modal__close" @click="consultOpen = false" aria-label="Tutup">
             <UIcon name="i-lucide-x" class="w-4 h-4" />
           </button>
-          <h3 :style="h2Style" class="erigo-modal__title">Bicara dengan desainer</h3>
-          <p class="erigo-modal__sub">Sampaikan kebutuhan custom order, tim kami merespons dalam 1-2 hari kerja.</p>
+          <h3 :style="h2Style" class="erigo-modal__title">Konsultasi</h3>
+          <p class="erigo-modal__sub">Kebutuhan custom order, respons 1-2 hari kerja.</p>
 
           <TmplForm
             :fields="[
@@ -657,7 +653,7 @@ function showToast(msg: string) {
 .erigo-lede {
   font-size: clamp(1rem, 1.3vw, 1.15rem);
   line-height: 1.55;
-  max-width: 48ch;
+  max-width: 42ch;
   opacity: 0.75;
   margin: 0 0 2rem;
 }
@@ -706,7 +702,7 @@ function showToast(msg: string) {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8rem 1.5rem 4rem;
+  padding: 10rem 1.5rem 6rem;
   overflow: hidden;
 }
 .erigo-hero__3d {
@@ -719,7 +715,7 @@ function showToast(msg: string) {
   position: relative;
   z-index: 2;
   max-width: 50rem;
-  text-align: center;
+  text-align: left;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 600ms ease, transform 600ms ease;
@@ -728,24 +724,17 @@ function showToast(msg: string) {
   opacity: 1;
   transform: translateY(0);
 }
-.erigo-lede {
-  font-size: clamp(1rem, 1.3vw, 1.15rem);
-  line-height: 1.6;
-  max-width: 42ch;
-  margin: 0 auto 2rem;
-  opacity: 0.75;
-}
 
 /* === SECTIONS === */
 .erigo-section {
-  padding: 5rem 1.5rem;
+  padding: 6rem 1.5rem;
   max-width: 80rem;
   margin: 0 auto;
 }
 .erigo-section-head {
   max-width: 50rem;
   margin: 0 auto 3rem;
-  text-align: center;
+  text-align: left;
 }
 .erigo-section-head h2 {
   font-size: var(--tmpl-h2);
@@ -807,7 +796,7 @@ function showToast(msg: string) {
 /* === PRODUCT CARD === */
 .erigo-product-card {
   border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   background: var(--tmpl-surface);
   cursor: pointer;
@@ -815,7 +804,7 @@ function showToast(msg: string) {
 }
 .erigo-product-card:hover {
   border-color: color-mix(in srgb, currentColor 20%, transparent);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 0 8px 32px color-mix(in srgb, currentColor 6%, transparent);
 }
 .erigo-product-card__img {
@@ -929,7 +918,7 @@ function showToast(msg: string) {
   align-items: center;
   justify-content: center;
   border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
-  border-radius: 6px;
+  border-radius: 8px;
   background: transparent;
   color: inherit;
   font: inherit;
@@ -985,14 +974,14 @@ function showToast(msg: string) {
 .erigo-testimonial {
   padding: 2rem;
   border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--tmpl-surface);
   margin: 0;
 }
 .erigo-testimonial__text {
   font-size: 15px;
   line-height: 1.6;
-  margin: 0 0 1.25rem;
+  margin: 0 0 1rem;
   font-style: italic;
   opacity: 0.85;
 }
@@ -1084,7 +1073,7 @@ function showToast(msg: string) {
   background: var(--tmpl-bg);
   color: var(--tmpl-fg);
   border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 2rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
