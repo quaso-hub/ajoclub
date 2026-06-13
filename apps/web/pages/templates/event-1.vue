@@ -79,26 +79,26 @@ const scheduleGrid = computed(() => {
 const tiers = [
   {
     key: 'earlybird', name: 'Early Bird', price: 500000, priceLabel: 'Rp 500.000',
-    desc: 'Untuk 200 pendaftar pertama',
-    features: ['Akses semua hari (3 hari)', 'Makan siang + coffee break', 'T-shirt DevTalk 2026', 'Akses rekaman', 'Grup Telegram peserta'],
+    desc: '200 pendaftar pertama',
+    features: ['Akses 3 hari', 'Makan siang + coffee break', 'T-shirt', 'Akses rekaman', 'Grup Telegram'],
     spots: 200,
   },
   {
     key: 'regular', name: 'Regular', price: 1500000, priceLabel: 'Rp 1.500.000',
     desc: 'Mulai 1 Agustus',
-    features: ['Semua fitur Early Bird', 'Dinner networking malam pertama', 'Sticker pack terbatas', 'Diskon 20% untuk tiket tahun depan', 'Akses rekaman 90 hari'],
+    features: ['Semua Early Bird', 'Dinner networking hari 1', 'Sticker pack', 'Diskon 20% tiket tahun depan'],
     spots: 500,
   },
   {
     key: 'vip', name: 'VIP', price: 5000000, priceLabel: 'Rp 5.000.000',
-    desc: 'Untuk 50 pendaftar',
-    features: ['Semua fitur Regular', 'Kursi depan (baris 1-3)', '1-on-1 mentoring dengan 2 pembicara pilihan', 'Makan malam eksklusif dengan pembicara, hari kedua', 'Goodie bag sponsor'],
+    desc: '50 kursi',
+    features: ['Semua Regular', 'Kursi depan (baris 1-3)', '1-on-1 mentoring (2 pembicara)', 'Dinner eksklusif hari 2', 'Goodie bag sponsor'],
     spots: 50,
   },
   {
     key: 'student', name: 'Student', price: 250000, priceLabel: 'Rp 250.000',
     desc: 'Perlu KTM',
-    features: ['Akses semua hari', 'Makan siang', 'Grup mahasiswa', 'Boleh bawa laptop untuk ikut workshop', 'Tidak dapat T-shirt dan goodie bag'],
+    features: ['Akses 3 hari', 'Makan siang', 'Grup mahasiswa', 'Workshop laptop-friendly'],
     spots: 300,
   },
 ]
@@ -147,62 +147,62 @@ const sponsorTiers = [
   {
     tier: 'Platinum', slot: 3,
     sponsors: [
-      { name: 'GoTo', desc: 'Grup teknologi terbesar di Indonesia. Gojek + Tokopedia.' },
-      { name: 'Tokopedia', desc: 'Marketplace untuk 12 juta merchant di seluruh Indonesia.' },
-      { name: 'Bank Mandiri', desc: 'Bank terbesar di Indonesia berdasarkan aset.' },
+      { name: 'GoTo', desc: 'Gojek + Tokopedia' },
+      { name: 'Tokopedia', desc: '12 juta merchant' },
+      { name: 'Bank Mandiri', desc: 'Bank BUMN terbesar' },
     ],
   },
   {
     tier: 'Gold', slot: 5,
     sponsors: [
-      { name: 'Bukalapak', desc: 'Platform e-commerce untuk UMKM Indonesia.' },
-      { name: 'DANA', desc: 'Dompet digital untuk 130 juta pengguna di Indonesia.' },
-      { name: 'Traveloka', desc: 'Platform travel dan lifestyle terbesar di Asia Tenggara.' },
-      { name: 'Mekari', desc: 'SaaS HR, payroll, dan akuntansi untuk bisnis Indonesia.' },
-      { name: 'Xendit', desc: 'Payment gateway untuk 300.000+ merchant di Asia Tenggara.' },
+      { name: 'Bukalapak', desc: 'E-commerce UMKM' },
+      { name: 'DANA', desc: '130 juta pengguna' },
+      { name: 'Traveloka', desc: 'Travel & lifestyle' },
+      { name: 'Mekari', desc: 'SaaS HR & payroll' },
+      { name: 'Xendit', desc: '300K+ merchant' },
     ],
   },
   {
     tier: 'Silver', slot: 8,
     sponsors: [
-      { name: 'Shopee ID', desc: 'E-commerce dengan pengiriman gratis ke seluruh Indonesia.' },
-      { name: 'Privy', desc: 'Digital signature dan e-KYC untuk 40 juta pengguna.' },
-      { name: 'Nodeflux', desc: 'AI vision untuk smart city dan keamanan.' },
-      { name: 'Glints', desc: 'Platform karir dan rekrutmen untuk talenta Asia Tenggara.' },
-      { name: 'Akulaku', desc: 'Fintech lending dan e-commerce untuk underbanked.' },
-      { name: 'Bibit', desc: 'Robo-advisor investasi reksa dana untuk generasi muda.' },
-      { name: 'Modalku', desc: 'P2P lending untuk UMKM di Asia Tenggara.' },
-      { name: 'KoinWorks', desc: 'Platform fintech untuk pinjaman dan investasi.' },
+      { name: 'Shopee ID', desc: 'Gratis ongkir' },
+      { name: 'Privy', desc: 'e-KYC & digital signature' },
+      { name: 'Nodeflux', desc: 'AI vision' },
+      { name: 'Glints', desc: 'Rekrutmen tech' },
+      { name: 'Akulaku', desc: 'Fintech lending' },
+      { name: 'Bibit', desc: 'Robo-advisor reksa dana' },
+      { name: 'Modalku', desc: 'P2P lending UMKM' },
+      { name: 'KoinWorks', desc: 'Fintech pinjaman' },
     ],
   },
   {
     tier: 'Bronze', slot: 12,
     sponsors: [
-      { name: 'Jenius', desc: 'Bank digital dari BTPN untuk gaya hidup modern.' },
-      { name: 'Blu', desc: 'Bank digital dari BCA untuk generasi digital.' },
-      { name: 'Jago', desc: 'Bank digital berbasis teknologi dari Bank Jago.' },
-      { name: 'Flip', desc: 'Transfer uang antar bank tanpa biaya.' },
-      { name: 'Dana', desc: 'Dompet digital untuk pembayaran sehari-hari.' },
-      { name: 'BibitPlus', desc: 'Platform investasi untuk pemula.' },
-      { name: 'RuangGuru', desc: 'Platform edukasi terbesar di Indonesia.' },
-      { name: 'Sekolah.mu', desc: 'Platform belajar online untuk siswa Indonesia.' },
-      { name: 'CoLearn', desc: 'Bimbel online untuk persiapan ujian masuk PTN.' },
-      { name: 'Pahamify', desc: 'Aplikasi belajar untuk siswa SMA.' },
-      { name: 'Kalananti', desc: 'Platform pembelajaran coding untuk anak.' },
-      { name: 'Cakap', desc: 'Platform belajar bahasa asing online.' },
+      { name: 'Jenius', desc: 'Bank digital BTPN' },
+      { name: 'Blu', desc: 'Bank digital BCA' },
+      { name: 'Jago', desc: 'Bank digital' },
+      { name: 'Flip', desc: 'Transfer gratis' },
+      { name: 'Dana', desc: 'Dompet digital' },
+      { name: 'BibitPlus', desc: 'Investasi pemula' },
+      { name: 'RuangGuru', desc: 'Edukasi online' },
+      { name: 'Sekolah.mu', desc: 'Belajar online' },
+      { name: 'CoLearn', desc: 'Bimbel masuk PTN' },
+      { name: 'Pahamify', desc: 'Belajar SMA' },
+      { name: 'Kalananti', desc: 'Coding untuk anak' },
+      { name: 'Cakap', desc: 'Bahasa asing online' },
     ],
   },
   {
     tier: 'Media Partner', slot: 8,
     sponsors: [
-      { name: 'DailySocial.id', desc: 'Media teknologi dan startup Indonesia sejak 2008.' },
-      { name: 'Tech in Asia ID', desc: 'Komunitas dan media tech terbesar di Asia.' },
-      { name: 'Tek.id', desc: 'Portal berita teknologi terkini.' },
-      { name: 'Dailytek.id', desc: 'Berita gadget, review, dan tips teknologi.' },
-      { name: 'kumparanTECH', desc: 'Kanal teknologi dari kumparan.' },
-      { name: 'IDN Times Tech', desc: 'Berita teknologi untuk generasi muda.' },
-      { name: 'Vice ID', desc: 'Media digital untuk budaya dan teknologi.' },
-      { name: 'Hyperlink ID', desc: 'Podcast dan konten teknologi Indonesia.' },
+      { name: 'DailySocial.id', desc: 'Tech & startup' },
+      { name: 'Tech in Asia ID', desc: 'Media tech Asia' },
+      { name: 'Tek.id', desc: 'Berita teknologi' },
+      { name: 'Dailytek.id', desc: 'Gadget & review' },
+      { name: 'kumparanTECH', desc: 'Teknologi kumparan' },
+      { name: 'IDN Times Tech', desc: 'Tech Gen Z' },
+      { name: 'Vice ID', desc: 'Budaya & tech' },
+      { name: 'Hyperlink ID', desc: 'Podcast tech' },
     ],
   },
 ]
@@ -553,7 +553,7 @@ const googleCalUrl = computed(() => {
         <div class="devtalk-section__head">
           <p class="devtalk-eyebrow" :style="monoStyle">MITRA</p>
           <h2 :style="h2Style" class="text-balance">
-            Terima kasih kepada perusahaan yang mendukung DevTalk 2026.
+            Terima kasih kepada mitra DevTalk 2026.
           </h2>
         </div>
 
@@ -617,7 +617,7 @@ const googleCalUrl = computed(() => {
         <!-- Sponsor CTA -->
         <div class="devtalk-sponsor-cta">
           <h3 :style="h2Style">Ingin jadi sponsor?</h3>
-          <p>Hubungi kami untuk paket sponsorship dan manfaat yang didapat.</p>
+          <p>Hubungi kami untuk paket sponsorship.</p>
           <TmplForm
             :fields="[
               { key: 'company', label: 'Nama perusahaan', required: true },
@@ -797,7 +797,7 @@ const googleCalUrl = computed(() => {
 
 /* === COUNTDOWN === */
 .devtalk-countdown-section {
-  padding: 4rem 1.5rem;
+  padding: 5rem 1.5rem;
   display: flex;
   justify-content: center;
   border-top: 1px solid color-mix(in oklch, currentColor 8%, transparent);
@@ -843,7 +843,7 @@ const googleCalUrl = computed(() => {
   gap: 1px;
   background: color-mix(in oklch, currentColor 8%, transparent);
   border: 1px solid color-mix(in oklch, currentColor 8%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 .devtalk-speaker-card {
@@ -912,7 +912,7 @@ const googleCalUrl = computed(() => {
   display: flex;
   gap: 0;
   border: 1px solid color-mix(in oklch, currentColor 12%, transparent);
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   margin-bottom: 1.5rem;
 }
@@ -971,7 +971,7 @@ const googleCalUrl = computed(() => {
 
 .devtalk-schedule-grid {
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 .devtalk-schedule-header {
@@ -1069,7 +1069,7 @@ const googleCalUrl = computed(() => {
   margin-top: 1rem;
   background: var(--tmpl-surface);
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 .devtalk-detail-panel__inner {
@@ -1129,7 +1129,7 @@ const googleCalUrl = computed(() => {
   position: relative;
   padding: 1.75rem 1.5rem;
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--tmpl-surface);
   cursor: pointer;
   transition: all 200ms ease;
@@ -1240,7 +1240,7 @@ const googleCalUrl = computed(() => {
 /* === CALENDAR === */
 .devtalk-calendar-section {
   border-bottom: 1px solid color-mix(in oklch, currentColor 8%, transparent);
-  padding: 3rem 1.5rem;
+  padding: 5rem 1.5rem;
 }
 .devtalk-calendar {
   max-width: 40rem;
@@ -1366,7 +1366,7 @@ const googleCalUrl = computed(() => {
   max-width: 40rem;
   margin: 0 auto;
   text-align: center;
-  padding: 3rem 0;
+  padding: 5rem 0 0;
   border-top: 1px solid color-mix(in oklch, currentColor 8%, transparent);
 }
 .devtalk-sponsor-cta h3 {

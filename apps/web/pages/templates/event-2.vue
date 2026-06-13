@@ -110,8 +110,8 @@ const tiers = [
     name: 'Early Bird',
     price: 'Rp 350.000',
     priceNum: 350000,
-    desc: 'Akses 1 hari. Pilih hari saat checkout.',
-    perks: ['1 hari akses semua panggung', 'Gelang festival', 'Peta venue digital'],
+    desc: 'Akses 1 hari.',
+    perks: ['1 hari semua panggung', 'Gelang festival', 'Peta digital'],
     remaining: 420,
     tag: 'Hampir habis',
   },
@@ -120,8 +120,8 @@ const tiers = [
     name: 'Regular',
     price: 'Rp 750.000',
     priceNum: 750000,
-    desc: 'Pass 3 hari. Semua panggung, semua hari.',
-    perks: ['3 hari akses semua panggung', 'Gelang festival', 'Peta venue digital', 'Akses food court'],
+    desc: 'Pass 3 hari. Semua panggung.',
+    perks: ['3 hari semua panggung', 'Gelang festival', 'Peta digital', 'Food court'],
     remaining: 1800,
     tag: null,
   },
@@ -130,8 +130,8 @@ const tiers = [
     name: 'VIP',
     price: 'Rp 2.500.000',
     priceNum: 2500000,
-    desc: 'Pengalaman penuh. Area khusus di depan panggung.',
-    perks: ['Semua yang di Regular', 'VIP viewing area depan panggung', 'Fast-track entry', 'Merch eksklusif', 'Lounge ber-AC'],
+    desc: 'Area depan panggung + fast-track.',
+    perks: ['Semua Regular', 'VIP viewing area', 'Fast-track entry', 'Merch eksklusif', 'Lounge ber-AC'],
     remaining: 340,
     tag: 'Favorit',
   },
@@ -140,8 +140,8 @@ const tiers = [
     name: 'Backstage',
     price: 'Rp 5.000.000',
     priceNum: 5000000,
-    desc: 'Di balik layar. Bertemu artis. Tur backstage.',
-    perks: ['Semua yang di VIP', 'Meet & greet artis', 'Tur backstage', 'Makan & minum sepuasnya', 'Poster signed edisi terbatas'],
+    desc: 'Meet & greet. Tur backstage.',
+    perks: ['Semua VIP', 'Meet & greet artis', 'Tur backstage', 'F&B sepuasnya', 'Poster signed'],
     remaining: 50,
     tag: 'Sangat terbatas',
   },
@@ -151,12 +151,12 @@ const tiers = [
 // FAQ
 // ============================================================
 const faqs = [
-  { q: 'Apakah tiket bisa dipindahtangankan?', a: 'Bisa. Kamu bisa transfer tiket ke nama lain melalui dashboard pembelian paling lambat 3 hari sebelum acara. Nama pemegang tiket harus sesuai KTP saat masuk.' },
-  { q: 'Anak di bawah umur boleh masuk?', a: 'Pengunjung di bawah 12 tahun harus didampingi orang tua. Anak di bawah 5 tahun gratis tanpa tiket. Remaja 12-17 tahun wajib beli tiket dan membawa surat izin orang tua.' },
-  { q: 'Apakah ada parkir?', a: 'Tersedia parkir motor dan mobil di area GWK. Parkir motor Rp 15.000, mobil Rp 30.000 per hari. Kami sarankan naik shuttle dari titik kumpul di Kuta dan Seminyak.' },
-  { q: 'Boleh bawa kamera?', a: 'Kamera pocket dan handphone boleh. Kamera DSLR/mirrorless dengan lensa lepas tidak diperbolehkan tanpa akreditasi media. GoPro dan action cam boleh.' },
-  { q: 'Bagaimana jika hujan?', a: 'NadaFest tetap jalan hujan atau cerah. Semua panggung punya atap. Bawa jas hujan (dilarang bawa payung buka). Ada shelter tersebar di venue.' },
-  { q: 'Apakah ada makanan halal?', a: 'Semua vendor makanan diwajibkan bersertifikat halal atau menyajikan makanan non-babi. Ada area makan khusus vegetarian dan vegan.' },
+  { q: 'Tiket bisa dipindahtangankan?', a: 'Bisa. Transfer via dashboard pembelian maksimal 3 hari sebelum acara. Nama harus sesuai KTP.' },
+  { q: 'Anak di bawah umur?', a: 'Di bawah 12 tahun wajib didampingi orang tua. Di bawah 5 tahun gratis. 12–17 tahun wajib tiket + surat izin.' },
+  { q: 'Parkir?', a: 'Motor Rp 15.000, mobil Rp 30.000/hari. Shuttle tersedia dari Kuta & Seminyak.' },
+  { q: 'Boleh bawa kamera?', a: 'Pocket & HP boleh. DSLR/mirrorless butuh akreditasi media. GoPro boleh.' },
+  { q: 'Kalau hujan?', a: 'Tetap jalan. Semua panggung beratap. Jas hujan boleh, payung dilarang.' },
+  { q: 'Makanan halal?', a: 'Semua vendor wajib halal atau non-babi. Ada area vegetarian & vegan.' },
 ]
 
 // ============================================================
@@ -265,8 +265,8 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
           <p class="text-xl md:text-2xl font-light tracking-tight mb-2" style="color: var(--tmpl-fg); font-family: var(--tmpl-font-display);">
             The Sound of the Archipelago
           </p>
-          <p class="text-sm mb-10 max-w-lg mx-auto leading-relaxed" style="color: var(--tmpl-muted);">
-            3 malam. 4 panggung. 16 artis. Satu suara dari seluruh Nusantara.
+          <p class="text-sm mb-10 max-w-md mx-auto leading-relaxed italic" style="color: var(--tmpl-muted);">
+            Musik yang tidak bisa dideskripsikan.
           </p>
 
           <!-- CTA -->
@@ -332,8 +332,8 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
         <!-- Header -->
         <p class="text-[11px] tracking-[0.35em] uppercase mb-3" style="color: var(--tmpl-muted); font-family: var(--tmpl-font-mono);">Lineup</p>
         <h2 :style="h2Style" class="mb-4" style="color: var(--tmpl-fg);">Siapa yang main.</h2>
-        <p class="text-sm mb-10 max-w-lg" style="color: var(--tmpl-muted);">
-          16 artis dari seluruh Indonesia. Dari folk sampai metalcore. Dari singer-songwriter sampai DJ.
+        <p class="text-sm mb-10 max-w-md" style="color: var(--tmpl-muted);">
+          16 artis. Folk ke metalcore. Singer-songwriter ke DJ.
         </p>
 
         <!-- Night tabs -->
@@ -403,7 +403,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
         <p class="text-[11px] tracking-[0.35em] uppercase mb-3" style="color: var(--tmpl-muted); font-family: var(--tmpl-font-mono);">Jadwal</p>
         <h2 :style="h2Style" class="mb-4" style="color: var(--tmpl-fg);">Tiga malam, empat panggung.</h2>
         <p class="text-sm mb-10 max-w-lg" style="color: var(--tmpl-muted);">
-          Pilih malam, lihat siapa main di jam berapa. Gerbang buka pukul 16.00 WITA.
+          Pilih malam. Gerbang buka 16.00 WITA.
         </p>
 
         <!-- Night selector -->
@@ -482,8 +482,8 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
       <div class="max-w-6xl mx-auto px-6">
         <p class="text-[11px] tracking-[0.35em] uppercase mb-3" style="color: var(--tmpl-muted); font-family: var(--tmpl-font-mono);">Tiket</p>
         <h2 :style="h2Style" class="mb-4" style="color: var(--tmpl-fg);">Pilih tier kamu.</h2>
-        <p class="text-sm mb-12 max-w-lg" style="color: var(--tmpl-muted);">
-          Semua tier akses semua panggung. Yang beda: pengalamannya.
+        <p class="text-sm mb-10 max-w-lg" style="color: var(--tmpl-muted);">
+          Semua tier akses semua panggung. Yang beda pengalamannya.
         </p>
 
         <div class="grid md:grid-cols-2 gap-4">
@@ -491,7 +491,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
             v-for="tier in tiers"
             :key="tier.id"
             @click="selectedTier = tier.id"
-            class="relative rounded-2xl p-6 md:p-8 cursor-pointer transition-all"
+            class="relative rounded-lg p-6 md:p-8 cursor-pointer transition-all"
             :style="selectedTier === tier.id
               ? { background: 'color-mix(in srgb, var(--tmpl-accent) 8%, transparent)', border: '2px solid color-mix(in srgb, var(--tmpl-accent) 40%, transparent)', transform: 'scale(1.01)' }
               : { background: 'var(--tmpl-surface)', border: '1px solid color-mix(in srgb, var(--tmpl-fg) 10%, transparent)' }
@@ -551,13 +551,13 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
       <div class="max-w-6xl mx-auto px-6">
         <p class="text-[11px] tracking-[0.35em] uppercase mb-3" style="color: var(--tmpl-muted); font-family: var(--tmpl-font-mono);">Venue</p>
         <h2 :style="h2Style" class="mb-4" style="color: var(--tmpl-fg);">GWK Cultural Park, Bali.</h2>
-        <p class="text-sm mb-12 max-w-xl" style="color: var(--tmpl-muted);">
-          Garuda Wisnu Kencana. Tanah seluas 60 hektar di Jimbaran, Bali. 4 panggung tersebar di area terbuka dengan pemandangan patung GWK setinggi 121 meter.
+        <p class="text-sm mb-10 max-w-xl" style="color: var(--tmpl-muted);">
+          60 hektar di Jimbaran. 4 panggung terbuka dengan patung GWK setinggi 121m.
         </p>
 
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid md:grid-cols-[3fr_2fr] gap-8">
           <!-- Map placeholder -->
-          <div class="aspect-[4/3] rounded-2xl overflow-hidden" style="background: color-mix(in srgb, var(--tmpl-fg) 5%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 10%, transparent);">
+          <div class="aspect-[4/3] rounded-lg overflow-hidden" style="background: color-mix(in srgb, var(--tmpl-fg) 5%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 10%, transparent);">
             <div class="w-full h-full flex items-center justify-center">
               <div class="text-center">
                 <svg class="w-12 h-12 mx-auto mb-3 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
@@ -572,7 +572,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
             <div
               v-for="stage in stages"
               :key="stage"
-              class="flex items-start gap-4 p-4 rounded-xl"
+              class="flex items-start gap-4 p-4 rounded-lg"
               style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);"
             >
               <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xs font-bold shrink-0" style="background: color-mix(in srgb, var(--tmpl-accent) 15%, transparent); color: var(--tmpl-accent); font-family: var(--tmpl-font-mono);">
@@ -581,10 +581,10 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
               <div>
                 <p class="text-sm font-semibold" style="color: var(--tmpl-fg);">{{ stage }}</p>
                 <p class="text-xs mt-0.5" style="color: var(--tmpl-muted);">
-                  <template v-if="stage === 'Panggung Utama'">Kapasitas 4.500. Headliner dan penampil utama.</template>
-                  <template v-else-if="stage === 'Panggung Kecil'">Kapasitas 2.000. Indie dan emerging acts.</template>
-                  <template v-else-if="stage === 'DJ Booth'">Kapasitas 1.200. Electronic, disco, dan dance.</template>
-                  <template v-else>Kapasitas 800. Intimate, akustik, singer-songwriter.</template>
+                  <template v-if="stage === 'Panggung Utama'">4.500 kapasitas. Headliner.</template>
+                  <template v-else-if="stage === 'Panggung Kecil'">2.000 kapasitas. Indie & emerging.</template>
+                  <template v-else-if="stage === 'DJ Booth'">1.200 kapasitas. Electronic & dance.</template>
+                  <template v-else>800 kapasitas. Intimate & akustik.</template>
                 </p>
               </div>
             </div>
@@ -593,19 +593,19 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
 
         <!-- Practical info -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
-          <div class="p-4 rounded-xl text-center" style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
+          <div class="p-4 rounded-lg text-center" style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
             <p class="text-2xl font-bold" style="color: var(--tmpl-accent); font-family: var(--tmpl-font-mono);">16.00</p>
             <p class="text-[10px] tracking-[0.15em] uppercase mt-1" style="color: var(--tmpl-muted);">Gates buka (WITA)</p>
           </div>
-          <div class="p-4 rounded-xl text-center" style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
+          <div class="p-4 rounded-lg text-center" style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
             <p class="text-2xl font-bold" style="color: var(--tmpl-accent); font-family: var(--tmpl-font-mono);">02.00</p>
             <p class="text-[10px] tracking-[0.15em] uppercase mt-1" style="color: var(--tmpl-muted);">Gates tutup (WITA)</p>
           </div>
-          <div class="p-4 rounded-xl text-center" style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
+          <div class="p-4 rounded-lg text-center" style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
             <p class="text-2xl font-bold" style="color: var(--tmpl-accent); font-family: var(--tmpl-font-mono);">8.500</p>
             <p class="text-[10px] tracking-[0.15em] uppercase mt-1" style="color: var(--tmpl-muted);">Kapasitas per malam</p>
           </div>
-          <div class="p-4 rounded-xl text-center" style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
+          <div class="p-4 rounded-lg text-center" style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
             <p class="text-2xl font-bold" style="color: var(--tmpl-accent); font-family: var(--tmpl-font-mono);">25.500</p>
             <p class="text-[10px] tracking-[0.15em] uppercase mt-1" style="color: var(--tmpl-muted);">Total 3 hari</p>
           </div>
@@ -619,7 +619,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
     <section class="py-24 md:py-32 border-t" style="border-color: color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
       <div class="max-w-6xl mx-auto px-6 text-center">
         <p class="text-[11px] tracking-[0.35em] uppercase mb-3" style="color: var(--tmpl-muted); font-family: var(--tmpl-font-mono);">Didukung oleh</p>
-        <h2 :style="h2Style" class="mb-12" style="color: var(--tmpl-fg);">Partner kami.</h2>
+        <h2 :style="h2Style" class="mb-10" style="color: var(--tmpl-fg);">Partner kami.</h2>
 
         <!-- Platinum -->
         <p class="text-[10px] tracking-[0.25em] uppercase mb-4 font-semibold" style="color: var(--tmpl-accent);">Platinum</p>
@@ -627,7 +627,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
           <div
             v-for="s in sponsors.platinum"
             :key="s"
-            class="px-8 py-4 rounded-xl text-lg font-bold tracking-tight transition-all hover:scale-105"
+            class="px-8 py-4 rounded-lg text-lg font-bold tracking-tight transition-all hover:scale-105"
             style="background: color-mix(in srgb, var(--tmpl-fg) 6%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 10%, transparent); color: var(--tmpl-fg);"
           >
             {{ s }}
@@ -668,13 +668,13 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
     <section id="faq" class="py-24 md:py-32 border-t" style="border-color: color-mix(in srgb, var(--tmpl-fg) 8%, transparent); background: var(--tmpl-surface);">
       <div class="max-w-3xl mx-auto px-6">
         <p class="text-[11px] tracking-[0.35em] uppercase mb-3" style="color: var(--tmpl-muted); font-family: var(--tmpl-font-mono);">FAQ</p>
-        <h2 :style="h2Style" class="mb-12" style="color: var(--tmpl-fg);">Pertanyaan yang sering ditanya.</h2>
+        <h2 :style="h2Style" class="mb-10" style="color: var(--tmpl-fg);">Pertanyaan umum.</h2>
 
         <div class="space-y-2">
           <div
             v-for="(faq, i) in faqs"
             :key="i"
-            class="rounded-xl overflow-hidden transition-colors"
+            class="rounded-lg overflow-hidden transition-colors"
             style="border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);"
             :style="openFaq === i ? { background: 'color-mix(in srgb, var(--tmpl-fg) 4%, transparent)' } : {}"
           >
@@ -721,7 +721,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
           <div>
             <p class="text-2xl font-bold mb-3" style="font-family: var(--tmpl-font-display); color: var(--tmpl-fg);">NadaFest</p>
             <p class="text-sm leading-relaxed" style="color: var(--tmpl-muted);">
-              The Sound of the Archipelago. Sebuah festival musik independen Indonesia di GWK Cultural Park, Bali.
+              Musik yang tidak bisa dideskripsikan. GWK Cultural Park, Bali.
             </p>
           </div>
 

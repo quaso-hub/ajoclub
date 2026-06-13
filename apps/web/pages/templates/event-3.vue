@@ -49,22 +49,22 @@ const days = [
 const tracks = ['semua', 'Desain', 'Teknologi', 'Bisnis']
 
 const speakers = [
-  { name: 'Pandu C. Sukarya', role: 'Kurator Utama', company: 'Museum MACAN', talk: 'Material sebagai memori: 10 tahun ke depan desain Indonesia', day: 1, track: 'Desain' },
-  { name: 'Radhiah Khalik', role: 'Desainer Tipografi', company: 'Independen, Malaysia', talk: 'Tipe yang melawan: tipografi di bawah tekanan', day: 1, track: 'Desain' },
-  { name: 'Irwan Ahmett', role: 'Seniman', company: 'Taring Padi', talk: 'Banner dan barikade: seni sebagai protes, 25 tahun', day: 1, track: 'Desain' },
-  { name: 'Riri Rengganis', role: 'Arsitek Interior', company: 'Studio Riri', talk: 'Mendesain museum di gedung heritage', day: 1, track: 'Teknologi' },
-  { name: 'Rio Dewantara', role: 'UX Lead', company: 'independust.id', talk: 'Miliaran layar: UX mobile Indonesia', day: 2, track: 'Teknologi' },
+  { name: 'Pandu C. Sukarya', role: 'Kurator Utama', company: 'Museum MACAN', talk: 'Material sebagai memori', day: 1, track: 'Desain' },
+  { name: 'Radhiah Khalik', role: 'Desainer Tipografi', company: 'Independen, Malaysia', talk: 'Tipografi di bawah tekanan', day: 1, track: 'Desain' },
+  { name: 'Irwan Ahmett', role: 'Seniman', company: 'Taring Padi', talk: 'Seni sebagai protes, 25 tahun', day: 1, track: 'Desain' },
+  { name: 'Riri Rengganis', role: 'Arsitek Interior', company: 'Studio Riri', talk: 'Museum di gedung heritage', day: 1, track: 'Teknologi' },
+  { name: 'Rio Dewantara', role: 'UX Lead', company: 'independust.id', talk: 'UX mobile Indonesia', day: 2, track: 'Teknologi' },
   { name: 'Erika Karunia', role: 'Type Designer', company: 'Beetalker Studio', talk: 'Variable fonts untuk Bahasa Indonesia', day: 2, track: 'Desain' },
-  { name: 'Wicaksono Hendro', role: 'Editorial Designer', company: 'Halaman Belakang', talk: 'Desain editorial 2026: apa yang masih penting', day: 2, track: 'Desain' },
+  { name: 'Wicaksono Hendro', role: 'Editorial Designer', company: 'Halaman Belakang', talk: 'Editorial 2026', day: 2, track: 'Desain' },
   { name: 'At-Sunrise', role: 'Generative Artist', company: 'Tokyo, Jepang', talk: 'Poster generatif untuk musik ambient', day: 2, track: 'Teknologi' },
-  { name: 'Arief Budiman', role: 'Seniman Instalasi', company: 'Studio Antaran', talk: 'Instalasi: dari galeri ke ruang publik', day: 3, track: 'Desain' },
-  { name: 'Monita Soemantri', role: 'Desainer Budaya', company: 'Independen', talk: 'Desain dan adat: sistem desain 1000 tahun', day: 3, track: 'Bisnis' },
-  { name: 'Gilang Widya Pratama', role: 'Direktur Kreatif', company: 'RuangRupa', talk: 'Kolektif seni Indonesia: retrospektif 25 tahun', day: 3, track: 'Bisnis' },
+  { name: 'Arief Budiman', role: 'Seniman Instalasi', company: 'Studio Antaran', talk: 'Dari galeri ke ruang publik', day: 3, track: 'Desain' },
+  { name: 'Monita Soemantri', role: 'Desainer Budaya', company: 'Independen', talk: 'Sistem desain 1000 tahun', day: 3, track: 'Bisnis' },
+  { name: 'Gilang Widya Pratama', role: 'Direktur Kreatif', company: 'RuangRupa', talk: 'Retrospektif kolektif seni', day: 3, track: 'Bisnis' },
   { name: 'Narenda Dewanata', role: 'Brand Strategist', company: 'Versa Studio', talk: 'Merek Indonesia yang tidak malu jadi lokal', day: 3, track: 'Bisnis' },
-  { name: 'M. Irfan Ramli', role: 'Type Designer', company: 'Studiofu', talk: 'Tipografi bencana: visual Gunung Bromo', day: 4, track: 'Desain' },
+  { name: 'M. Irfan Ramli', role: 'Type Designer', company: 'Studiofu', talk: 'Tipografi bencana: Gunung Bromo', day: 4, track: 'Desain' },
   { name: 'Octaviani Pratama', role: 'UX Researcher', company: 'Independen, Sydney', talk: 'Desain untuk Asia Tenggara multibahasa', day: 4, track: 'Teknologi' },
-  { name: 'Luthfi Rinaldi', role: 'Motion Designer', company: 'Videokid', talk: 'Kenapa motion design Indonesia terlihat seperti itu', day: 4, track: 'Teknologi' },
-  { name: 'Saras Dewi', role: 'Product Designer', company: 'GoTo Financial', talk: 'Mendesain untuk 50 juta pengguna pertama', day: 4, track: 'Bisnis' },
+  { name: 'Luthfi Rinaldi', role: 'Motion Designer', company: 'Videokid', talk: 'Motion design Indonesia', day: 4, track: 'Teknologi' },
+  { name: 'Saras Dewi', role: 'Product Designer', company: 'GoTo Financial', talk: '50 juta pengguna pertama', day: 4, track: 'Bisnis' },
 ]
 
 const filteredSpeakers = computed(() => {
@@ -136,9 +136,9 @@ const faqs = [
   { q: 'Apakah ForumID cocok untuk mahasiswa?', a: 'Ya. ForumID terbuka untuk semua level, dari mahasiswa sampai praktisi senior. Tiket Desainer mencakup akses penuh ke semua talk dan pameran.' },
   { q: 'Bisa beli tiket di tempat?', a: 'Tidak. Semua tiket dijual online sampai habis. Kami tidak menjual tiket di lokasi acara.' },
   { q: 'Apakah ada diskon grup?', a: 'Tiket Studio sudah termasuk 3 orang. Tiket Korporat mencakup 5 orang. Untuk rombongan lebih besar, hubungi kami langsung.' },
-  { q: 'Bagaimana cara ke Museum MACAN?', a: 'Museum MACAN di Kembangan, Jakarta Barat. Bisa dicapai dengan MRT (stasiun terdekat: Istora) lalu ojek online, atau langsung naik Transjakarta.' },
+  { q: 'Bagaimana cara ke Museum MACAN?', a: 'Kembangan, Jakarta Barat. MRT ke Istora lalu ojek online, atau Transjakarta langsung.' },
   { q: 'Apakah acara ini bilingual?', a: 'Semua talk utama dalam Bahasa Indonesia. Beberapa talk tamu internasional menggunakan bahasa Inggris dengan subtitle.' },
-  { q: 'Bolehkah merekam sesi talk?', a: 'Tidak. Semua sesi direkam oleh tim ForumID dan akan tersedia 2 minggu setelah acara untuk peserta.' },
+  { q: 'Bolehkah merekam sesi talk?', a: 'Tidak. Semua sesi direkam tim ForumID dan tersedia 2 minggu setelah acara.' },
 ]
 
 const openFaq = ref<number | null>(null)
@@ -236,11 +236,11 @@ const openFaq = ref<number | null>(null)
               </h2>
 
               <p class="max-w-lg mb-4" :style="{ color: muted }">
-                ForumID edisi kedelapan. 64 desainer dari Indonesia dan Asia Tenggara. 4 hari talk, workshop, pameran, dan studio visit. Museum MACAN + Pos Bloc, Jakarta.
+                64 desainer. 4 hari. Museum MACAN + Pos Bloc, Jakarta.
               </p>
 
-              <p class="text-sm mb-10" :style="{ color: muted, fontFamily: typo.mono }">
-                Tema tahun ini: <strong :style="{ color: accent }">Material</strong> &mdash; raw material turn dalam seni kontemporer Indonesia
+              <p class="max-w-md mb-10" :style="{ color: fg, fontWeight: 500, fontStyle: 'italic', fontFamily: typo.display }">
+                Desain bukan hanya visual. Desain adalah keputusan.
               </p>
 
               <div class="flex flex-col sm:flex-row gap-3">
@@ -265,7 +265,7 @@ const openFaq = ref<number | null>(null)
           <!-- Right: year hologram placeholder + archive strip -->
           <div class="md:col-span-5 hidden md:flex flex-col items-center justify-center">
             <div
-              class="w-full aspect-square rounded-2xl flex items-center justify-center relative"
+              class="w-full aspect-square rounded-lg flex items-center justify-center relative"
               :style="{ background: surface }"
             >
               <!-- 3D year hologram placeholder -->
@@ -321,7 +321,7 @@ const openFaq = ref<number | null>(null)
           </div>
         </div>
         <p class="mb-10" :style="{ color: muted, maxWidth: '36rem' }">
-          Desainer, tipografer, seniman, dan strategist dari seluruh Indonesia dan Asia Tenggara.
+          Desainer, tipografer, seniman, dan strategist dari Indonesia dan Asia Tenggara.
         </p>
 
         <!-- Day filter pills -->
@@ -362,9 +362,10 @@ const openFaq = ref<number | null>(null)
         <!-- Speaker grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[1px]" :style="{ background: border }">
           <article
-            v-for="s in filteredSpeakers"
+            v-for="(s, si) in filteredSpeakers"
             :key="s.name"
             class="group p-6 transition-colors duration-200"
+            :class="{ 'sm:col-span-2 lg:col-span-2': si === 0 }"
             :style="{ background: surface }"
           >
             <!-- B&W portrait placeholder -->
@@ -403,7 +404,7 @@ const openFaq = ref<number | null>(null)
           <button
             v-for="d in days"
             :key="d.num"
-            class="flex-1 px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer text-center"
+            class="flex-1 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer text-center"
             :style="{
               background: activeDay === d.num ? accent : 'transparent',
               color: activeDay === d.num ? '#fff' : muted,
@@ -483,11 +484,11 @@ const openFaq = ref<number | null>(null)
           Semua tiket mencakup akses 4 hari, makan siang, dan sertifikat.
         </p>
 
-        <div class="grid md:grid-cols-3 gap-6">
+        <div class="grid md:grid-cols-3 gap-6 items-start">
           <div
             v-for="tier in ticketTiers"
             :key="tier.name"
-            class="rounded-xl p-8 flex flex-col transition-all duration-200 hover:translate-y-[-2px]"
+            class="rounded-lg p-8 flex flex-col transition-all duration-200 hover:translate-y-[-2px]"
             :style="{
               background: tier.accent ? fg : surface,
               color: tier.accent ? bg : fg,
@@ -545,14 +546,14 @@ const openFaq = ref<number | null>(null)
               Museum MACAN<br />+ Pos Bloc
             </h2>
             <p class="mt-4 mb-6" :style="{ color: muted }">
-              Museum MACAN (Modern and Contemporary Art in Nusantara) di Kembangan, Jakarta Barat. Ditambah ruang outdoor Pos Bloc untuk pameran dan jaringan.
+              Museum MACAN, Kembangan. Ruang outdoor Pos Bloc untuk pameran dan jaringan.
             </p>
             <div class="space-y-3">
               <div class="flex items-start gap-3">
                 <span :style="{ color: accent }">&#9201;</span>
                 <div>
                   <p class="text-sm font-medium">8-11 Oktober 2026</p>
-                  <p class="text-xs" :style="{ color: muted }">Kamis sampai Minggu, 09:00-18:00 WIB</p>
+                  <p class="text-xs" :style="{ color: muted }">Kamis–Minggu, 09:00–18:00 WIB</p>
                 </div>
               </div>
               <div class="flex items-start gap-3">
@@ -573,7 +574,7 @@ const openFaq = ref<number | null>(null)
           </div>
           <!-- Map placeholder -->
           <div
-            class="w-full aspect-[4/3] rounded-xl flex items-center justify-center"
+            class="w-full aspect-[4/3] rounded-lg flex items-center justify-center"
             :style="{ background: bg, border: `1px solid ${border}` }"
           >
             <div class="text-center">
@@ -601,6 +602,7 @@ const openFaq = ref<number | null>(null)
             v-for="y in archiveYears"
             :key="y.year"
             class="group p-6 flex flex-col justify-between aspect-[3/4] transition-colors duration-200 cursor-pointer"
+            :class="{ 'col-span-2': y.year === 2026 }"
             :style="{
               background: y.year === 2026 ? fg : surface,
               color: y.year === 2026 ? bg : fg,

@@ -36,14 +36,14 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  { name: 'Sate Ayam', desc: '10 tusuk, daging ayam pilihan, bumbu kacang khas Madura.', price: 'Rp 25.000', priceNum: 25000, category: 'Sate' },
-  { name: 'Sate Kambing', desc: '10 tusuk, daging kambing segar, bumbu kecap pedas.', price: 'Rp 30.000', priceNum: 30000, category: 'Sate' },
-  { name: 'Nasi Goreng Spesial', desc: 'Nasi goreng telur, ayam suwir, kerupuk, acar.', price: 'Rp 22.000', priceNum: 22000, category: 'Nasi & Mie' },
-  { name: 'Mie Ayam', desc: 'Mie kuning, ayam cincang, pangsit goreng, sawi.', price: 'Rp 20.000', priceNum: 20000, category: 'Nasi & Mie' },
-  { name: 'Es Teh Manis', desc: 'Teh poci dingin, gula asli, gelas besar.', price: 'Rp 5.000', priceNum: 5000, category: 'Minuman' },
-  { name: 'Es Jeruk', desc: 'Jeruk peras segar, es batu, manis alami.', price: 'Rp 7.000', priceNum: 7000, category: 'Minuman' },
-  { name: 'Bakso Spesial', desc: 'Bakso sapi 4 butir, mie, tahu, pangsit, kuah kaldu.', price: 'Rp 18.000', priceNum: 18000, category: 'Nasi & Mie' },
-  { name: 'Lontong Sayur', desc: 'Lontong, sayur labu, telur, sambal goreng.', price: 'Rp 15.000', priceNum: 15000, category: 'Nasi & Mie' },
+  { name: 'Sate Ayam', desc: '10 tusuk. Bumbu kacang khas Madura.', price: 'Rp 25.000', priceNum: 25000, category: 'Sate' },
+  { name: 'Sate Kambing', desc: '10 tusuk. Bumbu kecap pedas.', price: 'Rp 30.000', priceNum: 30000, category: 'Sate' },
+  { name: 'Nasi Goreng Spesial', desc: 'Telur, ayam suwir, kerupuk.', price: 'Rp 22.000', priceNum: 22000, category: 'Nasi & Mie' },
+  { name: 'Mie Ayam', desc: 'Ayam cincang, pangsit goreng.', price: 'Rp 20.000', priceNum: 20000, category: 'Nasi & Mie' },
+  { name: 'Es Teh Manis', desc: 'Teh poci dingin. Gula asli.', price: 'Rp 5.000', priceNum: 5000, category: 'Minuman' },
+  { name: 'Es Jeruk', desc: 'Jeruk peras segar.', price: 'Rp 7.000', priceNum: 7000, category: 'Minuman' },
+  { name: 'Bakso Spesial', desc: '4 butir bakso sapi. Kuah kaldu.', price: 'Rp 18.000', priceNum: 18000, category: 'Nasi & Mie' },
+  { name: 'Lontong Sayur', desc: 'Labu, telur, sambal goreng.', price: 'Rp 15.000', priceNum: 15000, category: 'Nasi & Mie' },
 ]
 
 const filteredMenu = computed(() => {
@@ -247,13 +247,10 @@ const isOpen = currentHour >= 10 && currentHour < 22
         <h2 :style="h2Style" class="sate-h2">Dari gerobak ke 4 cabang.</h2>
         <div class="sate-story">
           <p>
-            Pak Karto mulai jualan sate tahun 1998 di Bangkalan, Madura. Resep bumbu kacang turun-temurun dari almarhum bapaknya. Daging ayam dan kambing dipilih sendiri tiap pagi di pasar.
+            Pak Karto mulai jualan sate tahun 1998 di Bangkalan. Resep bumbu kacang turun-temurun dari almarhum bapaknya. Sekarang ada 4 cabang dan 1 dapur pusat di Ciputat — semua masih dibakar pakai arang batok kelapa.
           </p>
           <p>
-            Tahun 2010, gerobak pertama dibuka di Senopati. Tiga tahun kemudian, Tebet menyusul. Sekarang ada 4 cabang dan 1 dapur pusat di Ciputat. Semua sate masih dibakar pakai arang batok kelapa, bukan gas.
-          </p>
-          <p>
-            Bumbu kacang diulek manual setiap pagi. Kecap manis racikan sendiri. Lontong dibungkus daun pisang. Kalau habis, ya habis. Besok pagi bakar lagi.
+            Bumbu kacang diulek manual setiap pagi. Kecap racikan sendiri. Lontong daun pisang. Kalau habis, ya habis. Besok bakar lagi.
           </p>
         </div>
       </div>
@@ -368,7 +365,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
       <div class="sate-container sate-container--narrow">
         <p class="sate-label">Pesan</p>
         <h2 :style="h2Style" class="sate-h2">Langsung ke dapur.</h2>
-        <p class="sate-pesan-sub">Isi form di bawah, otomatis buka WhatsApp dengan pesan terisi. Tidak ada data yang disimpan.</p>
+        <p class="sate-pesan-sub">Isi form, langsung buka WhatsApp.</p>
 
         <TmplForm
           :fields="orderFormFields"
@@ -528,7 +525,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
   justify-content: center;
   height: 48px;
   padding: 0 1.5rem;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -568,7 +565,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
   height: 40px;
   padding: 0 1rem;
   font-size: 13px;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 /* === SECTIONS === */
@@ -650,7 +647,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
 .sate-menu-card {
   background: var(--tmpl-surface-elevated);
   border: 1px solid var(--tmpl-border);
-  border-radius: 14px;
+  border-radius: 8px;
   overflow: hidden;
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
@@ -674,7 +671,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
 }
 .sate-menu-card__desc {
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--tmpl-muted);
   margin: 0;
   flex: 1;
@@ -796,7 +793,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
 .sate-hours-card {
   background: var(--tmpl-surface-elevated);
   border: 1px solid var(--tmpl-border);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -925,7 +922,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
   opacity: 0.7;
 }
 .sate-gallery-follow {
-  text-align: center;
+  text-align: left;
   margin-top: 2rem;
   font-size: 14px;
   color: var(--tmpl-muted);
