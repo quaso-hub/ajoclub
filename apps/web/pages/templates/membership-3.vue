@@ -495,11 +495,8 @@ onBeforeUnmount(() => {
 
     <!-- WhatsApp FAB -->
     <TmplWhatsAppFab
-      :accent="tpl.accentColor"
-      :actions="[
-        { label: 'Traktir Raka kopi', detail: 'Kirim bukti traktir', icon: 'i-lucide-coffee', message: 'Halo Raka, saya mau traktir kamu kopi!' },
-        { label: 'Bicara dengan Raka', detail: 'Kirim pesan langsung', icon: 'i-lucide-pen-line', message: 'Halo Raka, saya mau bicara tentang tulisanmu.' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="membership"
     />
   </div>
 </template>

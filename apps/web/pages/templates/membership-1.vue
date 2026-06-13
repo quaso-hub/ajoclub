@@ -562,12 +562,8 @@ onBeforeUnmount(() => {
 
     <!-- WhatsApp FAB -->
     <TmplWhatsAppFab
-      :accent="tpl.accentColor"
-      :actions="[
-        { label: 'Berlangganan newsletter', detail: 'Daftar lewat WhatsApp', icon: 'i-lucide-mail', message: 'Halo Rara, saya ingin berlangganan Catatan Harian.' },
-        { label: 'Bicara dengan penulis', detail: 'Kirim surat ke Rara', icon: 'i-lucide-pen-line', message: 'Halo Rara, saya mau bicara tentang Catatan Harian.' },
-        { label: 'Bawa tulisan sebagai guest post', detail: 'Tulis untuk Catatan Harian', icon: 'i-lucide-file-text', message: 'Halo Rara, saya tertarik menulis guest post untuk Catatan Harian.' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="membership"
     />
   </div>
 </template>

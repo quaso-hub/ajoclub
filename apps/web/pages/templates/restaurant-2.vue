@@ -778,13 +778,8 @@ function handleNavClick(e: MouseEvent, href: string) {
 
     <!-- WhatsApp FAB -->
     <TmplWhatsAppFab
-      accent="var(--tmpl-accent)"
-      :actions="[
-        { label: 'Pesan kopi', detail: 'Langsung antar atau takeaway', icon: 'i-lucide-coffee', message: 'Halo Kopi Rumah, saya mau pesan kopi untuk diantar.' },
-        { label: 'Reservasi kursi', detail: 'Untuk kerja, meeting, atau nongkrong', icon: 'i-lucide-calendar', message: 'Halo Kopi Rumah, saya mau reservasi kursi.' },
-        { label: 'Tanya menu', detail: 'Menu hari ini, seasonal, atau wholesale', icon: 'i-lucide-utensils', message: 'Halo Kopi Rumah, menu hari ini apa saja?' },
-        { label: 'Kerja sama', detail: 'Katering, event, atau kolaborasi', icon: 'i-lucide-handshake', message: 'Halo Kopi Rumah, saya mau tanya soal kerja sama.' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="restaurant"
     />
   </div>
 </template>

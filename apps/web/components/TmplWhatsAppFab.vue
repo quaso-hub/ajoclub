@@ -23,8 +23,57 @@ const props = withDefaults(defineProps<{
   delay?: number
   /** Label for screen readers */
   label?: string
+  /** Template name for client-pitch mode (e.g. "Atur", "Anindya & Rama") */
+  templateName?: string
+  /** Template category for client-pitch mode (e.g. "SaaS", "Wedding") */
+  templateCategory?: string
 }>(), {
-  actions: () => [
+  actions: undefined,
+  accent: '#25d366',
+  delay: 1500,
+  label: 'Buka pilihan chat WhatsApp',
+  templateName: '',
+  templateCategory: '',
+})
+
+// Client-pitch mode: when templateName is provided, generate pitch actions
+const isPitchMode = computed(() => !!props.templateName)
+
+const pitchActions: FabAction[] = computed(() => {
+  if (!props.templateName) return []
+  const name = props.templateName
+  const cat = props.templateCategory || 'website'
+  return [
+    {
+      label: `Saya suka gaya ${name}`,
+      detail: `Mau bikin ${cat} serupa dengan model ini`,
+      icon: 'i-lucide-heart',
+      message: `Halo AjoClub, saya suka gaya template ${name} (${cat}). Mau bikin ${cat} serupa. Bisa diskusi?`,
+    },
+    {
+      label: 'Berapa harga?',
+      detail: `Estimasi biaya untuk ${cat} seperti ini`,
+      icon: 'i-lucide-calculator',
+      message: `Halo AjoClub, saya tertarik template ${name} (${cat}). Berapa estimasi biaya untuk bikin ${cat} serupa?`,
+    },
+    {
+      label: 'Bisa custom?',
+      detail: 'Sesuaikan dengan kebutuhan bisnis saya',
+      icon: 'i-lucide-settings',
+      message: `Halo AjoClub, saya suka template ${name} tapi ingin custom sesuai kebutuhan bisnis saya. Bisa diskusi?`,
+    },
+    {
+      label: 'Lihat portfolio lain',
+      detail: 'Tunjukkan lebih banyak contoh kerja AjoClub',
+      icon: 'i-lucide-grid',
+      message: `Halo AjoClub, saya sedang cari referensi ${cat}. Bisa tunjukkan portfolio lain yang serupa?`,
+    },
+  ]
+})
+
+const effectiveActions = computed(() => {
+  if (isPitchMode.value) return pitchActions.value
+  return props.actions ?? [
     {
       label: 'Mau bikin website',
       detail: 'Landing page, company profile, toko online',
@@ -43,10 +92,17 @@ const props = withDefaults(defineProps<{
       icon: 'i-lucide-wrench',
       message: 'Halo, website saya sudah ada tapi perlu diperbaiki.',
     },
-  ],
-  accent: '#25d366',
-  delay: 1500,
-  label: 'Buka pilihan chat WhatsApp',
+  ]
+})
+
+const menuTitle = computed(() => {
+  if (isPitchMode.value) return `Tertarik dengan ${props.templateName}?`
+  return 'Mau mulai dari mana?'
+})
+
+const menuSubtitle = computed(() => {
+  if (isPitchMode.value) return `Chat langsung dengan AjoClub. Pesan otomatis, tinggal kirim.`
+  return 'Pilih konteks, pesan WhatsApp otomatis lebih jelas.'
 })
 
 const isVisible = ref(false)
@@ -97,11 +153,11 @@ onBeforeUnmount(() => {
           class="tmpl-fab__menu"
         >
           <header class="tmpl-fab__menu-head">
-            <p class="tmpl-fab__menu-title">Mau mulai dari mana?</p>
-            <p class="tmpl-fab__menu-subtitle">Pilih konteks, pesan WhatsApp otomatis lebih jelas.</p>
+            <p class="tmpl-fab__menu-title">{{ menuTitle }}</p>
+            <p class="tmpl-fab__menu-subtitle">{{ menuSubtitle }}</p>
           </header>
           <button
-            v-for="(action, i) in actions"
+            v-for="(action, i) in effectiveActions"
             :key="i"
             type="button"
             class="tmpl-fab__item"

@@ -763,7 +763,10 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
     </footer>
 
     <!-- WhatsApp FAB -->
-    <TmplWhatsAppFab message="Halo, saya mau tanya soal NadaFest 2026." />
+    <TmplWhatsAppFab
+      :template-name="tpl.brand"
+      template-category="event"
+    />
 
   </div>
 </template>

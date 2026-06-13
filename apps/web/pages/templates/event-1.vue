@@ -652,13 +652,8 @@ const googleCalUrl = computed(() => {
 
     <!-- WhatsApp FAB -->
     <TmplWhatsAppFab
-      :accent="tpl.accentColor"
-      :actions="[
-        { label: 'Beli tiket Early Bird', detail: 'Rp 500.000, terbatas 200', icon: 'i-lucide-ticket', message: 'Halo, saya mau beli tiket DevTalk 2026 tier Early Bird (Rp 500.000). Apakah masih tersedia?' },
-        { label: 'Jadi sponsor', detail: 'Platinum, Gold, Silver, Bronze', icon: 'i-lucide-handshake', message: 'Halo, saya tertarik menjadi sponsor DevTalk 2026. Bisa info lebih lanjut?' },
-        { label: 'Daftar jadi pembicara', detail: 'Call for papers masih buka', icon: 'i-lucide-mic', message: 'Halo, saya ingin mendaftar sebagai pembicara di DevTalk 2026.' },
-        { label: 'Bawa tim (5+ orang, harga khusus)', detail: 'Diskon grup untuk tim besar', icon: 'i-lucide-users', message: 'Halo, saya mau beli tiket DevTalk 2026 untuk tim 5+ orang. Apakah ada harga khusus?' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="event"
     />
   </div>
 </template>

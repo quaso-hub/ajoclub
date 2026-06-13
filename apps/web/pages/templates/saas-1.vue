@@ -815,13 +815,8 @@ const minDate = today.toISOString().slice(0, 10)
     </Transition>
 
     <TmplWhatsAppFab
-      :accent="tpl.accentColor"
-      :actions="[
-        { label: 'Jadwalkan demo 30 menit', detail: 'Lewat Zoom, pakai data contoh', icon: 'i-lucide-calendar', message: 'Halo, saya mau jadwalkan demo Atur. Bisa Senin-Jumat jam berapa saja?' },
-        { label: 'Tanya harga', detail: 'Mau hitung sendiri dulu sebelum daftar', icon: 'i-lucide-calculator', message: 'Halo, saya mau tanya harga Atur. Saya tim ' + (seats.value) + ' orang, kira-kira cocok yang mana?' },
-        { label: 'Minta proposal', detail: 'PDF + rincian fitur, untuk dibahas internal', icon: 'i-lucide-file-text', message: 'Halo, saya mau proposal Atur untuk dibahas dengan tim. Boleh saya dapat versi PDF?' },
-        { label: 'Bicara langsung dengan tim', detail: 'Bukan bot, bukan sales, salah satu pendiri', icon: 'i-lucide-phone', message: 'Halo, saya mau bicara langsung dengan tim Atur (manusia). Kapan bisa telepon atau video call?' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="SaaS"
     />
   </div>
 </template>

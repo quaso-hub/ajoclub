@@ -726,6 +726,12 @@ const navLinks = [
       ]"
     />
 
+    <!-- WhatsApp FAB -->
+    <TmplWhatsAppFab
+      :template-name="tpl.brand"
+      template-category="e-commerce"
+    />
+
     <!-- Cart drawer -->
     <Teleport to="body">
       <Transition

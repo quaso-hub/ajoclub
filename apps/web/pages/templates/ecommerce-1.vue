@@ -593,13 +593,8 @@ function showToast(msg: string) {
     <!-- WHATSAPP FAB                    -->
     <!-- ============================== -->
     <TmplWhatsAppFab
-      :accent="tpl.accentColor"
-      :actions="[
-        { label: 'Konsultasi custom order', detail: 'Bicara dengan desainer kami', icon: 'i-lucide-pencil-ruler', message: 'Halo Erigo, saya mau konsultasi custom order.' },
-        { label: 'Cek stok sebelum datang', detail: 'Pastikan warna dan ukuran tersedia', icon: 'i-lucide-package-check', message: 'Halo Erigo, saya mau cek stok. Apakah [sebutkan produk] masih tersedia?' },
-        { label: 'Bicara dengan desainer', detail: 'Diskusi bahan, ukuran, atau desain', icon: 'i-lucide-palette', message: 'Halo Erigo, saya mau bicara dengan desainer tentang produk.' },
-        { label: 'Track pesanan saya', detail: 'Cek status pengiriman', icon: 'i-lucide-truck', message: 'Halo Erigo, saya mau cek status pesanan saya. Nomor order: [sebutkan nomor].' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="e-commerce"
     />
   </div>
 </template>

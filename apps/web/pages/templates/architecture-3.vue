@@ -478,12 +478,8 @@ const waUrl = computed(() => {
 
     <!-- ===== WHATSAPP FAB ===== -->
     <TmplWhatsAppFab
-      :accent="accentCss"
-      :actions="[
-        { label: 'Mau desain interior', detail: 'Apartemen, rumah, kantor', icon: 'i-lucide-pen-tool', message: 'Halo Ruang Studio, saya mau konsultasi desain interior.' },
-        { label: 'Pesan sampel material', detail: 'Kotak 6 sampel dikirim ke alamat', icon: 'i-lucide-box', message: 'Halo Ruang Studio, saya mau pesan kotak sampel material.' },
-        { label: 'Tanya harga', detail: 'Konsultasi, desain, atau build', icon: 'i-lucide-tag', message: 'Halo Ruang Studio, saya mau tanya soal harga layanan.' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="architecture"
     />
   </div>
 </template>

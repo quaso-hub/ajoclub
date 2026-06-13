@@ -543,12 +543,8 @@ const navLinks = [
     />
 
     <TmplWhatsAppFab
-      :accent="tpl.accentColor"
-      :actions="[
-        { label: 'Bicara langsung', detail: 'Bukan bot, salah satu pendiri', icon: 'i-lucide-phone', message: 'Halo Grapiku, saya mau bicara langsung soal proyek.' },
-        { label: 'Kirim brief singkat', detail: 'Ceritain proyeknya lewat chat', icon: 'i-lucide-file-text', message: 'Halo Grapiku, saya mau kirim brief. Proyeknya tentang [topik], target [user], kira-kira timeline [waktu].' },
-        { label: 'Tanya harga', detail: 'Sebelum ngobrol lebih jauh', icon: 'i-lucide-calculator', message: 'Halo Grapiku, saya mau tanya harga untuk proyek [tipe]. Budget kira-kira [range].' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="portfolio"
     />
   </div>
 </template>

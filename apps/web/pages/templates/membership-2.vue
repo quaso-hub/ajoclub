@@ -551,5 +551,11 @@ onMounted(() => {
         { label: 'Harga', href: '#tier' },
       ]"
     />
+
+    <!-- WhatsApp FAB -->
+    <TmplWhatsAppFab
+      :template-name="tpl.brand"
+      template-category="membership"
+    />
   </div>
 </template>

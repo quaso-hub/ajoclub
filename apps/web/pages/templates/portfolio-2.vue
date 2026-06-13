@@ -394,7 +394,10 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
       </button>
     </div>
 
-    <TmplWhatsAppFab />
+    <TmplWhatsAppFab
+      :template-name="tpl.brand"
+      template-category="portfolio"
+    />
   </div>
 </template>
 

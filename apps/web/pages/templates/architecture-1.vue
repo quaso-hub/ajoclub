@@ -286,14 +286,6 @@ const navLinks = [
   { label: 'Pengakuan', href: '#pengakuan' },
   { label: 'Kontak', href: '#kontak' },
 ]
-
-// WhatsApp FAB actions
-const fabActions = [
-  { label: 'Brief project baru', detail: 'Ceritakan lahan dan kebutuhan Anda', icon: 'i-lucide-file-text', message: 'Halo Archiry, saya punya lahan dan ingin mendiskusikan project baru.' },
-  { label: 'Konsultasi awal (gratis 30 menit)', detail: 'Telepon atau video call', icon: 'i-lucide-phone', message: 'Halo Archiry, saya ingin menjadwalkan konsultasi awal 30 menit. Kapan bisa?' },
-  { label: 'Minta portofolio PDF', detail: '6 proyek terpilih, lengkap foto', icon: 'i-lucide-download', message: 'Halo Archiry, saya ingin minta portofolio PDF. Boleh dikirim?' },
-  { label: 'Bicara langsung dengan salah satu pendiri', detail: 'Bukan bot, bukan sales', icon: 'i-lucide-users', message: 'Halo Archiry, saya ingin bicara langsung dengan salah satu pendiri.' },
-]
 </script>
 
 <template>
@@ -694,8 +686,8 @@ const fabActions = [
 
     <!-- WhatsApp FAB -->
     <TmplWhatsAppFab
-      :accent="tpl.accentColor"
-      :actions="fabActions"
+      :template-name="tpl.brand"
+      template-category="architecture"
     />
   </div>
 </template>

@@ -21,7 +21,6 @@ const ACCENT = '#FF0000'
 // ============================================================
 const isLoaded = ref(false)
 const currentYear = new Date().getFullYear()
-const fabOpen = ref(false)
 
 // ============================================================
 // CASE STUDIES — 8 Indonesian brands, brutalist
@@ -698,40 +697,11 @@ onBeforeUnmount(() => {
       </div>
     </footer>
 
-    <!-- ============================================================ -->
-    <!-- FAB — WhatsApp -->
-    <!-- ============================================================ -->
-    <div class="fixed bottom-5 right-5 z-50">
-      <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 translate-y-4 scale-95" leave-to-class="opacity-0 translate-y-4 scale-95">
-        <div v-if="fabOpen" class="absolute bottom-full right-0 mb-3 w-72 bg-white shadow-2xl border border-gray-200 p-4" style="font-family: var(--idx-mono);">
-          <p style="font-size: 14px; font-weight: 700; margin-bottom: 0.5rem;">Butuh bicara?</p>
-          <p style="font-size: 12px; color: var(--idx-muted); margin-bottom: 1rem;">Langsung chat. Tanpa formulir. Tanpa basa-basi.</p>
-          <a :href="waUrl" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0.75rem; background: var(--idx-accent); color: #fff; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; justify-content: center;">
-            Chat WhatsApp
-          </a>
-        </div>
-      </Transition>
-      <button
-        @click="fabOpen = !fabOpen"
-        :style="{
-          width: '56px',
-          height: '56px',
-          background: 'var(--idx-accent)',
-          color: '#fff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: 'none',
-          cursor: 'pointer',
-          fontFamily: 'var(--idx-mono)',
-          fontSize: '20px',
-          fontWeight: 700,
-        }"
-        aria-label="Buka chat"
-      >
-        &rarr;
-      </button>
-    </div>
+    <!-- WhatsApp FAB -->
+    <TmplWhatsAppFab
+      :template-name="tpl.brand"
+      template-category="portfolio"
+    />
   </div>
 </template>
 

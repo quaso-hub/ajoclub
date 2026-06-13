@@ -526,12 +526,8 @@ function openLiveStream() {
     />
 
     <TmplWhatsAppFab
-      :accent="tpl.accentColor"
-      :actions="[
-        { label: 'Konfirmasi kehadiran', detail: 'Lewat WhatsApp, langsung tercatat', icon: 'i-lucide-check-circle', message: 'Halo Sarah & Kevin, saya [nama], Insha Allah hadir di Bali.' },
-        { label: 'Tanya soal travel', detail: 'Penerbangan, hotel, transportasi', icon: 'i-lucide-plane', message: 'Halo, saya mau tanya soal info travel ke Bali untuk pernikahan.' },
-        { label: 'Tanya soal amplop', detail: 'Transfer atau kirim kado', icon: 'i-lucide-gift', message: 'Halo, saya mau tanya soal amplop untuk Sarah & Kevin.' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="wedding undangan"
     />
 
     <TmplLightbox

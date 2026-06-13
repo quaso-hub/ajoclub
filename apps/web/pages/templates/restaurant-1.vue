@@ -698,13 +698,8 @@ function fmtRp(n: number) {
 
     <!-- WhatsApp FAB -->
     <TmplWhatsAppFab
-      accent="var(--tmpl-accent)"
-      :actions="[
-        { label: 'Reservasi makan malam', detail: 'Untuk 2–12 orang, Selasa–Sabtu', icon: 'i-lucide-calendar', message: 'Halo Sasana, saya mau reservasi makan malam. Berapa hari sebelumnya?' },
-        { label: 'Tanya menu hari ini', detail: '8 sajian, berubah tiap 6 minggu', icon: 'i-lucide-utensils', message: 'Halo Sasana, menu hari ini apa saja?' },
-        { label: 'Private event', detail: 'Wine Dinner, Chef\'s Table, Brunch Ahad', icon: 'i-lucide-party-popper', message: 'Halo Sasana, saya mau tanya soal private event.' },
-        { label: 'Bicara langsung', detail: 'WhatsApp langsung ke dapur', icon: 'i-lucide-phone', message: 'Halo, saya mau bicara langsung dengan tim Sasana.' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="restaurant"
     />
   </div>
 </template>

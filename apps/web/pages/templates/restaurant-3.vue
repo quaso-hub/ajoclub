@@ -107,12 +107,6 @@ const branches = [
 ]
 const activeBranch = ref(0)
 
-const fabActions = [
-  { label: 'Pesan sate', detail: 'Order langsung via WhatsApp', icon: 'i-lucide-flame', message: 'Halo, saya mau pesan sate.' },
-  { label: 'Tanya menu', detail: 'Ada apa hari ini?', icon: 'i-lucide-utensils', message: 'Halo, menu hari ini apa saja?' },
-  { label: 'Reservasi', detail: 'Booking tempat untuk rombongan', icon: 'i-lucide-users', message: 'Halo, saya mau reservasi untuk rombongan.' },
-]
-
 const currentHour = new Date().getHours()
 const isOpen = currentHour >= 10 && currentHour < 22
 </script>
@@ -403,9 +397,8 @@ const isOpen = currentHour >= 10 && currentHour < 22
 
     <!-- WhatsApp FAB -->
     <TmplWhatsAppFab
-      :actions="fabActions"
-      accent="#25d366"
-      :delay="1200"
+      :template-name="tpl.brand"
+      template-category="restaurant"
     />
   </div>
 </template>

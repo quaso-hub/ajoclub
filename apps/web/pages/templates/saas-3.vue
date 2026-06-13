@@ -551,12 +551,8 @@ function initBlob() {
     </main>
 
     <TmplWhatsAppFab
-      :accent="tpl.accentColor"
-      :actions="[
-        { label: 'Tanya harga', detail: 'Mau hitung sendiri dulu sebelum daftar', icon: 'i-lucide-calculator', message: 'Halo, saya mau tanya harga Lintas. Bisa jelaskan paketnya?' },
-        { label: 'Jadwalkan demo', detail: 'Lewat Zoom, 30 menit', icon: 'i-lucide-calendar', message: 'Halo, saya mau jadwalkan demo Lintas. Bisa minggu depan?' },
-        { label: 'Bicara langsung', detail: 'Bukan bot, salah satu pendiri', icon: 'i-lucide-phone', message: 'Halo, saya mau bicara langsung dengan tim Lintas.' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="SaaS"
     />
   </div>
 </template>

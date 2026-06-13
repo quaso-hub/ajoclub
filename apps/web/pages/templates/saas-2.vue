@@ -1001,13 +1001,8 @@ watch(activeTimeRange, () => {
 
     <!-- WHATSAPP FAB -->
     <TmplWhatsAppFab
-      :accent="accentColor"
-      :actions="[
-        { label: 'Minta demo live 30 menit', detail: 'Lewat Zoom, pakai data contoh', icon: 'i-lucide-calendar', message: 'Halo, saya mau minta demo live Kas selama 30 menit.' },
-        { label: 'Bandingkan tier Berkembang vs Skala', detail: 'Rincian fitur per paket', icon: 'i-lucide-scale', message: 'Halo, saya mau bandingkan paket Berkembang dan Skala di Kas.' },
-        { label: 'Minta proposal untuk klien korporat', detail: 'PDF + rincian fitur', icon: 'i-lucide-file-text', message: 'Halo, saya minta proposal Kas untuk klien korporat. Boleh versi PDF?' },
-        { label: 'Bicara langsung dengan salah satu pendiri', detail: 'Bukan bot, bukan sales', icon: 'i-lucide-phone', message: 'Halo, saya mau bicara langsung dengan pendiri Kas. Kapan bisa?' },
-      ]"
+      :template-name="tpl.brand"
+      template-category="SaaS"
     />
   </div>
 </template>
