@@ -32,12 +32,12 @@ const isReducedMotion = ref(false)
 // DATA
 // ============================================================
 const spaces = [
-  { name: 'Frontend', icon: '⚡', desc: 'React, Vue, Next.js, Nuxt. Diskusi UI, performa, dan framework terbaru.', members: 1840, color: '#38bdf8' },
-  { name: 'Backend', icon: '🔧', desc: 'Node, Go, Rust, Java. API design, database, dan arsitektur server.', members: 1520, color: '#a78bfa' },
-  { name: 'Mobile', icon: '📱', desc: 'Flutter, React Native, Swift, Kotlin. Build sekali, jalan di mana-mana.', members: 980, color: '#34d399' },
-  { name: 'DevOps', icon: '☁️', desc: 'Docker, K8s, CI/CD, Terraform. Dari local ke production tanpa drama.', members: 720, color: '#fb923c' },
-  { name: 'AI/ML', icon: '🤖', desc: 'LLM, computer vision, data pipeline. Eksperimen dan deploy model.', members: 1100, color: '#f472b6' },
-  { name: 'Desain', icon: '🎨', desc: 'UI/UX, Figma, design system. Bikin produk yang enak dipakai.', members: 640, color: '#fbbf24' },
+  { name: 'Frontend', icon: '⚡', desc: 'React, Vue, Next.js. UI dan performa.', members: 1840, color: '#38bdf8' },
+  { name: 'Backend', icon: '🔧', desc: 'Node, Go, Rust. API dan database.', members: 1520, color: '#a78bfa' },
+  { name: 'Mobile', icon: '📱', desc: 'Flutter, React Native. Cross-platform.', members: 980, color: '#34d399' },
+  { name: 'DevOps', icon: '☁️', desc: 'Docker, K8s, CI/CD. Local ke production.', members: 720, color: '#fb923c' },
+  { name: 'AI/ML', icon: '🤖', desc: 'LLM, vision, pipeline. Eksperimen ke deploy.', members: 1100, color: '#f472b6' },
+  { name: 'Desain', icon: '🎨', desc: 'UI/UX, Figma. Produk yang enak dipakai.', members: 640, color: '#fbbf24' },
 ]
 
 const events = [
@@ -60,8 +60,8 @@ const tiers = [
     name: 'Gratis',
     price: 'Rp 0',
     period: '',
-    desc: 'Coba komunitas tanpa biaya.',
-    features: ['Gabung 3 space', 'Baca semua thread', 'Ikut event publik', 'Profil anggota'],
+    desc: 'Coba tanpa biaya.',
+    features: ['3 space', 'Baca thread', 'Event publik', 'Profil anggota'],
     cta: 'Gabung Gratis',
     popular: false,
   },
@@ -69,8 +69,8 @@ const tiers = [
     name: 'Komunitas',
     price: 'Rp 49rb',
     period: '/bulan',
-    desc: 'Akses penuh ke semua space dan fitur.',
-    features: ['Semua di Gratis', 'Gabung semua 6 space', 'Post dan reply thread', 'RSVP event eksklusif', 'Badge anggota', 'Direct message'],
+    desc: 'Akses penuh.',
+    features: ['Semua space', 'Post & reply', 'Event eksklusif', 'Badge anggota', 'Direct message'],
     cta: 'Mulai Komunitas',
     popular: true,
   },
@@ -78,26 +78,26 @@ const tiers = [
     name: 'Studio',
     price: 'Rp 149rb',
     period: '/bulan',
-    desc: 'Untuk yang serius berkembang.',
-    features: ['Semua di Komunitas', 'Mentoring 1-on-1 bulanan', 'Akses #pro channel', 'Portfolio review', 'Job referral prioritas', 'Custom badge warna'],
+    desc: 'Untuk yang serius.',
+    features: ['Mentoring 1-on-1', '#pro channel', 'Portfolio review', 'Job referral', 'Custom badge'],
     cta: 'Mulai Studio',
     popular: false,
   },
 ]
 
 const team = [
-  { name: 'Hasan Fadilah', role: 'Founder & Lead', avatar: 'H', bio: 'Full-stack developer. 8 tahun di industri. Pernah di Gojek dan Tokopedia.' },
-  { name: 'Rina Maharani', role: 'Community Manager', avatar: 'R', bio: 'Mengelola komunitas sejak 2021. Fokus di engagement dan program mentoring.' },
-  { name: 'Budi Santoso', role: 'DevOps Lead', avatar: 'B', bio: 'Infrastructure engineer. AWS certified. Suka ngomongin Docker dan K8s.' },
-  { name: 'Sinta Dewi', role: 'AI/ML Lead', avatar: 'S', bio: 'Data scientist. Riset NLP untuk bahasa Indonesia. Alumni ITB.' },
+  { name: 'Hasan Fadilah', role: 'Founder & Lead', avatar: 'H', bio: 'Full-stack. 8 tahun. Gojek, Tokopedia.' },
+  { name: 'Rina Maharani', role: 'Community Manager', avatar: 'R', bio: 'Komunitas sejak 2021. Engagement & mentoring.' },
+  { name: 'Budi Santoso', role: 'DevOps Lead', avatar: 'B', bio: 'Infrastructure. AWS certified. Docker & K8s.' },
+  { name: 'Sinta Dewi', role: 'AI/ML Lead', avatar: 'S', bio: 'Data scientist. NLP bahasa Indonesia. ITB.' },
 ]
 
 const faqs = [
-  { q: 'Apakah Sinau Koding gratis?', a: 'Ya, selamanya gratis untuk akses dasar. Kamu bisa gabung 3 space, baca semua thread, dan ikut event publik tanpa biaya.' },
-  { q: 'Bedanya tier Komunitas dan Studio apa?', a: 'Komunitas (Rp 49rb/bulan) buka akses ke semua 6 space dan fitur post. Studio (Rp 149rb/bulan) tambah mentoring 1-on-1, portfolio review, dan job referral prioritas.' },
-  { q: 'Saya pemula, cocok nggak?', a: 'Cocok banget. Space Frontend dan Backend punya thread khusus untuk pertanyaan dasar. Tidak ada pertanyaan bodoh di sini.' },
-  { q: 'Event diadakan di mana?', a: 'Kebanyakan online via Zoom atau Discord. Beberapa event besar diadakan offline di Jakarta, Bandung, dan Surabaya.' },
-  { q: 'Bisa cancel langganan kapan saja?', a: 'Bisa. Tidak ada kontrak. Cancel kapan saja, tetap akses sampai akhir periode billing.' },
+  { q: 'Apakah Sinau Koding gratis?', a: 'Ya. 3 space, baca thread, event publik — tanpa biaya.' },
+  { q: 'Bedanya Komunitas dan Studio?', a: 'Komunitas buka semua 6 space + post. Studio tambah mentoring 1-on-1, portfolio review, job referral.' },
+  { q: 'Saya pemula, cocok nggak?', a: 'Cocok. Ada thread khusus pertanyaan dasar. Tidak ada pertanyaan bodoh.' },
+  { q: 'Event diadakan di mana?', a: 'Online via Zoom/Discord. Beberapa offline di Jakarta, Bandung, Surabaya.' },
+  { q: 'Bisa cancel kapan saja?', a: 'Bisa. Tidak ada kontrak. Akses sampai akhir periode.' },
 ]
 
 // ============================================================
@@ -141,7 +141,7 @@ onMounted(() => {
       <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span
-            class="w-6 h-6 rounded-md flex items-center justify-center text-[11px] font-bold"
+            class="w-6 h-6 rounded-lg flex items-center justify-center text-[11px] font-bold"
             :style="{ background: toCssSafe(palette.accent), color: toCssSafe(palette.accentFg) }"
           >SK</span>
           <span class="text-sm font-bold" :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }">Sinau Koding</span>
@@ -163,7 +163,7 @@ onMounted(() => {
     <!-- ============================================================ -->
     <!-- 1. HERO + 3D CONSTELLATION -->
     <!-- ============================================================ -->
-    <section class="relative pt-24 pb-20 overflow-hidden">
+    <section class="relative pt-24 pb-24 overflow-hidden">
       <!-- 3D Canvas Background -->
       <div class="absolute inset-0 z-0 opacity-60">
         <TmplExperienceCanvas
@@ -200,7 +200,7 @@ onMounted(() => {
           <!-- H1 -->
           <h1 :style="{ ...h1Style, marginBottom: '1.5rem' }">
             Belajar bareng,<br />
-            <span :style="{ color: toCssSafe(palette.accent) }">bangun bareng.</span>
+            <span :style="{ color: toCssSafe(palette.accent) }">tumbuh bareng.</span>
           </h1>
 
           <!-- Subhead -->
@@ -208,7 +208,7 @@ onMounted(() => {
             class="text-lg max-w-xl mx-auto leading-relaxed mb-4"
             :style="{ color: toCssSafe(palette.muted) }"
           >
-            Komunitas developer Indonesia. {{ spaces.length }} space aktif, {{ events.length }} event bulan ini, 0 spam.
+            Komunitas developer Indonesia. {{ spaces.length }} space, {{ events.length }} event, 0 spam.
           </p>
 
           <!-- Member counter -->
@@ -243,7 +243,7 @@ onMounted(() => {
     <!-- ============================================================ -->
     <section
       id="spaces"
-      class="py-20 border-t"
+      class="pt-24 pb-20 border-t"
       :style="{ borderColor: toCssSafe(palette.border, 0.3), background: toCssSafe(palette.surface) }"
     >
       <div class="max-w-6xl mx-auto px-6">
@@ -252,13 +252,13 @@ onMounted(() => {
           :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
         >SPACES</p>
         <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Tempat ngobrol.</h2>
-        <p class="mb-12" :style="{ color: toCssSafe(palette.muted) }">Pilih topik, gabung, mulai diskusi.</p>
+        <p class="mb-16" :style="{ color: toCssSafe(palette.muted) }">Pilih topik, gabung.</p>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           <article
             v-for="space in spaces"
             :key="space.name"
-            class="rounded-xl p-5 cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
+            class="rounded-lg p-5 cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
             :style="{
               background: toCssSafe(palette.surfaceElevated),
               border: `1px solid ${toCssSafe(palette.border, 0.3)}`,
@@ -289,7 +289,7 @@ onMounted(() => {
                 >{{ String.fromCharCode(64 + i + spaces.indexOf(space)) }}</div>
               </div>
               <button
-                class="text-[11px] font-semibold px-3 py-1 rounded-md transition-opacity hover:opacity-80"
+                class="text-[11px] font-semibold px-3 py-1 rounded-lg transition-opacity hover:opacity-80"
                 :style="{ background: toCssSafe(palette.accentSoft), color: toCssSafe(palette.accent) }"
               >Gabung</button>
             </div>
@@ -301,20 +301,20 @@ onMounted(() => {
     <!-- ============================================================ -->
     <!-- 3. EVENTS (4 upcoming events) -->
     <!-- ============================================================ -->
-    <section id="events" class="py-20 border-t" :style="{ borderColor: toCssSafe(palette.border, 0.3) }">
+    <section id="events" class="pt-24 pb-20 border-t" :style="{ borderColor: toCssSafe(palette.border, 0.3) }">
       <div class="max-w-5xl mx-auto px-6">
         <p
           class="text-[11px] tracking-[0.2em] uppercase mb-3"
           :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
         >EVENT</p>
         <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Yang akan datang.</h2>
-        <p class="mb-12" :style="{ color: toCssSafe(palette.muted) }">Online dan offline. Gratis untuk anggota.</p>
+        <p class="mb-16" :style="{ color: toCssSafe(palette.muted) }">Online dan offline. Gratis.</p>
 
         <div class="space-y-3">
           <article
             v-for="event in events"
             :key="event.title"
-            class="rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-200"
+            class="rounded-lg p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-200"
             :style="{
               background: toCssSafe(palette.surface),
               border: `1px solid ${toCssSafe(palette.border, 0.3)}`,
@@ -347,7 +347,7 @@ onMounted(() => {
     <!-- ============================================================ -->
     <section
       id="diskusi"
-      class="py-20 border-t"
+      class="pt-24 pb-20 border-t"
       :style="{ borderColor: toCssSafe(palette.border, 0.3), background: toCssSafe(palette.surface) }"
     >
       <div class="max-w-5xl mx-auto px-6">
@@ -356,13 +356,13 @@ onMounted(() => {
           :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
         >DISKUSI</p>
         <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Thread terbaru.</h2>
-        <p class="mb-12" :style="{ color: toCssSafe(palette.muted) }">Dari semua space. Langsung join percakapan.</p>
+        <p class="mb-16" :style="{ color: toCssSafe(palette.muted) }">Dari semua space.</p>
 
         <div class="space-y-3">
           <article
             v-for="thread in threads"
             :key="thread.title"
-            class="rounded-xl p-5 transition-all duration-200 cursor-pointer"
+            class="rounded-lg p-5 transition-all duration-200 cursor-pointer"
             :style="{
               background: toCssSafe(palette.surfaceElevated),
               border: `1px solid ${toCssSafe(palette.border, 0.2)}`,
@@ -397,20 +397,20 @@ onMounted(() => {
     <!-- ============================================================ -->
     <!-- 5. TIER (3 pricing tiers) -->
     <!-- ============================================================ -->
-    <section id="tier" class="py-20 border-t" :style="{ borderColor: toCssSafe(palette.border, 0.3) }">
+    <section id="tier" class="pt-24 pb-20 border-t" :style="{ borderColor: toCssSafe(palette.border, 0.3) }">
       <div class="max-w-5xl mx-auto px-6">
         <p
           class="text-[11px] tracking-[0.2em] uppercase text-center mb-3"
           :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
         >TIER</p>
         <h2 :style="{ ...h2Style, marginBottom: '0.5rem', textAlign: 'center' }">Pilih yang cocok.</h2>
-        <p class="mb-12 text-center" :style="{ color: toCssSafe(palette.muted) }">Mulai gratis. Upgrade kapan saja.</p>
+        <p class="mb-16 text-center" :style="{ color: toCssSafe(palette.muted) }">Mulai gratis. Upgrade kapan saja.</p>
 
         <div class="grid md:grid-cols-3 gap-4">
           <div
             v-for="tier in tiers"
             :key="tier.name"
-            class="rounded-xl p-6 relative flex flex-col"
+            class="rounded-lg p-6 relative flex flex-col"
             :style="{
               background: tier.popular ? toCssSafe(palette.surfaceElevated) : toCssSafe(palette.surface),
               border: tier.popular
@@ -460,7 +460,7 @@ onMounted(() => {
     <!-- 6. TIM (4 community leaders) -->
     <!-- ============================================================ -->
     <section
-      class="py-20 border-t"
+      class="pt-24 pb-20 border-t"
       :style="{ borderColor: toCssSafe(palette.border, 0.3), background: toCssSafe(palette.surface) }"
     >
       <div class="max-w-5xl mx-auto px-6">
@@ -469,13 +469,13 @@ onMounted(() => {
           :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
         >TIM</p>
         <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Yang menggerakkan.</h2>
-        <p class="mb-12" :style="{ color: toCssSafe(palette.muted) }">Volunteer yang menjaga komunitas tetap hidup.</p>
+        <p class="mb-16" :style="{ color: toCssSafe(palette.muted) }">Volunteer yang menjaga komunitas.</p>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           <article
             v-for="person in team"
             :key="person.name"
-            class="rounded-xl p-5 text-center"
+            class="rounded-lg p-5 text-center"
             :style="{
               background: toCssSafe(palette.surfaceElevated),
               border: `1px solid ${toCssSafe(palette.border, 0.2)}`,
@@ -496,7 +496,7 @@ onMounted(() => {
     <!-- ============================================================ -->
     <!-- 7. FAQ -->
     <!-- ============================================================ -->
-    <section class="py-20 border-t" :style="{ borderColor: toCssSafe(palette.border, 0.3) }">
+    <section class="pt-24 pb-20 border-t" :style="{ borderColor: toCssSafe(palette.border, 0.3) }">
       <div class="max-w-3xl mx-auto px-6">
         <p
           class="text-[11px] tracking-[0.2em] uppercase text-center mb-3"
@@ -508,7 +508,7 @@ onMounted(() => {
           <div
             v-for="(item, index) in faqs"
             :key="index"
-            class="rounded-xl overflow-hidden transition-colors"
+            class="rounded-lg overflow-hidden transition-colors"
             :style="{
               background: toCssSafe(palette.surface),
               border: `1px solid ${toCssSafe(palette.border, 0.2)}`,

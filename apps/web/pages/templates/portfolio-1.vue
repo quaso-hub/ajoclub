@@ -41,7 +41,7 @@ const cases = [
     discipline: 'Produk',
     tag: 'Produk',
     color: 'var(--t-brand)',
-    desc: 'Redesign aplikasi mobile ordering untuk coffee chain dengan 250+ outlet.',
+    desc: 'Redesign app mobile ordering—250+ outlet.',
     outcome: '+24% repeat order dalam 3 bulan.',
   },
   {
@@ -51,7 +51,7 @@ const cases = [
     discipline: 'Brand',
     tag: 'Brand',
     color: 'var(--t-brand)',
-    desc: 'Refresh logo dan visual system untuk apparel lokal asal Bandung.',
+    desc: 'Refresh logo dan visual system—apparel lokal Bandung.',
     outcome: '18 social mentions dalam minggu pertama.',
   },
   {
@@ -61,7 +61,7 @@ const cases = [
     discipline: 'Brand',
     tag: 'Brand',
     color: 'var(--t-brand)',
-    desc: 'Packaging refresh untuk 50 SKU produk kopi kemasan.',
+    desc: 'Packaging refresh—50 SKU kopi kemasan.',
     outcome: 'Distribusi ke 200+ retail.',
   },
   {
@@ -71,7 +71,7 @@ const cases = [
     discipline: 'Web',
     tag: 'Web',
     color: 'var(--t-web)',
-    desc: 'E-commerce redesign untuk brand fashion modest wear.',
+    desc: 'E-commerce redesign—fashion modest wear.',
     outcome: '-38% cart abandonment.',
   },
   {
@@ -81,7 +81,7 @@ const cases = [
     discipline: 'UX',
     tag: 'UX',
     color: 'var(--t-dash)',
-    desc: 'Dashboard redesign untuk developer portal payment gateway.',
+    desc: 'Dashboard redesign—developer portal payment gateway.',
     outcome: '-22% support tickets.',
   },
   {
@@ -91,7 +91,7 @@ const cases = [
     discipline: 'Brand',
     tag: 'Brand',
     color: 'var(--t-brand)',
-    desc: 'Naming dan identity untuk brand sepatu lokal Bandung.',
+    desc: 'Naming dan identity—sepatu lokal Bandung.',
     outcome: 'Diliput 6 media dalam sebulan.',
   },
   {
@@ -101,7 +101,7 @@ const cases = [
     discipline: 'Produk',
     tag: 'Produk',
     color: 'var(--t-brand)',
-    desc: 'Build aplikasi tracking logistik untuk brand fashion beauty.',
+    desc: 'App tracking logistik—brand beauty.',
     outcome: 'Dipakai 15 cabang.',
   },
   {
@@ -111,7 +111,7 @@ const cases = [
     discipline: 'UX',
     tag: 'UX',
     color: 'var(--t-dash)',
-    desc: 'Redesign flow e-signature untuk startup B2B.',
+    desc: 'Redesign flow e-signature—startup B2B.',
     outcome: 'Completion rate 71% menjadi 89%.',
   },
 ]
@@ -141,9 +141,9 @@ const services = [
 // PROCESS — 4 steps
 // ============================================================
 const processSteps = [
-  { step: '01', title: 'Riset', weeks: '3 minggu', desc: 'Wawancara 8-12 user, journey mapping, competitive audit.' },
+  { step: '01', title: 'Riset', weeks: '3 minggu', desc: 'Wawancara user, journey mapping, competitive audit.' },
   { step: '02', title: 'Eksplorasi', weeks: '2 minggu', desc: 'Sketch, wireframe, eksplorasi visual.' },
-  { step: '03', title: 'Desain & uji', weeks: '6 minggu', desc: 'Desain hi-fi, prototype, usability test 3 putaran.' },
+  { step: '03', title: 'Desain & uji', weeks: '6 minggu', desc: 'Hi-fi, prototype, usability test 3 putaran.' },
   { step: '04', title: 'Peluncuran', weeks: '4 minggu', desc: 'Engineer handoff, monitoring 30 hari.' },
 ]
 
@@ -157,10 +157,10 @@ const klienRow2 = ['Janji Jiwa', 'Cottonink', 'Mekari', 'Kaum', 'Otten', 'AMUZ',
 // FOUNDERS — 4
 // ============================================================
 const founders = [
-  { name: 'Maya Kusuma', role: 'Founder, design lead', bio: 'Sebelumnya desainer produk di Tokopedia selama 4 tahun.', handle: '@mayakusuma', gradient: 'linear-gradient(135deg, #4A8CFF 0%, #2563EB 100%)' },
-  { name: 'Andika Wirajaya', role: 'Founder, engineering', bio: 'Pernah backend engineer di Gojek.', handle: '@andikaw', gradient: 'linear-gradient(135deg, #06B6D4 0%, #0284C7 100%)' },
-  { name: 'Ratna Halim', role: 'Co-founder, brand strategy', bio: 'Latar belakang periklanan di Ogilvy.', handle: '@ratnahalim', gradient: 'linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%)' },
-  { name: 'Bayu Pratama', role: 'Co-founder, ops & client', bio: 'Sebelumnya account director di Dentsu.', handle: '@bayup', gradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)' },
+  { name: 'Maya Kusuma', role: 'Founder, design lead', bio: 'Ex Tokopedia.', handle: '@mayakusuma', gradient: 'linear-gradient(135deg, #4A8CFF 0%, #2563EB 100%)' },
+  { name: 'Andika Wirajaya', role: 'Founder, engineering', bio: 'Ex Gojek.', handle: '@andikaw', gradient: 'linear-gradient(135deg, #06B6D4 0%, #0284C7 100%)' },
+  { name: 'Ratna Halim', role: 'Co-founder, brand', bio: 'Ex Ogilvy.', handle: '@ratnahalim', gradient: 'linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%)' },
+  { name: 'Bayu Pratama', role: 'Co-founder, ops', bio: 'Ex Dentsu.', handle: '@bayup', gradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)' },
 ]
 
 // ============================================================
@@ -298,7 +298,7 @@ const navLinks = [
             Bikin brand<br />yang jalan.
           </h1>
           <p class="gp-hero__sub">
-            Studio kecil 4 orang di Bandung. Brand, web, dashboard. Untuk UMKM sampai startup Series C.
+            4 orang. Brand, web, dashboard.
           </p>
           <p class="gp-hero__badge" :style="monoStyle">47 proyek · 38 klien · 6 industri · 5 tahun</p>
           <div class="gp-hero__ctas">
@@ -332,7 +332,7 @@ const navLinks = [
         <div class="gp-section__head">
           <p class="gp-meta" :style="monoStyle">Studi kasus</p>
           <h2 :style="h2Style" class="text-balance">
-            08 proyek pilihan.<br />47 total. 6 disiplin.
+            08 proyek pilihan.
           </h2>
         </div>
 
@@ -379,7 +379,7 @@ const navLinks = [
       <section id="layanan" class="gp-section gp-section--alt">
         <div class="gp-section__head">
           <p class="gp-meta" :style="monoStyle">Layanan</p>
-          <h2 :style="h2Style" class="text-balance">Apa yang bisa kami kerjakan.</h2>
+          <h2 :style="h2Style" class="text-balance">Layanan.</h2>
         </div>
 
         <div class="gp-services">
@@ -418,7 +418,7 @@ const navLinks = [
         <div class="gp-section__head">
           <p class="gp-meta" :style="monoStyle">Klien</p>
           <h2 :style="h2Style" class="text-balance">
-            Klien kami.<br />Brand, founder, dan tim<br />yang percaya kami bikin<br />sesuatu yang serius.
+            Klien kami.
           </h2>
         </div>
 
@@ -448,9 +448,9 @@ const navLinks = [
         <div class="gp-section__head">
           <p class="gp-meta" :style="monoStyle">Tim</p>
           <h2 :style="h2Style" class="text-balance">
-            4 orang. Bandung.<br />Bukan 50. Bukan 5.
+            4 orang. Bandung.
           </h2>
-          <p class="gp-section__sub">Cukup untuk dengerin, mikir, dan nge-ship tanpa nge-drag.</p>
+          <p class="gp-section__sub">Dengerin, mikir, ship.</p>
         </div>
 
         <div class="gp-team">
@@ -471,7 +471,7 @@ const navLinks = [
         <div class="gp-section__head">
           <p class="gp-meta" :style="monoStyle">Penghargaan</p>
           <h2 :style="h2Style" class="text-balance">
-            Diakui sama publikasi<br />yang kami hormati.
+            Diakui publikasi global.
           </h2>
         </div>
 
@@ -494,7 +494,7 @@ const navLinks = [
             <p class="gp-meta" :style="monoStyle">Tulis ke kami</p>
             <h2 :style="h2Style" class="text-balance">Mau mulai?</h2>
             <p class="gp-contact__sub">
-              Balas dalam 24 jam. Konsultasi pertama gratis. Bisa via WhatsApp, email, atau ketemu langsung di studio.
+              Balas 24 jam. Konsultasi gratis.
             </p>
 
             <TmplForm
@@ -678,7 +678,7 @@ const navLinks = [
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.4;
@@ -727,7 +727,7 @@ const navLinks = [
   color: var(--tmpl-fg);
 }
 .gp-stat__label {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--tmpl-muted);
@@ -738,7 +738,7 @@ const navLinks = [
 /* SECTION COMMON                 */
 /* ============================== */
 .gp-section {
-  padding: 6rem 2rem;
+  padding: 7rem 2rem;
   max-width: 80rem;
   margin: 0 auto;
 }
@@ -750,8 +750,7 @@ const navLinks = [
 }
 .gp-section__head {
   max-width: 50rem;
-  margin: 0 auto 3rem;
-  text-align: center;
+  margin: 0 0 3rem;
 }
 .gp-section__head h2 {
   font-family: var(--tmpl-font-display);
@@ -777,7 +776,6 @@ const navLinks = [
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
-  justify-content: center;
   margin-bottom: 2.5rem;
 }
 .gp-filter {
@@ -787,7 +785,7 @@ const navLinks = [
   background: transparent;
   color: var(--tmpl-muted);
   font: inherit;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 200ms ease;
 }
@@ -801,7 +799,7 @@ const navLinks = [
   border-color: var(--tmpl-accent);
 }
 .gp-filter__count {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--tmpl-muted);
@@ -823,7 +821,7 @@ const navLinks = [
 }
 .gp-case {
   border: 1px solid color-mix(in oklch, currentColor 8%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease;
   background: var(--tmpl-bg);
@@ -846,13 +844,13 @@ const navLinks = [
   transform: scale(1.02);
 }
 .gp-case__tag {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--tmpl-bg);
   background: color-mix(in oklch, var(--tmpl-bg) 30%, transparent);
   padding: 0.3rem 0.75rem;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 .gp-case__info {
   padding: 1.25rem;
@@ -871,7 +869,7 @@ const navLinks = [
   color: var(--tmpl-fg);
 }
 .gp-case__year {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   color: var(--tmpl-muted);
 }
@@ -882,7 +880,7 @@ const navLinks = [
   margin: 0 0 0.5rem;
 }
 .gp-case__outcome {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--tmpl-accent);
   margin: 0;
@@ -913,7 +911,7 @@ const navLinks = [
 .gp-service {
   padding: 2rem;
   border: 1px solid color-mix(in oklch, currentColor 8%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--tmpl-bg);
   transition: all 350ms ease;
   cursor: default;
@@ -975,10 +973,10 @@ const navLinks = [
   position: relative;
   padding: 2.5rem 1.5rem;
   border-bottom: 1px solid color-mix(in oklch, currentColor 8%, transparent);
-  border-right: 1px solid color-mix(in oklch, currentColor 8%, transparent);
+  border-left: 1px solid color-mix(in oklch, currentColor 8%, transparent);
   transition: all 300ms ease;
 }
-.gp-step:last-child { border-right: 0; }
+.gp-step:first-child { border-left: 0; }
 .gp-step:hover {
   background: color-mix(in oklch, var(--tmpl-accent) 4%, var(--tmpl-bg));
 }
@@ -1015,7 +1013,7 @@ const navLinks = [
   transition: transform 300ms ease;
 }
 .gp-step__weeks {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--tmpl-accent);
@@ -1081,14 +1079,14 @@ const navLinks = [
   color: var(--tmpl-fg);
 }
 .gp-founder__role {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--tmpl-accent);
   margin: 0 0 0.75rem;
 }
 .gp-founder__bio {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--tmpl-muted);
   line-height: 1.5;
   margin: 0 0 0.75rem;
@@ -1134,7 +1132,7 @@ const navLinks = [
   background: color-mix(in oklch, currentColor 3%, transparent);
 }
 .gp-award__pub {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--tmpl-accent);
@@ -1145,12 +1143,12 @@ const navLinks = [
   color: var(--tmpl-fg);
 }
 .gp-award__year {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   color: var(--tmpl-muted);
 }
 .gp-award__project {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--tmpl-muted);
   opacity: 0.7;
 }
@@ -1160,7 +1158,7 @@ const navLinks = [
 /* ============================== */
 .gp-contact {
   max-width: 100%;
-  padding: 6rem 2rem;
+  padding: 7rem 2rem;
 }
 .gp-contact__grid {
   display: grid;
@@ -1190,7 +1188,7 @@ const navLinks = [
   gap: 0.35rem;
 }
 .gp-contact__info-label {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--tmpl-accent);
@@ -1228,7 +1226,7 @@ a.gp-contact__info-value:hover {
   .gp-stat { border-bottom: 1px solid color-mix(in oklch, currentColor 8%, transparent); }
   .gp-stat:nth-child(2) { border-right: 0; }
   .gp-stat:nth-child(3), .gp-stat:nth-child(4) { border-bottom: 0; }
-  .gp-step { border-right: 0; }
+  .gp-step { border-left: 0; }
   .gp-award { border-right: 0; }
 }
 </style>

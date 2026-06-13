@@ -40,7 +40,7 @@ const articles = [
     readTime: '12 MIN',
     category: 'Esai',
     slug: 'tentang-orang-yang-menulis-di-kertas',
-    excerpt: 'Saya menemukan tulisan tangan ayah saya di laci ketiga lemari. Bukan catatan penting, hanya daftar belanja. Hurufnya miring ke kanan. Esai ini adalah upaya mengenalinya lagi, lewat apa yang dia tulis ketika tidak ada yang menyuruh dia menulis.',
+    excerpt: 'Saya menemukan tulisan tangan ayah di laci ketiga. Bukan catatan penting, hanya daftar belanja. Hurufnya miring ke kanan.',
   },
   {
     title: 'Catatan dari Kedai Kopi Dekat Pasar Minggu',
@@ -48,7 +48,7 @@ const articles = [
     readTime: '6 MIN',
     category: 'Catatan',
     slug: 'catatan-dari-kedai-kopi-dekat-pasar-minggu',
-    excerpt: 'Saya pergi ke kedai ini setiap Kamis selama dua tahun sebelum menyadari pelayan tetapnya tidak pernah mengingat wajah saya. Mungkin saya kurang ramah. Mungkin dia memang tidak ingat semua orang. Catatan kecil ini tidak punya kesimpulan.',
+    excerpt: 'Saya pergi ke kedai ini setiap Kamis selama dua tahun sebelum menyadari pelayan tetapnya tidak pernah mengingat wajah saya.',
   },
   {
     title: 'Wawancara: Seorang Pustakawan Tua di Yogyakarta',
@@ -56,7 +56,7 @@ const articles = [
     readTime: '22 MIN',
     category: 'Wawancara',
     slug: 'wawancara-seorang-pustakawan-tua-di-yogyakarta',
-    excerpt: 'Pak Hadi sudah menjaga Perpustakaan Kota Yogyakarta selama tiga puluh dua tahun. Saya menemuinya di ruang belakang yang penuh bau kertas tua. Wawancara ini berlangsung empat jam dengan dua cangkir teh. Saya mencatat semuanya di buku tulis.',
+    excerpt: 'Pak Hadi sudah menjaga Perpustakaan Kota Yogyakarta selama tiga puluh dua tahun. Wawancara ini berlangsung empat jam dengan dua cangkir teh.',
   },
   {
     title: 'Daftar Bacaan November 2026',
@@ -64,7 +64,7 @@ const articles = [
     readTime: '4 MIN',
     category: 'Daftar bacaan',
     slug: 'daftar-bacaan-november-2026',
-    excerpt: 'Bulan ini saya lebih banyak membaca esai panjang tentang kesunyian, satu novel terjemahan dari Korea, dan buku tua tentang cara orang Batak menyimpan makanan. Daftar ini bukan rekomendasi melainkan inventarisasi apa yang sempat membuat saya berhenti menandai halaman.',
+    excerpt: 'Bulan ini saya lebih banyak membaca esai panjang tentang kesunyian dan satu novel terjemahan dari Korea. Bukan rekomendasi, hanya inventarisasi apa yang sempat membuat saya berhenti menandai halaman.',
   },
   {
     title: 'Mengapa Saya Berhenti Membaca Twitter Pagi Hari',
@@ -72,7 +72,7 @@ const articles = [
     readTime: '9 MIN',
     category: 'Esai',
     slug: 'mengapa-saya-berhenti-membaca-twitter-pagi-hari',
-    excerpt: 'Selama tiga tahun saya membuka Twitter sebelum mandi. Tahun lalu saya memutuskan berhenti. Tidak ada yang dramatis, hanya rasa lelah yang menumpuk tanpa saya sadari. Esai ini adalah catatan tentang apa yang terjadi ketika pagi tidak lagi dimulai dengan amarah orang lain.',
+    excerpt: 'Selama tiga tahun saya membuka Twitter sebelum mandi. Tahun lalu saya berhenti. Tidak ada yang dramatis, hanya rasa lelah yang menumpuk.',
   },
   {
     title: 'Surat Pendek untuk Teman yang Pindah ke Luar Negeri',
@@ -80,7 +80,7 @@ const articles = [
     readTime: '5 MIN',
     category: 'Catatan',
     slug: 'surat-pendek-untuk-teman-yang-pindah-ke-luar-negeri',
-    excerpt: 'Dear Tama, kamu sudah enam bulan di Amsterdam. Saya tidak tahu apakah kamu membaca ini. Saya hanya ingin bilang, kita tidak perlu sering-sering bicara. Tapi tolong kirim satu foto langit dari jendela apartemenmu yang baru.',
+    excerpt: 'Dear Tama, kamu sudah enam bulan di Amsterdam. Saya hanya ingin bilang, kita tidak perlu sering-sering bicara. Tapi tolong kirim satu foto langit dari jendelamu.',
   },
   {
     title: 'Percakapan dengan Penulis yang Tidak Lagi Menulis',
@@ -88,7 +88,7 @@ const articles = [
     readTime: '18 MIN',
     category: 'Wawancara',
     slug: 'percakapan-dengan-penulis-yang-tidak-lagi-menulis',
-    excerpt: 'Dia berhenti menulis di usia empat puluh tiga. Tidak ada skandal, tidak ada kemarahan pada industri. Hanya keputusan pelan bahwa dia sudah selesai. Saya menemukan dia di sebuah kedai di Bandung dan merekam percakapan ini selama hampir tiga jam.',
+    excerpt: 'Dia berhenti menulis di usia empat puluh tiga. Tidak ada skandal, hanya keputusan pelan bahwa dia sudah selesai.',
   },
 ]
 
@@ -101,7 +101,7 @@ const archiveArticles = [
     readTime: '7 MIN',
     category: 'Esai',
     slug: 'kota-yang-tidak-pernah-tidur',
-    excerpt: 'Jakarta bukan kota yang tidak pernah tidur. Jakarta adalah kota yang dipaksa tidak tidur. Perbedaannya ada pada siapa yang memutuskan.',
+    excerpt: 'Jakarta bukan kota yang tidak pernah tidur. Jakarta adalah kota yang dipaksa tidak tidur.',
   },
   {
     title: 'Resep Sambal dari Nenek yang Tidak Pernah Ditulis',
@@ -109,7 +109,7 @@ const archiveArticles = [
     readTime: '3 MIN',
     category: 'Catatan',
     slug: 'resep-sambal-dari-nenek',
-    excerpt: 'Nenek tidak pernah menulis resepnya. Semuanya di tangan. Seberapa banyak cabai, seberapa lama diulek, kapan harus berhenti. Saya mencoba mengingatnya setiap kali memasak.',
+    excerpt: 'Nenek tidak pernah menulis resepnya. Semuanya di tangan. Saya mencoba mengingatnya setiap kali memasak.',
   },
   {
     title: 'Tentang Kenapa Kita Berhenti Membaca Buku Fisik',
@@ -117,23 +117,23 @@ const archiveArticles = [
     readTime: '11 MIN',
     category: 'Esai',
     slug: 'tentang-kenapa-kita-berhenti-membaca-buku-fisik',
-    excerpt: 'Bukan karena tidak suka. Bukan karena tidak punya waktu. Mungkin karena kita sudah terlalu terbiasa membaca sesuatu yang bisa di-scroll.',
+    excerpt: 'Bukan karena tidak suka. Mungkin karena kita sudah terlalu terbiasa membaca sesuatu yang bisa di-scroll.',
   },
 ]
 
 const testimonials = [
   {
-    quote: 'Dulu saya pikir menulis esai pendek itu mudah. Sampai saya membaca Catatan Harian dan menyadari bahwa tulisan Rara selalu selesai dengan satu kalimat yang membuat saya diam selama beberapa menit. Sekarang saya tidak lagi menganggap esai pendek mudah.',
+    quote: 'Tulisan Rara selalu selesai dengan satu kalimat yang membuat saya diam selama beberapa menit. Sekarang saya tidak lagi menganggap esai pendek mudah.',
     name: 'Andri Setiawan',
     role: 'penulis Kopi Pagi',
   },
   {
-    quote: 'Saya membaca Catatan Harian di kereta setiap pagi. Tidak pernah lebih dari tiga menit, karena eseinya memang pendek. Tapi setelah membaca satu, saya selalu menulis satu catatan kecil di notes HP. Sekarang saya punya 92 catatan.',
+    quote: 'Saya membaca Catatan Harian di kereta setiap pagi. Tidak pernah lebih dari tiga menit. Tapi setelah membaca satu, saya selalu menulis catatan kecil di notes HP.',
     name: 'Mira Lestari',
     role: 'desainer grafis di Bandung',
   },
   {
-    quote: 'Rara adalah salah satu dari sedikit penulis Indonesia yang tidak merasa perlu membagikan kunci hidupnya. Ia hanya menulis apa yang ia perhatikan. Setelah dua tahun membaca Catatan Harian, saya rasa saya menjadi lebih sabar, bukan lebih pintar.',
+    quote: 'Rara hanya menulis apa yang ia perhatikan. Setelah dua tahun membaca Catatan Harian, saya rasa saya menjadi lebih sabar, bukan lebih pintar.',
     name: 'Hasan Albanna',
     role: 'guru SMA di Makassar',
   },
@@ -142,23 +142,23 @@ const testimonials = [
 const faqs = [
   {
     q: 'Berapa lama Catatan Harian terbit?',
-    a: 'Setiap Kamis pagi, tanpa kecuali. Kalau Kamis bertepatan dengan hari libur, tetap terbit. Kalau Rara sakit, tulisannya lebih pendek dari biasanya, tapi tetap terbit.',
+    a: 'Setiap Kamis pagi, tanpa kecuali. Kalau Rara sakit, tulisannya lebih pendek, tapi tetap terbit.',
   },
   {
     q: 'Apakah ini newsletter gratis atau berbayar?',
-    a: 'Gratis. Selamanya. Tidak ada tier premium, tidak ada paywall, tidak ada konten eksklusif. Tulisan Rara tidak tiba-tiba berubah setelah anda membayar.',
+    a: 'Gratis. Selamanya. Tidak ada tier premium, tidak ada paywall.',
   },
   {
     q: 'Bisa saya menerima edisi sebelumnya?',
-    a: 'Arsip di situs ini memuat semua edisi sejak edisi pertama November 2024. Gulir ke bagian Arsip, atau gunakan kolom pencarian di bawah.',
+    a: 'Arsip di situs ini memuat semua edisi sejak November 2024. Gulir ke bagian Arsip.',
   },
   {
     q: 'Boleh saya mengirim tulisan balasan untuk Rara?',
-    a: 'Boleh. Balas saja ke email yang anda terima dari newsletter ini. Rara membaca semua surat dan biasanya membalas dalam waktu tiga hari, kadang lebih lambat.',
+    a: 'Boleh. Balas saja ke email newsletter ini. Rara membaca semua surat dan biasanya membalas dalam tiga hari.',
   },
   {
     q: 'Apakah data saya aman?',
-    a: 'Email anda tidak disimpan di server mana pun. Subscribe menggunakan WhatsApp, bukan database. Arsip tidak memerlukan login.',
+    a: 'Email anda tidak disimpan di server mana pun. Subscribe via WhatsApp, bukan database.',
   },
 ]
 
@@ -300,7 +300,7 @@ onBeforeUnmount(() => {
         </h1>
 
         <p class="catatan__tagline">
-          Tulisan pendek yang terbit setiap Kamis pagi. Tidak ada notifikasi, tidak ada popup. Hanya tulisan.
+          Tulisan yang layak dibaca.
         </p>
 
         <div class="catatan__hero-cta">
@@ -366,16 +366,10 @@ onBeforeUnmount(() => {
 
             <div class="catatan__bio-text">
               <p>
-                Rara Adiswara menulis catatan sejak 2017. Sebelumnya ia adalah editor di sebuah jurnal sastra kecil di Yogyakarta selama enam tahun, pekerjaan yang tidak membuatnya terkenal tetapi membentuk cara ia membaca tulisan orang lain dengan saksama. Ia lahir di Padang dan pindah ke Jakarta pada usia dua puluh tiga tahun.
+                Rara Adiswara menulis catatan sejak 2017. Sebelumnya ia editor di jurnal sastra kecil di Yogyakarta selama enam tahun. Ia lahir di Padang, pindah ke Jakarta pada usia dua puluh tiga.
               </p>
               <p>
-                Tulisan-tulisannya kebanyakan esai pendek tentang membaca, menulis, kesepian kota, dan memori yang tidak berguna. Ia tidak punya tema besar. Yang ia punya adalah kebiasaan memperhatikan hal-hal kecil yang tidak perlu diperhatikan. Beberapa orang menyebut ini tidak berguna. Ia setuju.
-              </p>
-              <p>
-                Ia memulai Catatan Harian pada November 2024 setelah tiga tahun menulis di jurnal pribadi yang tidak pernah ia buka lagi. Alasan ia membuatnya publik sederhana: tulisan yang tidak dibaca orang lain terasa berat. Sekarang ada sekitar 2.400 orang yang membacanya setiap Kamis.
-              </p>
-              <p>
-                Rara tidak menganggap dirinya penulis. Ia menganggap dirinya orang yang kebetulan menulis. Jika anda ingin menulis surat kepadanya, balaslah ke surel apa pun yang anda terima dari newsletter ini. Ia membalas semua surat, biasanya dalam waktu tiga hari, kadang lebih lambat, selalu dengan tulisan yang panjang.
+                Tulisannya kebanyakan esai pendek tentang membaca, kesepian kota, dan memori yang tidak berguna. Ia memulai Catatan Harian November 2024 karena tulisan yang tidak dibaca orang lain terasa berat. Sekarang ada sekitar 2.400 orang yang membacanya setiap Kamis.
               </p>
             </div>
           </div>
@@ -465,7 +459,7 @@ onBeforeUnmount(() => {
           <p class="catatan__eyebrow" :style="monoStyle">BERLANGGANAN</p>
           <h2 :style="h2Style" class="catatan__section-title">Tetap terhubung</h2>
           <p class="catatan__subscribe-intro">
-            Catatan Harian terbit setiap Kamis pagi ke kotak masuk anda. Tidak ada iklan, tidak ada pelacakan, tidak ada email promosi.
+            Terbit setiap Kamis. Tanpa iklan, tanpa pelacakan.
           </p>
 
           <TmplForm
@@ -480,7 +474,7 @@ onBeforeUnmount(() => {
           />
 
           <p class="catatan__subscribe-note">
-            kami tidak menyimpan email anda. Pesan langsung terbuka di WhatsApp Rara. Balasan dalam 1 sampai 3 hari.
+            Email tidak disimpan. Pesan langsung ke WhatsApp Rara.
           </p>
         </div>
       </section>
@@ -596,15 +590,19 @@ onBeforeUnmount(() => {
   min-height: 100dvh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 6rem 1.5rem 4rem;
+  padding: 6rem 1.5rem 4rem 3rem;
+}
+@media (min-width: 768px) {
+  .catatan__hero {
+    padding: 6rem 2rem 4rem 6rem;
+  }
 }
 .catatan__hero-inner {
-  max-width: 640px;
-  text-align: center;
+  max-width: 560px;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.5rem;
 }
 .catatan__issue {
@@ -636,7 +634,6 @@ onBeforeUnmount(() => {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
-  justify-content: center;
   margin-top: 0.5rem;
 }
 .catatan__btn {
@@ -676,7 +673,7 @@ onBeforeUnmount(() => {
 .catatan__scroll-cue {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
   margin-top: 2rem;
   cursor: pointer;
@@ -742,11 +739,11 @@ onBeforeUnmount(() => {
 .catatan__section {
   position: relative;
   z-index: 1;
-  padding: 6rem 1.5rem;
+  padding: 5rem 1.5rem 5rem 3rem;
 }
 @media (min-width: 768px) {
   .catatan__section {
-    padding: 96px 2rem;
+    padding: 80px 2rem 80px 6rem;
   }
 }
 .catatan__section--warm {
@@ -833,12 +830,12 @@ onBeforeUnmount(() => {
   color: var(--tmpl-fg, #2B2520);
 }
 .catatan__bio-role {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--tmpl-muted, #7A6E60);
   margin: 0 0 0.25rem;
 }
 .catatan__bio-loc {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.04em;
   color: var(--tmpl-muted, #7A6E60);
   margin: 0;
@@ -904,7 +901,7 @@ onBeforeUnmount(() => {
   color: var(--tmpl-accent-fg, #F5EFE3);
   background: var(--tmpl-accent, #B85C3A);
   padding: 0.125rem 0.5rem;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 .catatan__post-read {
   font-size: 0.75rem;
@@ -955,7 +952,7 @@ onBeforeUnmount(() => {
   padding: 0.5rem 1rem;
   background: transparent;
   border: 1px solid var(--tmpl-border, #DCD3C0);
-  border-radius: 999px;
+  border-radius: 6px;
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--tmpl-muted, #7A6E60);
@@ -1020,7 +1017,7 @@ onBeforeUnmount(() => {
   color: var(--tmpl-accent, #B85C3A);
   padding: 0.125rem 0.375rem;
   border: 1px solid var(--tmpl-accent, #B85C3A);
-  border-radius: 2px;
+  border-radius: 6px;
 }
 .catatan__archive-read {
   font-size: 0.75rem;
@@ -1046,7 +1043,7 @@ onBeforeUnmount(() => {
 .catatan__subscribe-note {
   font-size: 0.75rem;
   color: var(--tmpl-muted, #7A6E60);
-  text-align: center;
+  text-align: left;
   margin: 1.5rem 0 0;
   opacity: 0.7;
 }
@@ -1078,7 +1075,7 @@ onBeforeUnmount(() => {
 .catatan__testimoni-quote {
   font-family: var(--tmpl-font-display, 'Lora', Georgia, serif);
   font-style: italic;
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 0.8;
   color: var(--tmpl-accent, #B85C3A);
   margin-bottom: 0.5rem;
@@ -1153,11 +1150,17 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 2rem;
   padding: 1.5rem;
+  padding-left: 3rem;
   border-top: 1px solid var(--tmpl-border, #DCD3C0);
   flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  .catatan__footer-bottom {
+    padding-left: 6rem;
+  }
 }
 .catatan__footer-link {
   font-size: 0.8125rem;

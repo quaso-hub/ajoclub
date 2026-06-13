@@ -38,12 +38,12 @@ const tiers = [
     name: 'Kopi',
     price: 'Rp 25rb',
     period: 'sekali',
-    description: 'Traktir Raka satu kopi. Sesederhana itu.',
+    description: 'Traktir satu kopi.',
     popular: false,
     perks: [
-      'Ucapan terima kasih personal lewat email',
-      'Nama kamu di halaman pendukung',
-      'Akses ke esai eksklusif bulanan',
+      'Ucapan terima kasih lewat email',
+      'Nama di halaman pendukung',
+      'Esai eksklusif bulanan',
     ],
   },
   {
@@ -51,12 +51,12 @@ const tiers = [
     name: 'Bulanan',
     price: 'Rp 50rb',
     period: 'per bulan',
-    description: 'Dukungan rutin supaya Raka bisa konsisten nulis.',
+    description: 'Dukungan rutin, konsistensi nulis.',
     popular: true,
     perks: [
-      'Semua yang ada di tier Kopi',
-      'Akses awal ke esai baru (sebelum rilis publik)',
-      'Undangan obrolan bulanan lewat video call',
+      'Semua di tier Kopi',
+      'Akses awal esai baru',
+      'Obrolan bulanan via video call',
     ],
   },
   {
@@ -64,12 +64,12 @@ const tiers = [
     name: 'Tahunan',
     price: 'Rp 500rb',
     period: 'per tahun',
-    description: 'Hemat dua bulan. Komitmen panjang, dampak lebih besar.',
+    description: 'Hemat dua bulan, dampak lebih besar.',
     popular: false,
     perks: [
-      'Semua yang ada di tier Bulanan',
-      'Buku fisik pertama Raka (saat terbit)',
-      'Konsultasi 1-on-1 setiap kuartal',
+      'Semua di tier Bulanan',
+      'Buku fisik pertama saat terbit',
+      'Konsultasi 1-on-1 per kuartal',
     ],
   },
 ]
@@ -82,52 +82,52 @@ const milestones = [
 ]
 
 const posts = [
-  { title: 'Bahasa yang Hilang di Pinggir Jalan', date: '12 JUN 2026', read: '8 menit', excerpt: 'Tentang papan nama warung yang semakin mirip satu sama lain. Dan kenapa itu penting.' },
-  { title: 'Trotoar Bukan Hiasan', date: '5 JUN 2026', read: '11 menit', excerpt: 'Esai panjang tentang hak pejalan kaki di kota yang dibangun untuk mobil.' },
-  { title: 'Mengapa Saya Tidak Punya Podcast', date: '29 MEI 2026', read: '6 menit', excerpt: 'Alasan sederhana kenapa menulis tetap lebih jujur daripada bicara.' },
-  { title: 'Surat untuk Tetangga yang Pindah', date: '22 MEI 2026', read: '5 menit', excerpt: 'Tentang kenapa kita tidak pernah bilang selamat tinggal dengan benar.' },
-  { title: 'Kota Kecil yang Tidak Ingin Dikenal', date: '15 MEI 2026', read: '9 menit', excerpt: 'Perjalanan ke sebuah kabupaten yang tidak ada di Google Maps.' },
-  { title: 'Daftar Bacaan Mei 2026', date: '8 MEI 2026', read: '4 menit', excerpt: 'Buku, esai, dan artikel yang membuat saya berhenti scroll bulan ini.' },
+  { title: 'Bahasa yang Hilang di Pinggir Jalan', date: '12 JUN 2026', read: '8 menit', excerpt: 'Papan nama warung yang semakin mirip satu sama lain.' },
+  { title: 'Trotoar Bukan Hiasan', date: '5 JUN 2026', read: '11 menit', excerpt: 'Hak pejalan kaki di kota yang dibangun untuk mobil.' },
+  { title: 'Mengapa Saya Tidak Punya Podcast', date: '29 MEI 2026', read: '6 menit', excerpt: 'Kenapa menulis tetap lebih jujur daripada bicara.' },
+  { title: 'Surat untuk Tetangga yang Pindah', date: '22 MEI 2026', read: '5 menit', excerpt: 'Kenapa kita tidak pernah bilang selamat tinggal dengan benar.' },
+  { title: 'Kota Kecil yang Tidak Ingin Dikenal', date: '15 MEI 2026', read: '9 menit', excerpt: 'Kabupaten yang tidak ada di Google Maps.' },
+  { title: 'Daftar Bacaan Mei 2026', date: '8 MEI 2026', read: '4 menit', excerpt: 'Buku dan esai yang membuat saya berhenti scroll.' },
 ]
 
 const testimonials = [
   {
-    quote: 'Saya sudah baca tulisan Raka sejak 2024. Setiap Jumat pagi, sebelum kopi habis, esainya sudah selesai saya baca. Rasanya seperti punya teman yang benar-benar memperhatikan dunia.',
+    quote: 'Setiap Jumat pagi, sebelum kopi habis, esai Raka sudah selesai saya baca. Rasanya seperti punya teman yang memperhatikan dunia.',
     name: 'Sinta Wulandari',
-    role: 'guru bahasa di Yogyakarta',
+    role: 'guru bahasa, Yogyakarta',
   },
   {
-    quote: 'Raka menulis tentang hal-hal yang saya tahu tapi tidak bisa saya ungkapkan. Trotoar, warung, bahasa jalan. Setelah baca esainya, saya jadi lebih memperhatikan tempat tinggal saya sendiri.',
+    quote: 'Raka menulis tentang hal yang saya tahu tapi tidak bisa ungkapkan. Setelah baca, saya jadi lebih memperhatikan tempat tinggal saya sendiri.',
     name: 'Budi Santoso',
-    role: 'arsitek di Bandung',
+    role: 'arsitek, Bandung',
   },
   {
-    quote: 'Saya traktir Raka kopi karena saya percaya tulisan yang bagus butuh waktu, dan waktu butuh uang. Ini investasi kecil untuk sesuatu yang membuat hidup saya sedikit lebih bermakna.',
+    quote: 'Saya traktir kopi karena tulisan yang bagus butuh waktu, dan waktu butuh uang. Investasi kecil untuk hidup yang sedikit lebih bermakna.',
     name: 'Dita Kusuma',
-    role: 'desainer grafis di Jakarta',
+    role: 'desainer grafis, Jakarta',
   },
 ]
 
 const faqs = [
   {
-    q: 'Kenapa harus bayar? Bukannya tulisan harusnya gratis?',
-    a: 'Tulisan Raka tetap gratis dibaca semua orang. Dukunganmu membayar waktu yang Raka butuhkan untuk riset, menulis, dan mengedit. Tanpa dukungan, Raka harus cari kerja lain dan tulisannya jadi lebih jarang.',
+    q: 'Kenapa harus bayar?',
+    a: 'Tulisan tetap gratis. Dukunganmu membayar waktu riset, menulis, dan mengedit. Tanpa itu, Raka harus cari kerja lain.',
   },
   {
     q: 'Uangnya dipakai untuk apa?',
-    a: 'Sebagian besar untuk biaya hidup Raka (sewa, makan, transport riset). Sisanya untuk langganan riset, bayar editor freelance, dan ongkos cetak buku pertama. Raka publikasi laporan keuangan setiap kuartal.',
+    a: 'Biaya hidup, langganan riset, editor freelance, dan ongkos cetak buku. Laporan keuangan dipublikasi setiap kuartal.',
   },
   {
     q: 'Bisa berhenti kapan saja?',
-    a: 'Bisa. Untuk tier Bulanan dan Tahunan, kamu bisa berhenti kapan saja tanpa penalti. Dukungan yang sudah dibayar tidak bisa dikembalikan, tapi akses tetap aktif sampai periode berakhir.',
+    a: 'Bisa, tanpa penalti. Akses tetap aktif sampai periode berakhir.',
   },
   {
-    q: 'Saya di luar Indonesia, bisa tetap dukung?',
-    a: 'Bisa. Pembayaran bisa lewat kartu kredit internasional atau transfer bank. Raka akan sesuaikan harga sesuai daya beli negara kamu kalau kamu hubungi langsung.',
+    q: 'Saya di luar Indonesia, bisa?',
+    a: 'Bisa. Kartu kredit internasional atau transfer bank. Harga bisa disesuaikan.',
   },
   {
-    q: 'Apa bedanya dengan Patreon atau Trakteer?',
-    a: 'Tidak banyak bedanya dari sisi fitur. Yang membedakan adalah Raka punya kendali penuh atas data pendukungnya dan tidak tergantung platform pihak ketiga. Plus, kamu bisa baca semua tulisan tanpa harus login.',
+    q: 'Apa bedanya dengan Patreon?',
+    a: 'Raka punya kendali penuh atas data pendukung. Plus, semua tulisan bisa dibaca tanpa login.',
   },
 ]
 
@@ -218,7 +218,7 @@ onBeforeUnmount(() => {
         </h1>
 
         <p class="raka__tagline">
-          Saya menulis esai panjang setiap Jumat tentang desain, urbanisme, dan bahasa Indonesia sebagai bahasa yang hidup. Tanpa iklan, tanpa SEO. Kalau kamu suka, traktir saya kopi.
+          Esai panjang setiap Jumat tentang desain, urbanisme, dan bahasa Indonesia. Tanpa iklan, tanpa SEO. Kalau suka, traktir kopi.
         </p>
 
         <!-- Tip selector -->
@@ -273,16 +273,10 @@ onBeforeUnmount(() => {
         <div class="raka__bio">
           <div class="raka__bio-text">
             <p>
-              Raka Pratama menulis esai sejak 2019. Sebelumnya ia bekerja sebagai jurnalis lepas di beberapa media online di Jakarta selama empat tahun, pekerjaan yang mengajarinya bahwa berita cepat habis tapi tulisan yang pelan bisa bertahan lama. Ia lahir di Semarang dan pindah ke Bandung pada usia dua puluh lima tahun.
+              Raka Pratama menulis esai sejak 2019. Dulu jurnalis lepas di Jakarta, sekarang menetap di Bandung. Tulisannya tentang kota, bahasa, dan cara orang Indonesia hidup di ruang yang tidak dirancang untuk mereka.
             </p>
             <p>
-              Tulisan-tulisannya kebanyakan esai panjang tentang kota, bahasa, dan cara orang Indonesia hidup di ruang-ruang yang tidak dirancang untuk mereka. Ia tertarik pada trotoar yang hilang, warung yang berubah nama, dan percakapan yang terjadi di halte bus. Beberapa orang menyebut ini terlalu detail. Ia setuju, tapi tetap menulis.
-            </p>
-            <p>
-              Ia memulai Raka Writes pada Januari 2025 setelah dua tahun menulis di blog pribadi yang sepi pembaca. Alasan ia membuka dukungan sederhana: menulis esai panjang butuh waktu, dan waktu butuh uang. Sekarang ada 218 orang yang mendukungnya secara rutin, dan setiap Jumat pagi mereka menerima satu esai baru.
-            </p>
-            <p>
-              Raka percaya bahwa menulis adalah pekerjaan, bukan hobi. Tapi ia juga percaya bahwa pekerjaan yang baik tidak harus menghasilkan banyak uang. Yang penting cukup. Kalau kamu ingin bicara dengannya, kirim email atau traktir dia kopi. Dia membalas semua pesan, biasanya dalam waktu dua hari, kadang lebih lambat, selalu dengan jawaban yang panjang.
+              Ia memulai Raka Writes pada Januari 2025. Alasannya sederhana: menulis esai panjang butuh waktu, dan waktu butuh uang. 218 pendukung rutin menerima satu esai baru setiap Jumat pagi.
             </p>
           </div>
         </div>
@@ -297,7 +291,7 @@ onBeforeUnmount(() => {
         <p class="raka__eyebrow" :style="monoStyle">DUKUNG KARYA RAKA</p>
         <h2 :style="h2Style" class="raka__section-title">Pilih cara mendukung</h2>
         <p class="raka__section-desc">
-          Setiap dukungan, sekecil apa pun, membayar waktu yang Raka butuhkan untuk menulis. Tidak ada paksaan. Baca dulu, kalau suka, traktir kopi.
+          Dukung tulisan yang kamu suka. Baca dulu, kalau cocok, traktir kopi.
         </p>
 
         <div class="raka__tiers">
@@ -360,7 +354,7 @@ onBeforeUnmount(() => {
         <p class="raka__eyebrow" :style="monoStyle">TARGET BERSAMA</p>
         <h2 :style="h2Style" class="raka__section-title">Ke mana dukunganmu pergi</h2>
         <p class="raka__section-desc">
-          Ini bukan target Raka sendiri. Ini target kita bersama. Setiap kopi yang kamu traktir membawa kita satu langkah lebih dekat.
+          Setiap kopi membawa kita satu langkah lebih dekat ke target bersama.
         </p>
 
         <div class="raka__milestones">
@@ -593,7 +587,7 @@ onBeforeUnmount(() => {
   background: var(--tmpl-accent, #D4A843);
   color: var(--tmpl-fg, #2B2520);
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   font-family: var(--tmpl-font-body, 'Plus Jakarta Sans', system-ui, sans-serif);
   font-size: 1rem;
   font-weight: 600;
@@ -694,7 +688,7 @@ onBeforeUnmount(() => {
 }
 @media (min-width: 768px) {
   .raka__section {
-    padding: 80px 2rem;
+    padding: 100px 2rem;
   }
 }
 .raka__section--warm {
@@ -751,8 +745,9 @@ onBeforeUnmount(() => {
 }
 @media (min-width: 768px) {
   .raka__tiers {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1.15fr 1fr;
     gap: 1.25rem;
+    align-items: center;
   }
 }
 
@@ -760,7 +755,7 @@ onBeforeUnmount(() => {
   position: relative;
   background: var(--tmpl-bg, #F8F2E4);
   border: 1.5px solid var(--tmpl-border, #E0D8C4);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -863,7 +858,7 @@ onBeforeUnmount(() => {
   margin-top: 1rem;
   padding: 0.75rem 1.5rem;
   border: 1.5px solid var(--tmpl-border, #E0D8C4);
-  border-radius: 10px;
+  border-radius: 8px;
   background: transparent;
   font-family: var(--tmpl-font-body, 'Plus Jakarta Sans', system-ui, sans-serif);
   font-size: 0.875rem;
@@ -1049,7 +1044,7 @@ onBeforeUnmount(() => {
   margin-top: 2rem;
   padding: 0.875rem;
   border: 1.5px solid var(--tmpl-border, #E0D8C4);
-  border-radius: 12px;
+  border-radius: 8px;
   background: transparent;
   font-family: var(--tmpl-font-body, 'Plus Jakarta Sans', system-ui, sans-serif);
   font-size: 0.875rem;
