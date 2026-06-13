@@ -50,22 +50,22 @@ const selectedPlan = computed(() => PRICING[plan.value])
 
 // FAQ
 const faqs = [
-  { q: 'Apa Atur itu?', a: 'Aplikasi yang membantu tim kecil mengelola proyek, faktur, dan komunikasi klien dalam satu tempat.' },
-  { q: 'Untuk siapa?', a: 'Studio kreatif, agensi kecil, dan konsultan independen di Indonesia. Biasanya 1 sampai 15 orang. Bukan untuk korporasi besar.' },
-  { q: 'Harga berapa?', a: 'Mulai dari Rp 99.000 per bulan. Paket lengkap Agensi Rp 249.000. Studio Pro Rp 499.000. Tidak ada tier gratis, tapi ada trial 14 hari.' },
-  { q: 'Bisa integrasi dengan apa?', a: 'WhatsApp, Google Calendar, QRIS, BI-FAST, dan semua bank lokal Indonesia. Untuk integrasi custom, paket Studio Pro punya API dan webhook.' },
-  { q: 'Data aman?', a: 'Data disimpan di server di Jakarta (Supabase). Enkripsi TLS 1.3. Backup harian. Tidak dijual ke pihak ketiga. Tidak dipakai untuk training AI.' },
-  { q: 'Kalau saya non-teknis?', a: 'Atur dirancang untuk orang yang tidak punya kesabaran untuk software. Setup 7 menit, antarmuka Bahasa Indonesia, dukungan WhatsApp setiap hari kerja. Kalau bingung, telepon kami saja.' },
+  { q: 'Apa Atur itu?', a: 'SaaS yang membantu tim kecil mengelola proyek, faktur, dan klien dalam satu tempat. Seperti majalah, bukan dashboard.' },
+  { q: 'Untuk siapa?', a: 'Studio kreatif dan agensi kecil di Indonesia, 1 sampai 15 orang.' },
+  { q: 'Harga berapa?', a: 'Mulai Rp 99.000/bulan. Agensi Rp 249.000. Studio Pro Rp 499.000. Trial 14 hari, tanpa kartu kredit.' },
+  { q: 'Bisa integrasi dengan apa?', a: 'WhatsApp, Google Calendar, QRIS, BI-FAST, dan bank lokal. Paket Studio Pro punya API dan webhook.' },
+  { q: 'Data aman?', a: 'Server di Jakarta, enkripsi TLS 1.3, backup harian. Tidak dijual atau dipakai training AI.' },
+  { q: 'Kalau saya non-teknis?', a: 'Setup 7 menit, antarmuka Bahasa Indonesia, dukungan WhatsApp hari kerja.' },
 ]
 
 // Daftar Isi (TOC) — 6 articles
 const toc = [
-  { num: '01', code: 'SAMBUNG', title: 'Sambungkan brief, faktur, dan klien dalam satu tempat.', product: 'Atur Workspace' },
-  { num: '02', code: 'HITUNG', title: 'Hitung jam kerja, bagi tagihan, kirim invoice otomatis ke WhatsApp.', product: 'Atur Waktu' },
-  { num: '03', code: 'KIRIM', title: 'Kirim proposal dan kontrak tanpa bolak-balik email.', product: 'Atur Proposal' },
-  { num: '04', code: 'BAYAR', title: 'Terima pembayaran dari klien via QRIS, BI-FAST, atau transfer bank.', product: 'Atur Pembayaran' },
-  { num: '05', code: 'LAPOR', title: 'Lihat laporan keuangan studio tanpa bertanya ke akuntan.', product: 'Atur Laporan' },
-  { num: '06', code: 'BICARA', title: 'Ngobrol dengan tim lewat chat, langsung di samping setiap proyek.', product: 'Atur Pesan' },
+  { num: '01', code: 'SAMBUNG', title: 'Brief, faktur, dan klien dalam satu tempat.', product: 'Atur Workspace' },
+  { num: '02', code: 'HITUNG', title: 'Jam kerja, tagihan, dan invoice otomatis ke WhatsApp.', product: 'Atur Waktu' },
+  { num: '03', code: 'KIRIM', title: 'Proposal dan kontrak tanpa bolak-balik email.', product: 'Atur Proposal' },
+  { num: '04', code: 'BAYAR', title: 'Terima pembayaran via QRIS, BI-FAST, atau transfer bank.', product: 'Atur Pembayaran' },
+  { num: '05', code: 'LAPOR', title: 'Laporan keuangan studio tanpa bertanya ke akuntan.', product: 'Atur Laporan' },
+  { num: '06', code: 'BICARA', title: 'Chat tim, langsung di samping setiap proyek.', product: 'Atur Pesan' },
 ]
 
 // Klien marquee
@@ -482,7 +482,7 @@ const minDate = today.toISOString().slice(0, 10)
             </h1>
 
             <p class="atur-lede">
-              Aplikasi yang dirancang untuk tim kecil yang tidak punya kesabaran untuk spreadsheet. Setup tujuh menit. Bahasa Indonesia. Dukungan WhatsApp setiap hari kerja.
+              SaaS untuk tim kecil yang muak dengan spreadsheet. Setup 7 menit. Bahasa Indonesia. Dukungan WhatsApp.
             </p>
 
             <div class="atur-cta">
@@ -515,10 +515,7 @@ const minDate = today.toISOString().slice(0, 10)
       <section class="atur-lede-section" data-spread="2">
         <div class="atur-lede-wrap">
           <p class="atur-lede-large">
-            Kami membuat Atur karena kami juga bagian dari tim kecil &mdash; dan muak dengan software korporasi 500 orang.
-          </p>
-          <p class="atur-lede-small">
-            Aplikasi ini gratis untuk dicoba 14 hari. Tidak perlu kartu kredit. Anda cukup punya tim, brief, dan niat berhenti pakai spreadsheet.
+            Kami membuat Atur karena kami juga bagian dari tim kecil &mdash; dan muak dengan software korporasi 500 orang. Trial 14 hari, tanpa kartu kredit.
           </p>
         </div>
       </section>
@@ -545,7 +542,7 @@ const minDate = today.toISOString().slice(0, 10)
             Apa yang ada di Atur: <em>enam modul</em>, satu aplikasi.
           </h2>
           <p class="atur-section-sub">
-            Setiap modul berdiri sendiri. Beli satu, pakai satu, tambah yang lain saat tim tumbuh.
+            Enam modul berdiri sendiri. Beli satu, tambah yang lain saat tim tumbuh.
           </p>
         </div>
 
@@ -568,10 +565,10 @@ const minDate = today.toISOString().slice(0, 10)
         <div class="atur-section-head">
           <p class="atur-eyebrow" :style="monoStyle">05 / KOLOM &middot; HARGA</p>
           <h2 :style="h2Style" class="text-balance">
-            Tiga paket, <em>tanpa tier gratis</em>. Karena gratis bukan strategi, gratis adalah alasan untuk pergi.
+            Tiga paket, <em>tanpa tier gratis</em>. Gratis bukan strategi.
           </h2>
           <p class="atur-section-sub">
-            Paket kamu gratis untuk dicoba 14 hari, lalu disesuaikan dengan tim kamu. Geser slider di bawah untuk hitung sendiri.
+            Trial 14 hari. Geser slider untuk hitung harga tim kamu.
           </p>
         </div>
 
@@ -665,7 +662,7 @@ const minDate = today.toISOString().slice(0, 10)
         <div class="atur-section-head">
           <p class="atur-eyebrow" :style="monoStyle">07 / KOLOFON</p>
           <h2 :style="h2Style" class="text-balance">
-            Pertanyaan yang sering <em>ditanya</em> sebelum daftar.
+            Pertanyaan sebelum <em>daftar</em>.
           </h2>
         </div>
 
@@ -708,7 +705,7 @@ const minDate = today.toISOString().slice(0, 10)
         <!-- About / philosophy -->
         <div class="atur-about">
           <p class="atur-about__text" :style="h2Style">
-            Atur Studio adalah tim kecil yang berbasis di Jakarta. Kami membuat Atur karena kami juga bagian dari tim kecil &mdash; dan muak dengan software yang dirancang untuk korporasi 500 orang. Aplikasi ini gratis untuk dicoba. Kalau kamu tim kecil dan muak dengan spreadsheet, <em>Atur untuk kamu.</em>
+            Atur Studio, Jakarta. Tim kecil yang membuat SaaS untuk tim kecil. Trial 14 hari &mdash; kalau kamu muak dengan spreadsheet, <em>Atur untuk kamu.</em>
           </p>
         </div>
 
@@ -770,7 +767,7 @@ const minDate = today.toISOString().slice(0, 10)
             <UIcon name="i-lucide-x" class="w-4 h-4" />
           </button>
           <h3 :style="h2Style">Jadwalkan demo 30 menit</h3>
-          <p class="atur-modal__sub">Lewat Zoom, pakai data contoh dari bisnis kamu. Tidak perlu install apa-apa.</p>
+          <p class="atur-modal__sub">Lewat Zoom, pakai data bisnis kamu. Tidak perlu install.</p>
 
           <form class="atur-modal__form" @submit.prevent="sendDemo">
             <label>
@@ -978,26 +975,20 @@ const minDate = today.toISOString().slice(0, 10)
 
 /* === Lede — SPREAD 2 === */
 .atur-lede-section {
-  padding: 6rem 1.5rem;
+  padding: 8rem 1.5rem;
   border-bottom: 1px solid color-mix(in oklch, currentColor 8%, transparent);
 }
 .atur-lede-wrap {
   max-width: 36rem;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 .atur-lede-large {
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 400;
   font-style: italic;
-  line-height: 1.4;
+  line-height: 1.45;
   letter-spacing: -0.015em;
-  margin: 0 0 1.5rem;
-}
-.atur-lede-small {
-  font-size: 14px;
-  opacity: 0.65;
-  line-height: 1.6;
   margin: 0;
 }
 
@@ -1014,7 +1005,7 @@ const minDate = today.toISOString().slice(0, 10)
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 400;
   font-style: italic;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   color: var(--tmpl-accent);
   padding: 0;
@@ -1054,7 +1045,7 @@ const minDate = today.toISOString().slice(0, 10)
 
 /* === Daftar Isi — SPREAD 4 === */
 .atur-toc-section {
-  padding: 6rem 1.5rem;
+  padding: 8rem 1.5rem;
   max-width: 80rem;
   margin: 0 auto;
   border-bottom: 1px solid color-mix(in oklch, currentColor 8%, transparent);
@@ -1118,7 +1109,7 @@ const minDate = today.toISOString().slice(0, 10)
 
 /* === Kolom — SPREAD 5 (Pricing) === */
 .atur-kolom-section {
-  padding: 6rem 1.5rem;
+  padding: 8rem 1.5rem;
   max-width: 80rem;
   margin: 0 auto;
   border-bottom: 1px solid color-mix(in oklch, currentColor 8%, transparent);
@@ -1126,7 +1117,7 @@ const minDate = today.toISOString().slice(0, 10)
 .atur-calc {
   background: var(--tmpl-surface);
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 2rem;
   margin: 0 auto 3rem;
   max-width: 56rem;
@@ -1273,7 +1264,7 @@ const minDate = today.toISOString().slice(0, 10)
   position: relative;
   padding: 1.75rem 1.5rem;
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--tmpl-surface);
   cursor: pointer;
   transition: all 200ms ease;
@@ -1432,7 +1423,7 @@ const minDate = today.toISOString().slice(0, 10)
 
 /* === Kolofon — SPREAD 7 === */
 .atur-kolofon-section {
-  padding: 6rem 1.5rem 0;
+  padding: 8rem 1.5rem 0;
   max-width: 56rem;
   margin: 0 auto;
 }
@@ -1453,7 +1444,7 @@ const minDate = today.toISOString().slice(0, 10)
   align-items: flex-start;
   gap: 1rem;
   width: 100%;
-  padding: 1.25rem 0.5rem;
+  padding: 1.5rem 0.5rem;
   background: transparent;
   border: 0;
   color: inherit;
@@ -1501,7 +1492,7 @@ const minDate = today.toISOString().slice(0, 10)
 .atur-about__text {
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.55;
   letter-spacing: -0.015em;
   max-width: 40rem;
   margin: 0 auto;
@@ -1643,7 +1634,7 @@ const minDate = today.toISOString().slice(0, 10)
   background: var(--tmpl-bg);
   color: var(--tmpl-fg);
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 14px;
+  border-radius: 10px;
   padding: 2rem;
 }
 .atur-modal__close {
