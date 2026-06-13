@@ -42,12 +42,12 @@ const klien = [
 ]
 
 const features = [
-  { icon: 'i-lucide-zap', name: 'Alur Otomatis', desc: 'Atur trigger dan aksi. Biarkan sistem yang jalan tanpa kamu.' },
-  { icon: 'i-lucide-database', name: 'Data Terhubung', desc: 'Satu sumber kebenaran. Semua data di satu tempat, selalu sinkron.' },
-  { icon: 'i-lucide-bar-chart-3', name: 'Laporan Instan', desc: 'Klik satu tombol, laporan siap. Tidak perlu minta tolong akuntan.' },
-  { icon: 'i-lucide-users', name: 'Tim & Akses', desc: 'Atur siapa bisa lihat apa. Kasir tidak perlu laporan keuangan.' },
-  { icon: 'i-lucide-credit-card', name: 'Integrasi Lokal', desc: 'QRIS, GoPay, OVO, BCA, Mandiri. Semua terhubung.' },
-  { icon: 'i-lucide-bell', name: 'Notifikasi Cerdas', desc: 'Alert stok rendah, tagihan jatuh tempo, promo yang perlu dikirim.' },
+  { icon: 'i-lucide-zap', name: 'Alur Otomatis', desc: 'Trigger dan aksi jalan sendiri.' },
+  { icon: 'i-lucide-database', name: 'Data Terhubung', desc: 'Semua data di satu tempat, selalu sinkron.' },
+  { icon: 'i-lucide-bar-chart-3', name: 'Laporan Instan', desc: 'Satu klik, laporan siap.' },
+  { icon: 'i-lucide-users', name: 'Tim & Akses', desc: 'Atur siapa bisa lihat apa.' },
+  { icon: 'i-lucide-credit-card', name: 'Integrasi Lokal', desc: 'QRIS, GoPay, OVO, BCA, Mandiri.' },
+  { icon: 'i-lucide-bell', name: 'Notifikasi Cerdas', desc: 'Stok rendah, tagihan jatuh tempo, promo.' },
 ]
 
 const PRICING = {
@@ -67,12 +67,12 @@ const testimonials = [
 ]
 
 const faqs = [
-  { q: 'Apa itu Lintas?', a: 'Lintas adalah aplikasi operasional untuk UMKM Indonesia. Satu tempat untuk data, laporan, dan otomatisasi.' },
-  { q: 'Berapa harganya?', a: 'Mulai dari Rp 99.000 per bulan. Tidak ada tier gratis, tapi ada trial 14 hari tanpa kartu kredit.' },
-  { q: 'Bisa integrasi dengan apa?', a: 'QRIS, GoPay, OVO, BCA, Mandiri, dan semua bank lokal. Untuk integrasi custom, paket Perusahaan punya API.' },
-  { q: 'Data saya aman?', a: 'Data disimpan di server Jakarta. Enkripsi TLS 1.3. Backup harian. Tidak dijual ke pihak ketiga.' },
-  { q: 'Kalau saya non-teknis?', a: 'Lintas dirancang untuk orang yang tidak sabar dengan software. Setup 15 menit, antarmuka Bahasa Indonesia.' },
-  { q: 'Bisa coba dulu?', a: 'Ya. Trial 14 hari gratis. Tidak perlu kartu kredit. Cukup daftar dan langsung pakai.' },
+  { q: 'Apa itu Lintas?', a: 'Aplikasi operasional untuk UMKM Indonesia. Data, laporan, otomatisasi dalam satu tempat.' },
+  { q: 'Berapa harganya?', a: 'Mulai Rp 99.000/bulan. Trial 14 hari gratis, tanpa kartu kredit.' },
+  { q: 'Bisa integrasi dengan apa?', a: 'QRIS, GoPay, OVO, BCA, Mandiri. Paket Perusahaan punya API untuk integrasi custom.' },
+  { q: 'Data saya aman?', a: 'Server Jakarta, enkripsi TLS 1.3, backup harian. Tidak dijual ke pihak ketiga.' },
+  { q: 'Kalau saya non-teknis?', a: 'Setup 15 menit. Antarmuka Bahasa Indonesia. Dirancang untuk yang tidak sabar dengan software.' },
+  { q: 'Bisa coba dulu?', a: 'Ya. 14 hari gratis, tanpa kartu kredit. Daftar dan langsung pakai.' },
 ]
 
 // ============================================================
@@ -281,7 +281,7 @@ function initBlob() {
           </h1>
 
           <p class="lintas-lede">
-            Hubungkan data, otomatiskan proses, dan ukur dampaknya. Tanpa spreadsheet, tanpa copy-paste.
+            Data terhubung, proses otomatis. Tanpa spreadsheet.
           </p>
 
           <div class="lintas-cta-row">
@@ -356,7 +356,7 @@ function initBlob() {
             Harga yang jujur. Tanpa kejutan.
           </h2>
           <p class="lintas-section-sub">
-            Gratis untuk dua pengguna pertama. Tidak perlu kartu kredit.
+            Trial 14 hari. Tanpa kartu kredit.
           </p>
         </div>
 
@@ -520,7 +520,7 @@ function initBlob() {
           Mulai malam ini.
         </h2>
         <p class="lintas-cta__sub">
-          Gratis untuk dua pengguna pertama. Tidak perlu kartu kredit.
+          14 hari gratis. Tanpa kartu kredit.
         </p>
         <div class="lintas-cta-row">
           <a href="#" class="lintas-btn lintas-btn--primary">
@@ -703,7 +703,7 @@ function initBlob() {
 /* MARQUEE                        */
 /* ============================== */
 .lintas-marquee-section {
-  padding: 2.5rem 0;
+  padding: 3.5rem 0;
   border-top: 1px solid color-mix(in oklch, currentColor 8%, transparent);
   border-bottom: 1px solid color-mix(in oklch, currentColor 8%, transparent);
 }
@@ -730,7 +730,7 @@ function initBlob() {
 .lintas-feature-card {
   padding: 1.75rem;
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   background: color-mix(in oklch, var(--section-bg, white) 60%, white);
   transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
@@ -745,19 +745,19 @@ function initBlob() {
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: color-mix(in oklch, var(--tmpl-accent) 12%, transparent);
   color: var(--tmpl-accent);
   margin-bottom: 1rem;
 }
 .lintas-feature-card__name {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.01em;
   margin: 0 0 0.5rem;
 }
 .lintas-feature-card__desc {
-  font-size: 13.5px;
+  font-size: 13px;
   line-height: 1.55;
   opacity: 0.75;
   margin: 0;
@@ -825,7 +825,7 @@ function initBlob() {
   position: relative;
   padding: 2rem 1.5rem;
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   background: color-mix(in oklch, var(--section-bg, white) 60%, white);
   display: flex;
   flex-direction: column;
@@ -943,7 +943,7 @@ function initBlob() {
 .lintas-testimonial {
   padding: 1.75rem;
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 12px;
+  border-radius: 8px;
   background: color-mix(in oklch, var(--section-bg, white) 60%, white);
   margin: 0;
   display: flex;
@@ -956,7 +956,7 @@ function initBlob() {
   border-color: color-mix(in oklch, var(--tmpl-accent) 25%, transparent);
 }
 .lintas-testimonial__quote {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
   font-style: italic;
   margin: 0;
@@ -1018,7 +1018,7 @@ function initBlob() {
 }
 .lintas-faq__q {
   flex: 1;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.005em;
   line-height: 1.4;
@@ -1030,7 +1030,7 @@ function initBlob() {
 }
 .lintas-faq__a {
   padding: 0 0.5rem 1.5rem 2.75rem;
-  font-size: 14.5px;
+  font-size: 14px;
   line-height: 1.6;
   margin: 0;
   opacity: 0.8;
@@ -1062,5 +1062,52 @@ function initBlob() {
   .lintas-hero__blob {
     display: none;
   }
+}
+
+/* === Color wash transitions — smooth fade between sections === */
+.lintas-hero::after,
+.lintas-features::after,
+.lintas-pricing::after,
+.lintas-testimonials::after,
+.lintas-faq-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--section-bg));
+  pointer-events: none;
+  z-index: 1;
+}
+.lintas-hero,
+.lintas-features,
+.lintas-pricing,
+.lintas-testimonials,
+.lintas-faq-section {
+  position: relative;
+  overflow: hidden;
+}
+/* Top fade for sections after hero */
+.lintas-marquee-section::before,
+.lintas-features::before,
+.lintas-pricing::before,
+.lintas-testimonials::before,
+.lintas-faq-section::before,
+.lintas-cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to top, transparent, var(--section-bg));
+  pointer-events: none;
+  z-index: 1;
+}
+.lintas-marquee-section,
+.lintas-cta-section {
+  position: relative;
+  overflow: hidden;
 }
 </style>

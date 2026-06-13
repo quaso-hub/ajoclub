@@ -31,14 +31,14 @@ let hoursInterval: number | null = null
 // MENU DATA (8 dishes, 4 categories)
 // ============================================================
 const menuItems = [
-  { id: 1, name: 'Gohu Ikan Maluku', category: 'Pembuka', price: 'Rp 180.000', description: 'Ikan tuna segar dari Ambon, kecombrang, jeruk limau, dan asap singkong. Piring pertama, bukan pembuka formal.' },
-  { id: 2, name: 'Sambal Matah Bali', category: 'Pembuka', price: 'Rp 95.000', description: 'Bawang merah, cabai rawit, serai, terasi. Disajikan dengan ikan bilis goreng dan nasi hangat.' },
-  { id: 3, name: 'Rendang Sapi Batipu', category: 'Utama', price: 'Rp 380.000', description: 'Daging sapi lokal dimasak delapan jam dengan empat belas rempah. Disajikan dengan nasi padi yang baru dipanen.' },
-  { id: 4, name: 'Ikan Bakar Jimbaran', category: 'Utama', price: 'Rp 320.000', description: 'Ikan kakap utuh, dibakar dengan arang kelapa. Sambal matah, plecing, dan nasi kuning.' },
-  { id: 5, name: 'Sate Lilit Klungkung', category: 'Utama', price: 'Rp 220.000', description: 'Daging ayam cincang dengan daun sereh dan parutan kelapa. Delapan tusuk, lontong, dan acar.' },
-  { id: 6, name: 'Bubur Manado', category: 'Penutup', price: 'Rp 85.000', description: 'Bubur nasi dengan ikan asin, daun kemangi, dan kuah santan. Sederhana, tapi mengenyangkan.' },
-  { id: 7, name: 'Pisang Goreng Madu', category: 'Penutup', price: 'Rp 75.000', description: 'Pisang kepok goreng, madu dari Flores, es krim vanilla. Manis yang tidak berlebihan.' },
-  { id: 8, name: 'Wedang Jahe Rempah', category: 'Minuman', price: 'Rp 45.000', description: 'Jahe merah, sereh, kayu manis, cengkeh. Diseduh pelan-pelan.' },
+  { id: 1, name: 'Gohu Ikan Maluku', category: 'Pembuka', price: 'Rp 180.000', description: 'Tuna Ambon, kecombrang, jeruk limau, asap singkong.' },
+  { id: 2, name: 'Sambal Matah Bali', category: 'Pembuka', price: 'Rp 95.000', description: 'Bawang merah, cabai rawit, serai, terasi. Ikan bilis goreng.' },
+  { id: 3, name: 'Rendang Sapi Batipu', category: 'Utama', price: 'Rp 380.000', description: 'Sapi lokal, delapan jam, empat belas rempah.' },
+  { id: 4, name: 'Ikan Bakar Jimbaran', category: 'Utama', price: 'Rp 320.000', description: 'Kakap utuh, arang kelapa, sambal matah, nasi kuning.' },
+  { id: 5, name: 'Sate Lilit Klungkung', category: 'Utama', price: 'Rp 220.000', description: 'Ayam cincang, daun sereh, kelapa parut. Delapan tusuk.' },
+  { id: 6, name: 'Bubur Manado', category: 'Penutup', price: 'Rp 85.000', description: 'Bubur nasi, ikan asin, kemangi, santan.' },
+  { id: 7, name: 'Pisang Goreng Madu', category: 'Penutup', price: 'Rp 75.000', description: 'Pisang kepok, madu Flores, es krim vanilla.' },
+  { id: 8, name: 'Wedang Jahe Rempah', category: 'Minuman', price: 'Rp 45.000', description: 'Jahe merah, sereh, kayu manis, cengkeh.' },
 ]
 
 const categories = ['Semua', 'Pembuka', 'Utama', 'Penutup', 'Minuman']
@@ -54,9 +54,9 @@ const filteredCount = computed(() => filteredMenu.value.length)
 // PRIVATE EVENTS (3)
 // ============================================================
 const events = [
-  { id: 1, name: 'Wine Pairing Dinner', format: '4 jam · 8 sajian · dari Rp 18.000.000 / grup', description: 'Empat sommelier dari Jakarta Wine and Cheese Co. memandu pencocokan anggur natural Indonesia dan import dari kebun-kebun kecil. Berlangsung 4 jam, Kamis atau Jumat malam.' },
-  { id: 2, name: "Chef's Table di Dapur", format: '4 jam · 8 sajian · dari Rp 12.000.000 / grup', description: 'Empat kursi kayu elm di tengah dapur, tepat di samping kompor. Aria menjelaskan setiap sajian sebelum dihidangkan: ritme, suhu, kenapa rempah ini bukan itu.' },
-  { id: 3, name: 'Garden Brunch Ahad', format: '4 jam · 5 sajian · dari Rp 8.500.000 / grup', description: 'Tersedia setiap hari Minggu pertama bulan. Taman belakang dengan 12 kursi, cahaya pagi tanpa filter. Menu lebih ringan, waktu lebih panjang, percakapan lebih pelan.' },
+  { id: 1, name: 'Wine Pairing Dinner', format: '4 jam · 8 sajian · dari Rp 18.000.000 / grup', description: 'Sommelier memandu anggur natural Indonesia dan import dari kebun kecil. Kamis atau Jumat malam.' },
+  { id: 2, name: "Chef's Table di Dapur", format: '4 jam · 8 sajian · dari Rp 12.000.000 / grup', description: 'Empat kursi di tengah dapur. Aria menjelaskan setiap sajian: ritme, suhu, kenapa rempah ini.' },
+  { id: 3, name: 'Garden Brunch Ahad', format: '4 jam · 5 sajian · dari Rp 8.500.000 / grup', description: 'Minggu pertama bulan. Taman belakang, 12 kursi, cahaya pagi tanpa filter.' },
 ]
 
 // ============================================================
@@ -83,7 +83,6 @@ const form = reactive({
   acara: '',
   nama: '',
   phone: '',
-  email: '',
   catatan: '',
 })
 
@@ -407,7 +406,7 @@ function fmtRp(n: number) {
           </div>
 
           <div class="sasana-hero__meta" :style="monoStyle">
-            Tempat duduk 7 · Tasting menu 8 sajian · Reservasi 7 hari sebelumnya
+            7 kursi · 8 sajian · Reservasi H-7
           </div>
         </div>
 
@@ -426,19 +425,16 @@ function fmtRp(n: number) {
         <div class="sasana-cerita__grid">
           <div class="sasana-cerita__letter">
             <p class="sasana-cerita__dropcap">
-              Surat untuk Anda.
+              Dapur ini lahir dari makan siang di rumah nenek di Bukittinggi — sayur baru dipetik, ikan baru ditangkap. Tidak istimewa, selalu cukup. Itu yang ingin saya bawa ke Sasana.
             </p>
             <p>
-              Dapur ini berawal dari kebiasaan makan siang di rumah nenek saya di Bukittinggi. Setiap pukul dua belas, nasi dihidangkan dengan sayur yang baru dipetik dan ikan yang baru ditangkap dari danau. Tidak ada yang istimewa, kecuali semuanya selalu terasa cukup. Itulah yang ingin saya hadirkan di Sasana: makanan yang membuat Anda merasa cukup, bukan kenyang; yang membuat Anda berhenti sejenak, bukan buru-buru pulang.
+              Saya tidak mengejar teknik. Saya mengejar rasa yang jujur. Setiap piring melewati pasar pagi, tangan supplier yang sama selama belasan tahun, kompor yang tidak tidur sebelum sebelas malam.
             </p>
             <p>
-              Saya tidak mengejar teknik. Saya mengejar rasa yang jujur. Setiap piring di meja Anda melewati pasar pagi itu, tangan supplier yang sama selama belasan tahun, dan kompor kami yang tidak pernah tidur sebelum pukul sebelas malam.
-            </p>
-            <p>
-              Tiga tahun lalu, saya pulang dari Kopenhagen dengan satu keyakinan: Indonesia tidak butuh meniru dapur Eropa. Kita punya apa yang mereka cari.
+              Pulang dari Kopenhagen dengan satu keyakinan: Indonesia tidak butuh meniru siapa pun. Kita punya apa yang mereka cari.
             </p>
             <p class="sasana-cerita__sig">
-              Aria Pratama, Kepala Dapur, Mei 2026
+              Aria Pratama, Kepala Dapur
             </p>
           </div>
 
@@ -457,7 +453,7 @@ function fmtRp(n: number) {
       <section id="menu" class="sasana-menu">
         <div class="sasana-section-head">
           <h2 :style="h2Style">Hidangan.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">8 sajian · 4 kategori · Berubah mengikuti musim</p>
+          <p class="sasana-section-sub" :style="monoStyle">8 sajian · musiman</p>
         </div>
 
         <!-- Filter pills -->
@@ -493,7 +489,7 @@ function fmtRp(n: number) {
         </TransitionGroup>
 
         <div class="sasana-menu__footer">
-          <p :style="monoStyle">Hidangan berubah setiap 6 minggu.</p>
+          <p :style="monoStyle">Berubah setiap 6 minggu.</p>
           <a href="https://instagram.com/sasana.jkt" target="_blank" rel="noopener" class="sasana-link">Lihat menu lengkap di Instagram →</a>
         </div>
       </section>
@@ -504,7 +500,7 @@ function fmtRp(n: number) {
       <section id="reservasi" class="sasana-reservasi">
         <div class="sasana-section-head">
           <h2 :style="h2Style">Cadangan.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">Untuk 2–12 orang · 7 hari sebelumnya</p>
+          <p class="sasana-section-sub" :style="monoStyle">2–12 orang · H-7</p>
         </div>
 
         <div class="sasana-reservasi__grid">
@@ -560,11 +556,6 @@ function fmtRp(n: number) {
             </div>
 
             <div class="sasana-form__field">
-              <label for="r-email" class="sasana-form__label" :style="monoStyle">Email</label>
-              <input id="r-email" v-model="form.email" type="email" placeholder="nama@email.com" class="sasana-form__input" />
-            </div>
-
-            <div class="sasana-form__field">
               <label for="r-catatan" class="sasana-form__label" :style="monoStyle">Catatan untuk dapur</label>
               <textarea id="r-catatan" v-model="form.catatan" rows="3" maxlength="280" placeholder="Alergi, permintaan khusus" class="sasana-form__input sasana-form__input--textarea" />
               <span class="sasana-form__counter" :style="monoStyle">{{ form.catatan.length }}/280</span>
@@ -580,19 +571,17 @@ function fmtRp(n: number) {
               class="sasana-btn sasana-btn--primary sasana-btn--full"
               :disabled="!form.tanggal || !form.waktu || !form.nama || !form.phone || (form.tanggal && isSunday(form.tanggal))"
             >
-              <span v-if="reservationSuccess">✓ WhatsApp terbuka — konfirmasi di sana.</span>
+              <span v-if="reservationSuccess">✓ WhatsApp terbuka</span>
               <span v-else>Kirim permintaan →</span>
             </button>
 
-            <p class="sasana-form__disclaimer" :style="monoStyle">10% biaya konfirmasi · dp ditransfer via QRIS · tidak bisa di-refund dalam 48 jam</p>
+            <p class="sasana-form__disclaimer" :style="monoStyle">DP 10% via QRIS · tidak refund dalam 48 jam</p>
           </form>
 
           <!-- Essay -->
           <div class="sasana-reservasi__essay">
-            <p>Dua belas kursi. Tidak lebih. Setiap kursi kami hitung karena dapur kami yang kecil hanya bisa memasak untuk sejumlah tangan pada satu waktu.</p>
-            <p>Menu tasting 8 sajian. Tidak ada pilihan a la carte. Kami tidak masak untuk permintaan khusus di luar alergi. Bukan karena tidak sopan, tapi karena menunya dirancang sebagai satu arc, bukan kumpulan hidangan.</p>
-            <p>Konfirmasi H-1. Kami akan WhatsApp Anda 24 jam sebelum tanggal untuk mengonfirmasi dan mengirim QRIS untuk DP 10%. Tanpa konfirmasi, kursi kami lepas.</p>
-            <p>Lebih dari 15 menit dari slot waktu, kami tidak bisa menjamin makanan Anda dimasak di suhu yang tepat. Hubungi kami jika terlambat.</p>
+            <p>Dua belas kursi. Tasting menu 8 sajian, tanpa a la carte. Menu dirancang sebagai satu arc — kami tidak masak untuk permintaan khusus di luar alergi.</p>
+            <p>Konfirmasi H-1 via WhatsApp. DP 10% via QRIS. Lebih dari 15 menit dari slot, kami tidak bisa jamin suhu makanan Anda.</p>
           </div>
         </div>
       </section>
@@ -603,7 +592,7 @@ function fmtRp(n: number) {
       <section id="acara" class="sasana-acara">
         <div class="sasana-section-head">
           <h2 :style="h2Style">Acara.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">Ruang pribadi · untuk 6–24 orang · Selasa – Sabtu</p>
+          <p class="sasana-section-sub" :style="monoStyle">6–24 orang · Selasa – Sabtu</p>
         </div>
 
         <div class="sasana-acara__grid">
@@ -623,7 +612,7 @@ function fmtRp(n: number) {
       <section id="lokasi" class="sasana-lokasi">
         <div class="sasana-section-head">
           <h2 :style="h2Style">Lokasi.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">Tebet, Jakarta Selatan</p>
+          <p class="sasana-section-sub" :style="monoStyle">Tebet, Jakarta Selatan · since 2024</p>
         </div>
 
         <div class="sasana-lokasi__grid">
@@ -644,21 +633,16 @@ function fmtRp(n: number) {
             </div>
             <div class="sasana-lokasi__item">
               <span class="sasana-lokasi__label" :style="monoStyle">Jam buka</span>
-              <p>Selasa – Sabtu · 18.00 – 22.30. Last seating 21.00.</p>
+              <p>Selasa – Sabtu · 18.00 – 22.30 · Last seating 21.00</p>
             </div>
             <div class="sasana-lokasi__item">
               <span class="sasana-lokasi__label" :style="monoStyle">Kontak</span>
-              <p><a href="tel:+622183594421" class="sasana-link">+62 21 8359 4421</a></p>
-              <p><a href="mailto:halo@sasana.id" class="sasana-link">halo@sasana.id</a></p>
+              <p><a href="tel:+622183594421" class="sasana-link">+62 21 8359 4421</a> · <a href="mailto:halo@sasana.id" class="sasana-link">halo@sasana.id</a></p>
               <p><a href="https://instagram.com/sasana.jkt" target="_blank" rel="noopener" class="sasana-link">@sasana.jkt</a></p>
             </div>
             <div class="sasana-lokasi__item">
-              <span class="sasana-lokasi__label" :style="monoStyle">Parkir</span>
-              <p>Tersedia 4 mobil di halaman, valet gratis.</p>
-            </div>
-            <div class="sasana-lokasi__item">
-              <span class="sasana-lokasi__label" :style="monoStyle">Akses</span>
-              <p>Stasiun MRT Tebet 8 menit jalan kaki. Halte TransJakarta 3 menit.</p>
+              <span class="sasana-lokasi__label" :style="monoStyle">Parkir & Akses</span>
+              <p>4 mobil · valet gratis · MRT Tebet 8 mnt · TransJakarta 3 mnt</p>
             </div>
           </div>
         </div>
@@ -680,7 +664,7 @@ function fmtRp(n: number) {
           accent="var(--tmpl-accent)"
         />
 
-        <p class="sasana-press__footnote" :style="monoStyle">Tahun 2026 · Daftar penghargaan lengkap menyusul.</p>
+        <p class="sasana-press__footnote" :style="monoStyle">2026 · Daftar lengkap menyusul.</p>
       </section>
 
       <!-- ============================== -->
@@ -842,8 +826,8 @@ function fmtRp(n: number) {
    ============================================================ */
 .sasana-section-head {
   max-width: 50rem;
-  margin: 0 auto 3rem;
-  text-align: center;
+  margin: 0 auto 4rem;
+  text-align: left;
 }
 .sasana-section-head h2 {
   margin: 0 0 0.5rem;
@@ -860,7 +844,7 @@ function fmtRp(n: number) {
    CERITA
    ============================================================ */
 .sasana-cerita {
-  padding: 8rem 2rem;
+  padding: 10rem 2rem;
   border-top: 1px solid var(--tmpl-border);
 }
 .sasana-cerita__grid {
@@ -872,8 +856,8 @@ function fmtRp(n: number) {
 }
 @media (min-width: 1024px) {
   .sasana-cerita__grid {
-    grid-template-columns: 7fr 5fr;
-    gap: 4rem;
+    grid-template-columns: 8fr 4fr;
+    gap: 6rem;
   }
 }
 .sasana-cerita__letter {
@@ -921,7 +905,7 @@ function fmtRp(n: number) {
    MENU
    ============================================================ */
 .sasana-menu {
-  padding: 8rem 2rem;
+  padding: 10rem 2rem;
   max-width: 72rem;
   margin: 0 auto;
   border-top: 1px solid var(--tmpl-border);
@@ -937,7 +921,7 @@ function fmtRp(n: number) {
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 1rem;
-  border-radius: 999px;
+  border-radius: 6px;
   border: 1px solid var(--tmpl-border);
   background: transparent;
   color: var(--tmpl-muted);
@@ -1077,7 +1061,7 @@ function fmtRp(n: number) {
    RESERVASI
    ============================================================ */
 .sasana-reservasi {
-  padding: 8rem 2rem;
+  padding: 10rem 2rem;
   border-top: 1px solid var(--tmpl-border);
 }
 .sasana-reservasi__grid {
@@ -1105,7 +1089,7 @@ function fmtRp(n: number) {
   line-height: 1.55;
   color: var(--tmpl-muted);
   margin: 0;
-  max-width: 32ch;
+  max-width: 36ch;
 }
 
 /* ============================================================
@@ -1189,7 +1173,7 @@ function fmtRp(n: number) {
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 1rem;
-  border-radius: 999px;
+  border-radius: 6px;
   border: 1px solid var(--tmpl-border);
   background: transparent;
   color: var(--tmpl-muted);
@@ -1222,7 +1206,7 @@ function fmtRp(n: number) {
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 999px;
+  border-radius: 6px;
   border: 1px solid var(--tmpl-border);
   background: transparent;
   color: var(--tmpl-fg);
@@ -1249,7 +1233,7 @@ function fmtRp(n: number) {
    ACARA
    ============================================================ */
 .sasana-acara {
-  padding: 8rem 2rem;
+  padding: 10rem 2rem;
   border-top: 1px solid var(--tmpl-border);
 }
 .sasana-acara__grid {
@@ -1305,7 +1289,7 @@ function fmtRp(n: number) {
    LOKASI
    ============================================================ */
 .sasana-lokasi {
-  padding: 8rem 2rem;
+  padding: 10rem 2rem;
   border-top: 1px solid var(--tmpl-border);
 }
 .sasana-lokasi__grid {
@@ -1348,7 +1332,7 @@ function fmtRp(n: number) {
    PRESS
    ============================================================ */
 .sasana-press {
-  padding: 8rem 2rem;
+  padding: 10rem 2rem;
   border-top: 1px solid var(--tmpl-border);
 }
 .sasana-press__footnote {

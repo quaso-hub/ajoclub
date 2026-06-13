@@ -296,12 +296,12 @@ function toggleIntegration(key: string) {
 // ============================================================
 const openFaq = ref<number | null>(0)
 const faqs = [
-  { q: 'Apa itu Kas?', a: 'Kas adalah aplikasi kasir, faktur, inventori, dan laporan untuk UMKM Indonesia. Bahasa Indonesia penuh, support lokal 7 hari.' },
-  { q: 'Berapa harganya?', a: 'Mulai dari Rp 0 per bulan untuk Pemula. Berkembang Rp 149.000/bulan. Skala Rp 449.000/bulan. Tidak ada tier Enterprise misterius.' },
-  { q: 'Bisa coba gratis?', a: 'Ya, semua paket bisa dicoba 14 hari gratis. Tidak perlu kartu kredit. Tidak perlu install apa-apa.' },
-  { q: 'Bagaimana dengan data saya?', a: 'Disimpan di server Jakarta. Enkripsi TLS 1.3. Backup harian. Tidak dijual ke pihak ketiga. Tidak dipakai untuk training AI.' },
-  { q: 'Bisa integrasi dengan Tokopedia/Shopee?', a: 'Ya. Paket Berkembang punya 2 integrasi marketplace. Paket Skala unlimited.' },
-  { q: 'Kalau saya non-teknis?', a: 'Setup 7 menit, dipandu via WhatsApp. Atau telepon kami, bukan chatbot, manusia.' },
+  { q: 'Apa itu Kas?', a: 'Aplikasi kasir, faktur, inventori, dan laporan untuk UMKM Indonesia. Bahasa Indonesia penuh, support lokal 7 hari.' },
+  { q: 'Berapa harganya?', a: 'Pemula Rp 0. Berkembang Rp 149.000/bulan. Skala Rp 449.000/bulan. Tidak ada tier tersembunyi.' },
+  { q: 'Bisa coba gratis?', a: 'Ya. Semua paket 14 hari gratis, tanpa kartu kredit.' },
+  { q: 'Bagaimana dengan data saya?', a: 'Server Jakarta. TLS 1.3. Backup harian. Tidak dijual, tidak dipakai training AI.' },
+  { q: 'Bisa integrasi dengan Tokopedia/Shopee?', a: 'Ya. Berkembang: 2 integrasi marketplace. Skala: unlimited.' },
+  { q: 'Kalau saya non-teknis?', a: 'Setup 7 menit via WhatsApp. Atau telepon — manusia, bukan chatbot.' },
 ]
 
 // ============================================================
@@ -310,7 +310,7 @@ const faqs = [
 const testimonials = [
   {
     name: 'Aditya Pratama', role: 'Owner', company: 'Kreasiku Studio, Jakarta',
-    quote: 'Sebelum pakai Kas, kami pakai 4 aplikasi berbeda untuk invoicing, inventori, laporan, dan chat klien. Sekarang semuanya di Kas. Tim kami hemat 6 jam per minggu.',
+    quote: 'Dulu pakai 4 aplikasi untuk invoicing, inventori, laporan, dan chat klien. Sekarang semua di Kas. Tim hemat 6 jam per minggu.',
     stars: 5,
   },
   {
@@ -485,7 +485,7 @@ watch(activeTimeRange, () => {
           Kelola bisnis tanpa spreadsheet.<br>
           <span class="kas-h1__accent">5 menit setup.</span>
         </h1>
-        <p class="kas-hero__sub">Kasir, faktur, inventori, dan laporan, terhubung otomatis.</p>
+        <p class="kas-hero__sub">Kasir, faktur, inventori, laporan — semua terhubung.</p>
         <div class="kas-hero__ctas">
           <a href="#kas-pricing" class="kas-btn kas-btn--primary">Buka Dashboard</a>
           <a :href="buildUrl('Halo, saya mau lihat demo Kas.')" target="_blank" rel="noopener" class="kas-btn kas-btn--ghost">
@@ -691,7 +691,7 @@ watch(activeTimeRange, () => {
       <div class="kas-section__inner">
         <p class="kas-eyebrow" :style="monoStyle">HARGA</p>
         <h2 :style="h2Style" class="kas-section__h2">Tiga paket. Tanpa biaya tersembunyi.</h2>
-        <p class="kas-section__sub">Paket disesuaikan untuk UMKM Indonesia. Bayar per bulan, batal kapan saja.</p>
+        <p class="kas-section__sub">Bayar per bulan, batal kapan saja.</p>
 
         <div class="kas-pricing">
           <div v-for="tier in pricingTiers" :key="tier.key"
@@ -728,7 +728,8 @@ watch(activeTimeRange, () => {
     <section class="kas-section">
       <div class="kas-section__inner">
         <p class="kas-eyebrow" :style="monoStyle">FITUR</p>
-        <h2 :style="h2Style" class="kas-section__h2">Semua yang Anda butuhkan, di satu tempat.</h2>
+        <h2 :style="h2Style" class="kas-section__h2">Real product, not a marketing page.</h2>
+        <p class="kas-section__sub">You can click around the dashboard right now. Everything below is live.</p>
 
         <div class="kas-features">
           <!-- Feature 1: Calculator (interactive) -->
@@ -809,7 +810,7 @@ watch(activeTimeRange, () => {
           <div class="kas-feature">
             <div class="kas-feature__icon"><UIcon name="i-lucide-bar-chart-3" class="w-5 h-5" /></div>
             <h3 class="kas-feature__title">Laporan Real-Time</h3>
-            <p class="kas-feature__desc">Setiap transaksi yang masuk, langsung mengubah laporan. Tidak perlu ekspor, tidak perlu sinkronisasi manual.</p>
+            <p class="kas-feature__desc">Transaksi masuk, laporan berubah. Tanpa ekspor, tanpa sync manual.</p>
             <div class="kas-feature__chart">
               <svg viewBox="0 0 240 80" width="100%" height="80" preserveAspectRatio="none">
                 <defs>
@@ -828,7 +829,7 @@ watch(activeTimeRange, () => {
           <div class="kas-feature">
             <div class="kas-feature__icon"><UIcon name="i-lucide-map-pin" class="w-5 h-5" /></div>
             <h3 class="kas-feature__title">Multi-Cabang</h3>
-            <p class="kas-feature__desc">Kelola semua cabang dari satu dashboard. Lihat performa per kota, transfer stok antar cabang, dan laporan terkonsolidasi.</p>
+            <p class="kas-feature__desc">Semua cabang, satu dashboard. Performa per kota, transfer stok, laporan gabungan.</p>
             <div class="kas-feature__cities">
               <span v-for="city in ['Jakarta', 'Surabaya', 'Bandung', 'Yogyakarta']" :key="city" class="kas-feature__city">
                 <span class="kas-feature__city-dot" />
@@ -841,7 +842,7 @@ watch(activeTimeRange, () => {
           <div class="kas-feature">
             <div class="kas-feature__icon"><UIcon name="i-lucide-shield-check" class="w-5 h-5" /></div>
             <h3 class="kas-feature__title">Keamanan</h3>
-            <p class="kas-feature__desc">Data disimpan di server Jakarta. Enkripsi TLS 1.3. Backup harian. Tidak dijual ke pihak ketiga. Tidak dipakai untuk training AI.</p>
+            <p class="kas-feature__desc">Server Jakarta. TLS 1.3. Backup harian. Tidak dijual, tidak dipakai training AI.</p>
             <span class="kas-feature__badge" :style="monoStyle">GDPR-aligned</span>
           </div>
         </div>
@@ -854,7 +855,7 @@ watch(activeTimeRange, () => {
     <section class="kas-section">
       <div class="kas-section__inner">
         <p class="kas-eyebrow" :style="monoStyle">KENAPA KAS</p>
-        <h2 :style="h2Style" class="kas-section__h2">UMKM, agency, dan freelancer Indonesia. Dari warung kopi di Surabaya sampai agency di Jakarta.</h2>
+        <h2 :style="h2Style" class="kas-section__h2">Dari warung kopi sampai agency Jakarta.</h2>
 
         <div class="kas-testimonials">
           <div v-for="(t, i) in testimonials" :key="i" class="kas-testimonial">
@@ -881,7 +882,7 @@ watch(activeTimeRange, () => {
       <div class="kas-section__inner">
         <p class="kas-eyebrow" :style="monoStyle">INTEGRASI</p>
         <h2 :style="h2Style" class="kas-section__h2">Terhubung dengan yang Anda sudah pakai.</h2>
-        <p class="kas-section__sub">12 integrasi aktif di dashboard Anda. QRIS, BI-FAST, marketplace, payment gateway, semuanya otomatis.</p>
+        <p class="kas-section__sub">QRIS, BI-FAST, marketplace, payment gateway — otomatis.</p>
 
         <div class="kas-integrations">
           <div v-for="integ in ['QRIS', 'BI-FAST', 'BCA', 'Mandiri', 'BRI', 'GoPay', 'OVO', 'DANA', 'ShopeePay', 'Tokopedia', 'Shopee', 'WhatsApp']" :key="integ"
@@ -929,7 +930,7 @@ watch(activeTimeRange, () => {
     <section class="kas-cta-section">
       <div class="kas-cta-section__inner">
         <h2 :style="h1Style" class="kas-cta-section__h2">Cukup lihat. Coba langsung.</h2>
-        <p class="kas-cta-section__sub">Tanpa kartu kredit. Setup 7 menit. Bahasa Indonesia.</p>
+        <p class="kas-cta-section__sub">Tanpa kartu kredit. Setup 7 menit.</p>
         <div class="kas-cta-section__btns">
           <a href="#top" class="kas-btn kas-btn--primary kas-btn--lg">Buka Dashboard Anda</a>
           <a :href="buildUrl('Halo, saya mau tanya soal Kas.')" target="_blank" rel="noopener" class="kas-btn kas-btn--ghost kas-btn--lg">
@@ -1054,7 +1055,7 @@ watch(activeTimeRange, () => {
   display: inline-block;
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--kas-accent);
   margin-bottom: 1rem;
@@ -1115,7 +1116,7 @@ watch(activeTimeRange, () => {
 
 /* === Section === */
 .kas-section {
-  padding: 100px 1.5rem;
+  padding: 80px 1.5rem;
   border-top: 1px solid oklch(100% 0 0 / 0.06);
 }
 .kas-section__inner {
@@ -1170,7 +1171,7 @@ watch(activeTimeRange, () => {
   font-size: 18px;
   color: var(--kas-muted);
   margin: 0 0 1.5rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 .kas-hero__ctas {
   display: flex;
@@ -1189,7 +1190,7 @@ watch(activeTimeRange, () => {
   max-width: 1100px;
   margin: 0 auto;
   border: 1px solid oklch(100% 0 0 / 0.06);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   background: var(--kas-surface);
   box-shadow: 0 24px 64px -16px oklch(0% 0 0 / 0.5);
@@ -1311,7 +1312,7 @@ watch(activeTimeRange, () => {
   width: 320px;
   background: var(--kas-surface-2);
   border: 1px solid oklch(100% 0 0 / 0.1);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 0.75rem;
   z-index: 50;
   box-shadow: 0 16px 48px -12px oklch(0% 0 0 / 0.6);
@@ -1488,7 +1489,7 @@ watch(activeTimeRange, () => {
 .kas-dash__kpi {
   background: var(--kas-surface-2);
   border: 1px solid oklch(100% 0 0 / 0.06);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 1rem 1.25rem;
   min-height: 110px;
   transition: border-color 200ms ease, transform 200ms ease;
@@ -1741,7 +1742,7 @@ watch(activeTimeRange, () => {
    ============================================================ */
 .kas-pricing {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1.25fr 1fr;
   gap: 1.25rem;
   margin-top: 2.5rem;
 }
@@ -1749,7 +1750,7 @@ watch(activeTimeRange, () => {
   position: relative;
   background: var(--kas-surface);
   border: 1px solid oklch(100% 0 0 / 0.06);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -1836,14 +1837,14 @@ watch(activeTimeRange, () => {
    ============================================================ */
 .kas-features {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.3fr 1fr;
   gap: 1.25rem;
   margin-top: 2.5rem;
 }
 .kas-feature {
   background: var(--kas-surface);
   border: 1px solid oklch(100% 0 0 / 0.06);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -1870,7 +1871,7 @@ watch(activeTimeRange, () => {
 .kas-feature__desc {
   font-size: 13px;
   color: var(--kas-muted);
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0 0 1rem;
 }
 
@@ -2069,7 +2070,7 @@ watch(activeTimeRange, () => {
 .kas-testimonial {
   background: var(--kas-surface);
   border: 1px solid oklch(100% 0 0 / 0.06);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -2136,7 +2137,7 @@ watch(activeTimeRange, () => {
   padding: 1rem 1.25rem;
   background: var(--kas-surface);
   border: 1px solid oklch(100% 0 0 / 0.06);
-  border-radius: 10px;
+  border-radius: 8px;
   transition: border-color 200ms ease;
 }
 .kas-integrations__tile:hover { border-color: oklch(100% 0 0 / 0.12); }
@@ -2213,7 +2214,7 @@ watch(activeTimeRange, () => {
    CTA SECTION
    ============================================================ */
 .kas-cta-section {
-  padding: 120px 1.5rem;
+  padding: 80px 1.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -2271,7 +2272,7 @@ watch(activeTimeRange, () => {
   max-width: calc(100vw - 2rem);
   background: var(--kas-surface-2);
   border: 1px solid oklch(100% 0 0 / 0.12);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 24px 48px -12px oklch(0% 0 0 / 0.6), 0 0 0 1px oklch(72% 0.18 235 / 0.15);
   overflow: hidden;
 }
@@ -2365,7 +2366,6 @@ watch(activeTimeRange, () => {
 @media (max-width: 1023px) {
   .kas-dash__kpis { grid-template-columns: repeat(2, 1fr); }
   .kas-pricing { grid-template-columns: 1fr; }
-  .kas-features { grid-template-columns: 1fr 1fr; }
   .kas-testimonials { grid-template-columns: 1fr; }
   .kas-integrations { grid-template-columns: repeat(3, 1fr); }
 }
@@ -2376,15 +2376,14 @@ watch(activeTimeRange, () => {
   .kas-dash__kpis { grid-template-columns: 1fr 1fr; }
   .kas-dash__table-wrap { overflow-x: auto; }
   .kas-dash__table { min-width: 600px; }
-  .kas-features { grid-template-columns: 1fr; }
   .kas-pricing { grid-template-columns: 1fr; }
   .kas-pricing__card--recommended { transform: none; }
   .kas-pricing__card--recommended:hover { transform: translateY(-2px); }
   .kas-integrations { grid-template-columns: repeat(2, 1fr); }
   .kas-feature__qris { flex-direction: column; }
   .kas-feature__integrations { grid-template-columns: repeat(2, 1fr); }
-  .kas-section { padding: 60px 1rem; }
-  .kas-cta-section { padding: 80px 1rem; }
+  .kas-section { padding: 48px 1rem; }
+  .kas-cta-section { padding: 48px 1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

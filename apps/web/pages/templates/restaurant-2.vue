@@ -38,14 +38,14 @@ interface CafeMenuItem {
 }
 
 const menuItems: CafeMenuItem[] = [
-  { id: 1, name: 'Kopi Susu', category: 'Kopi', price: 28000, description: 'Espresso house blend, susu segar, gula aren. Dingin atau panas.', tag: 'best seller' },
-  { id: 2, name: 'Es Kopi Hitam', category: 'Kopi', price: 22000, description: 'Kopi tubruk dingin tanpa susu. Bersih, bold, tanpa ribet.', tag: undefined },
-  { id: 3, name: 'Matcha Latte', category: 'Kopi', price: 35000, description: 'Matcha Uji dari Kyoto, susu oat, sedikit madu. Hijau cerah.', tag: undefined },
-  { id: 4, name: 'Roti Panggang Mentega', category: 'Roti', price: 18000, description: 'Roti sourdough panggang, mentega asin, taburan garam laut.', tag: undefined },
-  { id: 5, name: 'Croissant Cokelat', category: 'Roti', price: 25000, description: 'Croissant butter 72 lapis, isian dark chocolate 64%. Dibuat setiap pagi.', tag: 'fresh daily' },
-  { id: 6, name: 'Nasi Goreng Spesial', category: 'Makanan', price: 38000, description: 'Nasi goreng kecap manis, ayam suwir, telur mata sapi, acar, kerupuk.', tag: undefined },
-  { id: 7, name: 'Pisang Goreng', category: 'Roti', price: 15000, description: 'Pisang kepok goreng tepung renyah. Cocol saus cokelat atau sambal.', tag: undefined },
-  { id: 8, name: 'Teh Tarik', category: 'Kopi', price: 20000, description: 'Teh hitam pekat ditarik tinggi-tinggi dengan susu kental manis.', tag: undefined },
+  { id: 1, name: 'Kopi Susu', category: 'Kopi', price: 28000, description: 'House blend, susu segar, gula aren.', tag: 'best seller' },
+  { id: 2, name: 'Es Kopi Hitam', category: 'Kopi', price: 22000, description: 'Tubruk dingin tanpa susu. Bersih, bold.', tag: undefined },
+  { id: 3, name: 'Matcha Latte', category: 'Kopi', price: 35000, description: 'Matcha Uji, susu oat, madu.', tag: undefined },
+  { id: 4, name: 'Roti Panggang Mentega', category: 'Roti', price: 18000, description: 'Sourdough panggang, mentega asin, garam laut.', tag: undefined },
+  { id: 5, name: 'Croissant Cokelat', category: 'Roti', price: 25000, description: '72 lapis butter, dark chocolate 64%.', tag: 'fresh daily' },
+  { id: 6, name: 'Nasi Goreng Spesial', category: 'Makanan', price: 38000, description: 'Kecap manis, ayam suwir, telur mata sapi.', tag: undefined },
+  { id: 7, name: 'Pisang Goreng', category: 'Roti', price: 15000, description: 'Pisang kepok renyah. Saus cokelat atau sambal.', tag: undefined },
+  { id: 8, name: 'Teh Tarik', category: 'Kopi', price: 20000, description: 'Teh pekat, susu kental manis, ditarik tinggi.', tag: undefined },
 ]
 
 const categories = ['Semua', 'Kopi', 'Makanan', 'Roti'] as const
@@ -163,7 +163,7 @@ function updateHours() {
     hoursLabel.value = 'Buka · tutup 22.00'
   } else {
     hoursOpen.value = false
-    hoursLabel.value = 'Tutup · buka besok 07.00'
+    hoursLabel.value = 'Tutup · buka 07.00'
   }
 }
 
@@ -171,12 +171,12 @@ function updateHours() {
 // GALERI (6 placeholder slots)
 // ============================================================
 const galeriItems = [
-  { label: 'Suasana pagi', caption: 'Pagi hari, sinar matahari masuk dari jendela besar.' },
-  { label: 'Kopi susu', caption: 'Kopi susu gula aren, menu yang paling dicari.' },
-  { label: 'Dapur kami', caption: 'Roti dibuat fresh setiap jam 5 pagi.' },
-  { label: 'Barista at work', caption: 'Latte art adalah seni yang bisa diminum.' },
-  { label: 'Corner seat', caption: 'Kursi pojok favorit untuk kerja atau baca.' },
-  { label: 'Croissant', caption: '72 lapis butter, renyah di luar, lembut di dalam.' },
+  { label: 'Suasana pagi', caption: 'Sinar matahari dari jendela besar.' },
+  { label: 'Kopi susu', caption: 'Menu paling dicari. Gula aren.' },
+  { label: 'Dapur kami', caption: 'Roti fresh jam 5 pagi.' },
+  { label: 'Barista at work', caption: 'Latte art — seni yang bisa diminum.' },
+  { label: 'Corner seat', caption: 'Favorit untuk kerja atau baca.' },
+  { label: 'Croissant', caption: '72 lapis butter. Renyah, lembut.' },
 ]
 
 // ============================================================
@@ -449,7 +449,7 @@ function handleNavClick(e: MouseEvent, href: string) {
           <div class="kopi-ticker__track">
             <span v-for="n in 4" :key="n" class="kopi-ticker__item">
               <span class="kopi-ticker__dot" />
-              Hari ini brew: {{ todayBrew }} · Roasted fresh · Est. 2019 Kemang
+              Hari ini brew: {{ todayBrew }} · Roasted fresh · Est. 2019
             </span>
           </div>
         </div>
@@ -464,7 +464,7 @@ function handleNavClick(e: MouseEvent, href: string) {
             </h1>
 
             <p class="kopi-hero__sub">
-              Dari rumah kami, ke cangkir anda. Specialty coffee, freshly roasted di Kemang, Jakarta.
+              Kopi yang baik, dari biji yang baik. Specialty coffee, freshly roasted di Kemang.
             </p>
 
             <div class="kopi-hero__ctas">
@@ -473,7 +473,7 @@ function handleNavClick(e: MouseEvent, href: string) {
             </div>
 
             <div class="kopi-hero__meta" :style="monoStyle">
-              Kemang, Jakarta · Buka 07.00 - 22.00 · 4 lokasi + 1 roastery
+              Kemang, Jakarta · 07.00 – 22.00 · 4 lokasi
             </div>
           </div>
 
@@ -491,7 +491,7 @@ function handleNavClick(e: MouseEvent, href: string) {
       <section id="menu" class="kopi-menu">
         <div class="kopi-section-head">
           <h2 :style="h2Style">Menu.</h2>
-          <p class="kopi-section-sub" :style="monoStyle">8 pilihan · Kopi, Makanan, Roti</p>
+          <p class="kopi-section-sub" :style="monoStyle">8 pilihan · Kopi · Makanan · Roti</p>
         </div>
 
         <!-- Filter pills -->
@@ -557,16 +557,13 @@ function handleNavClick(e: MouseEvent, href: string) {
         <div class="kopi-tentang__grid">
           <div class="kopi-tentang__text">
             <p class="kopi-tentang__lead">
-              Kopi Rumah lahir dari satu pertanyaan sederhana: kenapa kopi enak harus mahal?
+              Kopi yang baik, dari biji yang baik.
             </p>
             <p>
-              Tahun 2019, kami mulai dari garasi rumah di Kemang. Dua mesin espresso, satu grinder, dan kopi Gayo dari petani langsung. Tidak ada menu fancy, tidak ada tempat duduk mewah. Hanya kopi yang dibuat dengan benar.
+              2019, dari garasi di Kemang. Dua mesin espresso, satu grinder, kopi Gayo dari petani langsung. Sekarang 4 kedai, 1 roastery. Biji dari Aceh, Toraja, Mandailing, Kintamani, Flores — sangrai sendiri setiap minggu.
             </p>
             <p>
-              Sekarang kami punya 4 kedai dan 1 roastery. Biji kopi kami datang dari Aceh, Toraja, Mandailing, Kintamani, dan Flores. Kami sangrai sendiri setiap minggu. Karena kopi itu bukan cuma caffeine, ini rasa.
-            </p>
-            <p>
-              Datang, duduk, pesan. Tidak perlu reservasi untuk secangkir kopi. Tapi kalau mau kerja seharian, kursi pojok kami selalu siap.
+              Datang, duduk, pesan. Kursi pojok untuk kerja seharian selalu siap.
             </p>
           </div>
           <aside class="kopi-tentang__facts" :style="monoStyle">
@@ -631,7 +628,7 @@ function handleNavClick(e: MouseEvent, href: string) {
             </div>
             <div class="kopi-lokasi__item">
               <span class="kopi-lokasi__label" :style="monoStyle">WiFi</span>
-              <p>Gratis. Password di struk.</p>
+              <p>Gratis — password di struk.</p>
             </div>
             <div class="kopi-lokasi__item">
               <span class="kopi-lokasi__label" :style="monoStyle">Parkir</span>
@@ -676,7 +673,7 @@ function handleNavClick(e: MouseEvent, href: string) {
       <section id="reservasi" class="kopi-reservasi">
         <div class="kopi-section-head">
           <h2 :style="h2Style">Reservasi.</h2>
-          <p class="kopi-section-sub" :style="monoStyle">Untuk 1-20 orang · Butuh kursi untuk kerja atau meeting?</p>
+          <p class="kopi-section-sub" :style="monoStyle">1-20 orang · Kursi kerja & meeting</p>
         </div>
 
         <div class="kopi-reservasi__grid">
@@ -725,7 +722,7 @@ function handleNavClick(e: MouseEvent, href: string) {
               </div>
               <div class="kopi-form__field">
                 <label for="rv-catatan" class="kopi-form__label" :style="monoStyle">Catatan</label>
-                <textarea id="rv-catatan" v-model="resForm.catatan" rows="2" maxlength="280" placeholder="Butuh colokan, proyektor, atau area merokok?" class="kopi-form__input kopi-form__input--textarea" />
+                <textarea id="rv-catatan" v-model="resForm.catatan" rows="2" maxlength="280" placeholder="Colokan, proyektor, area merokok?" class="kopi-form__input kopi-form__input--textarea" />
               </div>
             </div>
 
@@ -741,13 +738,13 @@ function handleNavClick(e: MouseEvent, href: string) {
 
           <div class="kopi-reservasi__note">
             <p>
-              Reservasi untuk 4 orang atau lebih. Untuk 1-3 orang, langsung datang saja. Kami biasanya punya tempat duduk.
+              Reservasi untuk 4+ orang. 1-3 orang? Langsung datang.
             </p>
             <p>
-              Butuh ruangan privat untuk meeting? Sebutkan di catatan. Kami punya 2 ruangan dengan proyektor dan whiteboard.
+              Butuh ruangan privat? Sebutkan di catatan. 2 ruangan dengan proyektor.
             </p>
             <p>
-              Kami akan konfirmasi lewat WhatsApp dalam 1 jam. Kalau tidak ada balasan, cek spam atau hubungi langsung.
+              Konfirmasi via WhatsApp dalam 1 jam.
             </p>
           </div>
         </div>
@@ -851,7 +848,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   height: 40px;
   background: transparent;
   border: 1px solid var(--tmpl-border);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--tmpl-fg);
   cursor: pointer;
   transition: background-color 200ms ease;
@@ -928,7 +925,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  padding: clamp(6rem, 12vh, 10rem) 2rem 4rem;
+  padding: clamp(5rem, 10vh, 8rem) 2rem 3rem;
   max-width: 80rem;
   margin: 0 auto;
   width: 100%;
@@ -938,7 +935,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   .kopi-hero__grid {
     grid-template-columns: 7fr 5fr;
     gap: 4rem;
-    padding: clamp(6rem, 12vh, 10rem) 3rem 4rem;
+    padding: clamp(5rem, 10vh, 8rem) 3rem 3rem;
   }
 }
 .kopi-hero__content {
@@ -961,7 +958,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 .kopi-hero__meta {
   font-size: 11px;
@@ -998,7 +995,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 1.5rem;
-  border-radius: 10px;
+  border-radius: 8px;
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 13px;
   font-weight: 600;
@@ -1042,8 +1039,8 @@ function handleNavClick(e: MouseEvent, href: string) {
    ============================================================ */
 .kopi-section-head {
   max-width: 50rem;
-  margin: 0 auto 3rem;
-  text-align: center;
+  margin: 0 0 2.5rem;
+  text-align: left;
 }
 .kopi-section-head h2 {
   margin: 0 0 0.5rem;
@@ -1060,7 +1057,7 @@ function handleNavClick(e: MouseEvent, href: string) {
    MENU
    ============================================================ */
 .kopi-menu {
-  padding: clamp(4rem, 8vw, 8rem) 2rem;
+  padding: clamp(3rem, 6vw, 6rem) 2rem;
   max-width: 72rem;
   margin: 0 auto;
   border-top: 1px solid var(--tmpl-border);
@@ -1069,7 +1066,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 1rem;
 }
 .kopi-pill {
@@ -1097,7 +1094,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   color: var(--tmpl-fg);
 }
 .kopi-menu__count {
-  text-align: center;
+  text-align: left;
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -1120,7 +1117,7 @@ function handleNavClick(e: MouseEvent, href: string) {
 .kopi-menu-card {
   background: var(--tmpl-surface);
   border: 1px solid var(--tmpl-border);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: clamp(20px, 2.5vw, 28px);
   display: flex;
   flex-direction: column;
@@ -1241,7 +1238,7 @@ function handleNavClick(e: MouseEvent, href: string) {
    TENTANG
    ============================================================ */
 .kopi-tentang {
-  padding: clamp(4rem, 8vw, 8rem) 2rem;
+  padding: clamp(3rem, 6vw, 6rem) 2rem;
   border-top: 1px solid var(--tmpl-border);
 }
 .kopi-tentang__grid {
@@ -1249,12 +1246,12 @@ function handleNavClick(e: MouseEvent, href: string) {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2rem;
 }
 @media (min-width: 1024px) {
   .kopi-tentang__grid {
     grid-template-columns: 7fr 4fr;
-    gap: 4rem;
+    gap: 3rem;
   }
 }
 .kopi-tentang__lead {
@@ -1262,13 +1259,13 @@ function handleNavClick(e: MouseEvent, href: string) {
   font-size: clamp(1.25rem, 1.8vw, 1.5rem);
   font-weight: 500;
   line-height: 1.35;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1rem;
 }
 .kopi-tentang__text p {
   font-size: 15px;
   line-height: 1.6;
   color: var(--tmpl-muted);
-  margin: 0 0 1.25rem;
+  margin: 0 0 1rem;
 }
 .kopi-tentang__text p:last-child {
   margin-bottom: 0;
@@ -1303,7 +1300,7 @@ function handleNavClick(e: MouseEvent, href: string) {
    LOKASI
    ============================================================ */
 .kopi-lokasi {
-  padding: clamp(4rem, 8vw, 8rem) 2rem;
+  padding: clamp(3rem, 6vw, 6rem) 2rem;
   border-top: 1px solid var(--tmpl-border);
 }
 .kopi-lokasi__grid {
@@ -1311,18 +1308,18 @@ function handleNavClick(e: MouseEvent, href: string) {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2rem;
 }
 @media (min-width: 1024px) {
   .kopi-lokasi__grid {
     grid-template-columns: 6fr 4fr;
-    gap: 4rem;
+    gap: 3rem;
   }
 }
 .kopi-lokasi__info {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 .kopi-lokasi__item {
   display: flex;
@@ -1354,7 +1351,7 @@ function handleNavClick(e: MouseEvent, href: string) {
    GALERI
    ============================================================ */
 .kopi-galeri {
-  padding: clamp(4rem, 8vw, 8rem) 2rem;
+  padding: clamp(3rem, 6vw, 6rem) 2rem;
   border-top: 1px solid var(--tmpl-border);
 }
 .kopi-galeri__grid {
@@ -1377,7 +1374,7 @@ function handleNavClick(e: MouseEvent, href: string) {
 }
 .kopi-galeri__img {
   aspect-ratio: 4/3;
-  border-radius: 14px;
+  border-radius: 8px;
   display: flex;
   align-items: flex-end;
   padding: 1rem;
@@ -1391,7 +1388,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   opacity: 0.5;
   background: var(--tmpl-surface-elevated);
   padding: 0.25rem 0.625rem;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .kopi-galeri__caption {
   font-size: 13px;
@@ -1401,15 +1398,15 @@ function handleNavClick(e: MouseEvent, href: string) {
   padding: 0 0.25rem;
 }
 .kopi-galeri__cta {
-  text-align: center;
-  margin-top: 2.5rem;
+  text-align: left;
+  margin-top: 2rem;
 }
 
 /* ============================================================
    RESERVASI
    ============================================================ */
 .kopi-reservasi {
-  padding: clamp(4rem, 8vw, 8rem) 2rem;
+  padding: clamp(3rem, 6vw, 6rem) 2rem;
   border-top: 1px solid var(--tmpl-border);
 }
 .kopi-reservasi__grid {
@@ -1417,18 +1414,18 @@ function handleNavClick(e: MouseEvent, href: string) {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2rem;
 }
 @media (min-width: 1024px) {
   .kopi-reservasi__grid {
     grid-template-columns: 3fr 2fr;
-    gap: 4rem;
+    gap: 3rem;
   }
 }
 .kopi-reservasi__note {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 .kopi-reservasi__note p {
   font-size: 14px;
@@ -1469,7 +1466,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   padding: 0.75rem 0.875rem;
   background: transparent;
   border: 1px solid var(--tmpl-border);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--tmpl-fg);
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 14px;
@@ -1527,7 +1524,7 @@ function handleNavClick(e: MouseEvent, href: string) {
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--tmpl-border);
   background: transparent;
   color: var(--tmpl-fg);
