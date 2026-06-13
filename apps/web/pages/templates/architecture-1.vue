@@ -1,155 +1,1403 @@
 <script setup lang="ts">
+/**
+ * architecture-1.vue — Archiry
+ * Architecture firm. BIG/OMA/Snohetta restraint. Cormorant Garamond italic.
+ *
+ * 10 sections: 3D Hero, Hero, About, Projects (3-axis filter), Process (5 stages),
+ * Team (10), Recognition (12), Press (6), Contact (TmplForm), Footer
+ *
+ * Palette: archiry (light, brass accent)
+ * Typography: archiry (Cormorant Garamond italic + Inter + JetBrains Mono)
+ */
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+
 definePageMeta({ layout: false })
-useHead({
-  title: 'Archiry Studio',
-  htmlAttrs: { lang: 'id' },
-  link: [
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap' },
-  ],
+
+const theme = useTemplateTheme('architecture-1')
+const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+
+// ============================================================
+// STATE
+// ============================================================
+const heroLoaded = ref(false)
+const activeSection = ref('hero')
+const filterYears = ref<string[]>([])
+const filterTypes = ref<string[]>([])
+const filterStatus = ref<string[]>([])
+const hoveredProject = ref<number | null>(null)
+const hoveredProcess = ref<number | null>(null)
+const hoveredTeam = ref<number | null>(null)
+const hoveredRecognition = ref<number | null>(null)
+const processInView = ref(false)
+let scrollSpy: IntersectionObserver | null = null
+
+onMounted(() => {
+  setTimeout(() => { heroLoaded.value = true }, 120)
+  initScrollSpy()
 })
 
-const isLoaded = ref(false)
-onMounted(() => { setTimeout(() => { isLoaded.value = true }, 600) })
+onBeforeUnmount(() => {
+  if (scrollSpy) scrollSpy.disconnect()
+})
 
+function initScrollSpy() {
+  if (typeof window === 'undefined') return
+  scrollSpy = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          activeSection.value = (e.target as HTMLElement).id || 'hero'
+        }
+      }
+    },
+    { rootMargin: '-30% 0px -60% 0px', threshold: 0 },
+  )
+  document.querySelectorAll('[data-section]').forEach((el) => scrollSpy?.observe(el))
+}
+
+// ============================================================
+// DATA
+// ============================================================
 const projects = [
-  { name: 'Villa Andara', location: 'Bali', year: '2025', type: 'Residensial', area: '420 m²', desc: 'Villa tropis dengan material lokal: batu alam, kayu jati, bambu.' },
-  { name: 'Rumah Tinggal Dago', location: 'Bandung', year: '2024', type: 'Residensial', area: '280 m²', desc: 'Rumah keluarga 2 lantai, atap pelana, carport luas.' },
-  { name: 'Kantor Startup Jakarta', location: 'Jakarta', year: '2024', type: 'Komersial', area: '150 m²', desc: 'Open office untuk tim 20 orang. Meeting room, pantry, area istirahat.' },
+  {
+    name: 'KS House',
+    slug: 'ks-house',
+    year: '2024',
+    location: 'Dago Atas, Bandung',
+    type: 'Residensial',
+    status: 'Terbangun',
+    area: '320 m\u00B2',
+    desc: 'Rumah tinggal di kontur landai 8 meter, view utara ke hutan kota. Batu paras lokal untuk dinding utama, kayu jati reclaimed untuk semua kusen, bata ekspos untuk fasad belakang.',
+  },
+  {
+    name: 'TR Pavilion',
+    slug: 'tr-pavilion',
+    year: '2023',
+    location: 'Ubud, Bali',
+    type: 'Residensial',
+    status: 'Terbangun',
+    area: '180 m\u00B2',
+    desc: 'Paviliun terbuka di tepi sawah, struktur bambu petung dan atap alang-alang kering. Mezzanine setinggi 4.2 meter menangkap angin barat, dinding geser kayu meranti buka tutup penuh.',
+  },
+  {
+    name: 'EL Atelier',
+    slug: 'el-atelier',
+    year: '2025',
+    location: 'Pejaten, Jakarta Selatan',
+    type: 'Komersial',
+    status: 'Dalam proses',
+    area: '450 m\u00B2',
+    desc: 'Atelier dan showroom 2 lantai, fasad beton cetak dengan bukaan vertikal tinggi. Lantai dasar galeri dan penyimpanan, lantai mezzanine ruang kerja tim 8 orang dengan skylight.',
+  },
+  {
+    name: 'RP Reading Room',
+    slug: 'rp-reading-room',
+    year: '2022',
+    location: 'Salatiga, Jawa Tengah',
+    type: 'Publik',
+    status: 'Terbangun',
+    area: '220 m\u00B2',
+    desc: 'Ruang baca komunitas di samping gereja lama, struktur baja ringan dengan dinding kaca penuh. Furnitur kayu jati Jepara, rak terbuka sepanjang 18 meter untuk 4.200 buku.',
+  },
+  {
+    name: 'ND Guest Wing',
+    slug: 'nd-guest-wing',
+    year: '2025',
+    location: 'Ubud, Bali',
+    type: 'Interior',
+    status: 'Konsep',
+    area: '90 m\u00B2',
+    desc: 'Penambahan guest wing ke villa existing, 2 suite tidur dengan kamar mandi outdoor. Lantai batu Karangasem, dinding plester tanah liat, pencahayaan alami dari skylight timur.',
+  },
+  {
+    name: 'BH Coastal Retreat',
+    slug: 'bh-coastal-retreat',
+    year: '2024',
+    location: 'Pantai Selatan, Lombok',
+    type: 'Residensial',
+    status: 'Konsep',
+    area: '240 m\u00B2',
+    desc: 'Vila tepi pantai 5 bungalow terhubung deck kayu ulin. Atap jerami dengan struktur bambu, air dari sumur dangkal 14 meter, septic biofilter.',
+  },
 ]
 
-const services = [
-  { title: 'Arsitektur', desc: 'Rumah tinggal, villa, kantor. Dari sketsa sampai serah terima.' },
-  { title: 'Interior', desc: 'Desain interior yang responsif terhadap cahaya, material, dan ritme harian.' },
-  { title: 'Perencanaan', desc: 'Analisis site, programming, dan strategi pengembangan bertahap.' },
+const process = [
+  {
+    step: '01',
+    title: 'Brief',
+    weeks: 'Minggu 1\u20133',
+    desc: 'Kami tidak gambar dulu. Kami datang ke tempat, berjalan keliling, bicara dengan penghuni. Mendengarkan apa yang tidak mereka ucapkan. Menggali rutinitas, bukan selera.',
+    deliverables: ['Site visit 2\u20133x', 'Wawancara penghuni', 'Dokumen brief', 'Kajian tapak awal'],
+  },
+  {
+    step: '02',
+    title: 'Konsep',
+    weeks: 'Minggu 4\u20136',
+    desc: 'Dari brief, kami rumuskan 3 hal: orientasi bangunan terhadap matahari, hubungan ruang dengan tapak, dan material utama. Bukan moodboard Pinterest.',
+    deliverables: ['Tiga keputusan utama', 'Sketsa konsep 5\u20137 halaman', 'Estimasi biaya kasar', 'Pertemuan alignment klien'],
+  },
+  {
+    step: '03',
+    title: 'Sketsa',
+    weeks: 'Minggu 7\u201312',
+    desc: 'Sketsa tangan, bukan render. Kami percaya gambar tangan masih yang paling jujur tentang niat. Setiap denah dan potongan direvisi minimal 4 kali.',
+    deliverables: ['Sketsa tangan 30\u201350 lembar', 'Denah layout final', 'Potongan arsitektural', 'Material schedule'],
+  },
+  {
+    step: '04',
+    title: 'Model',
+    weeks: 'Minggu 13\u201320',
+    desc: 'Gambar kerja teknis lengkap: struktur, mekanikal, elektrikal, plumbing. Koordinasi dengan insinyur dan kontraktor. Maket fisik A3 untuk presentasi akhir.',
+    deliverables: ['Gambar kerja 80\u2013120 halaman', 'Spesifikasi teknis lengkap', 'Maket fisik 1:50', 'RAB detail'],
+  },
+  {
+    step: '05',
+    title: 'Konstruksi',
+    weeks: 'Bulan 5\u201314',
+    desc: 'Supervisi mingguan di lapangan. Bukan serah terima desain dan pergi. Kami datang setiap Selasa, bertemu mandor, cek apakah gambar kerja masih relevan.',
+    deliverables: ['Supervisi mingguan', 'Site meeting 2x sebulan', 'Laporan progres foto', 'Serah terima final dengan punch list'],
+  },
 ]
 
-const fabOpen = ref(false)
-const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, saya tertarik dengan template Archiry Studio. Bisa diskusi?')
+const team = [
+  { name: 'Rio Hardja, S.T., IAI', role: 'Principal Architect', bio: '15 tahun praktik. Lulusan ITB 2009. Riset material lokal Pulau Jawa dipublikasikan di A+U 2019.' },
+  { name: 'Mira Sukma, S.T.', role: 'Design Director', bio: '12 tahun praktik. Lulusan University of Melbourne. Pernah di Denton Corker Marshall dan WOHA Singapura.' },
+  { name: 'Bagas Wiratama', role: 'Senior Architect', bio: '9 tahun praktik. Lulusan UNPAR. Sebelumnya di SHAU Bandung. Menangani gambar kerja dan detail konstruksi.' },
+  { name: 'Citra Larasati, S.T.', role: 'Interior Lead', bio: '10 tahun praktik. Lulusan ISI Yogyakarta. Setiap interior dimulai dengan riset material dari pengrajin lokal.' },
+  { name: 'Doni Saputra, S.T.', role: 'Project Architect', bio: '7 tahun praktik. Lulusan UGM. Koordinasi lapangan dan gambar teknis eksekusi.' },
+  { name: 'Hana Pertiwi, S.T., M.Ar.', role: 'Sustainability Lead', bio: '6 tahun praktik. Magister arsitektur dari TU Delft. Riset carbon-storing material untuk bangunan tropis.' },
+  { name: 'Reza Maulana', role: 'Visualization', bio: '4 tahun praktik. Lulusan ITENAS. Gambar tangan, model fisik, render. Setiap presentasi pakai maket minimal A3.' },
+  { name: 'Aisha Karina', role: 'Junior Architect', bio: '2 tahun praktik. Lulusan ITB 2023. Pertama kali masuk lewat magang. Tugas: gambar kerja, survey lapangan, maket.' },
+  { name: 'Yusuf Pratama', role: 'Construction Liaison', bio: '20 tahun di lapangan. Lulusan STM. Pernah mandor di 14 proyek residensial.' },
+  { name: 'Sinta Maharani, S.E.', role: 'Studio Manager', bio: '8 tahun praktik. Lulusan Unisba. Anggaran, jadwal, vendor, pembayaran. Yang jaga agar studio tidak telat bayar tukang.' },
+]
+
+const recognition = [
+  { pub: 'Awwwards', award: 'Site of the Day', year: '2025', project: 'TR Pavilion' },
+  { pub: 'ArchDaily', award: 'Building of the Year, Longlist', year: '2024', project: 'KS House' },
+  { pub: 'Dezeen', award: 'Awards, Longlist', year: '2024', project: 'RP Reading Room' },
+  { pub: 'World Architecture Festival', award: 'Shortlisted, House', year: '2023', project: 'KS House' },
+  { pub: 'AD100', award: 'Studio Listing', year: '2024', project: 'Archiry Studio' },
+  { pub: 'Indonesia Design', award: 'Best Residential Architecture', year: '2023', project: 'TR Pavilion' },
+  { pub: 'Domus', award: 'International Selection', year: '2024', project: 'RP Reading Room' },
+  { pub: 'Frame Awards', award: 'Longlist, Civic', year: '2022', project: 'RP Reading Room' },
+  { pub: 'IAI', award: 'Award for Emerging Practice', year: '2022', project: 'Archiry Studio' },
+  { pub: 'Architecture MasterPrize', award: 'Winner, Restoration', year: '2022', project: 'RP Reading Room' },
+  { pub: 'Architizer A+ Awards', award: 'Jury Winner, Private House', year: '2024', project: 'TR Pavilion' },
+  { pub: 'Archello', award: 'Featured Project', year: '2023', project: 'BH Coastal Retreat' },
+]
+
+const press = [
+  { pub: 'ArchDaily', headline: 'KS House, a Bandung residence built around reclaimed teak', year: '2024' },
+  { pub: 'Domus', headline: 'Reading Room in Salatiga: civic architecture at 220 m\u00B2', year: '2024' },
+  { pub: 'Indonesia Design', headline: 'Studio Arsitektur Bandung yang menolak 80% kliennya', year: '2024' },
+  { pub: 'CNN Indonesia', headline: 'Paviliun bambu di Ubud: studi kasus material lokal', year: '2023' },
+  { pub: 'Kompas', headline: 'Piala IAI 2022 untuk praktik arsitektur muda Bandung', year: '2022' },
+  { pub: 'Tropicalia Magazine', headline: 'Carbon-storing bamboo, case study by Hana Pertiwi', year: '2023' },
+]
+
+// Filter data
+const filterYearOptions = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+const filterTypeOptions = ['Residensial', 'Komersial', 'Publik', 'Interior']
+const filterStatusOptions = ['Terbangun', 'Dalam proses', 'Konsep']
+
+const filteredProjects = computed(() => {
+  return projects.filter((p) => {
+    if (filterYears.value.length && !filterYears.value.includes(p.year)) return false
+    if (filterTypes.value.length && !filterTypes.value.includes(p.type)) return false
+    if (filterStatus.value.length && !filterStatus.value.includes(p.status)) return false
+    return true
+  })
+})
+
+const activeFilterCount = computed(() => filterYears.value.length + filterTypes.value.length + filterStatus.value.length)
+
+function toggleFilter(arr: string[], val: string) {
+  const idx = arr.indexOf(val)
+  if (idx >= 0) arr.splice(idx, 1)
+  else arr.push(val)
+}
+
+function clearAllFilters() {
+  filterYears.value = []
+  filterTypes.value = []
+  filterStatus.value = []
+}
+
+// Status color helper
+function statusColor(status: string) {
+  if (status === 'Terbangun') return 'var(--archiry-green)'
+  if (status === 'Dalam proses') return 'var(--tmpl-accent)'
+  return 'var(--tmpl-muted)'
+}
+
+// Team gradient avatars (brass/stone/ink range, unique per person)
+const teamGradients = [
+  'linear-gradient(135deg, oklch(72% 0.11 80), oklch(58% 0.08 60))',
+  'linear-gradient(135deg, oklch(65% 0.09 75), oklch(45% 0.06 250))',
+  'linear-gradient(135deg, oklch(78% 0.08 85), oklch(55% 0.10 70))',
+  'linear-gradient(135deg, oklch(60% 0.12 78), oklch(80% 0.06 90))',
+  'linear-gradient(135deg, oklch(50% 0.08 250), oklch(72% 0.11 80))',
+  'linear-gradient(135deg, oklch(84% 0.07 85), oklch(58% 0.13 75))',
+  'linear-gradient(135deg, oklch(45% 0.06 60), oklch(72% 0.11 80))',
+  'linear-gradient(135deg, oklch(72% 0.11 80), oklch(92% 0.04 85))',
+  'linear-gradient(135deg, oklch(38% 0.04 250), oklch(65% 0.09 75))',
+  'linear-gradient(135deg, oklch(75% 0.09 82), oklch(50% 0.08 60))',
+]
+
+// Contact form fields (TmplForm compatible)
+const contactFields = [
+  { key: 'name', label: 'Nama lengkap', type: 'text' as const, placeholder: 'Nama Anda', required: true },
+  { key: 'email', label: 'Email', type: 'email' as const, placeholder: 'email@anda.com', required: true },
+  { key: 'location', label: 'Lokasi proyek', type: 'text' as const, placeholder: 'Kota atau alamat' },
+  { key: 'story', label: 'Cerita tempatnya', type: 'textarea' as const, placeholder: 'Apa yang ingin Anda bangun, di mana, untuk siapa.', required: true },
+]
+
+const budgetOptions = [
+  '< Rp 500 juta',
+  'Rp 500 juta \u2013 2 miliar',
+  'Rp 2 miliar \u2013 10 miliar',
+  '> Rp 10 miliar',
+  'Belum tahu',
+]
+const selectedBudget = ref('')
+
+function handleFormSubmit(values: Record<string, string>) {
+  const lines = [
+    'Halo Archiry, saya ingin memulai proyek.',
+    '',
+    `Nama: ${values.name || ''}`,
+    `Email: ${values.email || ''}`,
+    `Lokasi: ${values.location || ''}`,
+    `Anggaran: ${selectedBudget.value || 'Belum ditentukan'}`,
+    '',
+    `Cerita: ${values.story || ''}`,
+  ]
+  const msg = lines.join('\n')
+  window.open(`https://wa.me/62227204518?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer')
+}
+
+// Nav links
+const navLinks = [
+  { label: 'Studi', href: '#hero' },
+  { label: 'Proyek', href: '#proyek' },
+  { label: 'Proses', href: '#proses' },
+  { label: 'Tim', href: '#tim' },
+  { label: 'Pengakuan', href: '#pengakuan' },
+  { label: 'Kontak', href: '#kontak' },
+]
+
+// WhatsApp FAB actions
+const fabActions = [
+  { label: 'Brief project baru', detail: 'Ceritakan lahan dan kebutuhan Anda', icon: 'i-lucide-file-text', message: 'Halo Archiry, saya punya lahan dan ingin mendiskusikan project baru.' },
+  { label: 'Konsultasi awal (gratis 30 menit)', detail: 'Telepon atau video call', icon: 'i-lucide-phone', message: 'Halo Archiry, saya ingin menjadwalkan konsultasi awal 30 menit. Kapan bisa?' },
+  { label: 'Minta portofolio PDF', detail: '6 proyek terpilih, lengkap foto', icon: 'i-lucide-download', message: 'Halo Archiry, saya ingin minta portofolio PDF. Boleh dikirim?' },
+  { label: 'Bicara langsung dengan salah satu pendiri', detail: 'Bukan bot, bukan sales', icon: 'i-lucide-users', message: 'Halo Archiry, saya ingin bicara langsung dengan salah satu pendiri.' },
+]
 </script>
 
 <template>
-  <div class="min-h-screen antialiased" style="background: #F5F5F0; color: #1C1917; font-family: 'Inter', system-ui, sans-serif;">
-    <TemplateBack />
+  <div class="archiry" :style="styles">
+    <a class="skip-link" href="#main" :style="{ position: 'absolute', left: '-9999px' }">Lewat ke konten</a>
 
-    <nav class="fixed top-0 inset-x-0 z-40 backdrop-blur-md" style="background: rgba(245,245,240,0.85);">
-      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <span style="font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500;">Archiry</span>
-        <div class="hidden md:flex items-center gap-8 text-[11px] tracking-[0.2em] uppercase text-gray-600">
-          <a href="#proyek" class="hover:text-gray-900 transition-colors">Proyek</a>
-          <a href="#layanan" class="hover:text-gray-900 transition-colors">Layanan</a>
-          <a href="#kontak" class="hover:text-gray-900 transition-colors">Kontak</a>
+    <TmplBack accent="var(--tmpl-accent)" />
+
+    <TmplNavbar
+      brand="Archiry"
+      :links="navLinks"
+      accent="var(--tmpl-accent)"
+      style="glass"
+      :show-theme-toggle="false"
+      force-mode="light"
+    />
+
+    <main id="main">
+
+      <!-- ============================== -->
+      <!-- SECTION 1 — 3D + HERO          -->
+      <!-- ============================== -->
+      <section id="hero" data-section class="archiry-hero" :style="{ minHeight: '100dvh' }">
+        <!-- 3D Canvas (background, pointer-events none) -->
+        <div class="archiry-hero__3d">
+          <TmplExperienceCanvas
+            preset="case-timeline"
+            :accent="tpl.accentColor"
+            intensity="calm"
+          />
         </div>
-      </div>
-    </nav>
 
-    <!-- Hero -->
-    <section class="relative min-h-[80vh] flex items-end pb-16 pt-20 overflow-hidden">
-      <div class="absolute inset-0" style="background: linear-gradient(135deg, #C9A961, #8B7355 50%, #5C5048);">
-        <div class="absolute inset-0 flex items-center justify-center">
-          <span class="text-[10px] tracking-[0.3em] uppercase text-white/40">Foto villa</span>
-        </div>
-      </div>
-      <div class="absolute inset-0 bg-gradient-to-t from-[#F5F5F0] via-transparent to-transparent" />
+        <!-- Index badge top-left -->
+        <p class="archiry-mono-top" :style="monoStyle">01 / 08</p>
 
-      <div class="relative z-10 max-w-6xl mx-auto px-6 w-full">
-        <div class="max-w-lg p-6" style="background: rgba(245,245,240,0.92); backdrop-filter: blur(12px); border-radius: 12px;">
-          <template v-if="!isLoaded">
-            <div class="h-4 w-24 bg-amber-200 rounded mb-3 animate-pulse" />
-            <div class="h-10 w-3/4 bg-gray-200 rounded mb-4 animate-pulse" />
-            <div class="h-4 w-full bg-gray-200 rounded mb-2 animate-pulse" />
-            <div class="h-4 w-2/3 bg-gray-200 rounded mb-4 animate-pulse" />
-            <div class="flex gap-3">
-              <div class="h-4 w-16 bg-gray-200 rounded animate-pulse" />
-              <div class="h-4 w-20 bg-gray-200 rounded animate-pulse" />
-              <div class="h-4 w-24 bg-gray-200 rounded animate-pulse" />
-            </div>
-          </template>
+        <!-- Metadata top-right -->
+        <p class="archiry-mono-top archiry-mono-top--right" :style="monoStyle">
+          Studi arsitektur &middot; Bandung &middot; 2018 hingga sekarang
+        </p>
 
-          <template v-else>
-            <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-3">Studio arsitektur · Bandung</p>
-            <h1 style="font-family: 'Cormorant Garamond', serif; font-weight: 400; line-height: 1.1;" class="text-3xl md:text-5xl mb-4">
-              Arsitektur yang<br />menghormati tempat.
-            </h1>
-            <p class="text-sm text-gray-600 leading-relaxed mb-4">12 orang, 23 proyek, sejak 2018. Berbasis di Bandung, bekerja di seluruh Indonesia.</p>
-            <div class="flex items-center gap-4 text-[11px] text-gray-500">
-              <span>Residensial</span><span>·</span><span>Komersial</span><span>·</span><span>Adaptive Reuse</span>
-            </div>
-          </template>
-        </div>
-      </div>
-    </section>
+        <!-- Hero content -->
+        <div class="archiry-hero__content">
+          <Transition
+            enter-active-class="transition-all duration-700 ease-out"
+            enter-from-class="opacity-0 translate-y-6"
+          >
+            <div v-if="heroLoaded">
+              <h1 :style="{ ...h1Style, fontSize: 'clamp(4.5rem, 10vw, 11rem)', lineHeight: '0.95', letterSpacing: '-0.025em' }" class="archiry-h1">
+                Rumah yang<br />menghormati<br />tempatnya.
+              </h1>
 
-    <!-- Proyek -->
-    <section id="proyek" class="py-24">
-      <div class="max-w-6xl mx-auto px-6">
-        <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-3">Proyek Terpilih</p>
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 400;" class="text-4xl mb-16">Proyek terbaru.</h2>
+              <p class="archiry-hero__sub">
+                Studio kecil 10 orang di Bandung. Proyek residensial, komersial, publik, interior. Bekerja di seluruh Indonesia sejak 2018.
+              </p>
 
-        <div class="space-y-24">
-          <article v-for="(p, i) in projects" :key="p.name" class="grid md:grid-cols-2 gap-8 md:gap-12 items-start" :class="i%2===1 ? 'md:[direction:rtl]' : ''">
-            <div class="aspect-[4/3] rounded-xl overflow-hidden" :class="i%2===1 ? 'md:order-2' : ''" style="background: linear-gradient(135deg, #D4C4A8, #8B7355);">
-              <div class="w-full h-full flex items-center justify-center">
-                <span class="text-[10px] tracking-[0.3em] uppercase text-white/40">Foto proyek</span>
+              <div class="archiry-hero__tags" :style="monoStyle">
+                Residensial &middot; Komersial &middot; Publik &middot; Interior
+              </div>
+
+              <div class="archiry-hero__cta">
+                <a href="#proyek" class="archiry-btn archiry-btn--primary">
+                  Lihat proyek terpilih
+                  <span aria-hidden="true">&darr;</span>
+                </a>
               </div>
             </div>
-            <div :class="i%2===1 ? 'md:order-1' : ''">
-              <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-3">{{ p.type }} · {{ p.year }}</p>
-              <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 400;" class="text-3xl mb-2">{{ p.name }}</h3>
-              <p class="text-sm text-gray-500 mb-3">{{ p.location }} · {{ p.area }}</p>
-              <p class="text-sm text-gray-600 leading-relaxed">{{ p.desc }}</p>
-            </div>
-          </article>
+          </Transition>
         </div>
-      </div>
-    </section>
 
-    <!-- Layanan -->
-    <section id="layanan" class="py-24" style="background: #EAE5D5;">
-      <div class="max-w-6xl mx-auto px-6">
-        <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-3">Layanan</p>
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 400;" class="text-4xl mb-16">Apa yang kami kerjakan.</h2>
-        <div class="grid md:grid-cols-3 gap-4">
-          <div v-for="s in services" :key="s.title" class="p-6 border border-amber-800/10 rounded-xl">
-            <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 500;" class="text-xl mb-3">{{ s.title }}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">{{ s.desc }}</p>
+        <!-- Scroll cue -->
+        <div class="archiry-scroll-cue" :style="monoStyle">
+          <span class="archiry-scroll-cue__line" />
+          <span class="archiry-scroll-cue__dot" />
+          <span class="archiry-scroll-cue__label">Scroll</span>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- SECTION 2 — ABOUT              -->
+      <!-- ============================== -->
+      <section id="studi" data-section class="archiry-about">
+        <p class="archiry-section-label" :style="monoStyle">01 / 06 &middot; Studio</p>
+        <h2 :style="h2Style" class="archiry-section-h2">
+          Arsitektur<br />yang tumbuh<br />dari tempat.
+        </h2>
+        <div class="archiry-about__body">
+          <p>Arsitektur yang baik tidak berdiri sendiri. Ia tumbuh dari tempat, iklim, dan cara orang di dalamnya hidup. Bentuk bangunan mengikuti ritme matahari, arah angin, dan kemiringan tanah, bukan estetika yang dipinjam dari majalah luar negeri.</p>
+          <p>Kami bukan studio yang mendesain dari foto referensi. Kami survey lokasi berulang kali, menggali material dari pengrajin lokal, dan menanyakan rutinitas harian klien sebelum menggambar denah pertama.</p>
+          <p>Material lokal bukan gimmick. Batu paras dari Jawa Tengah, kayu jati dari Jepara, bambu petung dari Sumatera, alang-alang dari Bali. Material yang kami pilih karena tahan lama, tersedia di tempat, dan punya cerita, bukan karena estetik saja.</p>
+          <p>Kami menolak 80% klien yang menghubungi kami. Bukan karena sombong. Tapi karena tidak semua proyek cocok dengan cara kami kerja. Yang kami kerjakan, kami kerjakan dengan serius dan terlibat penuh sampai serah terima.</p>
+        </div>
+        <p class="archiry-about__interrupt">
+          Studio kecil. Bukan karena tidak bisa tumbuh. Tapi karena arsitektur butuh waktu, dan waktu tidak bisa di-scale.
+        </p>
+      </section>
+
+      <!-- ============================== -->
+      <!-- SECTION 3 — PROJECTS           -->
+      <!-- ============================== -->
+      <section id="proyek" data-section class="archiry-projects">
+        <p class="archiry-section-label" :style="monoStyle">02 / 06 &middot; Proyek</p>
+        <h2 :style="h2Style" class="archiry-section-h2">
+          Proyek<br />terpilih.
+        </h2>
+
+        <!-- Filter chips (3 axes) -->
+        <div class="archiry-filters">
+          <div class="archiry-filter-group">
+            <p class="archiry-filter-label" :style="monoStyle">Tahun</p>
+            <div class="archiry-filter-chips">
+              <button
+                v-for="y in filterYearOptions"
+                :key="y"
+                type="button"
+                class="archiry-chip"
+                :class="{ 'archiry-chip--active': filterYears.includes(y) }"
+                @click="toggleFilter(filterYears, y)"
+              >{{ y }}</button>
+            </div>
+          </div>
+          <div class="archiry-filter-group">
+            <p class="archiry-filter-label" :style="monoStyle">Tipe</p>
+            <div class="archiry-filter-chips">
+              <button
+                v-for="t in filterTypeOptions"
+                :key="t"
+                type="button"
+                class="archiry-chip"
+                :class="{ 'archiry-chip--active': filterTypes.includes(t) }"
+                @click="toggleFilter(filterTypes, t)"
+              >{{ t }}</button>
+            </div>
+          </div>
+          <div class="archiry-filter-group">
+            <p class="archiry-filter-label" :style="monoStyle">Status</p>
+            <div class="archiry-filter-chips">
+              <button
+                v-for="s in filterStatusOptions"
+                :key="s"
+                type="button"
+                class="archiry-chip"
+                :class="{ 'archiry-chip--active': filterStatus.includes(s) }"
+                @click="toggleFilter(filterStatus, s)"
+              >{{ s }}</button>
+            </div>
+          </div>
+          <div v-if="activeFilterCount > 0" class="archiry-filter-meta" :style="monoStyle">
+            {{ activeFilterCount }} filter aktif &middot; {{ filteredProjects.length }} proyek cocok
+            <button type="button" class="archiry-filter-clear" @click="clearAllFilters">Hapus semua</button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Kontak -->
-    <section id="kontak" class="py-24 text-center">
-      <p class="text-[10px] tracking-[0.3em] uppercase text-amber-700 mb-6">Ada lahan?</p>
-      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-style: italic;" class="text-5xl mb-6">Mari ngobrol.</h2>
-      <p class="text-base text-gray-600 mb-8 max-w-md mx-auto">Balas dalam 48 jam. Konsultasi pertama gratis.</p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <a href="https://wa.me/6285188627365" target="_blank" rel="noopener" class="bg-gray-800 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-amber-700 transition-colors">WhatsApp</a>
-        <a href="mailto:hello@archiry.id" class="border border-gray-400 px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">Email</a>
-      </div>
-    </section>
+        <!-- Live counter -->
+        <p class="archiry-counter" :style="monoStyle">
+          Menampilkan {{ filteredProjects.length }} dari {{ projects.length }} proyek
+        </p>
 
-    <footer class="py-10 text-center" style="background: #1C1917; color: #F5F5F0;">
-      <p style="font-family: 'Cormorant Garamond', serif;" class="opacity-60">Archiry Studio</p>
-      <p class="text-[9px] tracking-[0.3em] uppercase opacity-40 mt-2">© 2026 Bandung · Template by AjoClub</p>
-    </footer>
-
-    <!-- FAB -->
-    <div class="fixed bottom-5 right-5 z-50">
-      <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 translate-y-4 scale-95" leave-to-class="opacity-0 translate-y-4 scale-95">
-        <div v-if="fabOpen" class="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 p-4">
-          <p class="text-sm font-semibold text-gray-900 mb-2">Tertarik dengan template ini?</p>
-          <p class="text-xs text-gray-500 mb-3">Chat langsung untuk diskusi fitur, harga, dan customisasi.</p>
-          <a :href="waUrl" target="_blank" rel="noopener" class="flex items-center gap-2 w-full px-4 py-2.5 bg-emerald-500 text-white rounded-lg text-sm font-medium hover:bg-emerald-600 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Chat WhatsApp
-          </a>
+        <!-- Project grid -->
+        <div v-if="filteredProjects.length > 0" class="archiry-project-grid">
+          <article
+            v-for="(p, i) in filteredProjects"
+            :key="p.slug"
+            class="archiry-project-card"
+            :class="{ 'archiry-project-card--hovered': hoveredProject === i }"
+            @mouseenter="hoveredProject = i"
+            @mouseleave="hoveredProject = null"
+          >
+            <p class="archiry-project-card__meta" :style="monoStyle">
+              {{ p.year }} &middot; {{ p.type }}
+            </p>
+            <h3 class="archiry-project-card__name">{{ p.name }}</h3>
+            <p class="archiry-project-card__desc">{{ p.desc }}</p>
+            <div class="archiry-project-card__divider" />
+            <p class="archiry-project-card__info" :style="monoStyle">
+              {{ p.location }} &middot; {{ p.area }} &middot; <span :style="{ color: statusColor(p.status) }">{{ p.status }}</span>
+            </p>
+            <Transition
+              enter-active-class="transition-all duration-300 ease-out"
+              leave-active-class="transition-all duration-200 ease-in"
+              enter-from-class="opacity-0 translate-y-1"
+              leave-to-class="opacity-0"
+            >
+              <p v-if="hoveredProject === i" class="archiry-project-card__cta">
+                Baca studi kasus <span aria-hidden="true">&rarr;</span>
+              </p>
+            </Transition>
+          </article>
         </div>
-      </Transition>
-      <button @click="fabOpen = !fabOpen" class="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-lg flex items-center justify-center transition-colors">
-        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </button>
-    </div>
+
+        <!-- Empty state -->
+        <div v-else class="archiry-empty">
+          <p>Tidak ada proyek yang cocok dengan filter ini. Coba kurangi satu filter.</p>
+          <button type="button" class="archiry-btn archiry-btn--ghost" @click="clearAllFilters">Hapus semua filter</button>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- SECTION 4 — PROCESS            -->
+      <!-- ============================== -->
+      <section id="proses" data-section class="archiry-process" ref="processSection">
+        <p class="archiry-section-label" :style="monoStyle">03 / 06 &middot; Proses</p>
+        <h2 :style="h2Style" class="archiry-section-h2">
+          Lima tahap.<br />Tidak ada<br />jalan pintas.
+        </h2>
+
+        <div class="archiry-process-list">
+          <div
+            v-for="(stage, i) in process"
+            :key="stage.step"
+            class="archiry-process-stage"
+            :class="{ 'archiry-process-stage--hovered': hoveredProcess === i }"
+            @mouseenter="hoveredProcess = i"
+            @mouseleave="hoveredProcess = null"
+          >
+            <div class="archiry-process-stage__num" :style="{ ...monoStyle, color: 'var(--tmpl-accent)' }">
+              {{ stage.step }}
+            </div>
+            <div class="archiry-process-stage__body">
+              <h3 class="archiry-process-stage__title">{{ stage.title }}</h3>
+              <p class="archiry-process-stage__weeks" :style="monoStyle">{{ stage.weeks }}</p>
+              <p class="archiry-process-stage__desc">{{ stage.desc }}</p>
+              <Transition
+                enter-active-class="transition-all duration-300 ease-out"
+                leave-active-class="transition-all duration-200 ease-in"
+                enter-from-class="opacity-0 max-h-0"
+                leave-to-class="opacity-0 max-h-0"
+              >
+                <ul v-if="hoveredProcess === i" class="archiry-process-stage__deliverables">
+                  <li v-for="d in stage.deliverables" :key="d">{{ d }}</li>
+                </ul>
+              </Transition>
+            </div>
+          </div>
+        </div>
+
+        <p class="archiry-process-footer" :style="monoStyle">
+          5 tahap. Tidak ada jalan pintas. Tidak ada revisi tak terbatas. Tidak ada desain dari foto.
+        </p>
+        <p class="archiry-process-note">
+          Setelah serah terima, kami kembali 3 bulan kemudian untuk foto dokumentasi. Arsitektur yang bagus baru terlihat setelah dipakai.
+        </p>
+      </section>
+
+      <!-- ============================== -->
+      <!-- SECTION 5 — TEAM               -->
+      <!-- ============================== -->
+      <section id="tim" data-section class="archiry-team">
+        <p class="archiry-section-label" :style="monoStyle">04 / 06 &middot; Tim</p>
+        <h2 :style="h2Style" class="archiry-section-h2">
+          10 orang.<br />Bandung.<br />Bukan 50. Bukan 5.
+        </h2>
+
+        <div class="archiry-team-grid">
+          <div
+            v-for="(member, i) in team"
+            :key="member.name"
+            class="archiry-team-card"
+            :class="{ 'archiry-team-card--hovered': hoveredTeam === i }"
+            @mouseenter="hoveredTeam = i"
+            @mouseleave="hoveredTeam = null"
+          >
+            <div class="archiry-team-card__avatar" :style="{ background: teamGradients[i] }" />
+            <p class="archiry-team-card__name">{{ member.name }}</p>
+            <p class="archiry-team-card__role" :style="monoStyle">{{ member.role }}</p>
+            <Transition
+              enter-active-class="transition-all duration-300 ease-out"
+              leave-active-class="transition-all duration-200 ease-in"
+              enter-from-class="opacity-0 max-h-0"
+              leave-to-class="opacity-0 max-h-0"
+            >
+              <p v-if="hoveredTeam === i" class="archiry-team-card__bio">{{ member.bio }}</p>
+            </Transition>
+          </div>
+        </div>
+
+        <p class="archiry-team-footer">
+          Cukup untuk dengerin, mikir, dan nge-ship tanpa nge-drag. Kami tidak rekrut untuk presentasi, kami rekrut untuk masa bakti panjang.
+        </p>
+      </section>
+
+      <!-- ============================== -->
+      <!-- SECTION 6 — RECOGNITION        -->
+      <!-- ============================== -->
+      <section id="pengakuan" data-section class="archiry-recognition">
+        <p class="archiry-section-label" :style="monoStyle">05 / 06 &middot; Pengakuan</p>
+        <h2 :style="h2Style" class="archiry-section-h2">
+          Diterima oleh<br />publikasi yang<br />kami hormati.
+        </h2>
+
+        <div class="archiry-recog-grid">
+          <div
+            v-for="(r, i) in recognition"
+            :key="`${r.pub}-${r.year}`"
+            class="archiry-recog-tile"
+            :class="{ 'archiry-recog-tile--hovered': hoveredRecognition === i }"
+            @mouseenter="hoveredRecognition = i"
+            @mouseleave="hoveredRecognition = null"
+          >
+            <p class="archiry-recog-tile__pub">{{ r.pub }}</p>
+            <p class="archiry-recog-tile__award" :style="monoStyle">{{ r.award }}</p>
+            <p class="archiry-recog-tile__year" :style="monoStyle">{{ r.year }}</p>
+            <p class="archiry-recog-tile__project">{{ r.project }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- SECTION 7 — PRESS              -->
+      <!-- ============================== -->
+      <section class="archiry-press">
+        <p class="archiry-section-label" :style="monoStyle">Liputan dan tulisan</p>
+
+        <div class="archiry-press-list">
+          <div v-for="item in press" :key="`${item.pub}-${item.year}`" class="archiry-press-row">
+            <span class="archiry-press-row__pub" :style="monoStyle">{{ item.pub }}</span>
+            <span class="archiry-press-row__headline">{{ item.headline }}</span>
+            <span class="archiry-press-row__year" :style="monoStyle">{{ item.year }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- SECTION 8 — CONTACT            -->
+      <!-- ============================== -->
+      <section id="kontak" data-section class="archiry-contact">
+        <p class="archiry-section-label" :style="monoStyle">06 / 06 &middot; Kontak</p>
+        <h2 :style="{ ...h2Style, fontSize: 'clamp(3rem, 7vw, 6rem)' }" class="archiry-section-h2">
+          Mulai dari<br />cerita tempat.
+        </h2>
+        <p class="archiry-contact__sub">
+          Balas dalam 48 jam. Bisa WhatsApp, email, atau ketemu langsung di studio. Konsultasi pertama tidak dipungut biaya.
+        </p>
+
+        <div class="archiry-contact-grid">
+          <!-- Form -->
+          <div class="archiry-contact-form">
+            <TmplForm
+              :fields="contactFields"
+              submit-label="Kirim cerita &rarr;"
+              whatsapp-phone="62227204518"
+              whatsapp-message-prefix="Halo Archiry, saya ingin memulai proyek."
+              accent="var(--tmpl-accent)"
+              @submit="handleFormSubmit"
+            />
+            <!-- Budget radio chips (outside TmplForm since it doesn't support radio) -->
+            <div class="archiry-budget">
+              <p class="archiry-budget__label">Perkiraan anggaran</p>
+              <div class="archiry-budget__chips">
+                <button
+                  v-for="opt in budgetOptions"
+                  :key="opt"
+                  type="button"
+                  class="archiry-chip"
+                  :class="{ 'archiry-chip--active': selectedBudget === opt }"
+                  @click="selectedBudget = opt"
+                >{{ opt }}</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info column -->
+          <aside class="archiry-contact-info">
+            <div class="archiry-contact-info__item">
+              <p class="archiry-contact-info__label" :style="monoStyle">WhatsApp</p>
+              <p class="archiry-contact-info__value">+62 22 720 4518</p>
+            </div>
+            <div class="archiry-contact-info__item">
+              <p class="archiry-contact-info__label" :style="monoStyle">Email</p>
+              <p class="archiry-contact-info__value">halo@archiry.id</p>
+            </div>
+            <div class="archiry-contact-info__item">
+              <p class="archiry-contact-info__label" :style="monoStyle">Studio</p>
+              <p class="archiry-contact-info__value">Jl. Sumatera 21, Bandung</p>
+            </div>
+            <div class="archiry-contact-info__item">
+              <p class="archiry-contact-info__label" :style="monoStyle">Bekerja di</p>
+              <p class="archiry-contact-info__value">Seluruh Indonesia, fokus Jawa dan Bali</p>
+            </div>
+            <div class="archiry-contact-info__item">
+              <p class="archiry-contact-info__label" :style="monoStyle">Sosial</p>
+              <p class="archiry-contact-info__value">
+                Instagram @archiry.studio<br />Are.na @archiry &middot; 500px @archiry
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <TmplFooter
+      brand-name="Archiry"
+      variant="signoff"
+      signoff="Arsitektur yang menghormati tempatnya."
+      accent="var(--tmpl-accent)"
+      signature="&copy; 2018\u20132026 Archiry Studio. Bandung. Bekerja di seluruh Indonesia."
+    />
+
+    <!-- WhatsApp FAB -->
+    <TmplWhatsAppFab
+      :accent="tpl.accentColor"
+      :actions="fabActions"
+    />
   </div>
 </template>
+
+<style scoped>
+/* ============================================================
+   CSS CUSTOM PROPERTIES (archiry palette overrides)
+   ============================================================ */
+.archiry {
+  --archiry-green: oklch(58% 0.10 145);
+  --archiry-brass: oklch(72% 0.11 80);
+  --archiry-paper-2: oklch(95% 0.008 90);
+  --archiry-paper-3: oklch(91% 0.01 88);
+  --archiry-ink-soft: oklch(38% 0.012 250);
+  --archiry-ink-mute: oklch(58% 0.01 250);
+  --archiry-border: oklch(18% 0.012 250 / 0.12);
+  min-height: 100dvh;
+  position: relative;
+}
+
+/* ============================================================
+   TYPOGRAPHY BASE
+   ============================================================ */
+.archiry :deep(p) {
+  max-width: 70ch;
+}
+.archiry :deep(a) {
+  color: inherit;
+}
+
+/* ============================================================
+   MONO LABELS (top-left/right in hero)
+   ============================================================ */
+.archiry-mono-top {
+  position: absolute;
+  top: 5.5rem;
+  left: 2rem;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+  z-index: 2;
+}
+.archiry-mono-top--right {
+  left: auto;
+  right: 2rem;
+  display: none;
+}
+@media (min-width: 768px) {
+  .archiry-mono-top--right { display: block; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.archiry-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8rem 2rem 4rem;
+  overflow: hidden;
+}
+.archiry-hero__3d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.45;
+}
+.archiry-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 65vw;
+}
+@media (max-width: 767px) {
+  .archiry-hero__content { max-width: 100%; }
+}
+.archiry-h1 {
+  font-style: italic;
+  margin: 0 0 2.5rem;
+}
+.archiry-hero__sub {
+  font-size: clamp(1.0625rem, 1.2vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 32ch;
+  margin: 0 0 1.5rem;
+  opacity: 0.78;
+}
+.archiry-hero__tags {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+  margin-bottom: 2rem;
+}
+.archiry-hero__cta {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Scroll cue */
+.archiry-scroll-cue {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+}
+.archiry-scroll-cue__line {
+  width: 1px;
+  height: 40px;
+  background: var(--archiry-border);
+  position: relative;
+  overflow: hidden;
+}
+.archiry-scroll-cue__line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--tmpl-accent);
+  animation: scroll-line 2.5s ease-in-out infinite;
+}
+@keyframes scroll-line {
+  0% { top: -100%; }
+  50% { top: 100%; }
+  100% { top: 100%; }
+}
+.archiry-scroll-cue__dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--tmpl-accent);
+}
+.archiry-scroll-cue__label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.archiry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  border: 1px solid transparent;
+  transition: background-color 350ms ease, border-color 350ms ease;
+}
+.archiry-btn--primary {
+  background: var(--tmpl-fg);
+  color: var(--tmpl-bg);
+}
+.archiry-btn--primary:hover {
+  background: var(--archiry-brass);
+}
+.archiry-btn--ghost {
+  background: transparent;
+  color: var(--tmpl-fg);
+  border-color: var(--archiry-border);
+}
+.archiry-btn--ghost:hover {
+  border-color: var(--tmpl-accent);
+  color: var(--tmpl-accent);
+}
+
+/* ============================================================
+   SECTION LABELS + HEADINGS
+   ============================================================ */
+.archiry-section-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+  margin-bottom: 1.5rem;
+}
+.archiry-section-h2 {
+  font-style: italic;
+  margin: 0 0 3rem;
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.archiry-about {
+  padding: 8rem 8vw;
+  max-width: 65%;
+}
+@media (max-width: 767px) {
+  .archiry-about { max-width: 100%; padding: 5rem 1.5rem; }
+}
+.archiry-about__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.archiry-about__body p {
+  font-size: clamp(1.0625rem, 1.2vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 70ch;
+  margin: 0;
+}
+.archiry-about__interrupt {
+  margin-top: 3rem;
+  font-style: italic;
+  font-size: 1rem;
+  max-width: 40ch;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.75;
+}
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+.archiry-projects {
+  padding: 6rem 2rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* Filters */
+.archiry-filters {
+  margin-bottom: 1.5rem;
+}
+.archiry-filter-group {
+  margin-bottom: 1rem;
+}
+.archiry-filter-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+  margin-bottom: 0.5rem;
+}
+.archiry-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.archiry-chip {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--archiry-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--tmpl-fg);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.archiry-chip:hover {
+  border-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+.archiry-chip--active {
+  background: var(--tmpl-fg);
+  color: var(--tmpl-bg);
+  border-color: var(--tmpl-fg);
+}
+.archiry-filter-meta {
+  font-size: 11px;
+  color: var(--archiry-ink-mute);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.archiry-filter-clear {
+  background: none;
+  border: none;
+  color: var(--tmpl-accent);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.archiry-counter {
+  font-size: 11px;
+  color: var(--archiry-ink-mute);
+  margin-bottom: 2rem;
+}
+
+/* Project grid */
+.archiry-project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--archiry-border);
+  border: 1px solid var(--archiry-border);
+}
+@media (min-width: 768px) {
+  .archiry-project-grid { grid-template-columns: 1fr 1fr; }
+}
+.archiry-project-card {
+  padding: 2rem;
+  background: var(--tmpl-bg);
+  transition: background-color 350ms ease;
+  cursor: pointer;
+  position: relative;
+}
+.archiry-project-card--hovered {
+  background: var(--archiry-paper-2);
+}
+.archiry-project-card__meta {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+  margin-bottom: 0.75rem;
+}
+.archiry-project-card__name {
+  font-family: var(--tmpl-font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.75rem;
+  color: var(--archiry-ink-soft);
+  transition: color 350ms ease;
+}
+.archiry-project-card--hovered .archiry-project-card__name {
+  color: var(--tmpl-fg);
+}
+.archiry-project-card__desc {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  margin: 0 0 1rem;
+  max-width: 50ch;
+}
+.archiry-project-card__divider {
+  height: 1px;
+  background: var(--archiry-border);
+  margin-bottom: 0.75rem;
+}
+.archiry-project-card__info {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+  margin: 0;
+}
+.archiry-project-card__cta {
+  margin-top: 0.75rem;
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--tmpl-accent);
+}
+
+/* Empty state */
+.archiry-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  opacity: 0.6;
+}
+.archiry-empty p {
+  margin: 0 0 1rem;
+  max-width: 100%;
+}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.archiry-process {
+  padding: 6rem 2rem;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+.archiry-process-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid var(--archiry-border);
+  margin-left: 1.5rem;
+}
+.archiry-process-stage {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem 0 2rem 1.5rem;
+  position: relative;
+  transition: background-color 350ms ease;
+}
+.archiry-process-stage--hovered {
+  background: color-mix(in srgb, var(--tmpl-accent) 3%, transparent);
+}
+.archiry-process-stage__num {
+  font-family: var(--tmpl-font-display);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 3rem;
+}
+.archiry-process-stage__body {
+  flex: 1;
+}
+.archiry-process-stage__title {
+  font-family: var(--tmpl-font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+  margin: 0 0 0.25rem;
+}
+.archiry-process-stage__weeks {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+  margin: 0 0 0.75rem;
+}
+.archiry-process-stage__desc {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  max-width: 55ch;
+  margin: 0;
+  opacity: 0.75;
+}
+.archiry-process-stage__deliverables {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.archiry-process-stage__deliverables li {
+  font-size: 11px;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--archiry-border);
+  border-radius: 999px;
+  color: var(--archiry-ink-mute);
+}
+.archiry-process-footer {
+  font-size: 11px;
+  text-align: center;
+  color: var(--archiry-ink-mute);
+  margin: 3rem auto 1rem;
+  max-width: 60ch;
+  letter-spacing: 0.04em;
+}
+.archiry-process-note {
+  font-style: italic;
+  font-size: 0.875rem;
+  text-align: center;
+  max-width: 50ch;
+  margin: 0 auto;
+  opacity: 0.65;
+}
+
+/* ============================================================
+   TEAM
+   ============================================================ */
+.archiry-team {
+  padding: 6rem 2rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+.archiry-team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--archiry-border);
+  border: 1px solid var(--archiry-border);
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .archiry-team-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.archiry-team-card {
+  padding: 1.5rem;
+  background: var(--tmpl-bg);
+  text-align: center;
+  transition: background-color 350ms ease;
+  cursor: default;
+}
+.archiry-team-card--hovered {
+  background: var(--archiry-paper-2);
+}
+.archiry-team-card__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+}
+.archiry-team-card__name {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.01em;
+}
+.archiry-team-card__role {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tmpl-accent);
+  margin: 0;
+}
+.archiry-team-card__bio {
+  font-style: italic;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  max-width: 28ch;
+  margin: 0.5rem auto 0;
+  opacity: 0.7;
+}
+.archiry-team-footer {
+  font-style: italic;
+  font-size: 0.875rem;
+  text-align: center;
+  max-width: 50ch;
+  margin: 0 auto;
+  opacity: 0.65;
+}
+
+/* ============================================================
+   RECOGNITION
+   ============================================================ */
+.archiry-recognition {
+  padding: 6rem 2rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+.archiry-recog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--archiry-border);
+  border: 1px solid var(--archiry-border);
+}
+@media (min-width: 768px) {
+  .archiry-recog-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.archiry-recog-tile {
+  padding: 1.25rem;
+  background: var(--tmpl-bg);
+  transition: background-color 350ms ease;
+  cursor: default;
+}
+.archiry-recog-tile--hovered {
+  background: var(--archiry-paper-2);
+}
+.archiry-recog-tile__pub {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0 0 0.25rem;
+  transition: color 350ms ease;
+}
+.archiry-recog-tile--hovered .archiry-recog-tile__pub {
+  color: var(--tmpl-fg);
+}
+.archiry-recog-tile__award {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tmpl-accent);
+  margin: 0 0 0.15rem;
+}
+.archiry-recog-tile__year {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--archiry-ink-mute);
+  margin: 0 0 0.5rem;
+}
+.archiry-recog-tile__project {
+  font-style: italic;
+  font-size: 0.8125rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* ============================================================
+   PRESS
+   ============================================================ */
+.archiry-press {
+  padding: 4rem 2rem 6rem;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+.archiry-press-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--archiry-border);
+}
+.archiry-press-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 60px;
+  gap: 1rem;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--archiry-border);
+  align-items: baseline;
+  transition: color 250ms ease;
+}
+@media (max-width: 767px) {
+  .archiry-press-row { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+.archiry-press-row:hover {
+  color: var(--tmpl-fg);
+}
+.archiry-press-row__pub {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+}
+.archiry-press-row__headline {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+.archiry-press-row__year {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--archiry-ink-mute);
+  text-align: right;
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.archiry-contact {
+  padding: 6rem 2rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+.archiry-contact__sub {
+  font-size: clamp(1.0625rem, 1.2vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 32ch;
+  margin: -1.5rem 0 3rem;
+  opacity: 0.7;
+}
+.archiry-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 768px) {
+  .archiry-contact-grid { grid-template-columns: 7fr 5fr; }
+}
+.archiry-budget {
+  margin-top: 1.5rem;
+}
+.archiry-budget__label {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+}
+.archiry-budget__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.archiry-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.archiry-contact-info__label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--archiry-ink-mute);
+  margin: 0 0 0.25rem;
+}
+.archiry-contact-info__value {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============================================================
+   SKIP LINK
+   ============================================================ */
+.skip-link:focus {
+  position: fixed !important;
+  top: 1rem;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.75rem 1rem;
+  background: var(--tmpl-fg);
+  color: var(--tmpl-bg);
+  border-radius: 6px;
+  font-size: 14px;
+}
+</style>
