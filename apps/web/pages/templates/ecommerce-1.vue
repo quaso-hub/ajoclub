@@ -1,135 +1,1148 @@
 <script setup lang="ts">
+/**
+ * ecommerce-1.vue — Erigo Goods
+ * Premium product e-commerce. Apple/B&O/Hermes aesthetic.
+ *
+ * 8 sections: Hero + 3D → Featured → Categories → Product Detail → Cart → Testimonials → FAQ → Footer
+ * 7+ working interactions: category filter, cart add/remove/qty, variant selector, color picker, 3D drag, TmplForm, WhatsApp checkout
+ */
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import type { CartItem } from '~/components/TmplCart.vue'
+
 definePageMeta({ layout: false })
-useHead({
-  title: 'Erigo Store',
-  htmlAttrs: { lang: 'id' },
-  link: [
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap' },
-  ],
-})
 
-const isLoaded = ref(false)
-onMounted(() => { setTimeout(() => { isLoaded.value = true }, 500) })
+const theme = useTemplateTheme('ecommerce-1')
+const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
 
-const products = [
-  { name: 'Kaos Oversize — Hitam', price: 'Rp 189.000', desc: '100% cotton combed 30s, sablon DTG.' },
-  { name: 'Hoodie — Navy', price: 'Rp 349.000', desc: 'Fleece 380gsm, embroidered logo.' },
-  { name: 'Tote Bag — Natural', price: 'Rp 89.000', desc: 'Canvas 12oz, screen printed.' },
-  { name: 'Cap — Black', price: 'Rp 129.000', desc: 'Adjustable, embroidered.' },
+// ============================================================
+// PRODUCTS
+// ============================================================
+interface Product {
+  id: string
+  name: string
+  category: 'Pakaian' | 'Tas' | 'Aksesori'
+  categoryTag: string
+  price: number
+  colors: { name: string; hex: string }[]
+  sizes: string[]
+  description: string
+  gradient: string
+}
+
+const products: Product[] = [
+  {
+    id: 'kaos-oversize',
+    name: 'Kaos Oversize Heavyweight',
+    category: 'Pakaian',
+    categoryTag: 'PAKAIAN',
+    price: 285000,
+    colors: [
+      { name: 'Cream', hex: '#F5F0E8' },
+      { name: 'Slate', hex: '#6B7280' },
+      { name: 'Sage', hex: '#9CAF88' },
+    ],
+    sizes: ['S', 'M', 'L', 'XL'],
+    description: 'Kaos katun 24s dengan potongan oversize. Jahitan rantai di keliman. Dicetak di Bandung, dikirim 3-5 hari kerja.',
+    gradient: 'linear-gradient(145deg, #F5F0E8 0%, #E8E0D0 40%, #D4C9B5 100%)',
+  },
+  {
+    id: 'hoodie-terry',
+    name: 'Hoodie Loop Terry',
+    category: 'Pakaian',
+    categoryTag: 'PAKAIAN',
+    price: 480000,
+    colors: [
+      { name: 'Natural', hex: '#F0EBE0' },
+      { name: 'Coal', hex: '#3A3A3A' },
+      { name: 'Olive', hex: '#6B7B4A' },
+    ],
+    sizes: ['S', 'M', 'L', 'XL'],
+    description: 'Hoodie dengan loop terry katun 460gsm. Kantong depan model kanguru. Tali tudung dari katun tebal, bukan tali sintetis.',
+    gradient: 'linear-gradient(145deg, #F0EBE0 0%, #D9D0C0 40%, #C4BAA8 100%)',
+  },
+  {
+    id: 'tote-kanvas',
+    name: 'Tote Kanvas 16oz',
+    category: 'Tas',
+    categoryTag: 'TAS',
+    price: 350000,
+    colors: [
+      { name: 'Natural', hex: '#EDE8DC' },
+      { name: 'Hitam', hex: '#1A1A1A' },
+      { name: 'Sage', hex: '#9CAF88' },
+    ],
+    sizes: ['One Size'],
+    description: 'Tote dari kanvas lokal 16oz. Jahitan ganda di strap. Kantong dalam untuk laptop 14 inci.',
+    gradient: 'linear-gradient(145deg, #EDE8DC 0%, #D8D0BE 40%, #C2B8A4 100%)',
+  },
+  {
+    id: 'selempang-kulit',
+    name: 'Selempang Kulit Sapi',
+    category: 'Tas',
+    categoryTag: 'TAS',
+    price: 920000,
+    colors: [
+      { name: 'Tan', hex: '#C4956A' },
+      { name: 'Cokelat', hex: '#6B4226' },
+      { name: 'Hitam', hex: '#1A1A1A' },
+    ],
+    sizes: ['One Size'],
+    description: 'Selempang dari kulit sapi lokal. Hardware kuningan. Tali bisa diatur 90-130cm.',
+    gradient: 'linear-gradient(145deg, #C4956A 0%, #A87D58 40%, #8C6540 100%)',
+  },
+  {
+    id: 'topi-barelang',
+    name: 'Topi Barelang 5-Panel',
+    category: 'Aksesori',
+    categoryTag: 'AKSESORI',
+    price: 195000,
+    colors: [
+      { name: 'Natural', hex: '#F0EBE0' },
+      { name: 'Olive', hex: '#6B7B4A' },
+      { name: 'Navy', hex: '#1E2A3A' },
+    ],
+    sizes: ['One Size'],
+    description: 'Topi 5-panel dari katun twill. Bordir "Erigo" kecil di samping. Adjustable strap di belakang.',
+    gradient: 'linear-gradient(145deg, #F0EBE0 0%, #DED5C4 40%, #CCBFA8 100%)',
+  },
+  {
+    id: 'syal-wol',
+    name: 'Syal Wol Lambung',
+    category: 'Aksesori',
+    categoryTag: 'AKSESORI',
+    price: 425000,
+    colors: [
+      { name: 'Cream', hex: '#F5F0E8' },
+      { name: 'Charcoal', hex: '#4A4A4A' },
+      { name: 'Terracotta', hex: '#C0704A' },
+    ],
+    sizes: ['One Size'],
+    description: 'Syal wol 100% dari Biak. Tenunan tangan 4 minggu per piece. Setiap syal sedikit berbeda.',
+    gradient: 'linear-gradient(145deg, #F5F0E8 0%, #E0D5C5 40%, #CBBAA5 100%)',
+  },
 ]
 
-const fabOpen = ref(false)
-const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, saya tertarik dengan template Erigo Store. Bisa diskusi?')
+// ============================================================
+// STATE
+// ============================================================
+const activeCategory = ref<string | null>(null)
+const selectedProduct = ref<Product | null>(null)
+const selectedColor = ref<Record<string, string>>({})
+const selectedSize = ref<Record<string, string>>({})
+const cartOpen = ref(false)
+const cartItems = ref<CartItem[]>([])
+const openFaq = ref<number | null>(0)
+const heroLoaded = ref(false)
+const consultOpen = ref(false)
+
+// Init selections
+for (const p of products) {
+  selectedColor.value[p.id] = p.colors[0].name
+  selectedSize.value[p.id] = p.sizes[0]
+}
+
+// Load cart from localStorage
+onMounted(() => {
+  setTimeout(() => { heroLoaded.value = true }, 100)
+  try {
+    const saved = localStorage.getItem('erigo-cart')
+    if (saved) cartItems.value = JSON.parse(saved)
+  } catch { /* ignore */ }
+})
+
+function persistCart(items: CartItem[]) {
+  try {
+    localStorage.setItem('erigo-cart', JSON.stringify(items))
+  } catch { /* ignore */ }
+}
+
+// ============================================================
+// FILTERED PRODUCTS
+// ============================================================
+const filteredProducts = computed(() => {
+  if (!activeCategory.value) return products
+  return products.filter(p => p.category === activeCategory.value)
+})
+
+// ============================================================
+// CART OPERATIONS
+// ============================================================
+const cartCount = computed(() => cartItems.value.reduce((s, it) => s + it.qty, 0))
+
+function addToCart(product: Product) {
+  const color = selectedColor.value[product.id]
+  const size = selectedSize.value[product.id]
+  const variant = size === 'One Size' ? color : `${color} / ${size}`
+  const cartId = `${product.id}-${color}-${size}`
+
+  const existing = cartItems.value.find(it => it.id === cartId)
+  if (existing) {
+    existing.qty += 1
+    cartItems.value = [...cartItems.value]
+  } else {
+    cartItems.value.push({
+      id: cartId,
+      name: product.name,
+      price: product.price,
+      qty: 1,
+      variant,
+    })
+  }
+  persistCart(cartItems.value)
+  cartOpen.value = true
+}
+
+function updateCartItems(items: CartItem[]) {
+  cartItems.value = items
+  persistCart(items)
+}
+
+// ============================================================
+// FAQ
+// ============================================================
+const faqs = [
+  { q: 'Berapa lama pengiriman?', a: '3-5 hari kerja untuk Jawa. 5-7 hari untuk luar Jawa. Semua paket dikirim dari Bandung.' },
+  { q: 'Bisa tukar ukuran?', a: 'Bisa. Tukar dalam 7 hari setelah terima, selama belum dicuci dan tag masih terpasang. Ongkir tukar ditanggung pembeli.' },
+  { q: 'Bahan dan perawatan?', a: 'Semua produk dari bahan lokal. Cuci air dingin, jangan pakai pengering. Setrika suhu rendah untuk kanvas dan wol.' },
+  { q: 'Apakah ada toko fisik?', a: 'Belum. Kamijual langsung dari workshop di Bandung. Kalau mau lihat langsung, bisa janjian ke workshop.' },
+  { q: 'Bagaimana cara pesan custom order?', a: 'Hubungi kami lewat WhatsApp. Sampaikan kebutuhan, tim desainer akan merespons dalam 1-2 hari kerja.' },
+]
+
+// ============================================================
+// FORMATTERS
+// ============================================================
+function fmtRp(n: number): string {
+  return `Rp ${n.toLocaleString('id-ID')}`
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+const toastMessage = ref('')
+let toastTimer: number | null = null
+
+function showToast(msg: string) {
+  toastMessage.value = msg
+  if (toastTimer) clearTimeout(toastTimer)
+  toastTimer = window.setTimeout(() => { toastMessage.value = '' }, 1800)
+}
 </script>
 
 <template>
-  <div class="min-h-screen antialiased" style="background: #FFFFFF; color: #111827; font-family: 'Plus Jakarta Sans', system-ui, sans-serif;">
-    <TemplateBack />
+  <div class="erigo" :style="styles">
+    <a class="skip-link" href="#main">Lewat ke konten</a>
 
-    <nav class="fixed top-0 inset-x-0 z-40 backdrop-blur-xl border-b border-gray-200/60" style="background: rgba(255,255,255,0.85);">
-      <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-        <span class="text-sm font-extrabold">ERIGO</span>
-        <div class="hidden md:flex items-center gap-7 text-[13px] text-gray-600">
-          <a href="#produk" class="hover:text-gray-900 transition-colors">Produk</a>
-          <a href="#tentang" class="hover:text-gray-900 transition-colors">Tentang</a>
-          <a href="#kontak" class="hover:text-gray-900 transition-colors">Kontak</a>
+    <TmplBack accent="var(--tmpl-accent)" />
+
+    <TmplNavbar
+      brand="Erigo Goods"
+      :links="[
+        { label: 'Produk', href: '#produk' },
+        { label: 'Kategori', href: '#kategori' },
+        { label: 'Testimoni', href: '#testimoni' },
+        { label: 'FAQ', href: '#faq' },
+      ]"
+      accent="var(--tmpl-accent)"
+      style="glass"
+    />
+
+    <main id="main">
+
+      <!-- ============================== -->
+      <!-- 1. HERO                        -->
+      <!-- ============================== -->
+      <section class="erigo-hero" :style="{ minHeight: '100dvh' }">
+        <div class="erigo-hero__3d">
+          <TmplExperienceCanvas
+            preset="orbit-product"
+            :accent="tpl.accentColor"
+            intensity="balanced"
+          />
         </div>
-        <a href="#keranjang" class="text-[13px] text-gray-600 hover:text-gray-900 transition-colors">Keranjang (0)</a>
-      </div>
-    </nav>
 
-    <!-- Hero -->
-    <section class="pt-14">
-      <div class="max-w-7xl mx-auto px-6 pt-16 pb-8">
-        <div class="grid lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <template v-if="!isLoaded">
-              <div class="h-4 w-32 bg-gray-200 rounded mb-4 animate-pulse" />
-              <div class="h-12 w-full bg-gray-200 rounded mb-4 animate-pulse" />
-              <div class="h-12 w-3/4 bg-gray-200 rounded mb-8 animate-pulse" />
-              <div class="h-5 w-full bg-gray-200 rounded mb-2 animate-pulse" />
-              <div class="h-5 w-2/3 bg-gray-200 rounded mb-8 animate-pulse" />
-              <div class="h-12 w-40 bg-gray-200 rounded-lg animate-pulse" />
-            </template>
+        <div class="erigo-hero__content" :class="{ 'erigo-hero__content--loaded': heroLoaded }">
+          <p class="erigo-eyebrow" :style="monoStyle">BARANG YANG DIRANCANG, BUKAN DIBUAT</p>
 
-            <template v-else>
-              <p class="text-[11px] tracking-[0.2em] uppercase text-gray-500 mb-4">Koleksi Terbaru</p>
-              <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">Streetwear lokal,<br />kualitas internasional.</h1>
-              <p class="text-lg text-gray-600 leading-relaxed mb-8 max-w-md">
-                Dari Bandung untuk Indonesia. Kaos, hoodie, dan aksesoris — semua desain sendiri, produksi sendiri.
-              </p>
-              <a href="#produk" class="inline-block px-6 py-3 bg-black text-white rounded-lg text-sm font-semibold hover:bg-gray-800 transition-colors">
-                Lihat Koleksi
-              </a>
-            </template>
+          <h1 :style="h1Style" class="erigo-h1 text-balance">
+            <span class="erigo-h1__line">Erigo Goods.</span>
+            <span class="erigo-h1__line erigo-h1__line--sub">Barang sehari-hari dari Bandung.</span>
+          </h1>
+
+          <p class="erigo-lede">
+            Katun lokal, jahitan yang dipikirkan, harga yang masuk akal. Tidak lebih, tidak kurang.
+          </p>
+
+          <div class="erigo-cta">
+            <a href="#produk" class="erigo-btn erigo-btn--primary">
+              Lihat semua
+              <UIcon name="i-lucide-arrow-down" class="w-4 h-4" />
+            </a>
+            <button type="button" class="erigo-btn erigo-btn--ghost" @click="consultOpen = true">
+              Bicara dengan desainer
+            </button>
           </div>
-          <div class="aspect-square rounded-2xl" style="background: linear-gradient(135deg, #111827, #374151);">
-            <div class="w-full h-full flex items-center justify-center">
-              <span class="text-[10px] tracking-[0.3em] uppercase text-white/30">Foto produk</span>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- 2. MARQUEE                     -->
+      <!-- ============================== -->
+      <TmplMarquee
+        :items="['Dibuat di Bandung', 'Katun Lokal', 'Jahitan Rantai', 'Dikirim 3-5 Hari', 'Tukar dalam 7 Hari', 'Dibuat di Bandung', 'Katun Lokal', 'Jahitan Rantai', 'Dikirim 3-5 Hari', 'Tukar dalam 7 Hari']"
+        accent="var(--tmpl-accent)"
+      />
+
+      <!-- ============================== -->
+      <!-- 3. KATEGORI (filter chips)     -->
+      <!-- ============================== -->
+      <section id="kategori" class="erigo-section erigo-categories">
+        <div class="erigo-section-head">
+          <p class="erigo-eyebrow" :style="monoStyle">01 / KATEGORI</p>
+          <h2 :style="h2Style" class="text-balance">Tiga kategori, <em>semua dari Bandung.</em></h2>
+        </div>
+
+        <div class="erigo-chips">
+          <button
+            type="button"
+            class="erigo-chip"
+            :class="{ 'erigo-chip--active': !activeCategory }"
+            @click="activeCategory = null"
+          >
+            Semua
+          </button>
+          <button
+            v-for="cat in ['Pakaian', 'Tas', 'Aksesori']"
+            :key="cat"
+            type="button"
+            class="erigo-chip"
+            :class="{ 'erigo-chip--active': activeCategory === cat }"
+            @click="activeCategory = activeCategory === cat ? null : cat"
+          >
+            {{ cat }}
+          </button>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- 4. PRODUK (grid)               -->
+      <!-- ============================== -->
+      <section id="produk" class="erigo-section erigo-products">
+        <div class="erigo-section-head">
+          <p class="erigo-eyebrow" :style="monoStyle">02 / PRODUK</p>
+          <h2 :style="h2Style" class="text-balance">Barang yang kami <em>pakai sendiri.</em></h2>
+        </div>
+
+        <div class="erigo-product-grid">
+          <article
+            v-for="product in filteredProducts"
+            :key="product.id"
+            class="erigo-product-card"
+            @click="selectedProduct = selectedProduct?.id === product.id ? null : product"
+          >
+            <!-- Image placeholder -->
+            <div class="erigo-product-card__img" :style="{ background: product.gradient }">
+              <span class="erigo-product-card__tag" :style="monoStyle">{{ product.categoryTag }}</span>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Produk -->
-    <section id="produk" class="py-16 border-t border-gray-200/60">
-      <div class="max-w-7xl mx-auto px-6">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-gray-500 mb-8">Produk</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <article v-for="p in products" :key="p.name" class="group cursor-pointer">
-            <div class="aspect-[3/4] rounded-xl mb-3 bg-gray-100">
-              <div class="w-full h-full flex items-center justify-center">
-                <span class="text-[9px] tracking-[0.2em] uppercase text-gray-400">Foto</span>
+            <div class="erigo-product-card__body">
+              <p class="erigo-product-card__name">{{ product.name }}</p>
+              <p class="erigo-product-card__price" :style="monoStyle">{{ fmtRp(product.price) }}</p>
+            </div>
+
+            <!-- Inline expansion: product detail -->
+            <Transition
+              enter-active-class="transition-all duration-300 ease-out"
+              leave-active-class="transition-all duration-200 ease-in"
+              enter-from-class="opacity-0 max-h-0"
+              leave-to-class="opacity-0 max-h-0"
+            >
+              <div v-if="selectedProduct?.id === product.id" class="erigo-product-detail" @click.stop>
+                <p class="erigo-product-detail__desc">{{ product.description }}</p>
+
+                <!-- Color picker -->
+                <div class="erigo-detail-row">
+                  <span class="erigo-detail-label" :style="monoStyle">Warna</span>
+                  <div class="erigo-color-picker">
+                    <button
+                      v-for="c in product.colors"
+                      :key="c.name"
+                      type="button"
+                      class="erigo-color-swatch"
+                      :class="{ 'erigo-color-swatch--active': selectedColor[product.id] === c.name }"
+                      :style="{ '--swatch-bg': c.hex }"
+                      :aria-label="c.name"
+                      :title="c.name"
+                      @click="selectedColor[product.id] = c.name"
+                    >
+                      <span class="erigo-color-swatch__check">
+                        <UIcon v-if="selectedColor[product.id] === c.name" name="i-lucide-check" class="w-3 h-3" />
+                      </span>
+                    </button>
+                  </div>
+                  <span class="erigo-color-name" :style="monoStyle">{{ selectedColor[product.id] }}</span>
+                </div>
+
+                <!-- Size selector -->
+                <div v-if="product.sizes.length > 1" class="erigo-detail-row">
+                  <span class="erigo-detail-label" :style="monoStyle">Ukuran</span>
+                  <div class="erigo-size-picker">
+                    <button
+                      v-for="s in product.sizes"
+                      :key="s"
+                      type="button"
+                      class="erigo-size-btn"
+                      :class="{ 'erigo-size-btn--active': selectedSize[product.id] === s }"
+                      @click="selectedSize[product.id] = s"
+                    >
+                      {{ s }}
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Add to cart -->
+                <button
+                  type="button"
+                  class="erigo-add-btn"
+                  @click="addToCart(product)"
+                >
+                  Tambah ke keranjang
+                  <UIcon name="i-lucide-shopping-bag" class="w-4 h-4" />
+                </button>
               </div>
-            </div>
-            <h3 class="text-sm font-semibold mb-1 group-hover:text-gray-600 transition-colors">{{ p.name }}</h3>
-            <p class="text-[12px] text-gray-500 mb-1">{{ p.desc }}</p>
-            <p class="text-sm font-bold">{{ p.price }}</p>
+            </Transition>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Tentang -->
-    <section id="tentang" class="py-20 border-t border-gray-200/60" style="background: #FAFAFA;">
-      <div class="max-w-2xl mx-auto px-6 text-center">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-gray-500 mb-6">Tentang Erigo</p>
-        <p class="text-lg text-gray-700 leading-relaxed">
-          Erigo dimulai dari garasi di Bandung tahun 2015. Sekarang kami produksi 50.000+ item per bulan, kirim ke seluruh Indonesia, dan masih desain sendiri setiap piece.
-        </p>
-      </div>
-    </section>
+      <!-- ============================== -->
+      <!-- 5. TESTIMONI                   -->
+      <!-- ============================== -->
+      <section id="testimoni" class="erigo-section erigo-testimonials">
+        <div class="erigo-section-head">
+          <p class="erigo-eyebrow" :style="monoStyle">03 / DARI PEMBELI</p>
+          <h2 :style="h2Style" class="text-balance">Yang mereka <em>rasakan</em> setelah pakai.</h2>
+        </div>
 
-    <!-- Pengiriman -->
-    <section class="py-12 border-t border-gray-200/60">
-      <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div><p class="text-sm font-semibold">Gratis Ongkir</p><p class="text-[12px] text-gray-500 mt-1">Min. belanja Rp 200.000</p></div>
-        <div><p class="text-sm font-semibold">Bayar di Tempat</p><p class="text-[12px] text-gray-500 mt-1">COD tersedia</p></div>
-        <div><p class="text-sm font-semibold">Pengiriman 1-3 Hari</p><p class="text-[12px] text-gray-500 mt-1">Via JNE/POS</p></div>
-        <div><p class="text-sm font-semibold">Garansi 30 Hari</p><p class="text-[12px] text-gray-500 mt-1">Tukar jika tidak cocok</p></div>
-      </div>
-    </section>
+        <div class="erigo-testimonial-grid">
+          <blockquote class="erigo-testimonial">
+            <p class="erigo-testimonial__text">
+              "Pesan tote kanvas dan selempang kulit. Pengiriman 4 hari, sampai sebelum puasa. Kualitas jahitan bagus, strap-nya tidak tipis. Saya pakai tiap hari ke kantor."
+            </p>
+            <footer class="erigo-testimonial__footer">
+              <div>
+                <cite class="erigo-testimonial__name">Putri Larasati</cite>
+                <p class="erigo-testimonial__loc" :style="monoStyle">Jakarta</p>
+              </div>
+            </footer>
+          </blockquote>
 
-    <!-- FAB -->
-    <div class="fixed bottom-5 right-5 z-50">
-      <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 translate-y-4 scale-95" leave-to-class="opacity-0 translate-y-4 scale-95">
-        <div v-if="fabOpen" class="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 p-4">
-          <p class="text-sm font-semibold text-gray-900 mb-2">Tertarik dengan template ini?</p>
-          <p class="text-xs text-gray-500 mb-3">Chat langsung untuk diskusi fitur, harga, dan customisasi.</p>
-          <a :href="waUrl" target="_blank" rel="noopener" class="flex items-center gap-2 w-full px-4 py-2.5 bg-emerald-500 text-white rounded-lg text-sm font-medium hover:bg-emerald-600 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Chat WhatsApp
-          </a>
+          <blockquote class="erigo-testimonial">
+            <p class="erigo-testimonial__text">
+              "Hoodie-nya tebal tapi breathable, tidak gerah. Saya beli tiga warna sekaligus setelah coba satu."
+            </p>
+            <footer class="erigo-testimonial__footer">
+              <div>
+                <cite class="erigo-testimonial__name">Bima A. Wicaksono</cite>
+                <p class="erigo-testimonial__loc" :style="monoStyle">Bandung</p>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="erigo-testimonial">
+            <p class="erigo-testimonial__text">
+              "Detail kecil yang membuat barang ini terasa 'dirancang', bukan 'dibuat'. Klaim 'made in Indonesia' sering dilebih-lebihkan, tapi Erigo bener-bener."
+            </p>
+            <footer class="erigo-testimonial__footer">
+              <div>
+                <cite class="erigo-testimonial__name">Ratna Kusuma</cite>
+                <p class="erigo-testimonial__loc" :style="monoStyle">Yogyakarta</p>
+              </div>
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- 6. FAQ                         -->
+      <!-- ============================== -->
+      <section id="faq" class="erigo-section erigo-faq-section">
+        <div class="erigo-section-head">
+          <p class="erigo-eyebrow" :style="monoStyle">04 / PERTANYAAN</p>
+          <h2 :style="h2Style" class="text-balance">Yang sering <em>ditanya</em> sebelum beli.</h2>
+        </div>
+
+        <ul class="erigo-faq">
+          <li
+            v-for="(item, i) in faqs"
+            :key="i"
+            class="erigo-faq__item"
+            :class="{ 'erigo-faq__item--open': openFaq === i }"
+          >
+            <h3 class="erigo-faq__h">
+              <button
+                type="button"
+                class="erigo-faq__btn"
+                :aria-expanded="openFaq === i"
+                :aria-controls="`faq-${i}`"
+                @click="openFaq = openFaq === i ? null : i"
+              >
+                <span class="erigo-faq__q">{{ item.q }}</span>
+                <UIcon
+                  :name="openFaq === i ? 'i-lucide-minus' : 'i-lucide-plus'"
+                  class="erigo-faq__icon w-4 h-4"
+                />
+              </button>
+            </h3>
+            <Transition
+              enter-active-class="transition-all duration-300 ease-out overflow-hidden"
+              leave-active-class="transition-all duration-200 ease-in overflow-hidden"
+              enter-from-class="opacity-0 max-h-0"
+              leave-to-class="opacity-0 max-h-0"
+            >
+              <p v-if="openFaq === i" :id="`faq-${i}`" class="erigo-faq__a">
+                {{ item.a }}
+              </p>
+            </Transition>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ============================== -->
+      <!-- 7. FOOTER (signoff)            -->
+      <!-- ============================== -->
+      <TmplFooter
+        brand-name="Erigo Goods"
+        variant="signoff"
+        signoff="Barang yang dipikirkan, dari Bandung."
+        signature="Dibuat di Bandung"
+        accent="var(--tmpl-accent)"
+        bg="var(--tmpl-bg)"
+        text="var(--tmpl-fg)"
+      />
+    </main>
+
+    <!-- ============================== -->
+    <!-- CART DRAWER                     -->
+    <!-- ============================== -->
+    <TmplCart
+      :open="cartOpen"
+      :items="cartItems"
+      storage-key="erigo-cart"
+      currency="Rp "
+      whatsapp-phone="6285188627365"
+      whatsapp-message-prefix="Halo Erigo, saya mau pesan:"
+      :accent="tpl.accentColor"
+      @update:open="cartOpen = $event"
+      @update:items="updateCartItems"
+    />
+
+    <!-- ============================== -->
+    <!-- CONSULT FORM MODAL              -->
+    <!-- ============================== -->
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition-opacity duration-200"
+        leave-active-class="transition-opacity duration-150"
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+      >
+        <div v-if="consultOpen" class="erigo-modal-backdrop" @click="consultOpen = false" />
+      </Transition>
+      <Transition
+        enter-active-class="transition-all duration-300 ease-out"
+        leave-active-class="transition-all duration-200 ease-in"
+        enter-from-class="opacity-0 scale-95"
+        leave-to-class="opacity-0 scale-95"
+      >
+        <div v-if="consultOpen" class="erigo-modal" role="dialog" aria-label="Konsultasi desainer">
+          <button type="button" class="erigo-modal__close" @click="consultOpen = false" aria-label="Tutup">
+            <UIcon name="i-lucide-x" class="w-4 h-4" />
+          </button>
+          <h3 :style="h2Style" class="erigo-modal__title">Bicara dengan desainer</h3>
+          <p class="erigo-modal__sub">Sampaikan kebutuhan custom order, tim kami merespons dalam 1-2 hari kerja.</p>
+
+          <TmplForm
+            :fields="[
+              { key: 'name', label: 'Nama', type: 'text', placeholder: 'Nama kamu', required: true },
+              { key: 'city', label: 'Kota', type: 'text', placeholder: 'Misal: Jakarta' },
+              { key: 'message', label: 'Kebutuhan', type: 'textarea', placeholder: 'Ceritakan apa yang kamu butuhkan...', required: true },
+            ]"
+            submit-label="Kirim via WhatsApp"
+            whatsapp-phone="6285188627365"
+            whatsapp-message-prefix="Halo Erigo, saya mau konsultasi custom order:"
+            :accent="tpl.accentColor"
+            @success="consultOpen = false"
+          />
         </div>
       </Transition>
-      <button @click="fabOpen = !fabOpen" class="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-lg flex items-center justify-center transition-colors">
-        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </button>
-    </div>
+    </Teleport>
 
-    <TemplateFooter brand-name="ERIGO" :links="[{ label: 'Produk', href: '#produk' }, { label: 'Tentang', href: '#tentang' }, { label: 'Kontak', href: '#kontak' }]" accent="#111827" />
+    <!-- Toast -->
+    <Transition
+      enter-active-class="transition-all duration-200 ease-out"
+      leave-active-class="transition-all duration-150 ease-in"
+      enter-from-class="opacity-0 translate-y-2"
+      leave-to-class="opacity-0 translate-y-2"
+    >
+      <div v-if="toastMessage" class="erigo-toast" :style="monoStyle">
+        {{ toastMessage }}
+      </div>
+    </Transition>
+
+    <!-- ============================== -->
+    <!-- WHATSAPP FAB                    -->
+    <!-- ============================== -->
+    <TmplWhatsAppFab
+      :accent="tpl.accentColor"
+      :actions="[
+        { label: 'Konsultasi custom order', detail: 'Bicara dengan desainer kami', icon: 'i-lucide-pencil-ruler', message: 'Halo Erigo, saya mau konsultasi custom order.' },
+        { label: 'Cek stok sebelum datang', detail: 'Pastikan warna dan ukuran tersedia', icon: 'i-lucide-package-check', message: 'Halo Erigo, saya mau cek stok. Apakah [sebutkan produk] masih tersedia?' },
+        { label: 'Bicara dengan desainer', detail: 'Diskusi bahan, ukuran, atau desain', icon: 'i-lucide-palette', message: 'Halo Erigo, saya mau bicara dengan desainer tentang produk.' },
+        { label: 'Track pesanan saya', detail: 'Cek status pengiriman', icon: 'i-lucide-truck', message: 'Halo Erigo, saya mau cek status pesanan saya. Nomor order: [sebutkan nomor].' },
+      ]"
+    />
   </div>
 </template>
+
+<style scoped>
+.erigo {
+  min-height: 100dvh;
+  position: relative;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--tmpl-accent);
+  color: var(--tmpl-accent-fg);
+  padding: 0.5rem 1rem;
+  z-index: 100;
+  font-size: 13px;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* === Eyebrow === */
+.erigo-eyebrow {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tmpl-accent);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+}
+
+/* === H1 === */
+.erigo-h1 {
+  font-size: var(--tmpl-h1);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  margin: 0 0 1.5rem;
+}
+.erigo-h1__line {
+  display: block;
+  font-style: italic;
+}
+.erigo-h1__line--sub {
+  font-size: 0.45em;
+  font-style: normal;
+  letter-spacing: -0.01em;
+  opacity: 0.7;
+  margin-top: 0.5em;
+  font-family: var(--tmpl-font-body);
+}
+
+/* === Lede === */
+.erigo-lede {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.55;
+  max-width: 48ch;
+  opacity: 0.75;
+  margin: 0 0 2rem;
+}
+
+/* === CTA === */
+.erigo-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.erigo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  border: 1px solid transparent;
+  transition: background-color 200ms ease, transform 200ms ease, border-color 200ms ease;
+}
+.erigo-btn--primary {
+  background: var(--tmpl-fg);
+  color: var(--tmpl-bg);
+}
+.erigo-btn--primary:hover {
+  transform: translateY(-1px);
+}
+.erigo-btn--ghost {
+  background: transparent;
+  color: var(--tmpl-fg);
+  border-color: color-mix(in srgb, currentColor 25%, transparent);
+}
+.erigo-btn--ghost:hover {
+  background: color-mix(in srgb, currentColor 5%, transparent);
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+/* === HERO === */
+.erigo-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 1.5rem 4rem;
+  overflow: hidden;
+}
+.erigo-hero__3d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.25;
+}
+.erigo-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 50rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.erigo-hero__content--loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+.erigo-lede {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.6;
+  max-width: 42ch;
+  margin: 0 auto 2rem;
+  opacity: 0.75;
+}
+
+/* === SECTIONS === */
+.erigo-section {
+  padding: 5rem 1.5rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+.erigo-section-head {
+  max-width: 50rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+.erigo-section-head h2 {
+  font-size: var(--tmpl-h2);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+}
+.erigo-section-head h2 em {
+  font-style: italic;
+  color: var(--tmpl-accent);
+}
+
+/* === CATEGORY CHIPS === */
+.erigo-categories {
+  padding-bottom: 2rem;
+}
+.erigo-chips {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.erigo-chip {
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.erigo-chip:hover {
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+  background: color-mix(in srgb, currentColor 5%, transparent);
+}
+.erigo-chip--active {
+  background: var(--tmpl-fg);
+  color: var(--tmpl-bg);
+  border-color: var(--tmpl-fg);
+}
+
+/* === PRODUCT GRID === */
+.erigo-product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .erigo-product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .erigo-product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* === PRODUCT CARD === */
+.erigo-product-card {
+  border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--tmpl-surface);
+  cursor: pointer;
+  transition: all 250ms ease;
+}
+.erigo-product-card:hover {
+  border-color: color-mix(in srgb, currentColor 20%, transparent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px color-mix(in srgb, currentColor 6%, transparent);
+}
+.erigo-product-card__img {
+  aspect-ratio: 4 / 5;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+}
+.erigo-product-card__tag {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tmpl-bg) 85%, transparent);
+  color: var(--tmpl-fg);
+}
+.erigo-product-card__body {
+  padding: 1.25rem 1.5rem;
+}
+.erigo-product-card__name {
+  font-family: var(--tmpl-font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.01em;
+}
+.erigo-product-card__price {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* === PRODUCT DETAIL (inline expansion) === */
+.erigo-product-detail {
+  padding: 0 1.5rem 1.5rem;
+  border-top: 1px solid color-mix(in srgb, currentColor 8%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.erigo-product-detail__desc {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.75;
+  margin: 1rem 0 0;
+}
+.erigo-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.erigo-detail-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.5;
+  min-width: 3rem;
+}
+
+/* === COLOR PICKER === */
+.erigo-color-picker {
+  display: flex;
+  gap: 0.5rem;
+}
+.erigo-color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background: var(--swatch-bg);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 200ms ease, transform 200ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.erigo-color-swatch:hover {
+  transform: scale(1.1);
+}
+.erigo-color-swatch--active {
+  border-color: var(--tmpl-fg);
+  box-shadow: 0 0 0 2px var(--tmpl-bg);
+}
+.erigo-color-swatch__check {
+  color: var(--tmpl-bg);
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.5));
+}
+.erigo-color-name {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* === SIZE PICKER === */
+.erigo-size-picker {
+  display: flex;
+  gap: 0.375rem;
+}
+.erigo-size-btn {
+  width: 36px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.erigo-size-btn:hover {
+  border-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+.erigo-size-btn--active {
+  background: var(--tmpl-fg);
+  color: var(--tmpl-bg);
+  border-color: var(--tmpl-fg);
+}
+
+/* === ADD TO CART BUTTON === */
+.erigo-add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  background: var(--tmpl-accent);
+  color: var(--tmpl-accent-fg);
+  border: 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 200ms ease, transform 200ms ease;
+  width: 100%;
+}
+.erigo-add-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* === TESTIMONIALS === */
+.erigo-testimonials {
+  border-top: 1px solid color-mix(in srgb, currentColor 8%, transparent);
+}
+.erigo-testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .erigo-testimonial-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.erigo-testimonial {
+  padding: 2rem;
+  border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+  border-radius: 12px;
+  background: var(--tmpl-surface);
+  margin: 0;
+}
+.erigo-testimonial__text {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
+  font-style: italic;
+  opacity: 0.85;
+}
+.erigo-testimonial__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.erigo-testimonial__name {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  display: block;
+}
+.erigo-testimonial__loc {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0.15rem 0 0;
+}
+
+/* === FAQ === */
+.erigo-faq {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+}
+.erigo-faq__item {
+  border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+}
+.erigo-faq__h {
+  margin: 0;
+}
+.erigo-faq__btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.25rem 0.5rem;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.erigo-faq__q {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+}
+.erigo-faq__icon {
+  flex-shrink: 0;
+  color: var(--tmpl-accent);
+}
+.erigo-faq__a {
+  padding: 0 0.5rem 1.5rem;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.75;
+}
+
+/* === MODAL === */
+.erigo-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.erigo-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 95;
+  width: min(520px, calc(100vw - 2rem));
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  background: var(--tmpl-bg);
+  color: var(--tmpl-fg);
+  border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+.erigo-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+.erigo-modal__close:hover {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+.erigo-modal__title {
+  margin: 0 0 0.5rem;
+}
+.erigo-modal__sub {
+  font-size: 14px;
+  opacity: 0.7;
+  margin: 0 0 1.5rem;
+}
+
+/* === TOAST === */
+.erigo-toast {
+  position: fixed;
+  bottom: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  background: var(--tmpl-fg);
+  color: var(--tmpl-bg);
+  padding: 0.625rem 1.25rem;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .erigo-hero__content {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+</style>
