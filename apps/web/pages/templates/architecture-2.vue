@@ -35,7 +35,7 @@ const projects = [
     type: 'Rumah', price: 1850000000, priceLabel: 'Rp 1,85 Miliar',
     sqm: 108, bedrooms: 3, bathrooms: 2,
     status: 'Tersedia', statusClass: 'bh-status--available',
-    desc: 'Cluster premium di jantung BSD City. 8 menit ke AEON Mall, 12 menit ke Stasiun KRL BSD. SHM, IMB lengkap. Jalan cluster 8 meter.',
+    desc: 'Cluster premium BSD City. 8 menit ke AEON Mall, 12 menit ke Stasiun KRL. SHM lengkap.',
     units: 48, unitsLeft: 12,
   },
   {
@@ -43,7 +43,7 @@ const projects = [
     type: 'Rumah', price: 2400000000, priceLabel: 'Rp 2,4 Miliar',
     sqm: 140, bedrooms: 4, bathrooms: 3,
     status: 'Tersedia', statusClass: 'bh-status--available',
-    desc: 'Townhouse 2 lantai di kawasan premium Alam Sutera. 5 menit ke IKEA dan Living World. Akses langsung ke Tol Jakarta-Serpong.',
+    desc: 'Townhouse 2 lantai premium. 5 menit ke IKEA, akses langsung Tol Jakarta-Serpong.',
     units: 32, unitsLeft: 8,
   },
   {
@@ -51,7 +51,7 @@ const projects = [
     type: 'Apartemen', price: 650000000, priceLabel: 'Rp 650 Juta',
     sqm: 45, bedrooms: 1, bathrooms: 1,
     status: 'Sisa 5 Unit', statusClass: 'bh-status--selling',
-    desc: 'Studio dan 1BR di PIK 2, view laut. Kolam renang infinity, gym, coworking space. 10 menit ke Bandara Soekarno-Hatta.',
+    desc: 'Studio dan 1BR view laut. Infinity pool, gym, coworking. 10 menit ke Bandara.',
     units: 120, unitsLeft: 5,
   },
   {
@@ -59,7 +59,7 @@ const projects = [
     type: 'Rumah', price: 1200000000, priceLabel: 'Rp 1,2 Miliar',
     sqm: 90, bedrooms: 3, bathrooms: 2,
     status: 'Tersedia', statusClass: 'bh-status--available',
-    desc: 'Rumah tapak di kaki Gunung Pancar. Udara sejuk, view pegunungan. 15 menit ke exit tol Sentul City.',
+    desc: 'Rumah tapak kaki Gunung Pancar. Udara sejuk, view pegunungan. 15 menit ke tol.',
     units: 60, unitsLeft: 22,
   },
   {
@@ -67,7 +67,7 @@ const projects = [
     type: 'Rumah', price: 980000000, priceLabel: 'Rp 980 Juta',
     sqm: 72, bedrooms: 3, bathrooms: 2,
     status: 'Tersedia', statusClass: 'bh-status--available',
-    desc: 'Cluster keluarga muda di Cibubur. 5 menit ke tol Jagorawi, 10 menit ke Mall Ciputra Cibubur. Smart home ready.',
+    desc: 'Cluster keluarga muda. 5 menit ke tol Jagorawi, 10 menit ke Mall Ciputra. Smart home.',
     units: 80, unitsLeft: 35,
   },
   {
@@ -75,7 +75,7 @@ const projects = [
     type: 'Rumah', price: 3200000000, priceLabel: 'Rp 3,2 Miliar',
     sqm: 180, bedrooms: 4, bathrooms: 3,
     status: 'Pre-Launch', statusClass: 'bh-status--coming',
-    desc: 'Villa retreat di dataran tinggi Lembang. 1.300 mdpl. Kayu jati dan batu alam. Kolam renang pribadi.',
+    desc: 'Villa retreat 1.300 mdpl. Kayu jati, batu alam, kolam renang pribadi.',
     units: 24, unitsLeft: 24,
   },
 ]
@@ -156,18 +156,18 @@ function toggleCompare(id: number) {
 // AMENITIES (12)
 // ============================================================
 const amenities = [
-  { icon: 'i-lucide-waves', name: 'Kolam Renang', desc: 'Kolam dewasa dan anak, buka 06.00-21.00' },
-  { icon: 'i-lucide-dumbbell', name: 'Gym & Fitness', desc: 'Peralatan Technogym, buka 24 jam' },
-  { icon: 'i-lucide-trees', name: 'Taman Tematik', desc: 'Taman bermain anak dan jogging track 1,2 km' },
-  { icon: 'i-lucide-baby', name: 'Playground', desc: 'Area bermain anak dengan lantai karet aman' },
-  { icon: 'i-lucide-book-open', name: 'Perpustakaan', desc: 'Ruang baca komunitas, 2.000 koleksi' },
-  { icon: 'i-lucide-shield-check', name: 'Keamanan 24 Jam', desc: 'CCTV, one-gate system, satpam bergilir' },
-  { icon: 'i-lucide-heart', name: 'Mushola', desc: 'Mushola cluster, kapasitas 80 jamaah' },
-  { icon: 'i-lucide-cross', name: 'Klinik', desc: 'Klinik pratama Senin-Sabtu 08.00-20.00' },
-  { icon: 'i-lucide-store', name: 'Minimarket', desc: 'Indomaret dan Alfamart di area komersial' },
-  { icon: 'i-lucide-bus', name: 'Shuttle Bus', desc: 'Antar-jemput stasiun KRL dan mall terdekat' },
-  { icon: 'i-lucide-zap', name: 'Smart Home', desc: 'Smart lock, smart lighting, AC IoT' },
-  { icon: 'i-lucide-leaf', name: 'Area Hijau', desc: '30% lahan untuk ruang terbuka hijau' },
+  { icon: 'i-lucide-waves', name: 'Kolam Renang', desc: 'Dewasa dan anak, 06-21' },
+  { icon: 'i-lucide-dumbbell', name: 'Gym & Fitness', desc: 'Technogym, 24 jam' },
+  { icon: 'i-lucide-trees', name: 'Taman Tematik', desc: 'Playground dan jogging 1,2 km' },
+  { icon: 'i-lucide-baby', name: 'Playground', desc: 'Lantai karet aman' },
+  { icon: 'i-lucide-book-open', name: 'Perpustakaan', desc: '2.000 koleksi' },
+  { icon: 'i-lucide-shield-check', name: 'Keamanan 24 Jam', desc: 'CCTV, one-gate system' },
+  { icon: 'i-lucide-heart', name: 'Mushola', desc: 'Kapasitas 80 jamaah' },
+  { icon: 'i-lucide-cross', name: 'Klinik', desc: 'Senin-Sabtu 08-20' },
+  { icon: 'i-lucide-store', name: 'Minimarket', desc: 'Indomaret dan Alfamart' },
+  { icon: 'i-lucide-bus', name: 'Shuttle Bus', desc: 'Stasiun KRL dan mall' },
+  { icon: 'i-lucide-zap', name: 'Smart Home', desc: 'Smart lock, lighting, AC' },
+  { icon: 'i-lucide-leaf', name: 'Area Hijau', desc: '30% ruang terbuka hijau' },
 ]
 
 // ============================================================
@@ -242,14 +242,14 @@ const waUrl = computed(() => {
         <Transition enter-active-class="transition-all duration-700 ease-out" enter-from-class="opacity-0 translate-y-6" enter-to-class="opacity-100 translate-y-0">
           <div v-if="heroLoaded">
             <p class="bh-mono-label">Developer Properti Sejak 1989</p>
-            <h1 :style="h1Style" class="bh-h1">Rumah yang Tumbuh Bersama Keluarga Anda.</h1>
-            <p class="bh-hero__sub">6 cluster landed house dan apartemen di Jabodetabek dan Bandung. Mulai dari Rp 480 Juta. KPR mulai Rp 3,8 juta/bulan.</p>
+            <h1 :style="h1Style" class="bh-h1">Properti yang layak dihuni.</h1>
+            <p class="bh-hero__sub">6 cluster di Jabodetabek dan Bandung. Mulai Rp 480 Juta, KPR mulai Rp 3,8 juta/bulan.</p>
             <div class="bh-hero__cta">
               <a href="#proyek" class="bh-btn bh-btn--primary">Lihat Proyek</a>
-              <a :href="waUrl" target="_blank" rel="noopener" class="bh-btn bh-btn--ghost">Konsultasi via WhatsApp</a>
+              <a :href="waUrl" target="_blank" rel="noopener" class="bh-btn bh-btn--ghost">Konsultasi WhatsApp</a>
             </div>
             <div class="bh-hero__stats">
-              <span>6 Cluster Aktif</span><span>444 Unit Tersedia</span><span>35 Tahun Pengalaman</span><span>SHM &amp; IMB Lengkap</span>
+              <span>6 Cluster</span><span>444 Unit</span><span>35 Tahun</span><span>SHM Lengkap</span>
             </div>
           </div>
         </Transition>
@@ -263,7 +263,7 @@ const waUrl = computed(() => {
       <div class="bh-container">
         <p class="bh-mono-label">Proyek Kami</p>
         <h2 :style="h2Style" class="bh-h2">6 Cluster, 6 Lokasi</h2>
-        <p class="bh-section__desc">Setiap cluster dirancang untuk keluarga Indonesia. Legalitas jelas, akses tol dekat, fasilitas lengkap.</p>
+        <p class="bh-section__desc">Legalitas jelas, akses tol dekat, fasilitas lengkap.</p>
 
         <div class="bh-project-grid">
           <article
@@ -388,7 +388,7 @@ const waUrl = computed(() => {
       <div class="bh-container">
         <p class="bh-mono-label">Simulasi KPR</p>
         <h2 :style="h2Style" class="bh-h2">Hitung Cicilan Anda</h2>
-        <p class="bh-section__desc">Masukkan harga unit, pilih DP dan tenor. Hasil langsung berubah tanpa perlu klik tombol.</p>
+        <p class="bh-section__desc">Masukkan harga, pilih DP dan tenor. Hasil langsung berubah.</p>
 
         <div class="bh-kpr">
           <!-- Input -->
@@ -455,7 +455,7 @@ const waUrl = computed(() => {
       <div class="bh-container">
         <p class="bh-mono-label">Fasilitas Cluster</p>
         <h2 :style="h2Style" class="bh-h2">Lengkap untuk Keluarga</h2>
-        <p class="bh-section__desc">Setiap cluster dilengkapi fasilitas yang dirancang untuk kenyamanan penghuni sehari-hari.</p>
+        <p class="bh-section__desc">Fasilitas untuk kenyamanan penghuni sehari-hari.</p>
         <div class="bh-amenity-grid">
           <div v-for="a in amenities" :key="a.name" class="bh-amenity">
             <UIcon :name="a.icon" class="bh-amenity__icon" />
@@ -473,7 +473,7 @@ const waUrl = computed(() => {
       <div class="bh-container">
         <p class="bh-mono-label">Lokasi</p>
         <h2 :style="h2Style" class="bh-h2">Akses Mudah ke Mana-mana</h2>
-        <p class="bh-section__desc">Semua cluster dekat pintu tol, stasiun KRL, sekolah internasional, dan rumah sakit.</p>
+        <p class="bh-section__desc">Dekat tol, KRL, sekolah internasional, dan rumah sakit.</p>
         <div class="bh-location">
           <div class="bh-location__map">
             <iframe
@@ -505,7 +505,7 @@ const waUrl = computed(() => {
           <div>
             <p class="bh-mono-label">Daftar Minat</p>
             <h2 :style="h2Style" class="bh-h2">Dapatkan Price List Terbaru</h2>
-            <p class="bh-section__desc">Isi formulir. Marketing kami menghubungi Anda dalam 1x24 jam. Tanpa kewajiban.</p>
+            <p class="bh-section__desc">Isi formulir. Marketing menghubungi dalam 1x24 jam.</p>
             <form class="bh-form" @submit.prevent="window.open(waUrl, '_blank', 'noopener,noreferrer')">
               <div class="bh-form__field">
                 <label class="bh-form__label">Nama Lengkap</label>
@@ -530,7 +530,7 @@ const waUrl = computed(() => {
           <div>
             <p class="bh-mono-label">Jadwalkan Kunjungan</p>
             <h2 :style="h2Style" class="bh-h2">Lihat Langsung di Lokasi</h2>
-            <p class="bh-section__desc">Marketing kami mendampingi Anda. Antar-jemput gratis untuk kunjungan dari luar kota.</p>
+            <p class="bh-section__desc">Marketing mendampingi. Antar-jemput gratis dari luar kota.</p>
             <form class="bh-form" @submit.prevent="submitSiteVisit">
               <div class="bh-form__field">
                 <label class="bh-form__label">Nama</label>
@@ -575,7 +575,7 @@ const waUrl = computed(() => {
         <div class="bh-footer__grid">
           <div>
             <p class="bh-footer__brand">Bukit Hijau</p>
-            <p class="bh-footer__about">Developer properti sejak 1989. 12.000+ unit tersebar di 15 kota. Legalitas jelas, after-sales terjamin.</p>
+            <p class="bh-footer__about">Developer properti sejak 1989. 12.000+ unit di 15 kota. Legalitas jelas, after-sales terjamin.</p>
             <p class="bh-footer__legal">PT Bukit Hijau Development Indonesia<br />NPWP 01.234.567.8-901.000</p>
           </div>
           <div>
@@ -633,15 +633,15 @@ const waUrl = computed(() => {
 /* Mono label */
 .bh-mono-label { font-family: var(--tmpl-font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; color: var(--tmpl-accent); }
 
-/* Headings */
-.bh-h1 { margin-bottom: 1.5rem; }
-.bh-h2 { margin-bottom: 1rem; }
+/* Headings — Inter Tight Black, 3 sizes max */
+.bh-h1 { margin-bottom: 1.5rem; font-family: var(--tmpl-font-heading, 'Inter Tight', sans-serif); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; }
+.bh-h2 { margin-bottom: 1rem; font-family: var(--tmpl-font-heading, 'Inter Tight', sans-serif); font-weight: 900; letter-spacing: -0.02em; line-height: 1.2; }
 
 /* Container */
 .bh-container { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
 
 /* Section */
-.bh-section { padding: 5rem 0; border-top: 1px solid var(--tmpl-border); }
+.bh-section { padding: 80px 0; border-top: 1px solid var(--tmpl-border); }
 .bh-section--alt { background: var(--tmpl-surface); }
 .bh-section__desc { font-size: 0.875rem; margin-bottom: 3rem; max-width: 32rem; color: var(--tmpl-muted); line-height: 1.7; }
 .bh-section__header { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 3rem; }
@@ -649,7 +649,7 @@ const waUrl = computed(() => {
 .bh-section__hint { font-size: 0.75rem; color: var(--tmpl-muted); }
 
 /* Buttons */
-.bh-btn { display: inline-flex; align-items: center; justify-content: center; height: 2.75rem; padding: 0 1.5rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 200ms ease; cursor: pointer; border: none; }
+.bh-btn { display: inline-flex; align-items: center; justify-content: center; height: 2.75rem; padding: 0 1.5rem; border-radius: 8px; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 200ms ease; cursor: pointer; border: none; }
 .bh-btn:hover { transform: translateY(-1px); }
 .bh-btn--primary { background: var(--tmpl-accent); color: var(--tmpl-accent-fg); }
 .bh-btn--ghost { border: 1px solid var(--tmpl-border); color: var(--tmpl-fg); background: transparent; }
@@ -657,20 +657,20 @@ const waUrl = computed(() => {
 .bh-btn--sm { height: 2.25rem; padding: 0 1rem; font-size: 0.75rem; }
 .bh-form__submit { width: 100%; }
 
-/* Project grid */
+/* Project grid — asymmetric: 1fr 1.4fr on desktop */
 .bh-project-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
-@media (min-width: 768px) { .bh-project-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .bh-project-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px) { .bh-project-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .bh-project-grid { grid-template-columns: 1fr 1.4fr 1fr; } }
 
 /* Card */
-.bh-card { border-radius: 0.75rem; border: 1px solid var(--tmpl-border); background: var(--tmpl-surface-elevated); transition: all 300ms ease; cursor: pointer; overflow: hidden; }
+.bh-card { border-radius: 8px; border: 1px solid var(--tmpl-border); background: var(--tmpl-surface-elevated); transition: all 300ms ease; cursor: pointer; overflow: hidden; }
 .bh-card:hover { box-shadow: 0 4px 24px oklch(22% 0.012 60 / 0.08); }
-.bh-card__img { aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; background: var(--tmpl-surface); border-radius: 0.75rem 0.75rem 0 0; }
+.bh-card__img { aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; background: var(--tmpl-surface); border-radius: 8px 8px 0 0; }
 .bh-card__img-label { font-family: var(--tmpl-font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tmpl-muted); }
 .bh-card__body { padding: 1.25rem; }
 .bh-card__meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
 .bh-card__type { font-family: var(--tmpl-font-mono); font-size: 11px; color: var(--tmpl-muted); }
-.bh-card__title { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--tmpl-fg); }
+.bh-card__title { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--tmpl-fg); font-family: var(--tmpl-font-heading, 'Inter Tight', sans-serif); }
 .bh-card__loc { font-size: 0.75rem; margin-bottom: 0.75rem; color: var(--tmpl-muted); }
 .bh-card__price { font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem; font-variant-numeric: tabular-nums; color: var(--tmpl-fg); }
 .bh-card__specs { display: flex; gap: 1rem; font-family: var(--tmpl-font-mono); font-size: 11px; margin-bottom: 0.75rem; color: var(--tmpl-muted); }
@@ -680,29 +680,29 @@ const waUrl = computed(() => {
 .bh-card__stock { font-family: var(--tmpl-font-mono); font-size: 10px; margin-top: 0.5rem; color: var(--tmpl-muted); }
 
 /* Status badges */
-.bh-status { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.125rem 0.5rem; border-radius: 0.25rem; }
+.bh-status { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.125rem 0.5rem; border-radius: 4px; }
 .bh-status--available { background: oklch(94% 0.025 145); color: oklch(48% 0.13 145); }
 .bh-status--selling { background: oklch(94% 0.06 60); color: oklch(50% 0.16 60); }
 .bh-status--coming { background: oklch(94% 0.01 240); color: oklch(50% 0.04 240); }
 
-/* Unit grid */
+/* Unit grid — asymmetric 1fr 1.2fr on desktop */
 .bh-unit-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
-@media (min-width: 768px) { .bh-unit-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .bh-unit-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px) { .bh-unit-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .bh-unit-grid { grid-template-columns: 1fr 1.2fr; } }
 
-.bh-unit-card { border-radius: 0.75rem; border: 1px solid var(--tmpl-border); padding: 1.25rem; transition: all 200ms ease; cursor: pointer; background: var(--tmpl-surface-elevated); }
+.bh-unit-card { border-radius: 8px; border: 1px solid var(--tmpl-border); padding: 1.25rem; transition: all 200ms ease; cursor: pointer; background: var(--tmpl-surface-elevated); }
 .bh-unit-card--selected { border-color: var(--tmpl-accent); box-shadow: 0 0 0 1px var(--tmpl-accent); }
-.bh-unit-card__plan { aspect-ratio: 4/3; border-radius: 0.5rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--tmpl-surface); }
+.bh-unit-card__plan { aspect-ratio: 4/3; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--tmpl-surface); }
 .bh-floor-svg { width: 100%; height: 100%; padding: 1rem; }
 .bh-unit-card__badge { position: absolute; top: 0.5rem; right: 0.5rem; width: 1.5rem; height: 1.5rem; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; background: var(--tmpl-accent); color: var(--tmpl-accent-fg); }
-.bh-unit-card__name { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--tmpl-fg); }
+.bh-unit-card__name { font-size: 0.875rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--tmpl-fg); font-family: var(--tmpl-font-heading, 'Inter Tight', sans-serif); }
 .bh-unit-card__cluster { font-size: 0.75rem; margin-bottom: 0.75rem; color: var(--tmpl-muted); }
 .bh-unit-card__info { display: flex; justify-content: space-between; align-items: flex-end; }
 .bh-unit-card__specs { font-family: var(--tmpl-font-mono); font-size: 11px; color: var(--tmpl-muted); line-height: 1.6; }
 .bh-unit-card__price { font-size: 1rem; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--tmpl-fg); }
 
 /* Compare */
-.bh-compare { margin-top: 3rem; border-radius: 0.75rem; border: 1px solid var(--tmpl-accent); padding: 1.5rem; background: var(--tmpl-surface-elevated); }
+.bh-compare { margin-top: 3rem; border-radius: 8px; border: 1px solid var(--tmpl-accent); padding: 1.5rem; background: var(--tmpl-surface-elevated); }
 .bh-compare__table-wrap { overflow-x: auto; margin-top: 1rem; }
 .bh-compare__table { width: 100%; font-size: 0.875rem; border-collapse: collapse; }
 .bh-compare__table th { text-align: left; padding: 0.5rem 1rem 0.5rem 0; font-family: var(--tmpl-font-mono); font-size: 10px; text-transform: uppercase; color: var(--tmpl-muted); border-bottom: 1px solid var(--tmpl-border); }
@@ -710,9 +710,9 @@ const waUrl = computed(() => {
 .bh-compare__bold { font-weight: 700; color: var(--tmpl-fg); }
 .bh-compare__actions { display: flex; gap: 0.75rem; margin-top: 1rem; }
 
-/* KPR */
+/* KPR — asymmetric 1.2fr 1fr */
 .bh-kpr { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-@media (min-width: 1024px) { .bh-kpr { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .bh-kpr { grid-template-columns: 1.2fr 1fr; } }
 .bh-kpr__input { display: flex; flex-direction: column; gap: 1.5rem; }
 .bh-kpr__field { display: flex; flex-direction: column; gap: 0.5rem; }
 .bh-kpr__label { font-family: var(--tmpl-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tmpl-muted); }
@@ -721,16 +721,16 @@ const waUrl = computed(() => {
 .bh-kpr__hint { font-family: var(--tmpl-font-mono); font-size: 11px; color: var(--tmpl-muted); }
 .bh-range { flex: 1; accent-color: var(--tmpl-accent); }
 .bh-kpr__chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-.bh-chip { padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; border: 1px solid var(--tmpl-border); background: transparent; color: var(--tmpl-fg); cursor: pointer; transition: all 200ms ease; }
+.bh-chip { padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.875rem; font-weight: 500; border: 1px solid var(--tmpl-border); background: transparent; color: var(--tmpl-fg); cursor: pointer; transition: all 200ms ease; }
 .bh-chip--active { background: var(--tmpl-accent); color: var(--tmpl-accent-fg); border-color: var(--tmpl-accent); }
 .bh-kpr__rates { display: flex; flex-direction: column; gap: 0.5rem; }
-.bh-rate-btn { text-align: left; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid var(--tmpl-border); background: transparent; cursor: pointer; transition: all 200ms ease; }
+.bh-rate-btn { text-align: left; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--tmpl-border); background: transparent; cursor: pointer; transition: all 200ms ease; }
 .bh-rate-btn--active { background: var(--tmpl-accent-soft); border-color: var(--tmpl-accent); }
 .bh-rate-btn__label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--tmpl-fg); }
 .bh-rate-btn__desc { font-family: var(--tmpl-font-mono); font-size: 11px; color: var(--tmpl-muted); }
 
 /* KPR result */
-.bh-kpr__result { border-radius: 0.75rem; border: 1px solid var(--tmpl-border); padding: 1.5rem; background: var(--tmpl-surface-elevated); }
+.bh-kpr__result { border-radius: 8px; border: 1px solid var(--tmpl-border); padding: 1.5rem; background: var(--tmpl-surface-elevated); }
 .bh-kpr__rows { margin-bottom: 1.5rem; }
 .bh-kpr__row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.75rem 0; border-bottom: 1px solid var(--tmpl-border); font-size: 0.875rem; color: var(--tmpl-muted); }
 .bh-kpr__row-val { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--tmpl-fg); }
@@ -742,36 +742,36 @@ const waUrl = computed(() => {
 .bh-kpr__big-sub { font-family: var(--tmpl-font-mono); font-size: 11px; margin-top: 0.25rem; color: var(--tmpl-muted); }
 .bh-kpr__cta { width: 100%; margin-top: 1.5rem; }
 
-/* Amenities */
+/* Amenities — 2col → 3col → 6col asymmetric */
 .bh-amenity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 @media (min-width: 768px) { .bh-amenity-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1024px) { .bh-amenity-grid { grid-template-columns: repeat(4, 1fr); } }
-.bh-amenity { border-radius: 0.75rem; border: 1px solid var(--tmpl-border); padding: 1rem; transition: all 200ms ease; background: var(--tmpl-surface-elevated); }
+@media (min-width: 1024px) { .bh-amenity-grid { grid-template-columns: repeat(6, 1fr); } }
+.bh-amenity { border-radius: 8px; border: 1px solid var(--tmpl-border); padding: 1rem; transition: all 200ms ease; background: var(--tmpl-surface-elevated); }
 .bh-amenity:hover { box-shadow: 0 2px 12px oklch(22% 0.012 60 / 0.06); }
 .bh-amenity__icon { width: 1.5rem; height: 1.5rem; margin-bottom: 0.75rem; color: var(--tmpl-accent); }
 .bh-amenity__name { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; color: var(--tmpl-fg); }
 .bh-amenity__desc { font-size: 0.75rem; line-height: 1.5; color: var(--tmpl-muted); }
 
-/* Location */
+/* Location — asymmetric 1.2fr 1fr */
 .bh-location { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-@media (min-width: 768px) { .bh-location { grid-template-columns: 1fr 1fr; } }
-.bh-location__map { border-radius: 0.75rem; overflow: hidden; border: 1px solid var(--tmpl-border); }
+@media (min-width: 768px) { .bh-location { grid-template-columns: 1.2fr 1fr; } }
+.bh-location__map { border-radius: 8px; overflow: hidden; border: 1px solid var(--tmpl-border); }
 .bh-location__map iframe { width: 100%; aspect-ratio: 4/3; border: 0; }
 .bh-location__list { display: flex; flex-direction: column; gap: 1rem; }
-.bh-location__item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border-radius: 0.5rem; background: var(--tmpl-surface); }
+.bh-location__item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border-radius: 8px; background: var(--tmpl-surface); }
 .bh-location__pin { width: 1rem; height: 1rem; margin-top: 0.125rem; flex-shrink: 0; color: var(--tmpl-accent); }
 .bh-location__name { font-size: 0.875rem; font-weight: 600; color: var(--tmpl-fg); }
 .bh-location__addr { font-size: 0.75rem; color: var(--tmpl-muted); }
 
-/* Contact */
+/* Contact — asymmetric 1.3fr 1fr */
 .bh-contact { display: grid; grid-template-columns: 1fr; gap: 3rem; }
-@media (min-width: 768px) { .bh-contact { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 768px) { .bh-contact { grid-template-columns: 1.3fr 1fr; } }
 
 /* Form */
 .bh-form { display: flex; flex-direction: column; gap: 1rem; }
 .bh-form__field { display: flex; flex-direction: column; gap: 0.25rem; }
 .bh-form__label { font-family: var(--tmpl-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tmpl-muted); }
-.bh-form__input { width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid var(--tmpl-border); font-size: 0.875rem; background: var(--tmpl-surface-elevated); color: var(--tmpl-fg); outline: none; transition: border-color 200ms ease; }
+.bh-form__input { width: 100%; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--tmpl-border); font-size: 0.875rem; background: var(--tmpl-surface-elevated); color: var(--tmpl-fg); outline: none; transition: border-color 200ms ease; }
 .bh-form__input:focus { border-color: var(--tmpl-accent); }
 .bh-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 
@@ -779,7 +779,7 @@ const waUrl = computed(() => {
 .bh-footer { padding: 4rem 0; border-top: 1px solid var(--tmpl-border); }
 .bh-footer__grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
 @media (min-width: 768px) { .bh-footer__grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
-.bh-footer__brand { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--tmpl-fg); }
+.bh-footer__brand { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--tmpl-fg); font-family: var(--tmpl-font-heading, 'Inter Tight', sans-serif); }
 .bh-footer__about { font-size: 0.75rem; line-height: 1.6; margin-bottom: 1rem; color: var(--tmpl-muted); }
 .bh-footer__legal { font-family: var(--tmpl-font-mono); font-size: 10px; color: var(--tmpl-muted); }
 .bh-footer__title { font-family: var(--tmpl-font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; color: var(--tmpl-muted); }
@@ -794,10 +794,10 @@ const waUrl = computed(() => {
 
 /* FAB */
 .bh-fab { position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 50; }
-.bh-fab__popup { position: absolute; bottom: 100%; right: 0; margin-bottom: 0.75rem; width: 18rem; border-radius: 0.75rem; box-shadow: 0 8px 32px oklch(22% 0.012 60 / 0.15); border: 1px solid var(--tmpl-border); padding: 1rem; background: var(--tmpl-surface-elevated); }
+.bh-fab__popup { position: absolute; bottom: 100%; right: 0; margin-bottom: 0.75rem; width: 18rem; border-radius: 8px; box-shadow: 0 8px 32px oklch(22% 0.012 60 / 0.15); border: 1px solid var(--tmpl-border); padding: 1rem; background: var(--tmpl-surface-elevated); }
 .bh-fab__title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--tmpl-fg); }
 .bh-fab__desc { font-size: 0.75rem; margin-bottom: 0.75rem; color: var(--tmpl-muted); }
-.bh-fab__btn { display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0.625rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; text-decoration: none; color: #fff; background: #25D366; }
+.bh-fab__btn { display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0.625rem 1rem; border-radius: 8px; font-size: 0.875rem; font-weight: 500; text-decoration: none; color: #fff; background: #25D366; }
 .bh-fab__trigger { width: 3.5rem; height: 3.5rem; border-radius: 999px; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; box-shadow: 0 4px 16px oklch(22% 0.012 60 / 0.15); background: #25D366; }
 .bh-fab__icon { width: 1.5rem; height: 1.5rem; color: #fff; }
 

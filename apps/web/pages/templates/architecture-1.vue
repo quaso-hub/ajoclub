@@ -67,7 +67,7 @@ const projects = [
     type: 'Residensial',
     status: 'Terbangun',
     area: '320 m\u00B2',
-    desc: 'Rumah tinggal di kontur landai 8 meter, view utara ke hutan kota. Batu paras lokal untuk dinding utama, kayu jati reclaimed untuk semua kusen, bata ekspos untuk fasad belakang.',
+    desc: 'Rumah tinggal di kontur landai 8 meter, view utara ke hutan kota. Batu paras lokal, kayu jati reclaimed, bata ekspos untuk fasad belakang.',
   },
   {
     name: 'TR Pavilion',
@@ -77,7 +77,7 @@ const projects = [
     type: 'Residensial',
     status: 'Terbangun',
     area: '180 m\u00B2',
-    desc: 'Paviliun terbuka di tepi sawah, struktur bambu petung dan atap alang-alang kering. Mezzanine setinggi 4.2 meter menangkap angin barat, dinding geser kayu meranti buka tutup penuh.',
+    desc: 'Paviliun terbuka di tepi sawah, struktur bambu petung dan atap alang-alang. Mezzanine 4.2 meter menangkap angin barat, dinding geser kayu meranti buka tutup penuh.',
   },
   {
     name: 'EL Atelier',
@@ -87,7 +87,7 @@ const projects = [
     type: 'Komersial',
     status: 'Dalam proses',
     area: '450 m\u00B2',
-    desc: 'Atelier dan showroom 2 lantai, fasad beton cetak dengan bukaan vertikal tinggi. Lantai dasar galeri dan penyimpanan, lantai mezzanine ruang kerja tim 8 orang dengan skylight.',
+    desc: 'Atelier dan showroom 2 lantai, fasad beton cetak dengan bukaan vertikal. Lantai dasar galeri, mezzanine ruang kerja tim 8 orang dengan skylight.',
   },
   {
     name: 'RP Reading Room',
@@ -97,7 +97,7 @@ const projects = [
     type: 'Publik',
     status: 'Terbangun',
     area: '220 m\u00B2',
-    desc: 'Ruang baca komunitas di samping gereja lama, struktur baja ringan dengan dinding kaca penuh. Furnitur kayu jati Jepara, rak terbuka sepanjang 18 meter untuk 4.200 buku.',
+    desc: 'Ruang baca komunitas di samping gereja lama, struktur baja ringan dinding kaca penuh. Rak terbuka 18 meter untuk 4.200 buku, furnitur kayu jati Jepara.',
   },
   {
     name: 'ND Guest Wing',
@@ -107,7 +107,7 @@ const projects = [
     type: 'Interior',
     status: 'Konsep',
     area: '90 m\u00B2',
-    desc: 'Penambahan guest wing ke villa existing, 2 suite tidur dengan kamar mandi outdoor. Lantai batu Karangasem, dinding plester tanah liat, pencahayaan alami dari skylight timur.',
+    desc: 'Guest wing ke villa existing, 2 suite tidur kamar mandi outdoor. Lantai batu Karangasem, dinding plester tanah liat, skylight timur.',
   },
   {
     name: 'BH Coastal Retreat',
@@ -117,7 +117,7 @@ const projects = [
     type: 'Residensial',
     status: 'Konsep',
     area: '240 m\u00B2',
-    desc: 'Vila tepi pantai 5 bungalow terhubung deck kayu ulin. Atap jerami dengan struktur bambu, air dari sumur dangkal 14 meter, septic biofilter.',
+    desc: 'Vila tepi pantai 5 bungalow terhubung deck kayu ulin. Atap jerami struktur bambu, air sumur dangkal 14 meter, septic biofilter.',
   },
 ]
 
@@ -126,35 +126,35 @@ const process = [
     step: '01',
     title: 'Brief',
     weeks: 'Minggu 1\u20133',
-    desc: 'Kami tidak gambar dulu. Kami datang ke tempat, berjalan keliling, bicara dengan penghuni. Mendengarkan apa yang tidak mereka ucapkan. Menggali rutinitas, bukan selera.',
+    desc: 'Kami tidak gambar dulu. Kami datang ke tempat, berjalan keliling, bicara dengan penghuni — menggali rutinitas, bukan selera.',
     deliverables: ['Site visit 2\u20133x', 'Wawancara penghuni', 'Dokumen brief', 'Kajian tapak awal'],
   },
   {
     step: '02',
     title: 'Konsep',
     weeks: 'Minggu 4\u20136',
-    desc: 'Dari brief, kami rumuskan 3 hal: orientasi bangunan terhadap matahari, hubungan ruang dengan tapak, dan material utama. Bukan moodboard Pinterest.',
+    desc: 'Dari brief, kami rumuskan orientasi terhadap matahari, hubungan ruang dengan tapak, dan material utama. Bukan moodboard Pinterest.',
     deliverables: ['Tiga keputusan utama', 'Sketsa konsep 5\u20137 halaman', 'Estimasi biaya kasar', 'Pertemuan alignment klien'],
   },
   {
     step: '03',
     title: 'Sketsa',
     weeks: 'Minggu 7\u201312',
-    desc: 'Sketsa tangan, bukan render. Kami percaya gambar tangan masih yang paling jujur tentang niat. Setiap denah dan potongan direvisi minimal 4 kali.',
+    desc: 'Sketsa tangan, bukan render. Gambar tangan masih paling jujur tentang niat. Denah dan potongan direvisi minimal 4 kali.',
     deliverables: ['Sketsa tangan 30\u201350 lembar', 'Denah layout final', 'Potongan arsitektural', 'Material schedule'],
   },
   {
     step: '04',
     title: 'Model',
     weeks: 'Minggu 13\u201320',
-    desc: 'Gambar kerja teknis lengkap: struktur, mekanikal, elektrikal, plumbing. Koordinasi dengan insinyur dan kontraktor. Maket fisik A3 untuk presentasi akhir.',
+    desc: 'Gambar kerja teknis lengkap: struktur, ME, plumbing. Koordinasi insinyur dan kontraktor. Maket fisik A3 presentasi akhir.',
     deliverables: ['Gambar kerja 80\u2013120 halaman', 'Spesifikasi teknis lengkap', 'Maket fisik 1:50', 'RAB detail'],
   },
   {
     step: '05',
     title: 'Konstruksi',
     weeks: 'Bulan 5\u201314',
-    desc: 'Supervisi mingguan di lapangan. Bukan serah terima desain dan pergi. Kami datang setiap Selasa, bertemu mandor, cek apakah gambar kerja masih relevan.',
+    desc: 'Supervisi mingguan di lapangan. Kami datang setiap Selasa, bertemu mandor, cek apakah gambar kerja masih relevan.',
     deliverables: ['Supervisi mingguan', 'Site meeting 2x sebulan', 'Laporan progres foto', 'Serah terima final dengan punch list'],
   },
 ]
@@ -338,7 +338,7 @@ const navLinks = [
               </h1>
 
               <p class="archiry-hero__sub">
-                Studio kecil 10 orang di Bandung. Proyek residensial, komersial, publik, interior. Bekerja di seluruh Indonesia sejak 2018.
+                Studio kecil 10 orang di Bandung. Residensial, komersial, publik, interior. Seluruh Indonesia sejak 2018.
               </p>
 
               <div class="archiry-hero__tags" :style="monoStyle">
@@ -372,14 +372,10 @@ const navLinks = [
           Arsitektur<br />yang tumbuh<br />dari tempat.
         </h2>
         <div class="archiry-about__body">
-          <p>Arsitektur yang baik tidak berdiri sendiri. Ia tumbuh dari tempat, iklim, dan cara orang di dalamnya hidup. Bentuk bangunan mengikuti ritme matahari, arah angin, dan kemiringan tanah, bukan estetika yang dipinjam dari majalah luar negeri.</p>
-          <p>Kami bukan studio yang mendesain dari foto referensi. Kami survey lokasi berulang kali, menggali material dari pengrajin lokal, dan menanyakan rutinitas harian klien sebelum menggambar denah pertama.</p>
-          <p>Material lokal bukan gimmick. Batu paras dari Jawa Tengah, kayu jati dari Jepara, bambu petung dari Sumatera, alang-alang dari Bali. Material yang kami pilih karena tahan lama, tersedia di tempat, dan punya cerita, bukan karena estetik saja.</p>
-          <p>Kami menolak 80% klien yang menghubungi kami. Bukan karena sombong. Tapi karena tidak semua proyek cocok dengan cara kami kerja. Yang kami kerjakan, kami kerjakan dengan serius dan terlibat penuh sampai serah terima.</p>
+          <p>Arsitektur yang baik tumbuh dari tempat, iklim, dan cara penghuninya hidup. Bentuk bangunan mengikuti matahari, angin, dan kemiringan tanah — bukan estetika dari majalah luar negeri.</p>
+          <p>Material lokal bukan gimmick. Batu paras Jawa Tengah, kayu jati Jepara, bambu petung Sumatera. Dipilih karena tahan lama, tersedia di tempat, dan punya cerita.</p>
+          <p>Kami menolak 80% klien. Bukan sombong — tapi tidak semua proyek cocok dengan cara kami kerja. Yang kami ambil, kami kerjakan penuh sampai serah terima.</p>
         </div>
-        <p class="archiry-about__interrupt">
-          Studio kecil. Bukan karena tidak bisa tumbuh. Tapi karena arsitektur butuh waktu, dan waktu tidak bisa di-scale.
-        </p>
       </section>
 
       <!-- ============================== -->
@@ -522,10 +518,10 @@ const navLinks = [
         </div>
 
         <p class="archiry-process-footer" :style="monoStyle">
-          5 tahap. Tidak ada jalan pintas. Tidak ada revisi tak terbatas. Tidak ada desain dari foto.
+          5 tahap. Tidak ada jalan pintas. Tidak ada desain dari foto.
         </p>
         <p class="archiry-process-note">
-          Setelah serah terima, kami kembali 3 bulan kemudian untuk foto dokumentasi. Arsitektur yang bagus baru terlihat setelah dipakai.
+          Setelah serah terima, kami kembali 3 bulan kemudian untuk foto. Arsitektur yang bagus baru terlihat setelah dipakai.
         </p>
       </section>
 
@@ -562,7 +558,7 @@ const navLinks = [
         </div>
 
         <p class="archiry-team-footer">
-          Cukup untuk dengerin, mikir, dan nge-ship tanpa nge-drag. Kami tidak rekrut untuk presentasi, kami rekrut untuk masa bakti panjang.
+          Cukup untuk dengerin, mikir, dan nge-ship. Kami rekrut untuk masa bakti panjang, bukan presentasi.
         </p>
       </section>
 
@@ -616,7 +612,7 @@ const navLinks = [
           Mulai dari<br />cerita tempat.
         </h2>
         <p class="archiry-contact__sub">
-          Balas dalam 48 jam. Bisa WhatsApp, email, atau ketemu langsung di studio. Konsultasi pertama tidak dipungut biaya.
+          Balas dalam 48 jam. WhatsApp, email, atau ketemu langsung di studio. Konsultasi pertama gratis.
         </p>
 
         <div class="archiry-contact-grid">
@@ -910,9 +906,7 @@ const navLinks = [
   font-style: italic;
   font-size: 1rem;
   max-width: 40ch;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  text-align: left;
   opacity: 0.75;
 }
 
@@ -920,7 +914,7 @@ const navLinks = [
    PROJECTS
    ============================================================ */
 .archiry-projects {
-  padding: 6rem 2rem;
+  padding: 5rem 2rem;
   max-width: 80rem;
   margin: 0 auto;
 }
@@ -947,7 +941,7 @@ const navLinks = [
 .archiry-chip {
   padding: 0.35rem 0.75rem;
   border: 1px solid var(--archiry-border);
-  border-radius: 999px;
+  border-radius: 6px;
   background: transparent;
   color: var(--tmpl-fg);
   font: inherit;
@@ -1030,7 +1024,7 @@ const navLinks = [
   color: var(--tmpl-fg);
 }
 .archiry-project-card__desc {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.6;
   opacity: 0.7;
   margin: 0 0 1rem;
@@ -1070,7 +1064,7 @@ const navLinks = [
    PROCESS
    ============================================================ */
 .archiry-process {
-  padding: 6rem 2rem;
+  padding: 5rem 2rem;
   max-width: 56rem;
   margin: 0 auto;
 }
@@ -1119,7 +1113,7 @@ const navLinks = [
   margin: 0 0 0.75rem;
 }
 .archiry-process-stage__desc {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.6;
   max-width: 55ch;
   margin: 0;
@@ -1137,23 +1131,22 @@ const navLinks = [
   font-size: 11px;
   padding: 0.25rem 0.6rem;
   border: 1px solid var(--archiry-border);
-  border-radius: 999px;
+  border-radius: 6px;
   color: var(--archiry-ink-mute);
 }
 .archiry-process-footer {
   font-size: 11px;
-  text-align: center;
+  text-align: left;
   color: var(--archiry-ink-mute);
-  margin: 3rem auto 1rem;
+  margin: 3rem 0 1rem;
   max-width: 60ch;
   letter-spacing: 0.04em;
 }
 .archiry-process-note {
   font-style: italic;
   font-size: 0.875rem;
-  text-align: center;
+  text-align: left;
   max-width: 50ch;
-  margin: 0 auto;
   opacity: 0.65;
 }
 
@@ -1161,7 +1154,7 @@ const navLinks = [
    TEAM
    ============================================================ */
 .archiry-team {
-  padding: 6rem 2rem;
+  padding: 5rem 2rem;
   max-width: 80rem;
   margin: 0 auto;
 }
@@ -1207,7 +1200,7 @@ const navLinks = [
 }
 .archiry-team-card__bio {
   font-style: italic;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.4;
   max-width: 28ch;
   margin: 0.5rem auto 0;
@@ -1216,9 +1209,8 @@ const navLinks = [
 .archiry-team-footer {
   font-style: italic;
   font-size: 0.875rem;
-  text-align: center;
+  text-align: left;
   max-width: 50ch;
-  margin: 0 auto;
   opacity: 0.65;
 }
 
@@ -1226,7 +1218,7 @@ const navLinks = [
    RECOGNITION
    ============================================================ */
 .archiry-recognition {
-  padding: 6rem 2rem;
+  padding: 5rem 2rem;
   max-width: 80rem;
   margin: 0 auto;
 }
@@ -1273,7 +1265,7 @@ const navLinks = [
 }
 .archiry-recog-tile__project {
   font-style: italic;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   opacity: 0.7;
   margin: 0;
 }
@@ -1282,7 +1274,7 @@ const navLinks = [
    PRESS
    ============================================================ */
 .archiry-press {
-  padding: 4rem 2rem 6rem;
+  padding: 5rem 2rem;
   max-width: 56rem;
   margin: 0 auto;
 }
@@ -1313,7 +1305,7 @@ const navLinks = [
   color: var(--archiry-ink-mute);
 }
 .archiry-press-row__headline {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 .archiry-press-row__year {
@@ -1327,7 +1319,7 @@ const navLinks = [
    CONTACT
    ============================================================ */
 .archiry-contact {
-  padding: 6rem 2rem;
+  padding: 5rem 2rem;
   max-width: 80rem;
   margin: 0 auto;
 }
@@ -1373,7 +1365,7 @@ const navLinks = [
   margin: 0 0 0.25rem;
 }
 .archiry-contact-info__value {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.5;
   margin: 0;
 }

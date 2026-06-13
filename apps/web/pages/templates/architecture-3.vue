@@ -42,68 +42,53 @@ onMounted(() => { setTimeout(() => { heroLoaded.value = true }, 150) })
 // DATA — Layanan
 // ============================================================
 const layanan = [
-  { icon: 'i-lucide-pen-tool', title: 'Desain Interior', desc: 'Dari konsep hingga penataan akhir. Moodboard, denah furniture, daftar belanja, dan rencana pencahayaan.' },
-  { icon: 'i-lucide-message-circle', title: 'Konsultasi', desc: 'Sesi 60 menit dengan desainer. Analisis ruangan, rekomendasi gaya, dan estimasi anggaran.' },
-  { icon: 'i-lucide-paintbrush', title: 'Styling', desc: 'Penataan akhir dengan aksesori, tanaman, tekstil, dan seni. Ruangan langsung siap ditempati.' },
-  { icon: 'i-lucide-cube', title: 'Visualisasi', desc: 'Render 3D fotorealistik sebelum eksekusi. Lihat hasilnya sebelum mengeluarkan anggaran.' },
+  { icon: 'i-lucide-pen-tool', title: 'Desain Interior', desc: 'Konsep hingga penataan akhir. Moodboard, denah, dan rencana pencahayaan.' },
+  { icon: 'i-lucide-message-circle', title: 'Konsultasi', desc: 'Sesi 60 menit. Analisis ruangan, rekomendasi gaya, estimasi anggaran.' },
+  { icon: 'i-lucide-paintbrush', title: 'Styling', desc: 'Aksesori, tanaman, tekstil. Ruangan langsung siap ditempati.' },
+  { icon: 'i-lucide-cube', title: 'Visualisasi', desc: 'Render 3D fotorealistik sebelum eksekusi. Lihat sebelum belanja.' },
 ]
 
 // ============================================================
 // DATA — Proyek
 // ============================================================
 const proyek = [
-  { name: 'Ruang Kerja Minimalis', style: 'Minimalis', location: 'Jakarta Selatan', year: '2025', desc: 'Kantor rumah 18 m\u00B2 dengan meja kayu jati custom dan rak dinding tersembunyi. Cahaya alami dari jendela utama dimanfaatkan sepenuhnya tanpa lampu di siang hari.' },
-  { name: 'Apartemen Studio', style: 'Skandinavia', location: 'Bandung', year: '2024', desc: 'Unit 28 m\u00B2 di Cipete yang terasa lapang berkat palet warna terang dan furnitur multifungsi. Dapur terbuka menyatu dengan area duduk tanpa sekat fisik.' },
-  { name: 'Rumah Keluarga', style: 'Klasik', location: 'BSD City', year: '2024', desc: 'Rumah tiga kamar untuk keluarga muda dengan ruang bermain anak yang terintegrasi dengan ruang keluarga. Material lokal mendominasi: batu palimanan dan kayu jati.' },
-  { name: 'Kafe Industrial', style: 'Industrial', location: 'Bandung', year: '2023', desc: 'Kafe 85 m\u00B2 di Dago dengan dinding bata ekspos, meja besi tempa, dan pencahayaan gantung Edison. Suasana hangat yang tidak terasa dingin meskipun gaya industrial.' },
-  { name: 'Butik Fashion', style: 'Boho', location: 'Kemang, Jakarta', year: '2023', desc: 'Butik 45 m\u00B2 dengan rak rotan anyaman, cermin lengkung besar, dan lantai teraso. Setiap sudut dirancang sebagai spot foto untuk pengunjung.' },
-  { name: 'Villa Pantai', style: 'Boho', location: 'Canggu, Bali', year: '2025', desc: 'Villa liburan dengan pintu geser kaca yang membuka ke taman tropis. Material utama: kayu kelapa, linen putih, dan anyaman bambu dari pengrajin lokal Tabanan.' },
+  { name: 'Ruang Kerja Minimalis', style: 'Minimalis', location: 'Jakarta Selatan', year: '2025', desc: 'Kantor 18 m\u00B2 dengan meja jati custom dan rak tersembunyi. Cahaya alami penuh tanpa lampu siang hari.' },
+  { name: 'Apartemen Studio', style: 'Skandinavia', location: 'Bandung', year: '2024', desc: 'Unit 28 m\u00B2 yang terasa lapang berkat palet terang dan furnitur multifungsi. Dapur terbuka menyatu.' },
+  { name: 'Rumah Keluarga', style: 'Klasik', location: 'BSD City', year: '2024', desc: 'Tiga kamar dengan ruang bermain anak terintegrasi. Material lokal: batu palimanan dan kayu jati.' },
+  { name: 'Kafe Industrial', style: 'Industrial', location: 'Bandung', year: '2023', desc: 'Kafe 85 m\u00B2 dengan bata ekspos, besi tempa, dan lampu Edison. Hangat meski industrial.' },
+  { name: 'Butik Fashion', style: 'Boho', location: 'Kemang, Jakarta', year: '2023', desc: 'Butik 45 m\u00B2 dengan rotan anyaman, cermin lengkung, dan lantai teraso. Setiap sudut spot foto.' },
+  { name: 'Villa Pantai', style: 'Boho', location: 'Canggu, Bali', year: '2025', desc: 'Pintu geser kaca membuka ke taman tropis. Kayu kelapa, linen putih, anyaman bambu lokal.' },
 ]
 
 // ============================================================
 // DATA — Material (6 Indonesian materials)
 // ============================================================
 const materials = [
-  { name: 'Jati Jepara', origin: 'Jepara, Jawa Tengah', desc: 'Kayu jati tua reclaimed dari perahu nelayan dan rumah lama. Seratnya unik, tahan rayap, dan makin indah seiring waktu.', color: '#8B6914', category: 'Kayu' },
-  { name: 'Linen', origin: 'Eropa (diimport via Jakarta)', desc: 'Kain linen natural untuk tirai, sarung bantal, dan taplak. Teksturnya lembut, bernapas, dan makin lentur setelah dicuci beberapa kali.', color: '#D4C5A9', category: 'Tekstil' },
-  { name: 'Palimanan', origin: 'Cirebon, Jawa Barat', desc: 'Batu kapur lunak berwarna krem kekuningan. Cocok untuk dinding aksen dan lantai teras. Harganya terjangkau dibanding marmer impor.', color: '#E8D5B7', category: 'Batu' },
-  { name: 'Kuningan', origin: 'Yogyakarta', desc: 'Logam kuningan yang dipatenkan secara alami untuk pegangan pintu, lampu gantung, dan aksen furnitur. Warnanya berubah dari emas ke cokelat gelap seiring waktu.', color: '#B8860B', category: 'Logam' },
-  { name: 'Keramik', origin: 'Plered, Jawa Barat', desc: 'Keramik buatan tangan dengan glazur tidak rata. Setiap keping punya warna sedikit berbeda, menciptakan pola hidup di dinding dapur atau kamar mandi.', color: '#C4A882', category: 'Keramik' },
-  { name: 'Batu Alam', origin: 'Bali & Lombok', desc: 'Batu kali dan batu paras untuk taman, kamar mandi, dan dinding luar. Tahan cuaca, tidak licin, dan memberikan tekstur alami pada setiap ruangan.', color: '#9B8B7A', category: 'Batu' },
+  { name: 'Jati Jepara', origin: 'Jepara, Jawa Tengah', desc: 'Kayu jati reclaimed dari perahu nelayan. Serat unik, tahan rayap, makin indah seiring waktu.', color: '#8B6914', category: 'Kayu' },
+  { name: 'Linen', origin: 'Eropa (via Jakarta)', desc: 'Kain natural untuk tirai dan tekstil. Lembut, bernapas, makin lentur setelah dicuci.', color: '#D4C5A9', category: 'Tekstil' },
+  { name: 'Palimanan', origin: 'Cirebon, Jawa Barat', desc: 'Batu kapur krem kekuningan. Cocok untuk dinding aksen dan lantai teras. Terjangkau.', color: '#E8D5B7', category: 'Batu' },
+  { name: 'Kuningan', origin: 'Yogyakarta', desc: 'Logam paten alami untuk pegangan pintu dan lampu gantung. Berubah emas ke cokelat gelap.', color: '#B8860B', category: 'Logam' },
+  { name: 'Keramik', origin: 'Plered, Jawa Barat', desc: 'Keramik tangan dengan glazur tak rata. Setiap keping unik, hidupkan dinding dapur.', color: '#C4A882', category: 'Keramik' },
+  { name: 'Batu Alam', origin: 'Bali & Lombok', desc: 'Batu kali dan paras untuk taman dan kamar mandi. Tahan cuaca, tekstur alami.', color: '#9B8B7A', category: 'Batu' },
 ]
 
 // ============================================================
 // DATA — Quiz (5 questions, 4 options each)
 // ============================================================
 const quizQuestions = [
-  {
-    q: 'Kalau Anda masuk ruangan yang ideal, perasaan pertama yang muncul?',
-    options: ['Tenang dan rapi', 'Hangat dan penuh karakter', 'Megah dan elegan', 'Bebas dan penuh warna'],
-  },
-  {
-    q: 'Warna yang paling membuat Anda nyaman?',
-    options: ['Putih, krem, abu-abu terang', 'Cokelat kayu, hijau zaitun, krem', 'Hitam, emas, marmer gelap', 'Terracotta, mustard, hijau sage'],
-  },
-  {
-    q: 'Material apa yang Anda sentuh duluan kalau masuk toko furnitur?',
-    options: ['Kayu berwarna terang', 'Kayu jati tua atau batu alam', 'Marmer atau logam mengkilap', 'Rotan, linen, atau anyaman'],
-  },
-  {
-    q: 'Suasana seperti apa yang Anda mau saat pulang kerja?',
-    options: ['Seperti hotel yang rapi dan tenang', 'Seperti rumah nenek yang hangat', 'Seperti lobi hotel bintang lima', 'Seperti kafe di Bali yang santai'],
-  },
-  {
-    q: 'Berapa anggaran yang Anda siapkan untuk satu ruangan?',
-    options: ['Di bawah Rp 50 juta', 'Rp 50 - 150 juta', 'Rp 150 - 300 juta', 'Di atas Rp 300 juta'],
-  },
+  { q: 'Perasaan pertama saat masuk ruangan ideal?', options: ['Tenang dan rapi', 'Hangat dan penuh karakter', 'Megah dan elegan', 'Bebas dan penuh warna'] },
+  { q: 'Warna yang paling membuat nyaman?', options: ['Putih, krem, abu terang', 'Cokelat kayu, hijau zaitun', 'Hitam, emas, marmer gelap', 'Terracotta, mustard, sage'] },
+  { q: 'Material yang disentuh duluan di toko furnitur?', options: ['Kayu berwarna terang', 'Kayu jati tua atau batu alam', 'Marmer atau logam mengkilap', 'Rotan, linen, anyaman'] },
+  { q: 'Suasana saat pulang kerja?', options: ['Hotel yang rapi dan tenang', 'Rumah nenek yang hangat', 'Lobi hotel bintang lima', 'Kafe di Bali yang santai'] },
+  { q: 'Anggaran untuk satu ruangan?', options: ['Di bawah Rp 50 juta', 'Rp 50 - 150 juta', 'Rp 150 - 300 juta', 'Di atas Rp 300 juta'] },
 ]
 
 const quizStyles = ['Minimalis', 'Klasik', 'Industrial', 'Boho']
 const quizStyleDescriptions: Record<string, string> = {
-  Minimalis: 'Anda suka ruangan yang bersih, fungsional, dan tidak berlebihan. Sedikit elemen, dampak besar.',
-  Klasik: 'Anda menghargai kemewahan yang tidak mencolok. Material berkualitas, detail halus, dan kesan abadi.',
-  Industrial: 'Anda menyukai kejujuran material. Bata ekspos, besi tempa, dan beton yang tidak ditutupi.',
-  Boho: 'Anda merasa bebas dengan tekstur, pola, dan tanaman. Ruangan yang terasa hidup dan personal.',
+  Minimalis: 'Bersih, fungsional, tidak berlebihan. Sedikit elemen, dampak besar.',
+  Klasik: 'Kemewahan yang tidak mencolok. Material berkualitas, detail halus.',
+  Industrial: 'Kejujuran material. Bata ekspos, besi tempa, beton polos.',
+  Boho: 'Tekstur, pola, dan tanaman. Ruangan hidup dan personal.',
 }
 
 const quizResult = computed(() => {
@@ -196,8 +181,8 @@ const waUrl = computed(() => {
           <Transition appear enter-active-class="transition-all duration-1000 ease-out" enter-from-class="opacity-0 translate-y-6" enter-to-class="opacity-100 translate-y-0">
             <div v-if="heroLoaded">
               <p class="ruang-hero__label" :style="monoStyle">Studio Desain Interior &middot; Jakarta &amp; Bandung</p>
-              <h1 :style="h1Style" class="ruang-hero__title">Ruangan yang<br>Merasakan Anda.</h1>
-              <p class="ruang-hero__sub">Desain interior untuk apartemen, rumah, dan ruang kerja. 6 gaya desain. 1 filosofi: ruangan yang terasa personal, bukan sekadar cantik di foto.</p>
+              <h1 :style="h1Style" class="ruang-hero__title">Ruang yang<br>bercerita.</h1>
+              <p class="ruang-hero__sub">Interior untuk apartemen, rumah, dan ruang kerja. 6 gaya, 1 filosofi: ruangan yang terasa personal.</p>
               <div class="ruang-hero__ctas">
                 <a href="#kuis" class="ruang-btn ruang-btn--primary" :style="{ background: accentCss, color: accentFgCss }">Temukan Gaya Anda</a>
                 <a href="#proyek" class="ruang-btn ruang-btn--ghost" :style="{ borderColor: accentCss, color: accentCss }">Lihat Proyek</a>
@@ -287,7 +272,7 @@ const waUrl = computed(() => {
       <div class="ruang-container">
         <p class="ruang-label" :style="monoStyle">Material</p>
         <h2 :style="h2Style" class="ruang-h2">Material Indonesia yang kami pakai.</h2>
-        <p class="ruang-section-sub">Semua material diambil dari radius 300 km dari lokasi proyek. Bukan karena murah, tapi karena tahan lama dan mudah dirawat.</p>
+        <p class="ruang-section-sub">Radius 300 km dari lokasi proyek. Tahan lama, mudah dirawat.</p>
         <div class="ruang-material-grid">
           <article
             v-for="m in materials"
@@ -308,8 +293,8 @@ const waUrl = computed(() => {
         <!-- Sample Box -->
         <div class="ruang-sample-box" :style="{ background: surfaceElevatedCss, borderColor: borderCss }">
           <div>
-            <h3 class="ruang-sample-title">Pesan Kotak Sampel Material</h3>
-            <p class="ruang-sample-desc">Dapatkan 6 sampel material (5 &times; 5 cm) langsung ke alamat Anda. Pegang, raba, dan rasakan sebelum memutuskan.</p>
+            <h3 class="ruang-sample-title">Pesan Kotak Sampel</h3>
+            <p class="ruang-sample-desc">6 sampel material (5 &times; 5 cm) langsung ke alamat. Pegang dan rasakan sebelum memutuskan.</p>
           </div>
           <button
             class="ruang-btn ruang-btn--primary"
@@ -321,7 +306,7 @@ const waUrl = computed(() => {
         </div>
         <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 -translate-y-2" leave-to-class="opacity-0 -translate-y-2">
           <div v-if="sampleBoxOpen" class="ruang-sample-detail" :style="{ background: surfaceCss, borderColor: borderCss }">
-            <p class="ruang-sample-detail-text">Kotak sampel dikirim dalam 3-5 hari kerja. Isi 6 material: Jati Jepara, Linen, Palimanan, Kuningan, Keramik, Batu Alam. Gratis ongkir Jabodetabek.</p>
+            <p class="ruang-sample-detail-text">Dikirim 3-5 hari. Isi: Jati Jepara, Linen, Palimanan, Kuningan, Keramik, Batu Alam. Gratis ongkir Jabodetabek.</p>
             <a :href="waUrl" target="_blank" rel="noopener" class="ruang-btn ruang-btn--primary" :style="{ background: accentCss, color: accentFgCss }">Pesan via WhatsApp</a>
           </div>
         </Transition>
@@ -333,7 +318,7 @@ const waUrl = computed(() => {
       <div class="ruang-container ruang-container--narrow">
         <p class="ruang-label" :style="monoStyle">Kuis Gaya</p>
         <h2 :style="h2Style" class="ruang-h2">Belum tahu gaya Anda?</h2>
-        <p class="ruang-section-sub">Jawab 5 pertanyaan. Kami beri tahu gaya interior yang paling cocok.</p>
+        <p class="ruang-section-sub">Jawab 5 pertanyaan. Kami beri tahu gaya yang cocok.</p>
 
         <!-- Progress -->
         <div v-if="!quizDone" class="ruang-quiz-progress">
@@ -415,7 +400,7 @@ const waUrl = computed(() => {
           <div class="ruang-kontak-info">
             <p class="ruang-label" :style="monoStyle">Kontak</p>
             <h2 :style="h2Style" class="ruang-h2">Mulai proyek Anda.</h2>
-            <p class="ruang-kontak-sub">Balas dalam 48 jam. Konsultasi pertama 60 menit, gratis. Tidak ada kewajiban untuk lanjut.</p>
+            <p class="ruang-kontak-sub">Balas dalam 48 jam. Konsultasi pertama 60 menit, gratis.</p>
             <div class="ruang-kontak-detail">
               <div>
                 <span class="ruang-kontak-detail-label" :style="monoStyle">Studio</span>
@@ -465,7 +450,7 @@ const waUrl = computed(() => {
       :accent="accentCss"
       :bg="fgCss"
       :text="bgCss"
-      signature="Desain interior untuk apartemen, rumah, dan ruang kerja. Jakarta & Bandung."
+      signature="Ruang yang bercerita. Interior untuk apartemen, rumah, dan ruang kerja."
       :links="[
         { label: 'Layanan', href: '#layanan' },
         { label: 'Proyek', href: '#proyek' },
@@ -531,7 +516,7 @@ const waUrl = computed(() => {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -558,11 +543,11 @@ const waUrl = computed(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6rem 1.25rem 3rem;
+  padding: 6rem 1.25rem 5rem;
 }
 @media (min-width: 768px) {
   .ruang-hero {
-    padding: 8rem 2.5rem 4rem;
+    padding: 8rem 2.5rem 5rem;
   }
 }
 .ruang-hero__inner {
@@ -642,7 +627,7 @@ const waUrl = computed(() => {
   position: absolute;
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: 8px;
   top: 50%;
   left: 50%;
   margin: -24px 0 0 -24px;
@@ -684,7 +669,7 @@ const waUrl = computed(() => {
 .ruang-layanan-card {
   padding: 1.5rem;
   border: 1px solid;
-  border-radius: 14px;
+  border-radius: 8px;
   transition: all 300ms cubic-bezier(0.65, 0, 0.35, 1);
   position: relative;
 }
@@ -698,7 +683,7 @@ const waUrl = computed(() => {
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
   margin-bottom: 1rem;
 }
 .ruang-layanan-num {
@@ -728,10 +713,18 @@ const waUrl = computed(() => {
   .ruang-proyek-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1024px) {
-  .ruang-proyek-grid { grid-template-columns: repeat(3, 1fr); }
+  .ruang-proyek-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .ruang-proyek-grid > :nth-child(1),
+  .ruang-proyek-grid > :nth-child(4) { grid-column: span 7; }
+  .ruang-proyek-grid > :nth-child(2),
+  .ruang-proyek-grid > :nth-child(5) { grid-column: span 5; }
+  .ruang-proyek-grid > :nth-child(3),
+  .ruang-proyek-grid > :nth-child(6) { grid-column: span 12; }
 }
 .ruang-proyek-card {
-  border-radius: 14px;
+  border-radius: 8px;
   overflow: hidden;
   transition: all 300ms cubic-bezier(0.65, 0, 0.35, 1);
   cursor: pointer;
@@ -769,7 +762,7 @@ const waUrl = computed(() => {
   font-size: 11px;
   font-weight: 600;
   padding: 0.2rem 0.6rem;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .ruang-proyek-loc {
   font-size: 11px;
@@ -801,14 +794,19 @@ const waUrl = computed(() => {
   .ruang-material-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1024px) {
-  .ruang-material-grid { grid-template-columns: repeat(3, 1fr); }
+  .ruang-material-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .ruang-material-grid > * { grid-column: span 4; }
+  .ruang-material-grid > :nth-child(1) { grid-column: span 5; }
+  .ruang-material-grid > :nth-child(2) { grid-column: span 7; }
 }
 .ruang-material-card {
   display: flex;
   gap: 1rem;
   padding: 1.25rem;
   border: 1px solid;
-  border-radius: 14px;
+  border-radius: 8px;
   transition: all 300ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 .ruang-material-card:hover {
@@ -818,7 +816,7 @@ const waUrl = computed(() => {
 .ruang-material-swatch {
   width: 56px;
   height: 56px;
-  border-radius: 12px;
+  border-radius: 8px;
   flex-shrink: 0;
 }
 .ruang-material-info {
@@ -852,7 +850,7 @@ const waUrl = computed(() => {
   margin-top: 2.5rem;
   padding: 1.5rem;
   border: 1px solid;
-  border-radius: 14px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -873,7 +871,7 @@ const waUrl = computed(() => {
   margin-top: 1rem;
   padding: 1.5rem;
   border: 1px solid;
-  border-radius: 14px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -890,13 +888,13 @@ const waUrl = computed(() => {
 .ruang-quiz-progress {
   height: 3px;
   background: rgba(0,0,0,0.06);
-  border-radius: 4px;
+  border-radius: 8px;
   margin-bottom: 2rem;
   overflow: hidden;
 }
 .ruang-quiz-progress-bar {
   height: 100%;
-  border-radius: 4px;
+  border-radius: 8px;
   transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .ruang-quiz-q {
@@ -931,7 +929,7 @@ const waUrl = computed(() => {
   gap: 0.75rem;
   padding: 1rem 1.25rem;
   border: 1px solid;
-  border-radius: 12px;
+  border-radius: 8px;
   background: transparent;
   cursor: pointer;
   font: inherit;
@@ -1010,7 +1008,7 @@ const waUrl = computed(() => {
 }
 .ruang-galeri-img {
   aspect-ratio: 4/3;
-  border-radius: 12px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1034,7 +1032,7 @@ const waUrl = computed(() => {
   gap: 2.5rem;
 }
 @media (min-width: 768px) {
-  .ruang-kontak-grid { grid-template-columns: 1fr 1fr; }
+  .ruang-kontak-grid { grid-template-columns: 5fr 7fr; }
 }
 .ruang-kontak-sub {
   opacity: 0.65;
@@ -1067,7 +1065,7 @@ const waUrl = computed(() => {
 .ruang-kontak-form-wrap {
   padding: 1.5rem;
   border: 1px solid;
-  border-radius: 14px;
+  border-radius: 8px;
 }
 @media (min-width: 768px) {
   .ruang-kontak-form-wrap { padding: 2rem; }

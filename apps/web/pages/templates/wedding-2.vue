@@ -1,10 +1,5 @@
 <script setup lang="ts">
-/**
- * wedding-2.vue — Dita & Budi
- * Modern Minimal Wedding. Ultra-clean, cool paper, blue accent.
- *
- * 12 sections. SUBTLE 3D: 1 wireframe torus ring barely visible.
- */
+/* wedding-2 — Dita & Budi. Sederhana. Bersih. Jelas. */
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 definePageMeta({ layout: false })
@@ -33,10 +28,10 @@ const rsvpMessage = 'Halo, saya ingin konfirmasi kehadiran di pernikahan Dita & 
 // 12 SECTIONS DATA
 // ============================================================
 const ceritaKami = [
-  { year: '2018', text: 'Ketemu di kampus, sama-sama terlambat masuk kelas statistik. Kursi kosong tinggal satu.' },
-  { year: '2020', text: 'Lulus bareng di tengah pandemi. Wisuda online, foto toga di kosan. Tidak apa.' },
-  { year: '2023', text: 'Pindah ke Jakarta. Kerja di gedung yang beda lantai. Makan siang selalu bareng.' },
-  { year: '2025', text: 'Dia melamar di Danau Toba, pagi hari, sebelum sarapan. Tanpa cincin, tanpa rencana. Hanya iya.' },
+  { year: '2018', text: 'Ketemu di kampus. Kursi kosong tinggal satu.' },
+  { year: '2020', text: 'Lulus bareng di tengah pandemi. Wisuda online.' },
+  { year: '2023', text: 'Pindah ke Jakarta. Makan siang selalu bareng.' },
+  { year: '2025', text: 'Dia melamar di Danau Toba, pagi hari. Tanpa cincin. Hanya iya.' },
 ]
 
 const acara = [
@@ -284,8 +279,7 @@ function openLiveStream() {
         <canvas ref="torusCanvasRef" class="db-hero__torus" aria-hidden="true" />
 
         <div class="db-hero__content">
-          <p class="db-hero__opening" :style="monoStyle">Bismillahirrahmanirrahim</p>
-          <p class="db-hero__opening" :style="monoStyle">Assalamualaikum Warahmatullahi Wabarakatuh</p>
+          <p class="db-hero__opening" :style="monoStyle">Bismillahirrahmanirrahim &middot; Assalamualaikum Warahmatullahi Wabarakatuh</p>
 
           <h1 :style="h1Style" class="db-hero__names text-balance">
             <span class="db-hero__name">Dita</span>
@@ -306,13 +300,13 @@ function openLiveStream() {
       <!-- CERITA — Timeline -->
       <!-- ============================== -->
       <section id="cerita" class="db-cerita">
-        <p class="db-eyebrow" :style="monoStyle">Perjalanan Kami</p>
+        <p class="db-eyebrow db-eyebrow--left" :style="monoStyle">Tentang</p>
         <h2 :style="h1Style" class="db-cerita__title text-balance">Tempat kami mulai.</h2>
 
         <ol class="db-cerita__list">
           <li v-for="item in ceritaKami" :key="item.year" class="db-cerita__item">
             <span class="db-cerita__year" :style="monoStyle">{{ item.year }}</span>
-            <p :style="h2Style" class="db-cerita__text">{{ item.text }}</p>
+            <p :style="monoStyle" class="db-cerita__text">{{ item.text }}</p>
           </li>
         </ol>
       </section>
@@ -321,7 +315,7 @@ function openLiveStream() {
       <!-- ACARA — 3 events -->
       <!-- ============================== -->
       <section id="acara" class="db-acara">
-        <p class="db-eyebrow" :style="monoStyle">Detail Acara</p>
+        <p class="db-eyebrow db-eyebrow--left" :style="monoStyle">Acara</p>
         <h2 :style="h1Style" class="db-acara__title text-balance">Sabtu, 20 Juni 2026.</h2>
 
         <div class="db-acara__list">
@@ -339,7 +333,7 @@ function openLiveStream() {
       <!-- ============================== -->
       <section id="galeri" class="db-galeri">
         <p class="db-eyebrow" :style="monoStyle">Galeri</p>
-        <h2 :style="h1Style" class="db-galeri__title text-balance">Foto-foto yang kami simpan.</h2>
+        <h2 :style="h1Style" class="db-galeri__title text-balance">Momen kami.</h2>
 
         <div class="db-galeri__grid">
           <button
@@ -381,7 +375,7 @@ function openLiveStream() {
       <section id="amplop" class="db-amplop">
         <p class="db-eyebrow" :style="monoStyle">Amplop</p>
         <h2 :style="h1Style" class="db-amplop__title text-balance">Kehadiran Anda sudah lebih dari cukup.</h2>
-        <p class="db-amplop__sub">Namun jika ingin mengirim kado, kami menyediakan rekening berikut.</p>
+        <p class="db-amplop__sub">Jika ingin mengirim kado, kami menyediakan rekening berikut.</p>
 
         <ul class="db-amplop__banks">
           <li v-for="bank in banks" :key="bank.id" class="db-bank" :class="{ 'db-bank--copied': copiedBank === bank.id }">
@@ -409,8 +403,8 @@ function openLiveStream() {
       <section class="db-actions">
         <div class="db-actions__grid">
           <div class="db-action">
-            <p class="db-eyebrow" :style="monoStyle">Tambah ke kalender</p>
-            <p class="db-action__sub">Simpan tanggal acaranya supaya tidak lupa.</p>
+            <p class="db-eyebrow" :style="monoStyle">Kalender</p>
+            <p class="db-action__sub">Simpan tanggal acaranya.</p>
             <button type="button" class="db-action__btn" @click="downloadICS">
               <UIcon name="i-lucide-calendar-plus" class="w-4 h-4" />
               Download .ics
@@ -418,7 +412,7 @@ function openLiveStream() {
           </div>
           <div class="db-action">
             <p class="db-eyebrow" :style="monoStyle">Siaran langsung</p>
-            <p class="db-action__sub">Siaran langsung akad dan resepsi via YouTube. Link akan dikirimkan H-1.</p>
+            <p class="db-action__sub">Akad dan resepsi via YouTube. Link dikirim H-1.</p>
             <button type="button" class="db-action__btn" @click="openLiveStream">
               <UIcon name="i-lucide-video" class="w-4 h-4" />
               Buka link
@@ -432,7 +426,7 @@ function openLiveStream() {
       <!-- ============================== -->
       <section class="db-signoff">
         <p :style="h1Style" class="db-signoff__text text-balance">
-          &ldquo;Terima kasih. Sampai jumpa di hari yang kami tunggu.&rdquo;
+          &ldquo;Sampai jumpa di hari yang kami tunggu.&rdquo;
         </p>
         <p :style="monoStyle" class="db-signoff__byline">Dengan cinta &middot; Dita &amp; Budi</p>
       </section>
@@ -495,6 +489,9 @@ function openLiveStream() {
   margin: 0 0 1.5rem;
   text-align: center;
 }
+.db-eyebrow--left {
+  text-align: left;
+}
 
 /* ============================================================ */
 /* HERO — names + torus                                          */
@@ -505,7 +502,7 @@ function openLiveStream() {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6rem 1.5rem 4rem;
+  padding: 6.25rem 1.5rem 4rem;
   overflow: hidden;
   background:
     radial-gradient(ellipse at 50% 40%, color-mix(in oklch, var(--tmpl-accent) 6%, transparent), transparent 55%),
@@ -579,10 +576,10 @@ function openLiveStream() {
 /* CERITA — Timeline                                             */
 /* ============================================================ */
 .db-cerita {
-  padding: 8rem 1.5rem;
+  padding: 6.25rem 1.5rem;
   max-width: 38rem;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 .db-cerita__title {
   font-size: clamp(2.25rem, 5vw, 3.5rem);
@@ -590,7 +587,7 @@ function openLiveStream() {
   font-style: italic;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  margin: 0 0 4rem;
+  margin: 0 0 3rem;
   color: var(--tmpl-fg);
 }
 .db-cerita__list {
@@ -617,23 +614,22 @@ function openLiveStream() {
   padding-top: 0.4rem;
 }
 .db-cerita__text {
-  font-size: 1.125rem;
+  font-size: 13px;
   font-weight: 400;
-  font-style: italic;
   line-height: 1.65;
   letter-spacing: -0.005em;
   margin: 0;
   color: var(--tmpl-fg);
-  font-feature-settings: "liga" 1, "dlig" 1;
+  opacity: 0.8;
 }
 
 /* ============================================================ */
 /* ACARA — 3 events                                              */
 /* ============================================================ */
 .db-acara {
-  padding: 8rem 1.5rem;
+  padding: 6.25rem 1.5rem;
   background: color-mix(in oklch, var(--tmpl-accent) 4%, var(--tmpl-bg));
-  text-align: center;
+  text-align: left;
 }
 .db-acara__title {
   font-size: clamp(2rem, 4.5vw, 3rem);
@@ -641,15 +637,12 @@ function openLiveStream() {
   font-style: italic;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  margin: 0 0 4rem;
+  margin: 0 0 3rem;
   color: var(--tmpl-fg);
   max-width: 32rem;
-  margin-left: auto;
-  margin-right: auto;
 }
 .db-acara__list {
   max-width: 36rem;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -699,7 +692,7 @@ function openLiveStream() {
 /* GALERI — Photos with lightbox                                 */
 /* ============================================================ */
 .db-galeri {
-  padding: 8rem 1.5rem;
+  padding: 6.25rem 1.5rem;
   max-width: 80rem;
   margin: 0 auto;
   text-align: center;
@@ -741,7 +734,7 @@ function openLiveStream() {
   justify-content: center;
   aspect-ratio: 3 / 4;
   background: linear-gradient(135deg, color-mix(in oklch, var(--tmpl-accent) 6%, var(--tmpl-bg)) 0%, color-mix(in oklch, var(--tmpl-fg) 3%, var(--tmpl-bg)) 100%);
-  border-radius: 2px;
+  border-radius: 4px;
   position: relative;
   overflow: hidden;
   transition: transform 400ms ease;
@@ -779,7 +772,7 @@ function openLiveStream() {
 /* RSVP                                                          */
 /* ============================================================ */
 .db-rsvp {
-  padding: 8rem 1.5rem;
+  padding: 6.25rem 1.5rem;
   max-width: 36rem;
   margin: 0 auto;
   text-align: center;
@@ -807,7 +800,7 @@ function openLiveStream() {
 /* AMPLOP — Banks with copy                                      */
 /* ============================================================ */
 .db-amplop {
-  padding: 8rem 1.5rem;
+  padding: 6.25rem 1.5rem;
   background: color-mix(in oklch, var(--tmpl-accent) 4%, var(--tmpl-bg));
   text-align: center;
 }
@@ -845,7 +838,7 @@ function openLiveStream() {
   padding: 1.5rem;
   background: var(--tmpl-bg);
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 6px;
+  border-radius: 4px;
   text-align: left;
   transition: border-color 200ms ease, transform 200ms ease;
 }
@@ -915,7 +908,7 @@ function openLiveStream() {
 /* ACTIONS — Add to calendar + live stream                       */
 /* ============================================================ */
 .db-actions {
-  padding: 6rem 1.5rem;
+  padding: 6.25rem 1.5rem;
   max-width: 64rem;
   margin: 0 auto;
 }
@@ -931,7 +924,7 @@ function openLiveStream() {
   text-align: center;
   padding: 2rem 1.5rem;
   border: 1px solid color-mix(in oklch, currentColor 10%, transparent);
-  border-radius: 8px;
+  border-radius: 4px;
   background: var(--tmpl-surface);
 }
 .db-action__sub {
@@ -950,7 +943,7 @@ function openLiveStream() {
   padding: 0.7rem 1.25rem;
   background: transparent;
   border: 1px solid color-mix(in oklch, currentColor 20%, transparent);
-  border-radius: 999px;
+  border-radius: 4px;
   color: var(--tmpl-fg);
   font: inherit;
   font-size: 12px;

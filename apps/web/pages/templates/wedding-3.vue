@@ -26,23 +26,23 @@ const { buildUrl } = useWhatsApp()
 // 12 SECTIONS DATA
 // ============================================================
 const ceritaKami = [
-  { year: '2020', location: 'Yogyakarta', text: 'Ketemu di kedai kopi dekat Malioboro. Dia tanya rekomendasi gudeg, saya ajak jalan kaki ke Taman Sari. Ternyata satu penerbangan besok.' },
-  { year: '2022', location: 'Raja Ampat', text: 'Trip pertama bareng. Snorkeling di Wayag, naik perahu sewaan, hujan deras di tengah laut. Pulang-pulang sudah tidak bisa pulang ke status teman.' },
-  { year: '2024', location: 'Labuan Bajo', text: 'Sunrise di Pulau Padar. Dia bangun lebih pagi dari saya, bawa cincin yang ternyata sudah disimpan sejak Jakarta. Tanpa pidato, tanpa rencana. Cuma satu pertanyaan.' },
-  { year: '2026', location: 'Bali', text: 'Dan sekarang, kami ingin kalian ada di sini. Di pantai yang sama, di bawah langit yang sama. Bukan resepsi besar. Hanya hari baik dengan orang-orang yang penting.' },
+  { year: '2020', location: 'Yogyakarta', text: 'Kedai kopi dekat Malioboro. Satu rekomendasi gudeg, satu jalan kaki ke Taman Sari. Ternyata satu penerbangan besok.' },
+  { year: '2022', location: 'Raja Ampat', text: 'Snorkeling di Wayag, hujan deras di tengah laut. Pulang-pulang sudah tidak bisa kembali ke status teman.' },
+  { year: '2024', location: 'Labuan Bajo', text: 'Sunrise di Pulau Padar. Dia bawa cincin yang sudah disimpan sejak Jakarta. Cuma satu pertanyaan.' },
+  { year: '2026', location: 'Bali', text: 'Kami ingin kalian di sini. Di pantai yang sama, di bawah langit yang sama. Hari baik dengan orang-orang penting.' },
 ]
 
 const acara = [
-  { time: '08:00', label: 'Akad Nikah', location: 'Pantai Melasti, Ungasan', note: 'Di tepi pantai, kaki di pasir. Baju formal tapi santai.' },
-  { time: '14:00', label: 'Resepsi', location: 'Villa Infinity, Uluwatu', note: 'Makan siang, musik live, kolam renang terbuka.' },
-  { time: '19:00', label: 'Makan Malam', location: 'Sundara Beach Club, Jimbaran', note: 'Sunset dinner di tepi laut. Dress code: resort elegant.' },
+  { time: '08:00', label: 'Akad Nikah', location: 'Pantai Melasti, Ungasan', note: 'Di tepi pantai. Formal tapi santai.' },
+  { time: '14:00', label: 'Resepsi', location: 'Villa Infinity, Uluwatu', note: 'Makan siang, musik live.' },
+  { time: '19:00', label: 'Makan Malam', location: 'Sundara Beach Club, Jimbaran', note: 'Sunset dinner. Dress code: resort elegant.' },
 ]
 
 const travel = [
-  { icon: 'i-lucide-plane', label: 'Penerbangan', value: 'Bali (DPS) — semua maskapai. Dari bandara ke hotel 25 menit taksi.' },
-  { icon: 'i-lucide-hotel', label: 'Hotel', value: 'The Edge Bali, Uluwatu. Kamar ditanggung untuk semua tamu undangan.' },
-  { icon: 'i-lucide-car', label: 'Transportasi', value: 'Shuttle bandara disediakan. Di Bali ada mobil operasional selama 3 hari.' },
-  { icon: 'i-lucide-calendar', label: 'Check-in/out', value: 'Check-in: 13 Maret 2026. Check-out: 16 Maret 2026.' },
+  { icon: 'i-lucide-plane', label: 'Penerbangan', value: 'Bali (DPS). Bandara ke hotel 25 menit.' },
+  { icon: 'i-lucide-hotel', label: 'Hotel', value: 'The Edge Bali, Uluwatu. Kamar ditanggung.' },
+  { icon: 'i-lucide-car', label: 'Transportasi', value: 'Shuttle bandara disediakan. Mobil operasional 3 hari.' },
+  { icon: 'i-lucide-calendar', label: 'Tanggal', value: 'Check-in 13 Maret, check-out 16 Maret 2026.' },
 ]
 
 const galleryImages = [
@@ -68,7 +68,7 @@ const rsvpFields = [
   { key: 'attendance', label: 'Kehadiran', type: 'select' as const, required: true, options: ['Hadir di Bali', 'Hadir via live stream', 'Maaf, tidak bisa'] },
   { key: 'message', label: 'Pesan untuk kami', type: 'textarea' as const, placeholder: 'Doa atau ucapan' },
 ]
-const rsvpMessage = 'Halo Sarah & Kevin, saya ingin konfirmasi kehadiran di pernikahan di Bali.'
+const rsvpMessage = 'Halo Sarah & Kevin, saya konfirmasi kehadiran di Bali.'
 
 // ============================================================
 // WEATHER WIDGET (static display, Bali March)
@@ -76,9 +76,9 @@ const rsvpMessage = 'Halo Sarah & Kevin, saya ingin konfirmasi kehadiran di pern
 const weather = {
   location: 'Bali, Maret 2026',
   temp: '28-32\u00B0C',
-  condition: 'Cerah berawan, sesekali hujan sore',
+  condition: 'Cerah berawan',
   humidity: '75-85%',
-  wind: '10-15 km/jam dari tenggara',
+  wind: '10-15 km/jam',
 }
 
 // ============================================================
@@ -302,7 +302,7 @@ function openLiveStream() {
 
         <div class="sk-hero__content">
           <p class="sk-hero__opening" :style="monoStyle">Bismillahirrahmanirrahim</p>
-          <p class="sk-hero__opening" :style="monoStyle">Dengan izin Allah SWT, kami mengundang Anda</p>
+          <p class="sk-hero__opening" :style="monoStyle">Dengan izin Allah SWT</p>
         </div>
       </section>
 
@@ -332,7 +332,7 @@ function openLiveStream() {
       <!-- ============================== -->
       <section id="cerita" class="sk-cerita">
         <p class="sk-eyebrow" :style="monoStyle">Perjalanan Kami</p>
-        <h2 :style="h2Style" class="sk-cerita__title text-balance">Dari kedai kopi sampai sini.</h2>
+        <h2 :style="h2Style" class="sk-cerita__title text-balance">Dari kedai kopi sampai sini</h2>
 
         <ol class="sk-cerita__list">
           <li v-for="item in ceritaKami" :key="item.year" class="sk-cerita__item">
@@ -372,7 +372,7 @@ function openLiveStream() {
       <!-- ============================== -->
       <section id="travel" class="sk-travel">
         <p class="sk-eyebrow" :style="monoStyle">Info Perjalanan</p>
-        <h2 :style="h2Style" class="sk-travel__title text-balance">Yang perlu kamu tahu sebelum berangkat.</h2>
+        <h2 :style="h2Style" class="sk-travel__title text-balance">Sebelum berangkat.</h2>
 
         <!-- Weather widget -->
         <div class="sk-weather">
@@ -406,7 +406,7 @@ function openLiveStream() {
       <!-- ============================== -->
       <section id="galeri" class="sk-galeri">
         <p class="sk-eyebrow" :style="monoStyle">Galeri</p>
-        <h2 :style="h2Style" class="sk-galeri__title text-balance">Tempat-tempat yang membawa kami ke sini.</h2>
+        <h2 :style="h2Style" class="sk-galeri__title text-balance">Tempat yang membawa kami ke sini.</h2>
 
         <div class="sk-galeri__grid">
           <button
@@ -431,7 +431,7 @@ function openLiveStream() {
       <section id="rsvp" class="sk-rsvp">
         <p class="sk-eyebrow" :style="monoStyle">Konfirmasi</p>
         <h2 :style="h2Style" class="sk-rsvp__title text-balance">Bisa hadir di Bali?</h2>
-        <p class="sk-rsvp__sub">Konfirmasi sebelum 1 Februari 2026. Hotel ditanggung.</p>
+        <p class="sk-rsvp__sub">Konfirmasi sebelum 1 Februari 2026.</p>
 
         <TmplForm
           :fields="rsvpFields"
@@ -447,8 +447,8 @@ function openLiveStream() {
       <!-- ============================== -->
       <section id="amplop" class="sk-amplop">
         <p class="sk-eyebrow" :style="monoStyle">Amplop</p>
-        <h2 :style="h2Style" class="sk-amplop__title text-balance">Kehadiranmu sudah lebih dari cukup.</h2>
-        <p class="sk-amplop__sub">Tapi kalau ingin mengirim kado, kami siapkan rekening berikut.</p>
+        <h2 :style="h2Style" class="sk-amplop__title text-balance">Kehadiranmu sudah cukup.</h2>
+        <p class="sk-amplop__sub">Kalau ingin mengirim kado, rekening berikut tersedia.</p>
 
         <ul class="sk-amplop__banks">
           <li v-for="bank in banks" :key="bank.id" class="sk-bank" :class="{ 'sk-bank--copied': copiedBank === bank.id }">
@@ -477,7 +477,7 @@ function openLiveStream() {
         <div class="sk-actions__grid">
           <div class="sk-action">
             <p class="sk-eyebrow" :style="monoStyle">Tambah ke kalender</p>
-            <p class="sk-action__sub">Simpan tanggalnya supaya tidak lupa.</p>
+            <p class="sk-action__sub">Simpan tanggalnya.</p>
             <button type="button" class="sk-action__btn" @click="downloadICS">
               <UIcon name="i-lucide-calendar-plus" class="w-4 h-4" />
               Download .ics
@@ -489,7 +489,7 @@ function openLiveStream() {
           <!-- ============================== -->
           <div class="sk-action">
             <p class="sk-eyebrow" :style="monoStyle">Siaran langsung</p>
-            <p class="sk-action__sub">Tidak bisa ke Bali? Tonton dari mana saja. Link dikirim H-1.</p>
+            <p class="sk-action__sub">Tidak bisa ke Bali? Tonton dari mana saja.</p>
             <button type="button" class="sk-action__btn" @click="openLiveStream">
               <UIcon name="i-lucide-video" class="w-4 h-4" />
               Minta link
@@ -503,9 +503,9 @@ function openLiveStream() {
       <!-- ============================== -->
       <section class="sk-signoff">
         <p :style="h1Style" class="sk-signoff__text text-balance">
-          Sampai jumpa di pantai.
+          Bali. Pantai. Sunset.
         </p>
-        <p :style="monoStyle" class="sk-signoff__byline">Sarah &amp; Kevin &middot; Bali &middot; 14.03.2026</p>
+        <p :style="monoStyle" class="sk-signoff__byline">Sarah &amp; Kevin &middot; 14.03.2026</p>
       </section>
     </main>
 
@@ -521,7 +521,7 @@ function openLiveStream() {
       ]"
       variant="marquee"
       :marquee-items="['Sarah & Kevin', '14.03.2026', 'Bali', '14.03.2026', 'Pantai Melasti', '14.03.2026', 'Uluwatu, Bali', '14.03.2026']"
-      signoff="Terima kasih. Sampai jumpa di pantai."
+      signoff="Bali. Pantai. Sunset."
       :accent="tpl.accentColor"
     />
 
@@ -564,7 +564,7 @@ function openLiveStream() {
   text-transform: uppercase;
   font-weight: 400;
   opacity: 0.5;
-  margin: 0 0 1.5rem;
+  margin: 0 0 24px;
   text-align: center;
 }
 
@@ -577,7 +577,7 @@ function openLiveStream() {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6rem 1.5rem 4rem;
+  padding: 100px 24px 80px;
   overflow: hidden;
   background:
     radial-gradient(ellipse at 50% 60%, color-mix(in oklch, var(--tmpl-accent) 5%, transparent), transparent 50%),
@@ -598,12 +598,12 @@ function openLiveStream() {
   max-width: 36rem;
 }
 .sk-hero__opening {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   font-weight: 400;
   opacity: 0.55;
-  margin: 0 0 0.6rem;
+  margin: 0 0 10px;
 }
 
 /* ============================================================ */
@@ -611,7 +611,7 @@ function openLiveStream() {
 /* ============================================================ */
 .sk-names {
   text-align: center;
-  padding: 6rem 1.5rem 3rem;
+  padding: 100px 24px;
   background:
     linear-gradient(180deg, color-mix(in oklch, var(--tmpl-accent) 3%, var(--tmpl-bg)), var(--tmpl-bg));
 }
@@ -620,7 +620,7 @@ function openLiveStream() {
   letter-spacing: 0.32em;
   text-transform: uppercase;
   opacity: 0.5;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
 }
 .sk-names__h1 {
   font-size: var(--tmpl-h1);
@@ -639,11 +639,11 @@ function openLiveStream() {
   font-style: normal;
 }
 .sk-names__date {
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   opacity: 0.55;
-  margin: 2.5rem 0 0.4rem;
+  margin: 40px 0 6px;
 }
 .sk-names__loc {
   font-size: 10px;
@@ -658,20 +658,20 @@ function openLiveStream() {
 .sk-countdown {
   display: flex;
   justify-content: center;
-  padding: 3rem 1.5rem 5rem;
+  padding: 100px 24px;
 }
 
 /* ============================================================ */
 /* 4. CERITA                                                      */
 /* ============================================================ */
 .sk-cerita {
-  padding: 5rem 1.5rem;
+  padding: 100px 24px;
   max-width: 42rem;
   margin: 0 auto;
 }
 .sk-cerita__title {
   text-align: center;
-  margin: 0 0 3.5rem;
+  margin: 0 0 56px;
 }
 .sk-cerita__list {
   list-style: none;
@@ -679,10 +679,10 @@ function openLiveStream() {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 40px;
 }
 .sk-cerita__item {
-  padding-bottom: 2.5rem;
+  padding-bottom: 40px;
   border-bottom: 1px solid color-mix(in srgb, var(--tmpl-border) 60%, transparent);
 }
 .sk-cerita__item:last-child {
@@ -692,11 +692,11 @@ function openLiveStream() {
 .sk-cerita__head {
   display: flex;
   align-items: baseline;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 .sk-cerita__year {
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 600;
@@ -709,7 +709,7 @@ function openLiveStream() {
   opacity: 0.4;
 }
 .sk-cerita__text {
-  font-size: clamp(1rem, 1.1vw, 1.1rem);
+  font-size: 14px;
   line-height: 1.7;
   margin: 0;
   color: color-mix(in srgb, var(--tmpl-fg) 85%, transparent);
@@ -719,23 +719,23 @@ function openLiveStream() {
 /* 5. ACARA                                                       */
 /* ============================================================ */
 .sk-acara {
-  padding: 5rem 1.5rem;
+  padding: 100px 24px;
   max-width: 42rem;
   margin: 0 auto;
 }
 .sk-acara__title {
   text-align: center;
-  margin: 0 0 3.5rem;
+  margin: 0 0 56px;
 }
 .sk-acara__list {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 32px;
 }
 .sk-acara__item {
   display: flex;
-  gap: 1.5rem;
-  padding-bottom: 2rem;
+  gap: 24px;
+  padding-bottom: 32px;
   border-bottom: 1px solid color-mix(in srgb, var(--tmpl-border) 60%, transparent);
 }
 .sk-acara__item:last-child {
@@ -746,18 +746,18 @@ function openLiveStream() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  min-width: 3.5rem;
+  gap: 8px;
+  min-width: 56px;
 }
 .sk-acara__time {
-  font-size: 13px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   font-weight: 600;
   opacity: 0.7;
   margin: 0;
 }
 .sk-acara__num {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.15em;
   opacity: 0.3;
 }
@@ -765,17 +765,17 @@ function openLiveStream() {
   flex: 1;
 }
 .sk-acara__label {
-  margin: 0 0 0.35rem;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin: 0 0 6px;
+  font-size: var(--tmpl-h2);
 }
 .sk-acara__location {
   font-size: 14px;
   font-weight: 500;
-  margin: 0 0 0.35rem;
+  margin: 0 0 6px;
   opacity: 0.8;
 }
 .sk-acara__note {
-  font-size: 13px;
+  font-size: 10px;
   opacity: 0.55;
   margin: 0;
   line-height: 1.5;
@@ -785,13 +785,13 @@ function openLiveStream() {
 /* 6. TRAVEL                                                      */
 /* ============================================================ */
 .sk-travel {
-  padding: 5rem 1.5rem;
+  padding: 100px 24px;
   background: color-mix(in srgb, var(--tmpl-surface) 100%, transparent);
 }
 .sk-travel__title {
   text-align: center;
   max-width: 32rem;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 40px;
 }
 
 /* Weather widget */
@@ -800,11 +800,12 @@ function openLiveStream() {
   align-items: center;
   gap: 1.25rem;
   max-width: 28rem;
-  margin: 0 auto 2.5rem;
-  padding: 1.25rem 1.5rem;
+  margin: 0 auto 40px;
+  padding: 20px 24px;
   border: 1px solid color-mix(in srgb, var(--tmpl-border) 80%, transparent);
-  border-radius: 14px;
+  border-radius: 4px;
   background: color-mix(in srgb, var(--tmpl-surface-elevated) 100%, transparent);
+  text-align: left;
 }
 .sk-weather__icon {
   position: relative;
@@ -834,18 +835,18 @@ function openLiveStream() {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.5;
-  margin: 0 0 0.25rem;
+  margin: 0 0 4px;
 }
 .sk-weather__temp {
-  font-size: 1.5rem;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin: 0 0 0.2rem;
+  margin: 0 0 4px;
 }
 .sk-weather__desc {
-  font-size: 13px;
+  font-size: 14px;
   opacity: 0.7;
-  margin: 0 0 0.3rem;
+  margin: 0 0 6px;
 }
 .sk-weather__meta {
   font-size: 10px;
@@ -857,9 +858,10 @@ function openLiveStream() {
 .sk-travel__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 16px;
   max-width: 42rem;
   margin: 0 auto;
+  text-align: left;
 }
 @media (min-width: 640px) {
   .sk-travel__grid {
@@ -868,10 +870,10 @@ function openLiveStream() {
 }
 .sk-travel__card {
   display: flex;
-  gap: 1rem;
-  padding: 1.25rem;
+  gap: 16px;
+  padding: 20px;
   border: 1px solid color-mix(in srgb, var(--tmpl-border) 60%, transparent);
-  border-radius: 12px;
+  border-radius: 4px;
   background: color-mix(in srgb, var(--tmpl-surface-elevated) 100%, transparent);
 }
 .sk-travel__icon {
@@ -881,7 +883,7 @@ function openLiveStream() {
   width: 40px;
   height: 40px;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 4px;
   background: color-mix(in srgb, var(--tmpl-accent) 10%, transparent);
   color: var(--tmpl-accent);
 }
@@ -890,7 +892,7 @@ function openLiveStream() {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.5;
-  margin: 0 0 0.35rem;
+  margin: 0 0 6px;
 }
 .sk-travel__value {
   font-size: 14px;
@@ -903,18 +905,18 @@ function openLiveStream() {
 /* 7. GALERI                                                      */
 /* ============================================================ */
 .sk-galeri {
-  padding: 5rem 1.5rem;
+  padding: 100px 24px;
   max-width: 48rem;
   margin: 0 auto;
 }
 .sk-galeri__title {
   text-align: center;
-  margin: 0 0 3rem;
+  margin: 0 0 48px;
 }
 .sk-galeri__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  gap: 12px;
 }
 @media (min-width: 768px) {
   .sk-galeri__grid {
@@ -924,7 +926,7 @@ function openLiveStream() {
 .sk-galeri__item {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -935,7 +937,7 @@ function openLiveStream() {
 }
 .sk-galeri__photo {
   aspect-ratio: 4 / 3;
-  border-radius: 10px;
+  border-radius: 4px;
   background:
     color-mix(in srgb, var(--tmpl-accent) 8%, transparent),
     color-mix(in srgb, var(--tmpl-surface) 100%, transparent);
@@ -950,13 +952,13 @@ function openLiveStream() {
   box-shadow: 0 8px 24px color-mix(in srgb, var(--tmpl-fg) 10%, transparent);
 }
 .sk-galeri__photo-label {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.35;
 }
 .sk-galeri__caption {
-  font-size: 12px;
+  font-size: 10px;
   opacity: 0.6;
   margin: 0;
   line-height: 1.4;
@@ -966,18 +968,18 @@ function openLiveStream() {
 /* 8. RSVP                                                        */
 /* ============================================================ */
 .sk-rsvp {
-  padding: 5rem 1.5rem;
+  padding: 100px 24px;
   max-width: 28rem;
   margin: 0 auto;
   text-align: center;
 }
 .sk-rsvp__title {
-  margin: 0 0 0.75rem;
+  margin: 0 0 12px;
 }
 .sk-rsvp__sub {
   font-size: 14px;
   opacity: 0.6;
-  margin: 0 0 2.5rem;
+  margin: 0 0 40px;
 }
 .sk-rsvp__form {
   text-align: left;
@@ -987,18 +989,18 @@ function openLiveStream() {
 /* 9. AMPLOP                                                      */
 /* ============================================================ */
 .sk-amplop {
-  padding: 5rem 1.5rem;
+  padding: 100px 24px;
   max-width: 36rem;
   margin: 0 auto;
   text-align: center;
 }
 .sk-amplop__title {
-  margin: 0 0 0.75rem;
+  margin: 0 0 12px;
 }
 .sk-amplop__sub {
   font-size: 14px;
   opacity: 0.6;
-  margin: 0 0 2.5rem;
+  margin: 0 0 40px;
 }
 .sk-amplop__banks {
   list-style: none;
@@ -1006,12 +1008,12 @@ function openLiveStream() {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
 }
 .sk-bank {
-  padding: 1.25rem 1.5rem;
+  padding: 20px 24px;
   border: 1px solid color-mix(in srgb, var(--tmpl-border) 70%, transparent);
-  border-radius: 12px;
+  border-radius: 4px;
   text-align: left;
   transition: border-color 200ms ease, background 200ms ease;
 }
@@ -1023,10 +1025,10 @@ function openLiveStream() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 .sk-bank__name {
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 600;
@@ -1036,10 +1038,10 @@ function openLiveStream() {
 .sk-bank__copy {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.65rem;
+  gap: 6px;
+  padding: 6px 12px;
   border: 1px solid color-mix(in srgb, var(--tmpl-border) 70%, transparent);
-  border-radius: 8px;
+  border-radius: 4px;
   background: transparent;
   cursor: pointer;
   font: inherit;
@@ -1054,12 +1056,12 @@ function openLiveStream() {
   border-color: var(--tmpl-accent);
 }
 .sk-bank__number {
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  margin: 0 0 0.35rem;
+  font-size: 14px;
+  margin: 0 0 6px;
   letter-spacing: -0.01em;
 }
 .sk-bank__holder {
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.15em;
   opacity: 0.5;
   margin: 0;
@@ -1069,12 +1071,12 @@ function openLiveStream() {
 /* 10-11. ACTIONS (Calendar + Live)                               */
 /* ============================================================ */
 .sk-actions {
-  padding: 5rem 1.5rem;
+  padding: 100px 24px;
 }
 .sk-actions__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 24px;
   max-width: 36rem;
   margin: 0 auto;
 }
@@ -1084,13 +1086,13 @@ function openLiveStream() {
   }
 }
 .sk-action {
-  padding: 1.5rem;
+  padding: 24px;
   border: 1px solid color-mix(in srgb, var(--tmpl-border) 60%, transparent);
-  border-radius: 14px;
+  border-radius: 4px;
   text-align: center;
 }
 .sk-action__sub {
-  font-size: 13px;
+  font-size: 10px;
   opacity: 0.6;
   margin: 0 0 1.25rem;
   line-height: 1.5;
@@ -1099,13 +1101,13 @@ function openLiveStream() {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.25rem;
+  padding: 10px 20px;
   background: var(--tmpl-accent);
   color: var(--tmpl-accent-fg);
   border: 0;
-  border-radius: 10px;
+  border-radius: 4px;
   font: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.03em;
   cursor: pointer;
@@ -1121,13 +1123,13 @@ function openLiveStream() {
 /* ============================================================ */
 .sk-signoff {
   text-align: center;
-  padding: 6rem 1.5rem;
+  padding: 100px 24px;
   max-width: 36rem;
   margin: 0 auto;
 }
 .sk-signoff__text {
-  margin: 0 0 1.5rem;
-  font-size: var(--tmpl-h2);
+  margin: 0 0 24px;
+  font-size: var(--tmpl-h1);
 }
 .sk-signoff__byline {
   font-size: 10px;
