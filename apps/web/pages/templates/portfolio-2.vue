@@ -1,116 +1,923 @@
 <script setup lang="ts">
+/**
+ * portfolio-2.vue — Studio Daida: Light Editorial Studio
+ * slug='portfolio-2', typo='daida', palette='daida'
+ * Fraunces italic H1, Lora body, JetBrains Mono labels
+ * Force mode: light. Paper bg, magenta accent.
+ */
 definePageMeta({ layout: false })
-useHead({
-  title: 'Studio Daida',
-  htmlAttrs: { lang: 'id' },
-  link: [
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap' },
-  ],
-})
+
+const theme = useTemplateTheme('portfolio-2')
+const { styles, h1Style, h2Style, monoStyle, tpl, palette, typography } = theme
 
 const isLoaded = ref(false)
-onMounted(() => { setTimeout(() => { isLoaded.value = true }, 500) })
+onMounted(() => { setTimeout(() => { isLoaded.value = true }, 400) })
 
-const projects = [
-  { title: 'Typeface untuk Kopi Rumah', category: 'Typography', year: '2026', desc: 'Custom display typeface untuk brand kopi lokal.' },
-  { title: 'Identity System — Sunda Asri', category: 'Brand', year: '2025', desc: 'Visual identity untuk restoran keluarga di Bandung.' },
-  { title: 'Majalah Bulanan — Catatan Bandung', category: 'Editorial', year: '2025', desc: 'Layout dan desain untuk majalah lokal.' },
+const accentHex = '#C4234B'
+const accentSoftHex = '#F8E0E6'
+
+const activeFilter = ref('Semua')
+const filterOptions = ['Semua', 'Identitas', 'Web', 'Editorial', 'Pameran', 'Cetak']
+const visibleCount = ref(6)
+
+const caseStudies = [
+  { id: 1, title: 'Fragile Beauty', client: 'Museum MACAN', year: '2024', sector: 'Identitas, Pameran', desc: 'Sistem identitas untuk pameran seni kontemporer. Kunjungan naik 2,1 kali lipat.', tags: ['Identitas', 'Pameran'] },
+  { id: 2, title: 'After Modernism', client: 'Galeri Nasional', year: '2023', sector: 'Identitas, Cetak', desc: 'Redesign katalog retrospektif. Penjualan katalog naik 40%.', tags: ['Identitas', 'Cetak'] },
+  { id: 3, title: 'Cosmopolis', client: 'Jakarta Biennale', year: '2024', sector: 'Identitas, Web', desc: 'Identitas dan situs web untuk biennale internasional. 850 ribu kunjungan situs.', tags: ['Identitas', 'Web'] },
+  { id: 4, title: 'Daily Ritual', client: 'Commune Coffee', year: '2025', sector: 'Identitas, Editorial', desc: 'Sistem brand untuk jaringan kopi spesialti. Langganan naik 18%.', tags: ['Identitas', 'Editorial'] },
+  { id: 5, title: 'Reopened', client: 'Tugu Kunstkring Paleis', year: '2023', sector: 'Identitas, Pameran', desc: 'Identitas untuk pembukaan kembali gedung heritage. Diliput Eye Magazine.', tags: ['Identitas', 'Pameran'] },
+  { id: 6, title: 'Currency Stories', client: 'Museum Bank Indonesia', year: '2024', sector: 'Pameran, Cetak', desc: 'Desain pameran tetap tentang sejarah mata uang Indonesia.', tags: ['Pameran', 'Cetak'] },
+  { id: 7, title: 'Cover Redesign', client: 'Tempo Magazine', year: '2023', sector: 'Editorial', desc: 'Redesign sampul majalah mingguan. Langganan naik 22%.', tags: ['Editorial'] },
+  { id: 8, title: 'Origin Series', client: 'Kopi Kenangan', year: '2024', sector: 'Identitas, Cetak', desc: 'Seri kemasan edisi terbatas untuk kopi single-origin. Diliput It\'s Nice That.', tags: ['Identitas', 'Cetak'] },
+  { id: 9, title: 'Hand-set Type', client: 'Mailing Batu', year: '2025', sector: 'Identitas', desc: 'Typeface display custom untuk studio percetakan letterpress. Diliput Print Magazine.', tags: ['Identitas'] },
+  { id: 10, title: 'Provenance', client: 'Bandung Design Biennale', year: '2024', sector: 'Identitas, Web', desc: 'Identitas dan platform digital untuk bienale desain. 12 ribu pengunjung.', tags: ['Identitas', 'Web'] },
+  { id: 11, title: 'Modernist Auction', client: 'Sotheby\'s Indonesia', year: '2025', sector: 'Identitas', desc: 'Sistem identitas untuk lelang seni modernis Indonesia. Diliput Wallpaper*.', tags: ['Identitas'] },
+  { id: 12, title: 'Reading Reborn', client: 'Gramedia', year: '2023', sector: 'Identitas', desc: 'Rebrand untuk divisi penerbitan. Diliput Brand New.', tags: ['Identitas'] },
 ]
 
+const filteredCases = computed(() => {
+  const list = activeFilter.value === 'Semua'
+    ? caseStudies
+    : caseStudies.filter(c => c.tags.includes(activeFilter.value))
+  return list.slice(0, visibleCount.value)
+})
+
+const services = [
+  { num: '01', title: 'Identitas Brand', desc: 'Sistem visual yang bertahan lebih lama dari tren. Logo, tipografi, palet warna, dan pedoman penggunaan.' },
+  { num: '02', title: 'Desain Editorial', desc: 'Tata letak majalah, buku, dan katalog. Dari konsep sampai file siap cetak.' },
+  { num: '03', title: 'Desain Web', desc: 'Situs web yang dibangun dengan pertimbangan editorial. Responsif, cepat, mudah dikelola.' },
+  { num: '04', title: 'Desain Pameran', desc: 'Sistem signage, grafis dinding, dan pengalaman visual untuk museum dan galeri.' },
+  { num: '05', title: 'Tipografi Custom', desc: 'Typeface yang dibuat khusus untuk brand atau proyek. Dari sketsa sampai font file.' },
+  { num: '06', title: 'Cetak & Produksi', desc: 'Pemilihan kertas, percetakan, dan finishing. Kami dampingi sampai hasilnya sesuai harapan.' },
+]
+
+const processSteps = [
+  { num: '01', title: 'Percakapan', desc: 'Kami mulai dengan mendengar. Apa yang ingin Anda sampaikan, kepada siapa, dan mengapa sekarang.' },
+  { num: '02', title: 'Riset & Arah', desc: 'Kami pelajari konteks Anda. Pesaing, audiens, dan budaya di sekitar brand Anda. Lalu kami tentukan arah desain.' },
+  { num: '03', title: 'Desain & Iterasi', desc: 'Kami presentasikan konsep, lalu dengarkan masukan Anda. Biasanya dua sampai tiga putaran revisi.' },
+  { num: '04', title: 'Serah Terima', desc: 'File final, pedoman penggunaan, dan panduan produksi. Kami juga bantu koordinasi dengan vendor cetak atau pengembang web.' },
+]
+
+const conversations = [
+  {
+    name: 'Adjie Kurniawan',
+    role: 'Pendiri, Studio Daida',
+    excerpt: 'Waktu saya balik dari London, saya pikir Indonesia butuh studio yang bicara pelan tapi jelas. Bukan yang paling keras, tapi yang paling tepat. Desain editorial itu soal memberi ruang pada konten, bukan mendominasinya.',
+    topic: 'Kembali dari Pentagram',
+    readTime: '12 menit',
+  },
+  {
+    name: 'Mira Anindya',
+    role: 'Direktur Editorial',
+    excerpt: 'Klien datang ke kami karena mereka lelah dengan desain yang terlihat bagus tapi tidak punya substansi. Mereka ingin sesuatu yang bisa dibaca, dipahami, dan diingat. Itu yang kami cari setiap hari.',
+    topic: 'Desain Editorial Indonesia',
+    readTime: '9 menit',
+  },
+  {
+    name: 'Bagas Satrio',
+    role: 'Tipografer',
+    excerpt: 'Setiap brand punpa ritme tersendiri. Typeface yang baik harus menangkap ritme itu. Bukan sekadar huruf yang indah, tapi huruf yang terasa benar ketika Anda membacanya.',
+    topic: 'Typeface untuk Brand Budaya',
+    readTime: '8 menit',
+  },
+]
+
+const klienNames = [
+  'Museum MACAN', 'Galeri Nasional', 'Jakarta Biennale', 'Commune Coffee',
+  'Tugu Kunstkring', 'Museum Bank Indonesia', 'Tempo', 'Kopi Kenangan',
+  'Mailing Batu', 'Bandung Biennale', 'Sotheby\'s', 'Gramedia',
+  'Djarum', 'BCA', 'BRI', 'Indosat',
+]
+
+const faqItems = [
+  { q: 'Berapa lama proyek biasanya selesai?', a: 'Tergantung ruang lingkup. Identitas brand biasanya 8 sampai 12 minggu. Proyek editorial 4 sampai 6 minggu. Kami akan memberikan estimasi waktu setelah percakapan awal.' },
+  { q: 'Apakah Anda hanya mengerjakan proyek budaya?', a: 'Tidak. Meskipun banyak klien kami berasal dari sektor budaya dan hospitality, kami juga mengerjakan proyek untuk brand komersial, institusi keuangan, dan perusahaan teknologi.' },
+  { q: 'Bagaimana cara memulai?', a: 'Kirim email ke hello@daida.id dengan deskripsi singkat tentang proyek Anda. Kami akan merespons dalam 48 jam dan menjadwalkan percakapan.' },
+  { q: 'Apakah Anda mengerjakan proyek di luar Bandung?', a: 'Ya. Kami mengerjakan proyek di seluruh Indonesia dan sesekali di luar negeri. Sebagian besar proses bisa dilakukan secara remote.' },
+]
+
+const openFaq = ref<number | null>(null)
+function toggleFaq(i: number) {
+  openFaq.value = openFaq.value === i ? null : i
+}
+
 const fabOpen = ref(false)
-const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, saya tertarik dengan template Studio Daida. Bisa diskusi?')
+const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya tertarik untuk berdiskusi tentang proyek desain.')
 </script>
 
 <template>
-  <div class="min-h-screen antialiased" style="background: #FAFAF7; color: #111827; font-family: 'DM Sans', system-ui, sans-serif;">
-    <TemplateBack />
+  <div :style="styles" class="daida-page">
+    <TmplNavbar
+      brand="Studio Daida"
+      wordmark="DAIDA"
+      :links="[
+        { label: 'Karya', href: '#karya' },
+        { label: 'Layanan', href: '#layanan' },
+        { label: 'Proses', href: '#proses' },
+        { label: 'Percakapan', href: '#percakapan' },
+        { label: 'Klien', href: '#klien' },
+        { label: 'Kontak', href: '#kontak' },
+      ]"
+      :accent="accentHex"
+      :bg="styles['--tmpl-bg']"
+      :text="styles['--tmpl-fg']"
+      style-variant="transparent"
+      force-mode="light"
+      :show-theme-toggle="false"
+    />
 
-    <nav class="fixed top-0 inset-x-0 z-40 backdrop-blur-xl border-b border-gray-200/60" style="background: rgba(250,250,247,0.85);">
-      <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-        <span style="font-family: 'DM Serif Display', serif;" class="text-lg">Studio Daida</span>
-        <div class="hidden md:flex items-center gap-7 text-[13px] text-gray-600">
-          <a href="#karya" class="hover:text-gray-900 transition-colors">Karya</a>
-          <a href="#tentang" class="hover:text-gray-900 transition-colors">Tentang</a>
-          <a href="#kontak" class="hover:text-gray-900 transition-colors">Kontak</a>
-        </div>
+    <!-- ============ 1. HERO + 3D ============ -->
+    <section id="top" class="daida-hero">
+      <div class="daida-hero__canvas-wrap">
+        <ClientOnly>
+          <TmplExperienceCanvas
+            preset="cinematic-scroll"
+            :accent="accentHex"
+            intensity="calm"
+            label="Rotating DAIDA wordmark"
+          />
+        </ClientOnly>
       </div>
-    </nav>
 
-    <!-- Hero -->
-    <section class="pt-20 pb-16">
-      <div class="max-w-4xl mx-auto px-6 pt-16">
-        <template v-if="!isLoaded">
-          <div class="h-4 w-32 bg-pink-200 rounded mb-4 animate-pulse" />
-          <div class="h-16 w-3/4 bg-gray-200 rounded mb-8 animate-pulse" />
-          <div class="h-5 w-full bg-gray-200 rounded mb-2 animate-pulse" />
-          <div class="h-5 w-2/3 bg-gray-200 rounded animate-pulse" />
-        </template>
-
+      <div class="daida-hero__content">
+        <div v-if="!isLoaded" class="daida-hero__skeleton">
+          <div class="daida-skel daida-skel--label" />
+          <div class="daida-skel daida-skel--h1" />
+          <div class="daida-skel daida-skel--body" />
+          <div class="daida-skel daida-skel--body daida-skel--short" />
+        </div>
         <template v-else>
-          <p class="text-[11px] tracking-[0.2em] uppercase text-pink-500 mb-4">Studio desain · Bandung</p>
-          <h1 style="font-family: 'DM Serif Display', serif; font-style: italic; line-height: 1.05;" class="text-5xl md:text-7xl mb-8">Studio Daida</h1>
-          <p class="text-lg text-gray-600 max-w-xl leading-relaxed">Brand, editorial, dan typography untuk publisher independen dan studio kecil.</p>
+          <p :style="monoStyle" class="daida-label">Vol 12, Iss 01 &middot; 2026</p>
+          <h1 :style="h1Style" class="daida-hero__title">
+            Brand, web, dan<br>editorial craft<br>sejak 2014.
+          </h1>
+          <p class="daida-hero__sub">
+            Studio desain di Bandung. Kami membantu brand, museum, dan penerbit membangun sistem visual yang jelas dan bertahan lama.
+          </p>
+          <div class="daida-hero__ctas">
+            <a href="#karya" class="daida-btn daida-btn--primary" :style="{ background: accentHex }">Lihat karya</a>
+            <a href="#percakapan" class="daida-btn daida-btn--ghost">Baca percakapan</a>
+          </div>
         </template>
       </div>
     </section>
 
-    <!-- Karya -->
-    <section id="karya" class="py-16 border-t border-gray-200/60">
-      <div class="max-w-4xl mx-auto px-6">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-pink-500 mb-8">Proyek Terpilih</p>
-        <div class="space-y-16">
-          <article v-for="p in projects" :key="p.title" class="grid md:grid-cols-[1.2fr_1fr] gap-8 items-start group cursor-pointer">
-            <div class="aspect-[4/3] rounded-xl overflow-hidden" style="background: linear-gradient(135deg, #F3E8FF, #E8D5B7);">
-              <div class="w-full h-full flex items-center justify-center">
-                <span class="text-[9px] tracking-[0.2em] uppercase text-gray-400">Foto proyek</span>
+    <!-- ============ 2. STUDI KASUS (12 cards + filter) ============ -->
+    <section id="karya" class="daida-section daida-section--cases">
+      <div class="daida-container">
+        <div class="daida-section__header">
+          <p :style="monoStyle" class="daida-label">01 &mdash; Studi Kasus</p>
+          <h2 :style="h2Style" class="daida-section__title">Proyek terpilih</h2>
+        </div>
+
+        <div class="daida-filter">
+          <button
+            v-for="opt in filterOptions"
+            :key="opt"
+            type="button"
+            class="daida-filter__btn"
+            :class="{ 'daida-filter__btn--active': activeFilter === opt }"
+            :style="activeFilter === opt ? { background: accentHex, color: '#fff', borderColor: accentHex } : {}"
+            @click="activeFilter = opt; visibleCount = 6"
+          >
+            {{ opt }}
+          </button>
+        </div>
+
+        <div class="daida-cases-grid">
+          <article
+            v-for="(cs, i) in filteredCases"
+            :key="cs.id"
+            class="daida-case-card"
+          >
+            <div class="daida-case-card__img" :style="{ background: i % 3 === 0 ? '#F3E8FF' : i % 3 === 1 ? '#E8EEF5' : '#F5EDE4' }">
+              <span class="daida-case-card__img-label" :style="monoStyle">{{ cs.client }}</span>
+            </div>
+            <div class="daida-case-card__body">
+              <div class="daida-case-card__meta">
+                <span :style="monoStyle" class="daida-case-card__tags">{{ cs.sector }}</span>
+                <span :style="monoStyle" class="daida-case-card__year">{{ cs.year }}</span>
+              </div>
+              <h3 class="daida-case-card__title">{{ cs.title }}</h3>
+              <p class="daida-case-card__client">{{ cs.client }}</p>
+              <p class="daida-case-card__desc">{{ cs.desc }}</p>
+            </div>
+          </article>
+        </div>
+
+        <div v-if="filteredCases.length >= visibleCount" class="daida-more">
+          <button type="button" class="daida-btn daida-btn--ghost" @click="visibleCount += 6">
+            Lihat semua proyek
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. LAYANAN (6) ============ -->
+    <section id="layanan" class="daida-section daida-section--services" :style="{ background: 'var(--tmpl-surface)' }">
+      <div class="daida-container">
+        <div class="daida-section__header">
+          <p :style="monoStyle" class="daida-label">02 &mdash; Layanan</p>
+          <h2 :style="h2Style" class="daida-section__title">Apa yang kami kerjakan</h2>
+        </div>
+
+        <div class="daida-services-grid">
+          <div v-for="svc in services" :key="svc.num" class="daida-service">
+            <span :style="monoStyle" class="daida-service__num">{{ svc.num }}</span>
+            <h3 class="daida-service__title">{{ svc.title }}</h3>
+            <p class="daida-service__desc">{{ svc.desc }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. PROSES (4 steps) ============ -->
+    <section id="proses" class="daida-section daida-section--process">
+      <div class="daida-container">
+        <div class="daida-section__header">
+          <p :style="monoStyle" class="daida-label">03 &mdash; Proses</p>
+          <h2 :style="h2Style" class="daida-section__title">Bagaimana kami bekerja</h2>
+        </div>
+
+        <div class="daida-process-grid">
+          <div v-for="step in processSteps" :key="step.num" class="daida-step">
+            <span :style="monoStyle" class="daida-step__num">{{ step.num }}</span>
+            <div class="daida-step__line" :style="{ background: accentHex }" />
+            <h3 class="daida-step__title">{{ step.title }}</h3>
+            <p class="daida-step__desc">{{ step.desc }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. PERCAKAPAN (3 conversations) ============ -->
+    <section id="percakapan" class="daida-section daida-section--conversations" :style="{ background: 'var(--tmpl-surface)' }">
+      <div class="daida-container">
+        <div class="daida-section__header">
+          <p :style="monoStyle" class="daida-label">04 &mdash; Percakapan</p>
+          <h2 :style="h2Style" class="daida-section__title">Dari studio</h2>
+        </div>
+
+        <div class="daida-conversations-grid">
+          <article v-for="conv in conversations" :key="conv.name" class="daida-conversation">
+            <div class="daida-conversation__header">
+              <div class="daida-conversation__avatar" :style="{ background: accentSoftHex, color: accentHex }">
+                {{ conv.name.split(' ').map(w => w[0]).join('') }}
+              </div>
+              <div>
+                <p class="daida-conversation__name">{{ conv.name }}</p>
+                <p :style="monoStyle" class="daida-conversation__role">{{ conv.role }}</p>
               </div>
             </div>
-            <div>
-              <p class="text-[11px] tracking-[0.2em] uppercase text-gray-500 mb-2">{{ p.category }} · {{ p.year }}</p>
-              <h3 class="text-2xl font-medium mb-3 group-hover:text-pink-500 transition-colors" style="font-family: 'DM Serif Display', serif;">{{ p.title }}</h3>
-              <p class="text-base text-gray-600 leading-relaxed">{{ p.desc }}</p>
-            </div>
+            <p class="daida-conversation__topic" :style="{ color: accentHex }">{{ conv.topic }} &middot; {{ conv.readTime }} baca</p>
+            <blockquote class="daida-conversation__excerpt">
+              &ldquo;{{ conv.excerpt }}&rdquo;
+            </blockquote>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Tentang -->
-    <section id="tentang" class="py-20 border-t border-gray-200/60" style="background: #FFFFFF;">
-      <div class="max-w-2xl mx-auto px-6">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-pink-500 mb-6">Tentang</p>
-        <p class="text-lg leading-[1.7] text-gray-700">
-          Studio Daida adalah praktik desain dua orang di Bandung. Kami kerja sama dengan penerbit, brand independen, dan institusi budaya. Fokus kami: typography, desain editorial, dan sistem visual identity yang bertahan lebih lama dari tren.
-        </p>
+    <!-- ============ 6. KLIEN MARQUEE (16 names) ============ -->
+    <section id="klien" class="daida-section daida-section--clients">
+      <div class="daida-container">
+        <div class="daida-section__header">
+          <p :style="monoStyle" class="daida-label">05 &mdash; Klien</p>
+          <h2 :style="h2Style" class="daida-section__title">Siapa yang pernah kami bantu</h2>
+        </div>
+      </div>
+      <TmplMarquee
+        :items="klienNames"
+        separator="&middot;"
+        speed="slow"
+        :accent="accentHex"
+      />
+    </section>
+
+    <!-- ============ 7. FAQ ============ -->
+    <section id="faq" class="daida-section daida-section--faq" :style="{ background: 'var(--tmpl-surface)' }">
+      <div class="daida-container">
+        <div class="daida-section__header">
+          <p :style="monoStyle" class="daida-label">06 &mdash; Tanya Jawab</p>
+          <h2 :style="h2Style" class="daida-section__title">Pertanyaan yang sering diajukan</h2>
+        </div>
+
+        <div class="daida-faq-list">
+          <div v-for="(item, i) in faqItems" :key="i" class="daida-faq-item">
+            <button
+              type="button"
+              class="daida-faq-item__q"
+              :aria-expanded="openFaq === i"
+              @click="toggleFaq(i)"
+            >
+              <span>{{ item.q }}</span>
+              <span class="daida-faq-item__icon" :class="{ 'daida-faq-item__icon--open': openFaq === i }">+</span>
+            </button>
+            <Transition
+              enter-active-class="transition-all duration-300 ease-out"
+              leave-active-class="transition-all duration-200 ease-in"
+              enter-from-class="opacity-0 max-h-0"
+              leave-to-class="opacity-0 max-h-0"
+            >
+              <div v-if="openFaq === i" class="daida-faq-item__a">
+                <p>{{ item.a }}</p>
+              </div>
+            </Transition>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Kontak -->
-    <section id="kontak" class="py-20 border-t border-gray-200/60 text-center">
-      <h2 style="font-family: 'DM Serif Display', serif; font-style: italic;" class="text-3xl mb-4">Kerja sama?</h2>
-      <p class="text-base text-gray-600 mb-8 max-w-md mx-auto">Balas dalam 48 jam. Tanpa pitch deck.</p>
-      <a href="https://wa.me/6285188627365" target="_blank" rel="noopener" class="inline-block bg-pink-500 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-pink-600 transition-colors">Hubungi via WhatsApp</a>
+    <!-- ============ 8. KONTAK / FOOTER ============ -->
+    <section id="kontak" class="daida-section daida-section--contact">
+      <div class="daida-container">
+        <div class="daida-contact-grid">
+          <div class="daida-contact__info">
+            <p :style="monoStyle" class="daida-label">07 &mdash; Hubungi Kami</p>
+            <h2 :style="h2Style" class="daida-section__title">Ceritakan proyek Anda</h2>
+            <p class="daida-contact__text">Kami merespons dalam 48 jam. Waktu Bandung. Tanpa pitch deck.</p>
+            <div class="daida-contact__details">
+              <p><strong>Email</strong><br><a href="mailto:hello@daida.id" :style="{ color: accentHex }">hello@daida.id</a></p>
+              <p><strong>Telepon</strong><br>+62 22 720 4321</p>
+              <p><strong>Alamat</strong><br>Jl. Lombok No. 12<br>Bandung 40114, Indonesia</p>
+              <p><strong>Jam Kerja</strong><br>Senin&ndash;Jumat, 09.00&ndash;18.00 WIB</p>
+            </div>
+          </div>
+          <div class="daida-contact__form-wrap">
+            <TmplForm
+              :fields="[
+                { key: 'name', label: 'Nama', required: true },
+                { key: 'email', label: 'Email', type: 'email', required: true },
+                { key: 'company', label: 'Perusahaan' },
+                { key: 'type', label: 'Jenis Proyek', type: 'select', options: ['Identitas', 'Editorial', 'Web', 'Pameran', 'Tipografi', 'Lainnya'] },
+                { key: 'message', label: 'Ceritakan proyek Anda', type: 'textarea', required: true },
+              ]"
+              submit-label="Kirim Pesan"
+              :accent="accentHex"
+              whatsapp-phone="62227204321"
+              whatsapp-message-prefix="Halo Studio Daida, saya ingin berdiskusi tentang proyek:"
+            />
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- FAB -->
-    <div class="fixed bottom-5 right-5 z-50">
+    <TmplFooter
+      brand-name="Studio Daida"
+      variant="columns"
+      :links="[
+        { label: 'Karya', href: '#karya' },
+        { label: 'Layanan', href: '#layanan' },
+        { label: 'Proses', href: '#proses' },
+        { label: 'Percakapan', href: '#percakapan' },
+        { label: 'Kontak', href: '#kontak' },
+      ]"
+      :accent="accentHex"
+      :bg="styles['--tmpl-surface']"
+      :text="styles['--tmpl-fg']"
+      signature="Bandung, Indonesia"
+    />
+
+    <!-- WhatsApp FAB -->
+    <div class="daida-fab">
       <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 translate-y-4 scale-95" leave-to-class="opacity-0 translate-y-4 scale-95">
-        <div v-if="fabOpen" class="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 p-4">
-          <p class="text-sm font-semibold text-gray-900 mb-2">Tertarik dengan template ini?</p>
-          <p class="text-xs text-gray-500 mb-3">Chat langsung untuk diskusi fitur, harga, dan customisasi.</p>
-          <a :href="waUrl" target="_blank" rel="noopener" class="flex items-center gap-2 w-full px-4 py-2.5 bg-emerald-500 text-white rounded-lg text-sm font-medium hover:bg-emerald-600 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <div v-if="fabOpen" class="daida-fab__popup">
+          <p class="daida-fab__title">Tertarik bekerja sama?</p>
+          <p class="daida-fab__text">Chat langsung untuk diskusi proyek Anda.</p>
+          <a :href="waUrl" target="_blank" rel="noopener" class="daida-fab__wa" :style="{ background: accentHex }">
             Chat WhatsApp
           </a>
         </div>
       </Transition>
-      <button @click="fabOpen = !fabOpen" class="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-lg flex items-center justify-center transition-colors">
+      <button :style="{ background: accentHex }" class="daida-fab__btn" @click="fabOpen = !fabOpen" aria-label="Hubungi via WhatsApp">
         <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </button>
     </div>
 
-    <TemplateFooter brand-name="Studio Daida" :links="[{ label: 'Karya', href: '#karya' }, { label: 'Tentang', href: '#tentang' }, { label: 'Kontak', href: '#kontak' }]" accent="#EC4899" />
+    <TmplWhatsAppFab />
   </div>
 </template>
+
+<style scoped>
+/* ============ BASE ============ */
+.daida-page {
+  min-height: 100vh;
+  font-family: var(--tmpl-font-body);
+  color: var(--tmpl-fg);
+  background: var(--tmpl-bg);
+  -webkit-font-smoothing: antialiased;
+}
+.daida-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 96px);
+}
+.daida-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 1rem;
+}
+.daida-section {
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+}
+.daida-section__header {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.daida-section__title {
+  font-family: var(--tmpl-font-display);
+  font-style: italic;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+/* ============ BUTTONS ============ */
+.daida-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 1.75rem;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  cursor: pointer;
+  border: 0;
+}
+.daida-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.daida-btn--primary { color: #fff; }
+.daida-btn--ghost {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  color: inherit;
+}
+.daida-btn--ghost:hover {
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+  opacity: 1;
+}
+
+/* ============ HERO ============ */
+.daida-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.daida-hero__canvas-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.18;
+}
+.daida-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  padding: clamp(6rem, 12vw, 10rem) clamp(24px, 5vw, 96px) clamp(3rem, 6vw, 5rem);
+}
+.daida-hero__title {
+  margin: 0 0 1.5rem;
+}
+.daida-hero__sub {
+  font-size: clamp(1.05rem, 1.2vw, 1.15rem);
+  line-height: 1.65;
+  opacity: 0.7;
+  max-width: 520px;
+  margin: 0 0 2rem;
+}
+.daida-hero__ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Skeleton */
+.daida-hero__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.daida-skel {
+  border-radius: 8px;
+  animation: pulse 1.8s ease-in-out infinite;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+.daida-skel--label { width: 140px; height: 14px; }
+.daida-skel--h1 { width: 80%; height: 64px; }
+.daida-skel--body { width: 100%; height: 20px; }
+.daida-skel--short { width: 60%; }
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ============ FILTER ============ */
+.daida-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+.daida-filter__btn {
+  padding: 0.5rem 1.1rem;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-family: var(--tmpl-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.daida-filter__btn:hover {
+  border-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+.daida-filter__btn--active {
+  color: #fff;
+}
+
+/* ============ CASES GRID ============ */
+.daida-cases-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 640px) {
+  .daida-cases-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .daida-cases-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.daida-case-card {
+  border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  cursor: pointer;
+  background: var(--tmpl-surface-elevated);
+}
+.daida-case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px color-mix(in srgb, currentColor 8%, transparent);
+}
+.daida-case-card__img {
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.daida-case-card__img-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+.daida-case-card__body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+.daida-case-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.daida-case-card__tags {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}
+.daida-case-card__year {
+  font-size: 11px;
+  opacity: 0.4;
+}
+.daida-case-card__title {
+  font-family: var(--tmpl-font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+  transition: color 200ms ease;
+}
+.daida-case-card:hover .daida-case-card__title {
+  color: var(--tmpl-accent);
+}
+.daida-case-card__client {
+  font-size: 13px;
+  opacity: 0.5;
+  margin: 0 0 0.6rem;
+}
+.daida-case-card__desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  opacity: 0.65;
+  margin: 0;
+}
+.daida-more {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* ============ SERVICES ============ */
+.daida-services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem 3rem;
+}
+@media (min-width: 640px) {
+  .daida-services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .daida-services-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.daida-service {
+  padding: 1.75rem 0;
+  border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+.daida-service__num {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  opacity: 0.35;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.daida-service__title {
+  font-family: var(--tmpl-font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0 0 0.6rem;
+  line-height: 1.2;
+}
+.daida-service__desc {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* ============ PROCESS ============ */
+.daida-process-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 640px) {
+  .daida-process-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .daida-process-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.daida-step {
+  text-align: center;
+}
+.daida-step__num {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  opacity: 0.35;
+}
+.daida-step__line {
+  width: 32px;
+  height: 2px;
+  margin: 1rem auto;
+  border-radius: 1px;
+}
+.daida-step__title {
+  font-family: var(--tmpl-font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin: 0 0 0.6rem;
+}
+.daida-step__desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  opacity: 0.6;
+  margin: 0;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============ CONVERSATIONS ============ */
+.daida-conversations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+@media (min-width: 768px) {
+  .daida-conversations-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.daida-conversation {
+  padding: 2rem;
+  border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+  border-radius: 12px;
+  background: var(--tmpl-surface-elevated);
+}
+.daida-conversation__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.daida-conversation__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.daida-conversation__name {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0;
+}
+.daida-conversation__role {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0.15rem 0 0;
+}
+.daida-conversation__topic {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.daida-conversation__excerpt {
+  font-family: var(--tmpl-font-display);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* ============ CLIENTS MARQUEE ============ */
+.daida-section--clients {
+  padding-bottom: 2rem;
+}
+
+/* ============ FAQ ============ */
+.daida-faq-list {
+  max-width: 720px;
+}
+.daida-faq-item {
+  border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+.daida-faq-item__q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  gap: 1rem;
+}
+.daida-faq-item__icon {
+  font-size: 20px;
+  font-weight: 300;
+  transition: transform 200ms ease;
+  flex-shrink: 0;
+  opacity: 0.4;
+}
+.daida-faq-item__icon--open {
+  transform: rotate(45deg);
+}
+.daida-faq-item__a {
+  overflow: hidden;
+}
+.daida-faq-item__a p {
+  font-size: 14px;
+  line-height: 1.65;
+  opacity: 0.65;
+  margin: 0 0 1.25rem;
+}
+
+/* ============ CONTACT ============ */
+.daida-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 768px) {
+  .daida-contact-grid { grid-template-columns: 1fr 1fr; }
+}
+.daida-contact__text {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.65;
+  margin-bottom: 2rem;
+}
+.daida-contact__details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.daida-contact__details strong {
+  font-family: var(--tmpl-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  font-weight: 600;
+}
+.daida-contact__details a {
+  text-decoration: none;
+}
+.daida-contact__details a:hover {
+  text-decoration: underline;
+}
+.daida-contact__form-wrap {
+  padding: 2rem;
+  border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+  border-radius: 12px;
+  background: var(--tmpl-surface-elevated);
+}
+
+/* ============ FAB ============ */
+.daida-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+}
+.daida-fab__popup {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 12px;
+  width: 280px;
+  padding: 1.25rem;
+  background: var(--tmpl-surface-elevated);
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 14px;
+  box-shadow: 0 16px 48px color-mix(in srgb, currentColor 12%, transparent);
+}
+.daida-fab__title {
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 0 0.35rem;
+}
+.daida-fab__text {
+  font-size: 12px;
+  opacity: 0.6;
+  margin: 0 0 1rem;
+}
+.daida-fab__wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 200ms ease;
+}
+.daida-fab__wa:hover { opacity: 0.9; }
+.daida-fab__btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px color-mix(in srgb, currentColor 15%, transparent);
+  transition: transform 200ms ease;
+}
+.daida-fab__btn:hover { transform: scale(1.06); }
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  .daida-case-card:hover { transform: none; }
+  .daida-fab__btn:hover { transform: none; }
+  .daida-btn:hover { transform: none; }
+}
+</style>

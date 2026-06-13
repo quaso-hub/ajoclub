@@ -184,7 +184,7 @@ export const templates: Template[] = [
     category: 'membership', tags: ['Creator', 'Support', 'Tip'], scenePreset: 'cinematic-scroll',
     icon: CATEGORIES.membership, motionIntensity: 'calm',
     whatsappMessage: 'Halo, saya content creator dan tertarik template "support the work". Bisa diskusi?',
-    accentColor: '#FF4D4D', sortOrder: 12,
+    accentColor: '#D4A843', sortOrder: 12,
   }),
 
   // ========== PORTFOLIO ==========

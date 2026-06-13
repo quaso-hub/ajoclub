@@ -1,167 +1,555 @@
 <script setup lang="ts">
+/**
+ * membership-2.vue — Sinau Koding
+ * Indonesian developer community platform. Dark night bg, coral accent.
+ * Geist + Geist Mono. 120-node 3D constellation (case-timeline, balanced).
+ *
+ * 8 sections: Hero+3D, Spaces, Events, Diskusi, Tier, Tim, FAQ, Footer
+ */
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+
 definePageMeta({ layout: false })
-useHead({
-  title: 'Sinau Koding',
-  htmlAttrs: { lang: 'id' },
-  link: [
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap' },
-  ],
-})
 
-const isLoaded = ref(false)
-onMounted(() => { setTimeout(() => { isLoaded.value = true }, 600) })
+const theme = useTemplateTheme('membership-2')
+const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
 
+const toCssSafe = (t: { l: number, c: number, h: number }, alpha = 1) => {
+  if (alpha < 1) return `oklch(${t.l}% ${t.c} ${t.h} / ${alpha})`
+  return `oklch(${t.l}% ${t.c} ${t.h})`
+}
+
+// ============================================================
+// STATE
+// ============================================================
+const heroLoaded = ref(false)
+const activeSpaceFilter = ref('Semua')
+const faqOpen = ref<number | null>(null)
+const memberCount = ref(0)
+const onlineCount = ref(0)
+const isReducedMotion = ref(false)
+
+// ============================================================
+// DATA
+// ============================================================
 const spaces = [
-  { name: '#belajar-bersama', desc: 'Tempat nanya hal dasar. Nggak ada pertanyaan bodoh.', members: 1240, posts: 34 },
-  { name: '#code-review', desc: 'Upload code, dapat feedback dari senior.', members: 890, posts: 12 },
-  { name: '#loker-dev', desc: 'Lowongan developer remote & onsite Indonesia.', members: 2100, posts: 8 },
-  { name: '#showcase', desc: 'Pamerin project yang sudah jadi.', members: 670, posts: 5 },
+  { name: 'Frontend', icon: '⚡', desc: 'React, Vue, Next.js, Nuxt. Diskusi UI, performa, dan framework terbaru.', members: 1840, color: '#38bdf8' },
+  { name: 'Backend', icon: '🔧', desc: 'Node, Go, Rust, Java. API design, database, dan arsitektur server.', members: 1520, color: '#a78bfa' },
+  { name: 'Mobile', icon: '📱', desc: 'Flutter, React Native, Swift, Kotlin. Build sekali, jalan di mana-mana.', members: 980, color: '#34d399' },
+  { name: 'DevOps', icon: '☁️', desc: 'Docker, K8s, CI/CD, Terraform. Dari local ke production tanpa drama.', members: 720, color: '#fb923c' },
+  { name: 'AI/ML', icon: '🤖', desc: 'LLM, computer vision, data pipeline. Eksperimen dan deploy model.', members: 1100, color: '#f472b6' },
+  { name: 'Desain', icon: '🎨', desc: 'UI/UX, Figma, design system. Bikin produk yang enak dipakai.', members: 640, color: '#fbbf24' },
 ]
 
-const fabOpen = ref(false)
-const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, saya tertarik dengan template Sinau Koding. Bisa diskusi?')
+const events = [
+  { date: 'SAB, 21 JUN', time: '09:00 WIB', title: 'Workshop: Deploy Next.js ke Vercel', speaker: 'Hasan Fadilah', rsvp: 124 },
+  { date: 'SEL, 24 JUN', time: '19:30 WIB', title: 'Code Review Night #47', speaker: 'Komunitas', rsvp: 89 },
+  { date: 'KAM, 26 JUN', time: '20:00 WIB', title: 'Sharing: Dari Freelance ke Full-time', speaker: 'Rina Maharani', rsvp: 156 },
+  { date: 'SAB, 28 JUN', time: '10:00 WIB', title: 'Hackathon: Build API dalam 4 Jam', speaker: 'Budi Santoso', rsvp: 203 },
+]
+
+const threads = [
+  { author: 'Hasan Fadilah', avatar: 'H', time: '12 menit lalu', title: 'State management terbaik untuk Nuxt 3 di 2026?', replies: 23, reactions: 45, space: 'Frontend' },
+  { author: 'Rina Maharani', avatar: 'R', time: '1 jam lalu', title: 'Pengalaman migrasi dari REST ke tRPC di production', replies: 18, reactions: 32, space: 'Backend' },
+  { author: 'Budi Santoso', avatar: 'B', time: '2 jam lalu', title: 'Tips hemat cost AWS untuk side project', replies: 31, reactions: 67, space: 'DevOps' },
+  { author: 'Sinta Dewi', avatar: 'S', time: '3 jam lalu', title: 'Fine-tuning Llama 3 di dataset lokal bahasa Indonesia', replies: 14, reactions: 28, space: 'AI/ML' },
+  { author: 'Adi Prasetyo', avatar: 'A', time: '5 jam lalu', title: 'Flutter vs React Native: benchmark update Juni 2026', replies: 42, reactions: 89, space: 'Mobile' },
+]
+
+const tiers = [
+  {
+    name: 'Gratis',
+    price: 'Rp 0',
+    period: '',
+    desc: 'Coba komunitas tanpa biaya.',
+    features: ['Gabung 3 space', 'Baca semua thread', 'Ikut event publik', 'Profil anggota'],
+    cta: 'Gabung Gratis',
+    popular: false,
+  },
+  {
+    name: 'Komunitas',
+    price: 'Rp 49rb',
+    period: '/bulan',
+    desc: 'Akses penuh ke semua space dan fitur.',
+    features: ['Semua di Gratis', 'Gabung semua 6 space', 'Post dan reply thread', 'RSVP event eksklusif', 'Badge anggota', 'Direct message'],
+    cta: 'Mulai Komunitas',
+    popular: true,
+  },
+  {
+    name: 'Studio',
+    price: 'Rp 149rb',
+    period: '/bulan',
+    desc: 'Untuk yang serius berkembang.',
+    features: ['Semua di Komunitas', 'Mentoring 1-on-1 bulanan', 'Akses #pro channel', 'Portfolio review', 'Job referral prioritas', 'Custom badge warna'],
+    cta: 'Mulai Studio',
+    popular: false,
+  },
+]
+
+const team = [
+  { name: 'Hasan Fadilah', role: 'Founder & Lead', avatar: 'H', bio: 'Full-stack developer. 8 tahun di industri. Pernah di Gojek dan Tokopedia.' },
+  { name: 'Rina Maharani', role: 'Community Manager', avatar: 'R', bio: 'Mengelola komunitas sejak 2021. Fokus di engagement dan program mentoring.' },
+  { name: 'Budi Santoso', role: 'DevOps Lead', avatar: 'B', bio: 'Infrastructure engineer. AWS certified. Suka ngomongin Docker dan K8s.' },
+  { name: 'Sinta Dewi', role: 'AI/ML Lead', avatar: 'S', bio: 'Data scientist. Riset NLP untuk bahasa Indonesia. Alumni ITB.' },
+]
+
+const faqs = [
+  { q: 'Apakah Sinau Koding gratis?', a: 'Ya, selamanya gratis untuk akses dasar. Kamu bisa gabung 3 space, baca semua thread, dan ikut event publik tanpa biaya.' },
+  { q: 'Bedanya tier Komunitas dan Studio apa?', a: 'Komunitas (Rp 49rb/bulan) buka akses ke semua 6 space dan fitur post. Studio (Rp 149rb/bulan) tambah mentoring 1-on-1, portfolio review, dan job referral prioritas.' },
+  { q: 'Saya pemula, cocok nggak?', a: 'Cocok banget. Space Frontend dan Backend punya thread khusus untuk pertanyaan dasar. Tidak ada pertanyaan bodoh di sini.' },
+  { q: 'Event diadakan di mana?', a: 'Kebanyakan online via Zoom atau Discord. Beberapa event besar diadakan offline di Jakarta, Bandung, dan Surabaya.' },
+  { q: 'Bisa cancel langganan kapan saja?', a: 'Bisa. Tidak ada kontrak. Cancel kapan saja, tetap akses sampai akhir periode billing.' },
+]
+
+// ============================================================
+// LIFECYCLE
+// ============================================================
+onMounted(() => {
+  isReducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  setTimeout(() => { heroLoaded.value = true }, 400)
+
+  // Animated counters
+  const memberTarget = 4820
+  const onlineTarget = 1210
+  const duration = 1600
+  const start = performance.now()
+  const ease = (t: number) => 1 - Math.pow(1 - t, 3)
+
+  function tick(now: number) {
+    const elapsed = now - start
+    const progress = Math.min(elapsed / duration, 1)
+    const eased = ease(progress)
+    memberCount.value = Math.round(eased * memberTarget)
+    onlineCount.value = Math.round(eased * onlineTarget)
+    if (progress < 1) requestAnimationFrame(tick)
+  }
+  requestAnimationFrame(tick)
+})
 </script>
 
 <template>
-  <div class="min-h-screen antialiased" style="background: #0A0A0A; color: #F8FAFC; font-family: 'Inter', system-ui, sans-serif;">
-    <TemplateBack />
-
-    <nav class="fixed top-0 inset-x-0 z-40 backdrop-blur-xl border-b border-white/5" style="background: rgba(10,10,10,0.85);">
+  <div class="min-h-screen antialiased" :style="styles">
+    <!-- ============================================================ -->
+    <!-- NAV -->
+    <!-- ============================================================ -->
+    <nav
+      class="fixed top-0 inset-x-0 z-40 backdrop-blur-xl border-b"
+      :style="{
+        background: toCssSafe(palette.bg, 0.85),
+        borderColor: toCssSafe(palette.border, 0.3),
+      }"
+    >
       <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-        <span style="font-family: 'JetBrains Mono', monospace;" class="text-sm font-bold text-purple-400">Sinau Koding</span>
-        <div class="hidden md:flex items-center gap-7 text-[13px] text-white/60">
-          <a href="#channel" class="hover:text-white transition-colors">Channel</a>
-          <a href="#event" class="hover:text-white transition-colors">Event</a>
-          <a href="#harga" class="hover:text-white transition-colors">Harga</a>
+        <div class="flex items-center gap-2">
+          <span
+            class="w-6 h-6 rounded-md flex items-center justify-center text-[11px] font-bold"
+            :style="{ background: toCssSafe(palette.accent), color: toCssSafe(palette.accentFg) }"
+          >SK</span>
+          <span class="text-sm font-bold" :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }">Sinau Koding</span>
         </div>
-        <a href="#join" class="text-[12px] px-4 py-1.5 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors">Gabung Komunitas</a>
+        <div class="hidden md:flex items-center gap-7 text-[13px]" :style="{ color: toCssSafe(palette.muted) }">
+          <a href="#spaces" class="hover:opacity-100 opacity-70 transition-opacity">Spaces</a>
+          <a href="#events" class="hover:opacity-100 opacity-70 transition-opacity">Event</a>
+          <a href="#diskusi" class="hover:opacity-100 opacity-70 transition-opacity">Diskusi</a>
+          <a href="#tier" class="hover:opacity-100 opacity-70 transition-opacity">Harga</a>
+        </div>
+        <a
+          href="#tier"
+          class="text-[12px] px-4 py-1.5 rounded-lg font-medium transition-opacity hover:opacity-90"
+          :style="{ background: toCssSafe(palette.accent), color: toCssSafe(palette.accentFg) }"
+        >Gabung</a>
       </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="pt-24 pb-20">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <template v-if="!isLoaded">
-          <div class="h-6 w-40 bg-purple-500/10 rounded-full mb-8 mx-auto animate-pulse" />
-          <div class="h-14 w-full bg-white/10 rounded mb-4 animate-pulse" />
-          <div class="h-14 w-3/4 bg-white/10 rounded mb-6 mx-auto animate-pulse" />
-          <div class="h-5 w-full bg-white/10 rounded mb-8 mx-auto animate-pulse" />
-          <div class="flex justify-center gap-3">
-            <div class="h-12 w-40 bg-purple-500/10 rounded-lg animate-pulse" />
-            <div class="h-12 w-36 bg-white/10 rounded-lg animate-pulse" />
-          </div>
+    <!-- ============================================================ -->
+    <!-- 1. HERO + 3D CONSTELLATION -->
+    <!-- ============================================================ -->
+    <section class="relative pt-24 pb-20 overflow-hidden">
+      <!-- 3D Canvas Background -->
+      <div class="absolute inset-0 z-0 opacity-60">
+        <TmplExperienceCanvas
+          preset="case-timeline"
+          :accent="toCssSafe(palette.accent)"
+          intensity="balanced"
+          label="Konstelasi anggota Sinau Koding"
+        />
+      </div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        <template v-if="!heroLoaded">
+          <div class="h-6 w-48 rounded-full mb-8 mx-auto animate-pulse" :style="{ background: toCssSafe(palette.accentSoft) }" />
+          <div class="h-14 w-full rounded mb-4 animate-pulse" :style="{ background: toCssSafe(palette.surface) }" />
+          <div class="h-14 w-3/4 rounded mb-6 mx-auto animate-pulse" :style="{ background: toCssSafe(palette.surface) }" />
+          <div class="h-5 w-full rounded mb-8 mx-auto animate-pulse" :style="{ background: toCssSafe(palette.surface) }" />
         </template>
 
         <template v-else>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 mb-8 text-[12px] text-purple-400" style="font-family: 'JetBrains Mono', monospace;">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            3.400+ anggota aktif
+          <!-- Status badge -->
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-8 text-[12px]"
+            :style="{
+              fontFamily: 'var(--tmpl-font-mono)',
+              background: toCssSafe(palette.accentSoft),
+              color: toCssSafe(palette.accent),
+              border: `1px solid ${toCssSafe(palette.accent, 0.2)}`,
+            }"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            {{ onlineCount.toLocaleString('id-ID') }} online sekarang
           </div>
 
-          <h1 class="text-4xl md:text-6xl font-bold leading-[0.95] tracking-[-0.03em] mb-6">
-            Komunitas developer<br /><span class="text-purple-400">Indonesia.</span>
+          <!-- H1 -->
+          <h1 :style="{ ...h1Style, marginBottom: '1.5rem' }">
+            Belajar bareng,<br />
+            <span :style="{ color: toCssSafe(palette.accent) }">bangun bareng.</span>
           </h1>
-          <p class="text-lg text-white/60 max-w-xl mx-auto leading-relaxed mb-8">
-            Belajar bareng, code review, cari kerja, dan showcase project. Semua gratis.
+
+          <!-- Subhead -->
+          <p
+            class="text-lg max-w-xl mx-auto leading-relaxed mb-4"
+            :style="{ color: toCssSafe(palette.muted) }"
+          >
+            Komunitas developer Indonesia. {{ spaces.length }} space aktif, {{ events.length }} event bulan ini, 0 spam.
           </p>
+
+          <!-- Member counter -->
+          <p
+            class="text-sm mb-8"
+            :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.muted, 0.7) }"
+          >
+            <span class="font-bold" :style="{ color: toCssSafe(palette.fg) }">{{ memberCount.toLocaleString('id-ID') }}</span> anggota
+            &middot;
+            <span class="font-bold" :style="{ color: toCssSafe(palette.fg) }">{{ spaces.length }}</span> space
+          </p>
+
+          <!-- CTAs -->
           <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="#join" class="px-6 py-3 bg-purple-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-700 transition-colors">
-              Gabung Gratis
-            </a>
-            <a href="#channel" class="px-6 py-3 border border-white/20 rounded-lg text-sm font-medium text-white/80 hover:bg-white/5 transition-colors">
-              Lihat Channel
-            </a>
+            <a
+              href="#tier"
+              class="px-6 py-3 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90"
+              :style="{ background: toCssSafe(palette.accent), color: toCssSafe(palette.accentFg) }"
+            >Gabung Gratis</a>
+            <a
+              href="#spaces"
+              class="px-6 py-3 border rounded-lg text-sm font-medium transition-opacity hover:opacity-80"
+              :style="{ borderColor: toCssSafe(palette.border), color: toCssSafe(palette.fg, 0.8) }"
+            >Lihat Space</a>
           </div>
         </template>
       </div>
     </section>
 
-    <!-- Channels -->
-    <section id="channel" class="py-20 border-t border-white/5" style="background: #111111;">
-      <div class="max-w-5xl mx-auto px-6">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-purple-400 mb-3" style="font-family: 'JetBrains Mono', monospace;">CHANNEL</p>
-        <h2 class="text-3xl font-bold mb-12">Tempat ngobrol.</h2>
+    <!-- ============================================================ -->
+    <!-- 2. SPACES (6 community spaces) -->
+    <!-- ============================================================ -->
+    <section
+      id="spaces"
+      class="py-20 border-t"
+      :style="{ borderColor: toCssSafe(palette.border, 0.3), background: toCssSafe(palette.surface) }"
+    >
+      <div class="max-w-6xl mx-auto px-6">
+        <p
+          class="text-[11px] tracking-[0.2em] uppercase mb-3"
+          :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
+        >SPACES</p>
+        <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Tempat ngobrol.</h2>
+        <p class="mb-12" :style="{ color: toCssSafe(palette.muted) }">Pilih topik, gabung, mulai diskusi.</p>
 
-        <div class="grid md:grid-cols-2 gap-4">
-          <article v-for="space in spaces" :key="space.name" class="bg-white/5 border border-white/10 rounded-xl p-5 hover:border-purple-500/30 transition-colors cursor-pointer">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <article
+            v-for="space in spaces"
+            :key="space.name"
+            class="rounded-xl p-5 cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
+            :style="{
+              background: toCssSafe(palette.surfaceElevated),
+              border: `1px solid ${toCssSafe(palette.border, 0.3)}`,
+            }"
+          >
             <div class="flex items-start justify-between mb-3">
-              <h3 class="text-base font-semibold" style="font-family: 'JetBrains Mono', monospace;">{{ space.name }}</h3>
-              <span class="text-[11px] font-mono text-white/40">{{ space.members }} anggota</span>
+              <div class="flex items-center gap-2">
+                <span class="text-lg">{{ space.icon }}</span>
+                <h3 class="text-base font-semibold" :style="{ color: toCssSafe(palette.fg) }">{{ space.name }}</h3>
+              </div>
+              <span
+                class="text-[11px] font-medium"
+                :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.muted, 0.7) }"
+              >{{ space.members.toLocaleString('id-ID') }} anggota</span>
             </div>
-            <p class="text-sm text-white/60 leading-relaxed mb-3">{{ space.desc }}</p>
-            <p class="text-[11px] text-white/30">{{ space.posts }} post hari ini</p>
+            <p class="text-sm leading-relaxed mb-4" :style="{ color: toCssSafe(palette.muted) }">{{ space.desc }}</p>
+            <div class="flex items-center justify-between">
+              <div class="flex -space-x-2">
+                <div
+                  v-for="i in 3"
+                  :key="i"
+                  class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-[9px] font-bold"
+                  :style="{
+                    background: toCssSafe(palette.surface),
+                    borderColor: toCssSafe(palette.surfaceElevated),
+                    color: toCssSafe(palette.muted),
+                  }"
+                >{{ String.fromCharCode(64 + i + spaces.indexOf(space)) }}</div>
+              </div>
+              <button
+                class="text-[11px] font-semibold px-3 py-1 rounded-md transition-opacity hover:opacity-80"
+                :style="{ background: toCssSafe(palette.accentSoft), color: toCssSafe(palette.accent) }"
+              >Gabung</button>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Event -->
-    <section id="event" class="py-20 border-t border-white/5">
+    <!-- ============================================================ -->
+    <!-- 3. EVENTS (4 upcoming events) -->
+    <!-- ============================================================ -->
+    <section id="events" class="py-20 border-t" :style="{ borderColor: toCssSafe(palette.border, 0.3) }">
       <div class="max-w-5xl mx-auto px-6">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-purple-400 mb-3" style="font-family: 'JetBrains Mono', monospace;">EVENT</p>
-        <h2 class="text-3xl font-bold mb-12">Minggu ini.</h2>
+        <p
+          class="text-[11px] tracking-[0.2em] uppercase mb-3"
+          :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
+        >EVENT</p>
+        <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Yang akan datang.</h2>
+        <p class="mb-12" :style="{ color: toCssSafe(palette.muted) }">Online dan offline. Gratis untuk anggota.</p>
 
-        <div class="space-y-4">
-          <article class="bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h3 class="text-base font-semibold mb-1">Sharing Session: Dari Bootcamp ke Kerja</h3>
-              <p class="text-sm text-white/60">Budi Santoso · Kamis 20.00 WIB · Zoom</p>
+        <div class="space-y-3">
+          <article
+            v-for="event in events"
+            :key="event.title"
+            class="rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-200"
+            :style="{
+              background: toCssSafe(palette.surface),
+              border: `1px solid ${toCssSafe(palette.border, 0.3)}`,
+            }"
+          >
+            <div class="flex items-start gap-4">
+              <div
+                class="shrink-0 w-14 h-14 rounded-lg flex flex-col items-center justify-center"
+                :style="{ background: toCssSafe(palette.accentSoft) }"
+              >
+                <span class="text-[10px] font-bold" :style="{ color: toCssSafe(palette.accent), fontFamily: 'var(--tmpl-font-mono)' }">{{ event.date.split(',')[0] }}</span>
+                <span class="text-[10px]" :style="{ color: toCssSafe(palette.muted, 0.7), fontFamily: 'var(--tmpl-font-mono)' }">{{ event.date.split(', ')[1] }}</span>
+              </div>
+              <div>
+                <h3 class="text-base font-semibold mb-1" :style="{ color: toCssSafe(palette.fg) }">{{ event.title }}</h3>
+                <p class="text-sm" :style="{ color: toCssSafe(palette.muted) }">{{ event.speaker }} &middot; {{ event.time }}</p>
+              </div>
             </div>
-            <button class="border border-purple-500 text-purple-400 px-4 py-1.5 rounded text-sm font-medium hover:bg-purple-500/10 transition-colors shrink-0">RSVP · 89</button>
-          </article>
-          <article class="bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h3 class="text-base font-semibold mb-1">Code Review Night</h3>
-              <p class="text-sm text-white/60">Komunitas · Jumat 19.00 WIB · Discord</p>
-            </div>
-            <button class="border border-purple-500 text-purple-400 px-4 py-1.5 rounded text-sm font-medium hover:bg-purple-500/10 transition-colors shrink-0">RSVP · 156</button>
+            <button
+              class="shrink-0 text-sm font-medium px-4 py-1.5 rounded-lg border transition-opacity hover:opacity-80"
+              :style="{ borderColor: toCssSafe(palette.accent, 0.4), color: toCssSafe(palette.accent) }"
+            >RSVP &middot; {{ event.rsvp }}</button>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Harga -->
-    <section id="harga" class="py-20 border-t border-white/5" style="background: #111111;">
+    <!-- ============================================================ -->
+    <!-- 4. DISKUSI (5 thread previews) -->
+    <!-- ============================================================ -->
+    <section
+      id="diskusi"
+      class="py-20 border-t"
+      :style="{ borderColor: toCssSafe(palette.border, 0.3), background: toCssSafe(palette.surface) }"
+    >
+      <div class="max-w-5xl mx-auto px-6">
+        <p
+          class="text-[11px] tracking-[0.2em] uppercase mb-3"
+          :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
+        >DISKUSI</p>
+        <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Thread terbaru.</h2>
+        <p class="mb-12" :style="{ color: toCssSafe(palette.muted) }">Dari semua space. Langsung join percakapan.</p>
+
+        <div class="space-y-3">
+          <article
+            v-for="thread in threads"
+            :key="thread.title"
+            class="rounded-xl p-5 transition-all duration-200 cursor-pointer"
+            :style="{
+              background: toCssSafe(palette.surfaceElevated),
+              border: `1px solid ${toCssSafe(palette.border, 0.2)}`,
+            }"
+          >
+            <div class="flex items-start gap-3">
+              <div
+                class="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold"
+                :style="{ background: toCssSafe(palette.accentSoft), color: toCssSafe(palette.accent) }"
+              >{{ thread.avatar }}</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                  <span class="text-sm font-semibold" :style="{ color: toCssSafe(palette.fg) }">{{ thread.author }}</span>
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded-full"
+                    :style="{ background: toCssSafe(palette.accentSoft, 0.5), color: toCssSafe(palette.accent), fontFamily: 'var(--tmpl-font-mono)' }"
+                  >{{ thread.space }}</span>
+                  <span class="text-[11px]" :style="{ color: toCssSafe(palette.muted, 0.5), fontFamily: 'var(--tmpl-font-mono)' }">{{ thread.time }}</span>
+                </div>
+                <h3 class="text-[15px] font-medium mb-2" :style="{ color: toCssSafe(palette.fg) }">{{ thread.title }}</h3>
+                <div class="flex items-center gap-4 text-[12px]" :style="{ color: toCssSafe(palette.muted, 0.7) }">
+                  <span>{{ thread.replies }} balasan</span>
+                  <span>{{ thread.reactions }} reaksi</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 5. TIER (3 pricing tiers) -->
+    <!-- ============================================================ -->
+    <section id="tier" class="py-20 border-t" :style="{ borderColor: toCssSafe(palette.border, 0.3) }">
+      <div class="max-w-5xl mx-auto px-6">
+        <p
+          class="text-[11px] tracking-[0.2em] uppercase text-center mb-3"
+          :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
+        >TIER</p>
+        <h2 :style="{ ...h2Style, marginBottom: '0.5rem', textAlign: 'center' }">Pilih yang cocok.</h2>
+        <p class="mb-12 text-center" :style="{ color: toCssSafe(palette.muted) }">Mulai gratis. Upgrade kapan saja.</p>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            v-for="tier in tiers"
+            :key="tier.name"
+            class="rounded-xl p-6 relative flex flex-col"
+            :style="{
+              background: tier.popular ? toCssSafe(palette.surfaceElevated) : toCssSafe(palette.surface),
+              border: tier.popular
+                ? `2px solid ${toCssSafe(palette.accent)}`
+                : `1px solid ${toCssSafe(palette.border, 0.3)}`,
+            }"
+          >
+            <span
+              v-if="tier.popular"
+              class="absolute -top-2.5 left-6 px-2 py-0.5 text-[10px] font-bold rounded"
+              :style="{ background: toCssSafe(palette.accent), color: toCssSafe(palette.accentFg) }"
+            >PALING POPULER</span>
+
+            <p class="text-sm mb-2" :style="{ color: toCssSafe(palette.muted) }">{{ tier.name }}</p>
+            <p class="text-3xl font-semibold mb-1" :style="{ color: toCssSafe(palette.fg) }">
+              {{ tier.price }}
+              <span v-if="tier.period" class="text-sm font-normal" :style="{ color: toCssSafe(palette.muted, 0.6) }">{{ tier.period }}</span>
+            </p>
+            <p class="text-sm mb-6" :style="{ color: toCssSafe(palette.muted) }">{{ tier.desc }}</p>
+
+            <ul class="space-y-2.5 mb-8 flex-1">
+              <li
+                v-for="feature in tier.features"
+                :key="feature"
+                class="flex items-start gap-2 text-sm"
+                :style="{ color: toCssSafe(palette.fg, 0.85) }"
+              >
+                <span class="mt-0.5 shrink-0" :style="{ color: toCssSafe(palette.accent) }">&#10003;</span>
+                {{ feature }}
+              </li>
+            </ul>
+
+            <button
+              class="w-full py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90"
+              :style="{
+                background: tier.popular ? toCssSafe(palette.accent) : 'transparent',
+                color: tier.popular ? toCssSafe(palette.accentFg) : toCssSafe(palette.accent),
+                border: tier.popular ? 'none' : `1px solid ${toCssSafe(palette.accent, 0.4)}`,
+              }"
+            >{{ tier.cta }}</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 6. TIM (4 community leaders) -->
+    <!-- ============================================================ -->
+    <section
+      class="py-20 border-t"
+      :style="{ borderColor: toCssSafe(palette.border, 0.3), background: toCssSafe(palette.surface) }"
+    >
+      <div class="max-w-5xl mx-auto px-6">
+        <p
+          class="text-[11px] tracking-[0.2em] uppercase mb-3"
+          :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
+        >TIM</p>
+        <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Yang menggerakkan.</h2>
+        <p class="mb-12" :style="{ color: toCssSafe(palette.muted) }">Volunteer yang menjaga komunitas tetap hidup.</p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <article
+            v-for="person in team"
+            :key="person.name"
+            class="rounded-xl p-5 text-center"
+            :style="{
+              background: toCssSafe(palette.surfaceElevated),
+              border: `1px solid ${toCssSafe(palette.border, 0.2)}`,
+            }"
+          >
+            <div
+              class="w-14 h-14 rounded-full mx-auto mb-3 flex items-center justify-center text-xl font-bold"
+              :style="{ background: toCssSafe(palette.accentSoft), color: toCssSafe(palette.accent) }"
+            >{{ person.avatar }}</div>
+            <h3 class="text-sm font-semibold mb-0.5" :style="{ color: toCssSafe(palette.fg) }">{{ person.name }}</h3>
+            <p class="text-[11px] font-medium mb-2" :style="{ color: toCssSafe(palette.accent), fontFamily: 'var(--tmpl-font-mono)' }">{{ person.role }}</p>
+            <p class="text-[13px] leading-relaxed" :style="{ color: toCssSafe(palette.muted) }">{{ person.bio }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 7. FAQ -->
+    <!-- ============================================================ -->
+    <section class="py-20 border-t" :style="{ borderColor: toCssSafe(palette.border, 0.3) }">
       <div class="max-w-3xl mx-auto px-6">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-purple-400 text-center mb-4" style="font-family: 'JetBrains Mono', monospace;">HARGA</p>
-        <h2 class="text-3xl font-semibold text-center mb-12">Gratis untuk semua.</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="bg-white/5 border border-white/10 rounded-xl p-6">
-            <p class="text-sm text-white/60 mb-2">Gratis</p>
-            <p class="text-3xl font-semibold mb-3">Rp 0</p>
-            <p class="text-sm text-white/60 mb-6">Semua channel, event, dan code review.</p>
-            <button class="w-full py-2 border border-white/20 rounded text-sm font-medium hover:bg-white/5 transition-colors">Gabung Gratis</button>
-          </div>
-          <div class="bg-white/5 border-2 border-purple-600 rounded-xl p-6 relative">
-            <span class="absolute -top-2.5 left-6 px-2 py-0.5 text-[10px] bg-purple-600 text-white font-bold rounded">MENTORING</span>
-            <p class="text-sm text-white/60 mb-2">Pro</p>
-            <p class="text-3xl font-semibold mb-3">Rp 299.000<span class="text-sm text-white/40 font-normal">/bulan</span></p>
-            <p class="text-sm text-white/60 mb-6">1-on-1 mentoring, portfolio review, job referral.</p>
-            <button class="w-full py-2 bg-purple-600 text-white rounded text-sm font-medium hover:bg-purple-700 transition-colors">Mulai Pro</button>
+        <p
+          class="text-[11px] tracking-[0.2em] uppercase text-center mb-3"
+          :style="{ fontFamily: 'var(--tmpl-font-mono)', color: toCssSafe(palette.accent) }"
+        >FAQ</p>
+        <h2 :style="{ ...h2Style, marginBottom: '3rem', textAlign: 'center' }">Pertanyaan umum.</h2>
+
+        <div class="space-y-2">
+          <div
+            v-for="(item, index) in faqs"
+            :key="index"
+            class="rounded-xl overflow-hidden transition-colors"
+            :style="{
+              background: toCssSafe(palette.surface),
+              border: `1px solid ${toCssSafe(palette.border, 0.2)}`,
+            }"
+          >
+            <button
+              class="w-full text-left px-5 py-4 flex items-center justify-between gap-4"
+              @click="faqOpen = faqOpen === index ? null : index"
+            >
+              <span class="text-sm font-medium" :style="{ color: toCssSafe(palette.fg) }">{{ item.q }}</span>
+              <span
+                class="shrink-0 text-lg transition-transform duration-200"
+                :style="{ color: toCssSafe(palette.muted), transform: faqOpen === index ? 'rotate(45deg)' : 'rotate(0deg)' }"
+              >+</span>
+            </button>
+            <div
+              v-if="faqOpen === index"
+              class="px-5 pb-4 text-sm leading-relaxed"
+              :style="{ color: toCssSafe(palette.muted) }"
+            >{{ item.a }}</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FAB -->
-    <div class="fixed bottom-5 right-5 z-50">
-      <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 translate-y-4 scale-95" leave-to-class="opacity-0 translate-y-4 scale-95">
-        <div v-if="fabOpen" class="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 p-4">
-          <p class="text-sm font-semibold text-gray-900 mb-2">Tertarik dengan template ini?</p>
-          <p class="text-xs text-gray-500 mb-3">Chat langsung untuk diskusi fitur, harga, dan customisasi.</p>
-          <a :href="waUrl" target="_blank" rel="noopener" class="flex items-center gap-2 w-full px-4 py-2.5 bg-emerald-500 text-white rounded-lg text-sm font-medium hover:bg-emerald-600 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Chat WhatsApp
-          </a>
-        </div>
-      </Transition>
-      <button @click="fabOpen = !fabOpen" class="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-lg flex items-center justify-center transition-colors">
-        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </button>
-    </div>
-
-    <TemplateFooter brand-name="Sinau Koding" :links="[{ label: 'Channel', href: '#channel' }, { label: 'Event', href: '#event' }, { label: 'Harga', href: '#harga' }]" accent="#A855F7" />
+    <!-- ============================================================ -->
+    <!-- 8. FOOTER -->
+    <!-- ============================================================ -->
+    <TmplFooter
+      brand-name="Sinau Koding"
+      variant="columns"
+      :accent="toCssSafe(palette.accent)"
+      :bg="toCssSafe(palette.surface)"
+      :text="toCssSafe(palette.fg)"
+      signature="Komunitas developer Indonesia sejak 2021"
+      :links="[
+        { label: 'Spaces', href: '#spaces' },
+        { label: 'Event', href: '#events' },
+        { label: 'Diskusi', href: '#diskusi' },
+        { label: 'Harga', href: '#tier' },
+      ]"
+    />
   </div>
 </template>
