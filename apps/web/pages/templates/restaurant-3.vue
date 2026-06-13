@@ -1,201 +1,960 @@
 <script setup lang="ts">
+/**
+ * restaurant-3.vue
+ * Sate Madura Pak Karto — Warung Hyperlocal
+ * slug='restaurant-3', typo='sate', palette='sate'
+ * Bebas Neue H1, Inter body. Force mode: light. Burnt orange accent.
+ */
 definePageMeta({ layout: false })
-useHead({
-  title: 'Rumah Makan Sunda Asri',
-  htmlAttrs: { lang: 'id' },
-  link: [
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' },
-  ],
-})
+
+const theme = useTemplateTheme('restaurant-3')
+const { tpl, palette, styles, h1Style, h2Style } = theme
+const { buildUrl } = useWhatsApp()
 
 const isLoaded = ref(false)
-onMounted(() => { setTimeout(() => { isLoaded.value = true }, 500) })
+onMounted(() => { setTimeout(() => { isLoaded.value = true }, 300) })
 
-const menuCategories = [
-  {
-    name: 'Nasi & Lauk',
-    items: [
-      { name: 'Nasi Timbel Komplit', desc: 'Nasi timbel, ayam goreng, tahu, tempe, sambal, lalapan.', price: 'Rp 35.000' },
-      { name: 'Gurame Bakar Madu', desc: 'Gurame bakar dengan bumbu madu, porsi besar.', price: 'Rp 65.000' },
-      { name: 'Sayur Asem', desc: 'Sayur asem segar khas Sunda.', price: 'Rp 18.000' },
-    ],
-  },
-  {
-    name: 'Paket Keluarga',
-    items: [
-      { name: 'Paket Keluarga A (4 orang)', desc: '4 nasi, ayam goreng, ikan bakar, sayur asem, sambal, lalapan, 4 es teh.', price: 'Rp 149.000' },
-      { name: 'Paket Keluarga B (6 orang)', desc: '6 nasi, ayam goreng, gurame bakar, sayur asem, karedok, sambal, 6 es teh.', price: 'Rp 219.000' },
-    ],
-  },
-  {
-    name: 'Menu Anak',
-    items: [
-      { name: 'Nasi Goreng Mini', desc: 'Nasi goreng porsi anak, dengan sosis dan telur.', price: 'Rp 18.000' },
-      { name: 'Mie Goreng', desc: 'Mie goreng dengan sayuran dan telur.', price: 'Rp 16.000' },
-    ],
-  },
+const accentCss = computed(() => 'oklch(55% 0.20 35)')
+
+const navLinks = [
+  { label: 'Menu', href: '#menu' },
+  { label: 'Tentang', href: '#tentang' },
+  { label: 'Lokasi', href: '#lokasi' },
+  { label: 'Galeri', href: '#galeri' },
+  { label: 'Pesan', href: '#pesan' },
 ]
 
-const activeCategory = ref(0)
-const currentItems = computed(() => menuCategories[activeCategory.value].items)
+const categories = ['Semua', 'Sate', 'Nasi & Mie', 'Minuman']
+const activeCategory = ref('Semua')
 
-const fabOpen = ref(false)
-const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, saya tertarik dengan template Rumah Makan Sunda Asri. Bisa diskusi?')
+interface MenuItem {
+  name: string
+  desc: string
+  price: string
+  priceNum: number
+  category: string
+}
+
+const menuItems: MenuItem[] = [
+  { name: 'Sate Ayam', desc: '10 tusuk, daging ayam pilihan, bumbu kacang khas Madura.', price: 'Rp 25.000', priceNum: 25000, category: 'Sate' },
+  { name: 'Sate Kambing', desc: '10 tusuk, daging kambing segar, bumbu kecap pedas.', price: 'Rp 30.000', priceNum: 30000, category: 'Sate' },
+  { name: 'Nasi Goreng Spesial', desc: 'Nasi goreng telur, ayam suwir, kerupuk, acar.', price: 'Rp 22.000', priceNum: 22000, category: 'Nasi & Mie' },
+  { name: 'Mie Ayam', desc: 'Mie kuning, ayam cincang, pangsit goreng, sawi.', price: 'Rp 20.000', priceNum: 20000, category: 'Nasi & Mie' },
+  { name: 'Es Teh Manis', desc: 'Teh poci dingin, gula asli, gelas besar.', price: 'Rp 5.000', priceNum: 5000, category: 'Minuman' },
+  { name: 'Es Jeruk', desc: 'Jeruk peras segar, es batu, manis alami.', price: 'Rp 7.000', priceNum: 7000, category: 'Minuman' },
+  { name: 'Bakso Spesial', desc: 'Bakso sapi 4 butir, mie, tahu, pangsit, kuah kaldu.', price: 'Rp 18.000', priceNum: 18000, category: 'Nasi & Mie' },
+  { name: 'Lontong Sayur', desc: 'Lontong, sayur labu, telur, sambal goreng.', price: 'Rp 15.000', priceNum: 15000, category: 'Nasi & Mie' },
+]
+
+const filteredMenu = computed(() => {
+  if (activeCategory.value === 'Semua') return menuItems
+  return menuItems.filter(i => i.category === activeCategory.value)
+})
+
+const cartItems = reactive<Record<string, number>>({})
+
+function addToCart(name: string) {
+  cartItems[name] = (cartItems[name] || 0) + 1
+}
+
+function removeFromCart(name: string) {
+  if (cartItems[name] > 1) cartItems[name]--
+  else delete cartItems[name]
+}
+
+const cartCount = computed(() => Object.values(cartItems).reduce((a, b) => a + b, 0))
+const cartTotal = computed(() => {
+  let total = 0
+  for (const item of menuItems) {
+    total += (cartItems[item.name] || 0) * item.priceNum
+  }
+  return total
+})
+
+const whatsappOrderUrl = computed(() => {
+  const lines = Object.entries(cartItems).map(([name, qty]) => {
+    const item = menuItems.find(i => i.name === name)
+    return `${qty}x ${name} (${item?.price})`
+  })
+  const text = `Halo Sate Madura Pak Karto, saya mau pesan:\n\n${lines.join('\n')}\n\nTotal: Rp ${cartTotal.value.toLocaleString('id-ID')}\n\nMohon konfirmasi ya.`
+  return buildUrl(text)
+})
+
+const orderFormFields = [
+  { key: 'nama', label: 'Nama', type: 'text' as const, placeholder: 'Nama kamu', required: true },
+  { key: 'hp', label: 'No. WhatsApp', type: 'tel' as const, placeholder: '08xxxxxxxxxx', required: true },
+  { key: 'alamat', label: 'Alamat antar / ambil di cabang', type: 'text' as const, placeholder: 'Jl. Senopati / Tebet / BSD', required: true },
+  { key: 'catatan', label: 'Catatan', type: 'textarea' as const, placeholder: 'Extra sambal, tanpa bawang, dll.' },
+]
+
+const galleryPhotos = [
+  { alt: 'Sate ayam dibakar di arang', aspect: 'aspect-square' },
+  { alt: 'Bumbu kacang khas Madura', aspect: 'aspect-square' },
+  { alt: 'Suasana warung malam hari', aspect: 'aspect-[4/5]' },
+  { alt: 'Lontong sayur dan sambal', aspect: 'aspect-square' },
+  { alt: 'Es teh manis dan kerupuk', aspect: 'aspect-[4/5]' },
+  { alt: 'Pak Karto lagi bakar sate', aspect: 'aspect-square' },
+  { alt: 'Nasi goreng spesial porsi besar', aspect: 'aspect-square' },
+  { alt: 'Bakso sapi kuah kaldu', aspect: 'aspect-[4/5]' },
+  { alt: 'Antrian warung jam makan siang', aspect: 'aspect-square' },
+]
+
+const branches = [
+  { name: 'Senopati', address: 'Jl. Senopati No. 45, Kebayoran Baru', hours: '10:00 - 22:00', phone: '0812-3456-7890' },
+  { name: 'Tebet', address: 'Jl. Tebet Raya No. 12, Tebet', hours: '10:00 - 22:00', phone: '0812-3456-7891' },
+  { name: 'Bendungan Hilir', address: 'Jl. Benhil Raya No. 88, Tanah Abang', hours: '10:00 - 21:00', phone: '0812-3456-7892' },
+  { name: 'BSD', address: 'Jl. Pahlawan Seribu No. 7, BSD City', hours: '10:00 - 22:00', phone: '0812-3456-7893' },
+]
+const activeBranch = ref(0)
+
+const fabActions = [
+  { label: 'Pesan sate', detail: 'Order langsung via WhatsApp', icon: 'i-lucide-flame', message: 'Halo, saya mau pesan sate.' },
+  { label: 'Tanya menu', detail: 'Ada apa hari ini?', icon: 'i-lucide-utensils', message: 'Halo, menu hari ini apa saja?' },
+  { label: 'Reservasi', detail: 'Booking tempat untuk rombongan', icon: 'i-lucide-users', message: 'Halo, saya mau reservasi untuk rombongan.' },
+]
+
+const currentHour = new Date().getHours()
+const isOpen = currentHour >= 10 && currentHour < 22
 </script>
 
 <template>
-  <div class="min-h-screen antialiased" style="background: #FEFCE8; color: #1C1917; font-family: 'Plus Jakarta Sans', system-ui, sans-serif;">
-    <TemplateBack />
+  <div :style="styles" class="sate-page">
+    <TmplNavbar
+      brand="Pak Karto"
+      :links="navLinks"
+      :accent="accentCss"
+      style="transparent"
+      :show-theme-toggle="false"
+      :show-whatsapp-c-t-a="true"
+      whatsapp-message="Halo Sate Madura Pak Karto, saya mau tanya menu."
+      force-mode="light"
+    />
 
-    <nav class="fixed top-0 inset-x-0 z-40 backdrop-blur-xl border-b border-green-200/60" style="background: rgba(254,252,232,0.85);">
-      <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-        <span style="font-family: 'Libre Baskerville', serif;" class="text-sm font-bold text-green-900">Sunda Asri</span>
-        <div class="hidden md:flex items-center gap-7 text-[13px] text-green-800/70">
-          <a href="#menu" class="hover:text-green-900 transition-colors">Menu</a>
-          <a href="#paket" class="hover:text-green-900 transition-colors">Paket</a>
-          <a href="#lokasi" class="hover:text-green-900 transition-colors">Lokasi</a>
+    <!-- ====== HERO ====== -->
+    <section id="top" class="sate-hero">
+      <div class="sate-hero__bg">
+        <div class="sate-hero__photo" aria-hidden="true">
+          <div class="sate-hero__photo-inner" />
         </div>
-        <a href="https://wa.me/6285188627365" target="_blank" rel="noopener" class="text-[13px] px-4 py-1.5 bg-green-800 text-white rounded-lg font-medium hover:bg-green-900 transition-colors">Booking Meja</a>
+        <div class="sate-hero__overlay" />
+        <div class="sate-hero__canvas-wrap">
+          <ClientOnly>
+            <TmplExperienceCanvas
+              preset="cinematic-scroll"
+              :accent="accentCss"
+              intensity="calm"
+              label="Asap sate dari bara arang"
+            />
+          </ClientOnly>
+        </div>
       </div>
-    </nav>
 
-    <!-- Hero -->
-    <section class="pt-20 pb-16">
-      <div class="max-w-5xl mx-auto px-6">
-        <div class="grid lg:grid-cols-[1.2fr_1fr] gap-8 items-center">
-          <div>
-            <template v-if="!isLoaded">
-              <div class="h-4 w-32 bg-green-200 rounded mb-4 animate-pulse" />
-              <div class="h-12 w-full bg-green-200 rounded mb-4 animate-pulse" />
-              <div class="h-5 w-3/4 bg-green-200 rounded mb-8 animate-pulse" />
-              <div class="flex gap-3">
-                <div class="h-10 w-40 bg-green-200 rounded-lg animate-pulse" />
-                <div class="h-10 w-32 bg-green-200 rounded-lg animate-pulse" />
-              </div>
-            </template>
-
-            <template v-else>
-              <p class="text-[11px] tracking-[0.2em] uppercase text-green-700 mb-4">Rumah Makan Sunda · Bandung</p>
-              <h1 style="font-family: 'Libre Baskerville', serif;" class="text-4xl md:text-5xl font-bold leading-tight mb-6 text-gray-900">
-                Masakan Sunda,<br />seperti di rumah.
-              </h1>
-              <p class="text-lg text-gray-600 leading-relaxed mb-8 max-w-md">
-                Nasi timbel, gurame bakar, sayur asem — semua dimasak fresh setiap hari. Cocok buat makan bareng keluarga.
-              </p>
-              <div class="flex flex-col sm:flex-row gap-3">
-                <a href="https://wa.me/6285188627365" target="_blank" rel="noopener" class="px-5 py-2.5 bg-green-800 text-white rounded-lg text-sm font-semibold hover:bg-green-900 transition-colors text-center">
-                  Booking Meja
-                </a>
-                <a href="#menu" class="px-5 py-2.5 border border-green-800/30 rounded-lg text-sm font-medium text-green-800 hover:bg-green-50 transition-colors text-center">
-                  Lihat Menu
-                </a>
-              </div>
-            </template>
+      <div class="sate-hero__content">
+        <template v-if="isLoaded">
+          <div class="sate-hero__badge">
+            <span class="sate-hero__dot" :class="isOpen ? 'sate-hero__dot--open' : 'sate-hero__dot--closed'" />
+            <span class="sate-hero__badge-text">{{ isOpen ? 'Sedang bakar' : 'Tutup, buka besok 10:00' }}</span>
           </div>
-          <div class="aspect-[4/3] rounded-2xl" style="background: linear-gradient(135deg, #166534, #854D0E);">
-            <div class="w-full h-full flex items-center justify-center">
-              <span class="text-[10px] tracking-[0.3em] uppercase text-white/30">Foto nasi timbel</span>
-            </div>
+          <h1 :style="h1Style" class="sate-hero__title">
+            Sate Madura Pak Karto
+          </h1>
+          <p class="sate-hero__sub">
+            Sate ayam bumbu kacang khas Madura. Dibakar pakai arang batok kelapa. Sejak 1998, dari Bangkalan untuk Jakarta.
+          </p>
+          <div class="sate-hero__cta-row">
+            <a
+              :href="buildUrl('Halo, saya mau pesan sate.')"
+              target="_blank"
+              rel="noopener"
+              class="sate-btn sate-btn--primary"
+            >
+              Pesan via WhatsApp
+            </a>
+            <a href="#menu" class="sate-btn sate-btn--ghost">Lihat Menu</a>
           </div>
-        </div>
+        </template>
       </div>
     </section>
 
-    <!-- Info bar -->
-    <section class="py-5 border-y border-green-200/60" style="background: #FFFFFF;">
-      <div class="max-w-5xl mx-auto px-6 flex flex-wrap items-center justify-between gap-4 text-[13px] text-green-800/70">
-        <span>Jl. Raya Lembang No. 12, Bandung</span>
-        <span>Buka setiap hari, 10.00 — 21.00</span>
-        <span>Parkir luas, muat 20 mobil</span>
-      </div>
-    </section>
+    <!-- ====== MENU ====== -->
+    <section id="menu" class="sate-section">
+      <div class="sate-container">
+        <p class="sate-label">Menu</p>
+        <h2 :style="h2Style" class="sate-h2">Mau makan apa?</h2>
 
-    <!-- Menu -->
-    <section id="menu" class="py-20">
-      <div class="max-w-5xl mx-auto px-6">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-green-700 mb-3">Menu</p>
-        <h2 style="font-family: 'Libre Baskerville', serif;" class="text-3xl font-bold mb-10 text-gray-900">Menu hari ini.</h2>
-
-        <div class="flex flex-wrap gap-2 mb-8">
-          <button v-for="(cat, i) in menuCategories" :key="cat.name" @click="activeCategory = i"
-            class="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-            :class="activeCategory === i ? 'bg-green-800 text-white' : 'bg-white border border-green-200 text-green-800 hover:bg-green-50'">
-            {{ cat.name }}
+        <div class="sate-filter-row">
+          <button
+            v-for="cat in categories"
+            :key="cat"
+            type="button"
+            class="sate-filter-pill"
+            :class="{ 'sate-filter-pill--active': activeCategory === cat }"
+            @click="activeCategory = cat"
+          >
+            {{ cat }}
           </button>
         </div>
 
-        <div class="divide-y divide-green-100 border-t border-b border-green-100">
-          <div v-for="item in currentItems" :key="item.name" class="py-5 grid grid-cols-[1fr_auto] gap-6 items-start">
-            <div>
-              <h3 class="text-base font-semibold text-gray-900 mb-1">{{ item.name }}</h3>
-              <p class="text-sm text-gray-600">{{ item.desc }}</p>
+        <div class="sate-menu-grid">
+          <div
+            v-for="item in filteredMenu"
+            :key="item.name"
+            class="sate-menu-card"
+          >
+            <div class="sate-menu-card__body">
+              <h3 class="sate-menu-card__name">{{ item.name }}</h3>
+              <p class="sate-menu-card__desc">{{ item.desc }}</p>
+              <div class="sate-menu-card__bottom">
+                <span class="sate-menu-card__price">{{ item.price }}</span>
+                <div class="sate-menu-card__actions">
+                  <button
+                    v-if="cartItems[item.name]"
+                    type="button"
+                    class="sate-cart-btn"
+                    @click="removeFromCart(item.name)"
+                  >
+                    -
+                  </button>
+                  <span v-if="cartItems[item.name]" class="sate-cart-qty">{{ cartItems[item.name] }}</span>
+                  <button
+                    type="button"
+                    class="sate-cart-btn sate-cart-btn--add"
+                    @click="addToCart(item.name)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
             </div>
-            <span class="text-base font-bold text-green-800 shrink-0">{{ item.price }}</span>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Fasilitas -->
-    <section class="py-16 border-t border-green-200/60" style="background: #FFFFFF;">
-      <div class="max-w-5xl mx-auto px-6">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-green-700 mb-3">Fasilitas</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-            <p class="text-sm font-semibold text-green-900">Parkir Luas</p>
-            <p class="text-[12px] text-green-700 mt-1">20 mobil, 50 motor</p>
+        <div v-if="cartCount > 0" class="sate-cart-bar">
+          <div class="sate-cart-bar__info">
+            <span class="sate-cart-bar__count">{{ cartCount }} item</span>
+            <span class="sate-cart-bar__total">Rp {{ cartTotal.toLocaleString('id-ID') }}</span>
           </div>
-          <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-            <p class="text-sm font-semibold text-green-900">Ruang VIP</p>
-            <p class="text-[12px] text-green-700 mt-1">Untuk 20 orang</p>
-          </div>
-          <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-            <p class="text-sm font-semibold text-green-900">Kids Area</p>
-            <p class="text-[12px] text-green-700 mt-1">Aman buat anak</p>
-          </div>
-          <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-            <p class="text-sm font-semibold text-green-900">WiFi</p>
-            <p class="text-[12px] text-green-700 mt-1">Gratis</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Lokasi -->
-    <section id="lokasi" class="py-20 border-t border-green-200/60">
-      <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-8">
-        <div>
-          <p class="text-[11px] tracking-[0.2em] uppercase text-green-700 mb-3">Lokasi</p>
-          <h3 style="font-family: 'Libre Baskerville', serif;" class="text-2xl font-bold mb-3 text-gray-900">Jl. Raya Lembang No. 12</h3>
-          <p class="text-sm text-gray-600 leading-relaxed mb-4">Lembang, Bandung, Jawa Barat 40391<br />Dekat Farmhouse Lembang.</p>
-          <p class="text-sm text-gray-600"><strong>Jam:</strong> Setiap hari, 10.00 — 21.00</p>
-          <p class="text-sm text-gray-600 mt-2"><strong>Telepon:</strong> 0851-8862-7365</p>
-        </div>
-        <div class="aspect-[4/3] rounded-xl bg-green-100 flex items-center justify-center">
-          <span class="text-[11px] text-green-600">Google Maps embed</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAB -->
-    <div class="fixed bottom-5 right-5 z-50">
-      <Transition enter-active-class="transition-all duration-300 ease-out" leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 translate-y-4 scale-95" leave-to-class="opacity-0 translate-y-4 scale-95">
-        <div v-if="fabOpen" class="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 p-4">
-          <p class="text-sm font-semibold text-gray-900 mb-2">Booking meja?</p>
-          <p class="text-xs text-gray-500 mb-3">Chat langsung untuk reservasi atau tanya menu.</p>
-          <a :href="waUrl" target="_blank" rel="noopener" class="flex items-center gap-2 w-full px-4 py-2.5 bg-emerald-500 text-white rounded-lg text-sm font-medium hover:bg-emerald-600 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Chat WhatsApp
+          <a
+            :href="whatsappOrderUrl"
+            target="_blank"
+            rel="noopener"
+            class="sate-btn sate-btn--primary sate-btn--sm"
+          >
+            Pesan Sekarang
           </a>
         </div>
-      </Transition>
-      <button @click="fabOpen = !fabOpen" class="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-lg flex items-center justify-center transition-colors">
-        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </button>
-    </div>
+      </div>
+    </section>
 
-    <TemplateFooter brand-name="Sunda Asri" :links="[{ label: 'Menu', href: '#menu' }, { label: 'Paket', href: '#paket' }, { label: 'Lokasi', href: '#lokasi' }]" accent="#166534" />
+    <!-- ====== TENTANG ====== -->
+    <section id="tentang" class="sate-section sate-section--alt">
+      <div class="sate-container sate-container--narrow">
+        <p class="sate-label">Tentang</p>
+        <h2 :style="h2Style" class="sate-h2">Dari gerobak ke 4 cabang.</h2>
+        <div class="sate-story">
+          <p>
+            Pak Karto mulai jualan sate tahun 1998 di Bangkalan, Madura. Resep bumbu kacang turun-temurun dari almarhum bapaknya. Daging ayam dan kambing dipilih sendiri tiap pagi di pasar.
+          </p>
+          <p>
+            Tahun 2010, gerobak pertama dibuka di Senopati. Tiga tahun kemudian, Tebet menyusul. Sekarang ada 4 cabang dan 1 dapur pusat di Ciputat. Semua sate masih dibakar pakai arang batok kelapa, bukan gas.
+          </p>
+          <p>
+            Bumbu kacang diulek manual setiap pagi. Kecap manis racikan sendiri. Lontong dibungkus daun pisang. Kalau habis, ya habis. Besok pagi bakar lagi.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== JAM BUKA ====== -->
+    <section class="sate-section">
+      <div class="sate-container">
+        <p class="sate-label">Jam Buka</p>
+        <h2 :style="h2Style" class="sate-h2">Buka setiap hari.</h2>
+        <div class="sate-hours-grid">
+          <div class="sate-hours-card">
+            <span class="sate-hours-card__day">Senin - Jumat</span>
+            <span class="sate-hours-card__time">10:00 - 22:00</span>
+            <span class="sate-hours-card__note">Dapur pusat mulai bakar jam 09:00</span>
+          </div>
+          <div class="sate-hours-card">
+            <span class="sate-hours-card__day">Sabtu - Minggu</span>
+            <span class="sate-hours-card__time">10:00 - 22:00</span>
+            <span class="sate-hours-card__note">Kalau habis lebih awal, tutup</span>
+          </div>
+          <div class="sate-hours-card">
+            <span class="sate-hours-card__day">Hari Libur Nasional</span>
+            <span class="sate-hours-card__time">10:00 - 21:00</span>
+            <span class="sate-hours-card__note">Libur Idul Fitri tutup 3 hari</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== LOKASI ====== -->
+    <section id="lokasi" class="sate-section sate-section--alt">
+      <div class="sate-container">
+        <p class="sate-label">Lokasi</p>
+        <h2 :style="h2Style" class="sate-h2">4 cabang di Jakarta.</h2>
+
+        <div class="sate-branch-tabs">
+          <button
+            v-for="(b, i) in branches"
+            :key="b.name"
+            type="button"
+            class="sate-branch-tab"
+            :class="{ 'sate-branch-tab--active': activeBranch === i }"
+            @click="activeBranch = i"
+          >
+            {{ b.name }}
+          </button>
+        </div>
+
+        <div class="sate-branch-detail">
+          <div class="sate-branch-info">
+            <h3 class="sate-branch-info__name">{{ branches[activeBranch].name }}</h3>
+            <p class="sate-branch-info__addr">{{ branches[activeBranch].address }}</p>
+            <p class="sate-branch-info__hours">Buka: {{ branches[activeBranch].hours }}</p>
+            <div class="sate-branch-info__actions">
+              <a
+                :href="`tel:${branches[activeBranch].phone.replace(/-/g, '')}`"
+                class="sate-btn sate-btn--outline sate-btn--sm"
+              >
+                {{ branches[activeBranch].phone }}
+              </a>
+              <a
+                :href="`https://maps.google.com/?q=${encodeURIComponent(branches[activeBranch].address)}`"
+                target="_blank"
+                rel="noopener"
+                class="sate-btn sate-btn--outline sate-btn--sm"
+              >
+                Buka Maps
+              </a>
+            </div>
+          </div>
+          <div class="sate-branch-map">
+            <TmplMap
+              :label="`Pak Karto ${branches[activeBranch].name}`"
+              :address="branches[activeBranch].address"
+              city="Jakarta"
+              :accent="accentCss"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== GALERI ====== -->
+    <section id="galeri" class="sate-section">
+      <div class="sate-container">
+        <p class="sate-label">Galeri</p>
+        <h2 :style="h2Style" class="sate-h2">Foto dari dapur dan warung.</h2>
+
+        <div class="sate-gallery">
+          <div
+            v-for="(photo, i) in galleryPhotos"
+            :key="i"
+            class="sate-gallery__item"
+            :class="photo.aspect"
+          >
+            <div class="sate-gallery__ph" :aria-label="photo.alt">
+              <span class="sate-gallery__ph-text">{{ photo.alt }}</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="sate-gallery-follow">
+          Ikuti kami di
+          <a href="https://instagram.com/satekartoid" target="_blank" rel="noopener" class="sate-link">@satekartoid</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ====== PESAN VIA WHATSAPP ====== -->
+    <section id="pesan" class="sate-section sate-section--alt">
+      <div class="sate-container sate-container--narrow">
+        <p class="sate-label">Pesan</p>
+        <h2 :style="h2Style" class="sate-h2">Langsung ke dapur.</h2>
+        <p class="sate-pesan-sub">Isi form di bawah, otomatis buka WhatsApp dengan pesan terisi. Tidak ada data yang disimpan.</p>
+
+        <TmplForm
+          :fields="orderFormFields"
+          submit-label="Kirim Pesan via WhatsApp"
+          whatsapp-phone="6281234567890"
+          :whatsapp-message-prefix="'Halo Sate Madura Pak Karto, saya mau pesan:'"
+          :accent="accentCss"
+        />
+      </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <TmplFooter
+      brand-name="Sate Madura Pak Karto"
+      variant="columns"
+      :accent="accentCss"
+      :links="[
+        { label: 'Menu', href: '#menu' },
+        { label: 'Tentang', href: '#tentang' },
+        { label: 'Lokasi', href: '#lokasi' },
+        { label: 'Galeri', href: '#galeri' },
+        { label: 'Pesan', href: '#pesan' },
+      ]"
+      signature="Sejak 1998. Dari Bangkalan, untuk Jakarta."
+    />
+
+    <!-- WhatsApp FAB -->
+    <TmplWhatsAppFab
+      :actions="fabActions"
+      accent="#25d366"
+      :delay="1200"
+    />
   </div>
 </template>
+
+<style scoped>
+.sate-page {
+  min-height: 100vh;
+  font-family: var(--tmpl-font-body), 'Inter', system-ui, sans-serif;
+  background: var(--tmpl-bg);
+  color: var(--tmpl-fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === HERO === */
+.sate-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.sate-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.sate-hero__photo {
+  position: absolute;
+  inset: 0;
+}
+.sate-hero__photo-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    160deg,
+    oklch(25% 0.04 50) 0%,
+    oklch(35% 0.06 40) 40%,
+    oklch(20% 0.03 55) 100%
+  );
+}
+.sate-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    oklch(96% 0.02 60 / 0.95) 0%,
+    oklch(96% 0.02 60 / 0.6) 35%,
+    oklch(96% 0.02 60 / 0.15) 65%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+.sate-hero__canvas-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  z-index: 2;
+  pointer-events: none;
+}
+.sate-hero__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 8rem 1.5rem 4rem;
+}
+@media (min-width: 768px) {
+  .sate-hero__content {
+    padding: 10rem 2.5rem 5rem;
+  }
+}
+.sate-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: oklch(96% 0.02 60 / 0.8);
+  backdrop-filter: blur(8px);
+  margin-bottom: 1.25rem;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--tmpl-fg);
+}
+.sate-hero__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+.sate-hero__dot--open {
+  background: #16a34a;
+}
+.sate-hero__dot--closed {
+  background: #dc2626;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.sate-hero__title {
+  max-width: 14ch;
+  margin-bottom: 1rem;
+  color: var(--tmpl-fg);
+}
+.sate-hero__sub {
+  max-width: 44ch;
+  margin-bottom: 2rem;
+  font-size: var(--tmpl-body-size);
+  line-height: 1.6;
+  color: var(--tmpl-muted);
+}
+.sate-hero__cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* === BUTTONS === */
+.sate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 0;
+  font-family: inherit;
+}
+.sate-btn:active {
+  transform: scale(0.97);
+}
+.sate-btn--primary {
+  background: var(--tmpl-accent);
+  color: var(--tmpl-accent-fg);
+}
+.sate-btn--primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.sate-btn--ghost {
+  background: transparent;
+  color: var(--tmpl-fg);
+  border: 1px solid var(--tmpl-border);
+}
+.sate-btn--ghost:hover {
+  background: var(--tmpl-surface);
+}
+.sate-btn--outline {
+  background: transparent;
+  color: var(--tmpl-accent);
+  border: 1px solid var(--tmpl-accent);
+}
+.sate-btn--outline:hover {
+  background: var(--tmpl-accent-soft);
+}
+.sate-btn--sm {
+  height: 40px;
+  padding: 0 1rem;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+/* === SECTIONS === */
+.sate-section {
+  padding: 5rem 1.5rem;
+}
+.sate-section--alt {
+  background: var(--tmpl-surface);
+}
+@media (min-width: 768px) {
+  .sate-section {
+    padding: 6rem 2.5rem;
+  }
+}
+.sate-container {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+.sate-container--narrow {
+  max-width: 720px;
+}
+.sate-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tmpl-accent);
+  margin-bottom: 0.75rem;
+}
+.sate-h2 {
+  margin-bottom: 2.5rem;
+  color: var(--tmpl-fg);
+}
+
+/* === MENU FILTER === */
+.sate-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.sate-filter-pill {
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--tmpl-border);
+  background: transparent;
+  color: var(--tmpl-fg);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.sate-filter-pill:hover {
+  border-color: var(--tmpl-accent);
+}
+.sate-filter-pill--active {
+  background: var(--tmpl-accent);
+  color: var(--tmpl-accent-fg);
+  border-color: var(--tmpl-accent);
+}
+
+/* === MENU GRID === */
+.sate-menu-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .sate-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .sate-menu-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.sate-menu-card {
+  background: var(--tmpl-surface-elevated);
+  border: 1px solid var(--tmpl-border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.sate-menu-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px oklch(0% 0 0 / 0.08);
+}
+.sate-menu-card__body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 160px;
+}
+.sate-menu-card__name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--tmpl-fg);
+  margin: 0;
+}
+.sate-menu-card__desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--tmpl-muted);
+  margin: 0;
+  flex: 1;
+}
+.sate-menu-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--tmpl-border);
+}
+.sate-menu-card__price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--tmpl-accent);
+  font-variant-numeric: tabular-nums;
+}
+.sate-menu-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sate-cart-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--tmpl-border);
+  background: transparent;
+  color: var(--tmpl-fg);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms ease;
+}
+.sate-cart-btn:hover {
+  background: var(--tmpl-surface);
+}
+.sate-cart-btn--add {
+  background: var(--tmpl-accent);
+  color: var(--tmpl-accent-fg);
+  border-color: var(--tmpl-accent);
+}
+.sate-cart-btn--add:hover {
+  opacity: 0.9;
+}
+.sate-cart-qty {
+  font-size: 14px;
+  font-weight: 700;
+  min-width: 1.5ch;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* === CART BAR === */
+.sate-cart-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--tmpl-surface-elevated);
+  border-top: 1px solid var(--tmpl-border);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 -4px 24px oklch(0% 0 0 / 0.08);
+}
+@media (min-width: 768px) {
+  .sate-cart-bar {
+    padding: 1rem 2.5rem;
+  }
+}
+.sate-cart-bar__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.sate-cart-bar__count {
+  font-size: 12px;
+  color: var(--tmpl-muted);
+}
+.sate-cart-bar__total {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--tmpl-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* === STORY === */
+.sate-story {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.sate-story p {
+  font-size: var(--tmpl-body-size);
+  line-height: 1.7;
+  color: var(--tmpl-fg);
+  margin: 0;
+}
+
+/* === HOURS === */
+.sate-hours-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .sate-hours-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.sate-hours-card {
+  background: var(--tmpl-surface-elevated);
+  border: 1px solid var(--tmpl-border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.sate-hours-card__day {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tmpl-accent);
+  letter-spacing: 0.02em;
+}
+.sate-hours-card__time {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: var(--tmpl-font-mono), monospace;
+  letter-spacing: -0.02em;
+  color: var(--tmpl-fg);
+}
+.sate-hours-card__note {
+  font-size: 12px;
+  color: var(--tmpl-muted);
+}
+
+/* === BRANCH === */
+.sate-branch-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.sate-branch-tab {
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--tmpl-border);
+  background: transparent;
+  color: var(--tmpl-fg);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.sate-branch-tab:hover {
+  border-color: var(--tmpl-accent);
+}
+.sate-branch-tab--active {
+  background: var(--tmpl-accent);
+  color: var(--tmpl-accent-fg);
+  border-color: var(--tmpl-accent);
+}
+.sate-branch-detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .sate-branch-detail {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}
+.sate-branch-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.sate-branch-info__name {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--tmpl-fg);
+}
+.sate-branch-info__addr {
+  font-size: 14px;
+  color: var(--tmpl-muted);
+  margin: 0;
+}
+.sate-branch-info__hours {
+  font-size: 14px;
+  color: var(--tmpl-muted);
+  margin: 0;
+}
+.sate-branch-info__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* === GALLERY === */
+.sate-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+@media (min-width: 640px) {
+  .sate-gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+}
+@media (min-width: 1024px) {
+  .sate-gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+.sate-gallery__item {
+  overflow: hidden;
+  border-radius: 8px;
+}
+.sate-gallery__ph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--tmpl-surface);
+  border: 1px solid var(--tmpl-border);
+  border-radius: 8px;
+}
+.sate-gallery__ph-text {
+  font-size: 11px;
+  text-align: center;
+  color: var(--tmpl-muted);
+  opacity: 0.7;
+}
+.sate-gallery-follow {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 14px;
+  color: var(--tmpl-muted);
+}
+.sate-link {
+  color: var(--tmpl-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.sate-link:hover {
+  text-decoration: underline;
+}
+
+/* === PESAN === */
+.sate-pesan-sub {
+  font-size: 14px;
+  color: var(--tmpl-muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sate-hero__dot { animation: none; }
+}
+</style>
