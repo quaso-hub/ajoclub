@@ -2,7 +2,6 @@
 # Usage: docker compose -f docker-compose.prod.yml up -d
 
 services:
-  # Main AjoClub web app (Nuxt SSR)
   web:
     image: quasohub/ajoclub-web:latest
     container_name: ajoclub-web
@@ -22,7 +21,6 @@ services:
     networks:
       - proxy
 
-  # Static sites container (Nginx, hosts client sites)
   static-sites:
     image: nginx:alpine
     container_name: static-sites
@@ -34,7 +32,6 @@ services:
     networks:
       - proxy
 
-  # Nginx Proxy Manager — domain routing + auto SSL
   npm:
     image: jc21/nginx-proxy-manager:latest
     container_name: nginx-proxy-manager
@@ -50,7 +47,6 @@ services:
     networks:
       - proxy
 
-  # Portainer — monitoring dashboard (lightweight)
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer

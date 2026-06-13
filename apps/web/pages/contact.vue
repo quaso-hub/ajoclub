@@ -2,7 +2,7 @@
 definePageMeta({ layout: false })
 
 useHead({
-  title: 'Hubungi Kami',
+  title: 'Hubungi Kami - AjoClub',
   meta: [
     { name: 'description', content: 'Chat WhatsApp langsung untuk konsultasi bikin website.' },
   ],

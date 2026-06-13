@@ -2,7 +2,7 @@
 definePageMeta({ layout: false })
 
 useHead({
-  title: 'Tentang Kami',
+  title: 'Tentang Kami - AjoClub',
   meta: [
     { name: 'description', content: 'AjoClub: tim kecil yang bikin website dari awal sampai online.' },
   ],

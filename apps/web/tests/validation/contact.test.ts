@@ -1,16 +1,16 @@
 import { describe, it, expect } from 'vitest'
-import * as v from 'valibot'
+import { z } from 'zod'
 
-const schema = v.object({
-  name: v.pipe(v.string(), v.minLength(1)),
-  email: v.pipe(v.string(), v.email()),
-  project: v.optional(v.string()),
-  message: v.pipe(v.string(), v.minLength(1)),
+const schema = z.object({
+  name: z.string().min(1).max(255),
+  email: z.string().email().max(255),
+  project: z.string().max(100).optional(),
+  message: z.string().min(1).max(5000),
 })
 
 describe('Contact form validation', () => {
   it('accepts valid data', () => {
-    const result = v.safeParse(schema, {
+    const result = schema.safeParse({
       name: 'John Doe',
       email: 'john@example.com',
       message: 'Hello',
@@ -19,7 +19,7 @@ describe('Contact form validation', () => {
   })
 
   it('rejects invalid email', () => {
-    const result = v.safeParse(schema, {
+    const result = schema.safeParse({
       name: 'John',
       email: 'not-an-email',
       message: 'Hello',
@@ -28,7 +28,7 @@ describe('Contact form validation', () => {
   })
 
   it('rejects empty name', () => {
-    const result = v.safeParse(schema, {
+    const result = schema.safeParse({
       name: '',
       email: 'john@example.com',
       message: 'Hello',
@@ -37,7 +37,7 @@ describe('Contact form validation', () => {
   })
 
   it('rejects empty message', () => {
-    const result = v.safeParse(schema, {
+    const result = schema.safeParse({
       name: 'John',
       email: 'john@example.com',
       message: '',
@@ -46,7 +46,7 @@ describe('Contact form validation', () => {
   })
 
   it('accepts optional project field', () => {
-    const result = v.safeParse(schema, {
+    const result = schema.safeParse({
       name: 'John',
       email: 'john@example.com',
       project: 'landing',

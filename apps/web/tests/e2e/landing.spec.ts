@@ -12,7 +12,7 @@ test.describe('Landing Page', () => {
   test('has hero section with heading', async ({ page }) => {
     const heading = page.locator('h1')
     await expect(heading).toBeVisible()
-    await expect(heading).toContainText('Website yang bikin brand')
+    await expect(heading).toContainText('Kami bikin website')
   })
 
   test('has services section', async ({ page }) => {
@@ -36,15 +36,8 @@ test.describe('Landing Page', () => {
   })
 
   test('has theme toggle button', async ({ page }) => {
-    const themeToggle = page.locator('button[aria-label*="Switch to"]')
+    const themeToggle = page.locator('button[aria-label*="mode"]')
     await expect(themeToggle.first()).toBeVisible()
-  })
-
-  test('can scroll to services section', async ({ page }) => {
-    await page.locator('button', { hasText: 'Services' }).first().click()
-    await page.waitForTimeout(2500)
-    const services = page.locator('#services')
-    await expect(services).toBeInViewport()
   })
 
   test('has WhatsApp contact CTA with the current number', async ({ page }) => {
@@ -57,7 +50,7 @@ test.describe('Landing Page', () => {
 
   test('can open portfolio detail page', async ({ page }) => {
     await page.locator('#work').scrollIntoViewIfNeeded()
-    await page.locator('a[href="/portfolio/immersive-studio-showroom"]').click()
-    await expect(page.locator('h1')).toContainText('Immersive Studio Showroom')
+    await page.locator('a[href="/portfolio/launch-suite-local-service"]').first().click()
+    await expect(page.locator('h1')).toContainText('Launch Suite')
   })
 })

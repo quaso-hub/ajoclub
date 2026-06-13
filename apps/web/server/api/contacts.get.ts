@@ -1,6 +1,5 @@
 export default defineEventHandler(async (event) => {
   try {
-    // Require authentication for accessing contacts
     await requireAuth(event)
 
     const contacts = await prisma.contact.findMany({
@@ -13,7 +12,6 @@ export default defineEventHandler(async (event) => {
         project: true,
         status: true,
         createdAt: true,
-        // Exclude message from list view (PII minimization)
       },
     })
 

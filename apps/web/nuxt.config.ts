@@ -6,12 +6,11 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/ui',
-    '@pinia/nuxt',
   ],
 
   colorMode: {
     preference: 'system',
-    fallback: 'dark',
+    fallback: 'light',
     storage: 'cookie',
   },
 
@@ -37,12 +36,16 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/': { ssr: true },
-    '/about': { prerender: true },
-    '/portfolio/**': { ssr: true },
     '/api/**': { cors: true },
   },
 
   css: ['~/assets/css/main.css'],
+
+  nitro: {
+    experimental: {
+      // Allow Prisma in dev
+    },
+  },
 
   runtimeConfig: {
     databaseUrl: env.DATABASE_URL,

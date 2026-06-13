@@ -1,34 +1,55 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
-
-@theme static {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+@plugin "daisyui" {
+  themes: false;
+  root: ":root";
+  include: ;
+  exclude: ;
+  prefix: ;
+  logs: false;
 }
 
+/* === AjoClub Design System: 24 templates, 24 sandboxes === */
+/* All colors in OKLCH per Tailwind v4 + daisyUI 5 standard */
+
+@theme static {
+  /* Typography base */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* AjoClub brand tokens (used only on shell pages) */
+  --color-ajoclub-ink: oklch(15% 0.02 250);
+  --color-ajoclub-paper: oklch(98% 0.005 80);
+  --color-ajoclub-accent: oklch(72% 0.18 230);
+}
+
+/* ============================================================ */
+/* Lenis smooth scroll integration                              */
+/* ============================================================ */
 html.lenis, html.lenis body {
   height: auto;
 }
-
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
-
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
-
 .lenis.lenis-stopped {
   overflow: hidden;
 }
-
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
 
+/* ============================================================ */
+/* Base                                                          */
+/* ============================================================ */
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11";
 }
 
 canvas {
@@ -36,144 +57,157 @@ canvas {
 }
 
 ::selection {
-  background: var(--ui-primary);
-  color: var(--ui-bg);
+  background: var(--tmpl-accent, var(--color-ajoclub-accent));
+  color: var(--tmpl-bg, white);
 }
 
-/* Glassmorphism card */
+/* Smooth color transitions when mode changes */
+html {
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
+/* ============================================================ */
+/* Glassmorphism (used by FAB menu, modal backdrops)            */
+/* ============================================================ */
 .glass-card {
-  background: color-mix(in srgb, var(--ui-bg-elevated) 80%, transparent);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--ui-border);
-  border-radius: 8px;
+  background: color-mix(in srgb, var(--tmpl-bg-elevated, white) 80%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--tmpl-border, color-mix(in srgb, currentColor 12%, transparent));
+  border-radius: 12px;
 }
 
-/* Noise texture overlay */
+/* ============================================================ */
+/* Noise texture overlay (subtle film grain)                    */
+/* ============================================================ */
+.noise-overlay {
+  position: relative;
+}
 .noise-overlay::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
   border-radius: inherit;
+  mix-blend-mode: overlay;
 }
 
-/* Gradient mesh background */
-.gradient-mesh {
-  background:
-    radial-gradient(at 20% 30%, color-mix(in srgb, var(--ui-primary) 15%, transparent) 0%, transparent 50%),
-    radial-gradient(at 80% 70%, color-mix(in srgb, var(--ui-color-secondary-500, #8b5cf6) 10%, transparent) 0%, transparent 50%),
-    var(--ui-bg);
-}
-
-/* Section divider gradient */
+/* ============================================================ */
+/* Section dividers, scroll affordances                          */
+/* ============================================================ */
 .section-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--ui-border), transparent);
+  background: linear-gradient(to right, transparent, var(--tmpl-border, currentColor), transparent);
 }
 
-/* Smooth text rendering */
-.text-balance {
-  text-wrap: balance;
-}
+/* Smooth text rendering for headlines */
+.text-balance { text-wrap: balance; }
+.text-pretty  { text-wrap: pretty; }
 
+/* ============================================================ */
+/* 3D Canvas wrapper — the parent MUST have explicit height     */
+/* ============================================================ */
 .experience-canvas {
   position: relative;
   width: 100%;
   height: 100%;
   min-height: 100%;
   overflow: hidden;
+  contain: strict;
 }
-
 .experience-canvas canvas {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  touch-action: none;
 }
 
+/* CSS fallback when WebGL is unavailable, reduced-motion, or off-screen */
 .experience-fallback {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
   background:
-    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent, #fb7185) 24%, transparent), transparent 34%),
-    radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--accent, #fb7185) 16%, transparent), transparent 28%);
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--tmpl-accent, #fb7185) 28%, transparent), transparent 38%),
+    radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--tmpl-accent, #fb7185) 18%, transparent), transparent 32%),
+    radial-gradient(circle at 72% 68%, color-mix(in srgb, var(--tmpl-accent, #fb7185) 12%, transparent), transparent 28%);
 }
-
 .fallback-orb,
 .fallback-ring {
   position: absolute;
-  width: min(42vw, 360px);
+  width: min(46vw, 380px);
   aspect-ratio: 1;
   border-radius: 999px;
 }
-
 .fallback-orb {
-  background: radial-gradient(circle at 35% 30%, #fff, var(--accent, #fb7185) 32%, transparent 68%);
-  filter: blur(12px);
-  opacity: 0.5;
-}
-
-.fallback-ring {
-  border: 1px solid color-mix(in srgb, var(--accent, #fb7185) 70%, white);
-  transform: rotateX(62deg) rotateZ(-18deg);
-  box-shadow: 0 0 80px color-mix(in srgb, var(--accent, #fb7185) 35%, transparent);
+  background: radial-gradient(circle at 35% 30%, #fff, var(--tmpl-accent, #fb7185) 32%, transparent 68%);
+  filter: blur(14px);
   opacity: 0.65;
+  animation: tmpl-pulse 3.5s ease-in-out infinite;
+}
+.fallback-ring {
+  border: 1px solid color-mix(in srgb, var(--tmpl-accent, #fb7185) 65%, white);
+  transform: rotateX(62deg) rotateZ(-18deg);
+  box-shadow: 0 0 100px color-mix(in srgb, var(--tmpl-accent, #fb7185) 40%, transparent);
+  opacity: 0.7;
+  animation: tmpl-spin 24s linear infinite;
 }
 
+/* ============================================================ */
+/* ScenePreview — CSS-only for thumbnails / disabled fallback    */
+/* ============================================================ */
 .scene-preview {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 44%, color-mix(in srgb, var(--accent, #fb7185) 28%, transparent), transparent 34%),
-    linear-gradient(135deg, color-mix(in srgb, var(--accent, #fb7185) 22%, #09090b), #09090b 68%);
+    radial-gradient(circle at 50% 44%, color-mix(in srgb, var(--tmpl-accent, #fb7185) 30%, transparent), transparent 36%),
+    linear-gradient(135deg, color-mix(in srgb, var(--tmpl-accent, #fb7185) 24%, var(--tmpl-bg, #0a0a0a)), var(--tmpl-bg, #0a0a0a) 68%);
+  border-radius: inherit;
 }
-
 .scene-preview__grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(color-mix(in srgb, var(--accent, #fb7185) 18%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--accent, #fb7185) 18%, transparent) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--tmpl-accent, #fb7185) 18%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--tmpl-accent, #fb7185) 18%, transparent) 1px, transparent 1px);
   background-size: 42px 42px;
   mask-image: radial-gradient(circle at center, black, transparent 72%);
   opacity: 0.42;
   transform: perspective(500px) rotateX(58deg) translateY(28%);
 }
-
 .scene-preview__orb {
   position: absolute;
   inset: 24% 34%;
   border-radius: 999px;
-  background: radial-gradient(circle at 35% 25%, white, var(--accent, #fb7185) 34%, transparent 72%);
+  background: radial-gradient(circle at 35% 25%, white, var(--tmpl-accent, #fb7185) 34%, transparent 72%);
   filter: blur(2px);
-  opacity: 0.8;
-  box-shadow: 0 0 90px color-mix(in srgb, var(--accent, #fb7185) 65%, transparent);
+  opacity: 0.85;
+  box-shadow: 0 0 100px color-mix(in srgb, var(--tmpl-accent, #fb7185) 70%, transparent);
+  animation: tmpl-pulse 4s ease-in-out infinite;
 }
-
 .scene-preview__ring {
   position: absolute;
   left: 50%;
   top: 50%;
   width: var(--size);
   aspect-ratio: 1;
-  border: 1px solid color-mix(in srgb, var(--accent, #fb7185) 70%, white);
+  border: 1px solid color-mix(in srgb, var(--tmpl-accent, #fb7185) 70%, white);
   border-radius: 999px;
   transform: translate(-50%, -50%) rotateX(68deg) rotateZ(var(--rot));
   opacity: var(--opacity);
+  animation: tmpl-spin 30s linear infinite;
 }
-
 .scene-preview__timeline {
   position: absolute;
   left: 14%;
   right: 14%;
   top: 50%;
   height: 1px;
-  background: color-mix(in srgb, var(--accent, #fb7185) 70%, white);
+  background: color-mix(in srgb, var(--tmpl-accent, #fb7185) 70%, white);
 }
-
 .scene-preview__timeline span {
   position: relative;
   top: -5px;
@@ -183,5 +217,125 @@ canvas {
   margin-right: calc((100% - 50px) / 4);
   border-radius: 999px;
   background: white;
-  box-shadow: 0 0 28px var(--accent, #fb7185);
+  box-shadow: 0 0 32px var(--tmpl-accent, #fb7185);
+}
+
+/* ============================================================ */
+/* Animations                                                    */
+/* ============================================================ */
+@keyframes tmpl-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.65; }
+  50%      { transform: scale(1.12); opacity: 0.9; }
+}
+@keyframes tmpl-spin {
+  from { transform: rotateX(62deg) rotateZ(0deg); }
+  to   { transform: rotateX(62deg) rotateZ(360deg); }
+}
+@keyframes tmpl-shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+@keyframes tmpl-drift {
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(8px, -12px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes tmpl-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ============================================================ */
+/* Utility classes                                               */
+/* ============================================================ */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, currentColor 8%, transparent) 0%,
+    color-mix(in srgb, currentColor 16%, transparent) 50%,
+    color-mix(in srgb, currentColor 8%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  animation: tmpl-shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; opacity: 0.6; }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: tmpl-marquee 32s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+.drift {
+  animation: tmpl-drift 6s ease-in-out infinite;
+}
+
+/* Focus visible — WCAG 2.2 */
+:focus-visible {
+  outline: 2px solid var(--tmpl-accent, currentColor);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--tmpl-accent, black);
+  color: var(--tmpl-bg, white);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 200ms ease;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================================ */
+/* 3D Canvas — explicit size enforcement                         */
+/* Per-template parent must apply this                          */
+/* ============================================================ */
+.tmpl-canvas-host {
+  position: relative;
+  width: 100%;
+  /* THIS is the fix — explicit min-height, not just h-full */
+  min-height: 100%;
+  overflow: hidden;
+}
+
+/* ============================================================ */
+/* Mock photo placeholder (CSS art, no external image)          */
+/* Used when real image isn't available in a sandbox            */
+/* ============================================================ */
+.mock-photo {
+  position: relative;
+  background: linear-gradient(135deg, var(--mock-1, #1a1a1a) 0%, var(--mock-2, #2a2a2a) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.mock-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, color-mix(in srgb, white 8%, transparent), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, color-mix(in srgb, var(--tmpl-accent, #fb7185) 12%, transparent), transparent 60%);
+  pointer-events: none;
+}
+.mock-photo__label {
+  position: relative;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, currentColor 50%, transparent);
+  font-family: var(--font-mono);
 }

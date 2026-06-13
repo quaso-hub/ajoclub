@@ -23,7 +23,6 @@ export default defineEventHandler(async (event) => {
     return { success: true, id: contact.id }
   }
   catch (error) {
-    // Don't expose internal errors to client
     console.error('Contact form error:', error)
     throw createError({
       statusCode: 500,

@@ -26,7 +26,7 @@ onMounted(() => {
       })
     })
 
-    // Section titles: slide up on scroll
+    // Section titles
     gsap.utils.toArray('.service-title, .work-title, .about-title, .contact-title, .showcase-title').forEach((el) => {
       gsap.from(el as HTMLElement, {
         y: 40,
@@ -37,14 +37,14 @@ onMounted(() => {
       })
     })
 
-    // Cards: stagger batch
+    // Cards stagger
     ScrollTrigger.batch('.service-card, .showcase-card, .work-card, .stat-card, .principle-card', {
       onEnter: (batch) => gsap.from(batch, { y: 60, opacity: 0, stagger: 0.08, duration: 0.6, ease: 'power3.out' }),
       start: 'top 85%',
       once: true,
     })
 
-    // Contact form: slide up
+    // Contact form
     gsap.from('.contact-form', {
       y: 40,
       opacity: 0,
@@ -57,7 +57,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   ScrollTrigger.getAll().forEach(st => st.kill())
-  gsap.killTweensOf('*')
 })
 </script>
 

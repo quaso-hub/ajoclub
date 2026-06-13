@@ -15,7 +15,7 @@ services:
       - /app/.nuxt
     command: npx nuxt dev --host 0.0.0.0
 
-  # Nginx Proxy Manager — manage domains + SSL via web UI
+  # Nginx Proxy Manager
   npm:
     image: jc21/nginx-proxy-manager:latest
     ports:
@@ -27,7 +27,7 @@ services:
       - npm-letsencrypt:/etc/letsencrypt
     restart: unless-stopped
 
-  # Portainer — Docker monitoring dashboard
+  # Portainer
   portainer:
     image: portainer/portainer-ce:latest
     ports:

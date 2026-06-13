@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as THREE from 'three'
 
-type ScenePreset = 'orbit-product' | 'shader-portal' | 'case-timeline' | 'particle-morph' | 'cinematic-scroll'
+type ScenePreset = 'orbit-product' | 'shader-portal' | 'case-timeline' | 'particle-morph' | 'cinematic-scroll' | 'sphere'
 type MotionIntensity = 'calm' | 'balanced' | 'immersive'
 
 const props = withDefaults(defineProps<{
@@ -34,7 +34,7 @@ let scrollProgress = 0
 function supportsWebGL() {
   try {
     const canvas = document.createElement('canvas')
-    return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')))
   }
   catch {
     return false
@@ -45,9 +45,9 @@ function qualityProfile() {
   const width = window.innerWidth
   const dpr = window.devicePixelRatio || 1
   if (isReducedMotion.value) return { particles: 240, dpr: 1 }
-  if (width < 768) return { particles: 520, dpr: 1 }
-  if (dpr > 1.5) return { particles: 900, dpr: 1.35 }
-  return { particles: 1300, dpr: 1.5 }
+  if (width < 768) return { particles: 600, dpr: 1 }
+  if (dpr > 1.5) return { particles: 1000, dpr: 1.35 }
+  return { particles: 1500, dpr: 1.5 }
 }
 
 function presetGeometry() {
@@ -55,6 +55,7 @@ function presetGeometry() {
   if (props.preset === 'case-timeline') return new THREE.TorusKnotGeometry(2.25, 0.28, 160, 12)
   if (props.preset === 'shader-portal') return new THREE.TorusGeometry(2.8, 0.18, 18, 128)
   if (props.preset === 'cinematic-scroll') return new THREE.OctahedronGeometry(3.1, 2)
+  if (props.preset === 'sphere') return new THREE.SphereGeometry(2.8, 64, 64)
   return new THREE.DodecahedronGeometry(3, 2)
 }
 
@@ -62,13 +63,18 @@ function buildScene() {
   if (!root.value) return
 
   const quality = qualityProfile()
-  const width = root.value.clientWidth || root.value.parentElement?.clientWidth || window.innerWidth
+  const width = root.value.clientWidth || window.innerWidth
   const height = root.value.clientHeight || root.value.parentElement?.clientHeight || Math.round(window.innerHeight * 0.7)
+
   scene = new THREE.Scene()
-  camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100)
+  camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
   camera.position.set(0, 0.5, 10)
 
-  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' })
+  renderer = new THREE.WebGLRenderer({
+    alpha: true,
+    antialias: true,
+    powerPreference: 'high-performance',
+  })
   renderer.setClearColor(0x000000, 0)
   renderer.setPixelRatio(quality.dpr)
   renderer.setSize(width, height)
@@ -76,12 +82,14 @@ function buildScene() {
   isCanvasReady.value = true
 
   const accent = new THREE.Color(props.accent)
+
+  // Primary shape
   const material = new THREE.MeshStandardMaterial({
     color: accent,
     metalness: 0.72,
     roughness: 0.24,
     emissive: accent,
-    emissiveIntensity: 0.2,
+    emissiveIntensity: 0.25,
     wireframe: props.preset === 'shader-portal',
   })
 
@@ -101,16 +109,17 @@ function buildScene() {
   }
 
   scene.add(primaryGroup)
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55))
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6))
 
-  const keyLight = new THREE.PointLight(accent, 28, 30)
+  const keyLight = new THREE.PointLight(accent, 30, 30)
   keyLight.position.set(5, 5, 7)
   scene.add(keyLight)
 
-  const rimLight = new THREE.PointLight(0xffffff, 8, 24)
+  const rimLight = new THREE.PointLight(0xffffff, 10, 24)
   rimLight.position.set(-5, -2, 5)
   scene.add(rimLight)
 
+  // Particles
   const particleGeometry = new THREE.BufferGeometry()
   const positions = new Float32Array(quality.particles * 3)
   const colors = new Float32Array(quality.particles * 3)
@@ -122,7 +131,7 @@ function buildScene() {
     positions[i3] = radius * Math.sin(phi) * Math.cos(theta)
     positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
     positions[i3 + 2] = radius * Math.cos(phi)
-    const color = Math.random() > 0.75 ? new THREE.Color(0xffffff) : accent
+    const color = Math.random() > 0.7 ? new THREE.Color(0xffffff) : accent
     colors[i3] = color.r
     colors[i3 + 1] = color.g
     colors[i3 + 2] = color.b
@@ -132,10 +141,10 @@ function buildScene() {
   particleMesh = new THREE.Points(
     particleGeometry,
     new THREE.PointsMaterial({
-      size: props.intensity === 'calm' ? 0.024 : 0.034,
+      size: props.intensity === 'calm' ? 0.03 : 0.04,
       vertexColors: true,
       transparent: true,
-      opacity: 0.72,
+      opacity: 0.8,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     }),
@@ -147,6 +156,7 @@ function resize() {
   if (!root.value || !renderer || !camera) return
   const width = root.value.clientWidth
   const height = root.value.clientHeight
+  if (width === 0 || height === 0) return
   camera.aspect = width / height
   camera.updateProjectionMatrix()
   renderer.setSize(width, height)
@@ -190,8 +200,12 @@ function destroy() {
     })
   }
 
-  renderer?.dispose()
-  renderer?.domElement.remove()
+  if (renderer) {
+    renderer.dispose()
+    if (renderer.domElement && renderer.domElement.parentNode) {
+      renderer.domElement.parentNode.removeChild(renderer.domElement)
+    }
+  }
   renderer = null
   scene = null
   camera = null
@@ -209,7 +223,8 @@ onMounted(() => {
         resize()
         animate()
       }
-      catch {
+      catch (e) {
+        console.error('3D scene error:', e)
         hasWebGL.value = false
         isCanvasReady.value = false
       }
@@ -227,11 +242,18 @@ onMounted(() => {
 
     window.addEventListener('pointermove', onPointer, { passive: true })
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', resize)
+
+    let resizeTimer: number | null = null
+    const onResize = () => {
+      if (resizeTimer) clearTimeout(resizeTimer)
+      resizeTimer = window.setTimeout(() => resize(), 100)
+    }
+    window.addEventListener('resize', onResize)
+
     cleanup.push(
       () => window.removeEventListener('pointermove', onPointer),
       () => window.removeEventListener('scroll', onScroll),
-      () => window.removeEventListener('resize', resize),
+      () => window.removeEventListener('resize', onResize),
     )
   })
 })

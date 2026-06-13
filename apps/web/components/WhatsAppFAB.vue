@@ -50,11 +50,11 @@ onMounted(() => {
       >
         <div
           v-if="isOpen"
-          class="absolute bottom-full right-0 mb-3 w-[calc(100vw-2rem)] sm:w-80 rounded-xl border border-zinc-800 bg-zinc-900 p-3 shadow-2xl"
+          class="absolute bottom-full right-0 mb-3 w-[calc(100vw-2rem)] sm:w-80 glass-card p-3 shadow-2xl"
         >
           <div class="px-2 pb-3">
-            <p class="text-sm font-semibold text-white">Mau mulai dari mana?</p>
-            <p class="text-xs text-zinc-400">Pilih konteks, pesan WhatsApp otomatis lebih jelas.</p>
+            <p class="text-sm font-semibold">Mau mulai dari mana?</p>
+            <p class="text-xs text-(--ui-text-muted)">Pilih konteks, pesan WhatsApp otomatis lebih jelas.</p>
           </div>
           <a
             v-for="action in actions"
@@ -62,16 +62,16 @@ onMounted(() => {
             :href="action.href.value"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-zinc-800 transition-colors"
+            class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-(--ui-bg-elevated) transition-colors"
           >
             <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-green-500/10 text-green-500 flex items-center justify-center shrink-0">
               <UIcon :name="action.icon" class="w-4 h-4 sm:w-5 sm:h-5" />
             </span>
             <span class="min-w-0">
-              <span class="block text-sm font-medium text-white">{{ action.label }}</span>
-              <span class="block text-xs text-zinc-400">{{ action.detail }}</span>
+              <span class="block text-sm font-medium">{{ action.label }}</span>
+              <span class="block text-xs text-(--ui-text-muted)">{{ action.detail }}</span>
             </span>
-            <UIcon name="i-lucide-external-link" class="w-4 h-4 text-zinc-500 ml-auto shrink-0" />
+            <UIcon name="i-lucide-external-link" class="w-4 h-4 text-(--ui-text-muted) ml-auto shrink-0" />
           </a>
         </div>
       </Transition>

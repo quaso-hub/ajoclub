@@ -14,10 +14,10 @@ const principles = [
 </script>
 
 <template>
-  <section id="about" class="py-20 sm:py-32 bg-zinc-950 relative overflow-hidden">
+  <section id="about" class="py-20 sm:py-32 bg-(--ui-bg) relative overflow-hidden">
     <UContainer class="relative">
       <div class="mb-12 sm:mb-20">
-        <p class="text-sky-400 text-xs sm:text-sm font-mono tracking-widest uppercase mb-3 sm:mb-4 about-title">Tentang Kami</p>
+        <p class="text-(--ui-primary) text-xs sm:text-sm font-mono tracking-widest uppercase mb-3 sm:mb-4 about-title">Tentang Kami</p>
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold about-title leading-tight">
           Tim kecil, kerja serius.
         </h2>
@@ -27,23 +27,23 @@ const principles = [
         <div
           v-for="stat in stats"
           :key="stat.label"
-          class="rounded-xl border border-zinc-800 p-4 sm:p-6 text-center group hover:border-zinc-700 transition-all duration-300 stat-card"
+          class="glass-card p-4 sm:p-6 text-center group hover:-translate-y-1 transition-all duration-300 stat-card"
         >
-          <UIcon :name="stat.icon" class="w-5 h-5 sm:w-6 sm:h-6 text-sky-400 mx-auto mb-2 sm:mb-3 opacity-70" />
-          <div class="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 text-white">{{ stat.value }}</div>
-          <div class="text-[10px] sm:text-xs text-zinc-500 font-mono uppercase tracking-wider">{{ stat.label }}</div>
+          <UIcon :name="stat.icon" class="w-5 h-5 sm:w-6 sm:h-6 text-(--ui-primary) mx-auto mb-2 sm:mb-3 opacity-70" />
+          <div class="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">{{ stat.value }}</div>
+          <div class="text-[10px] sm:text-xs text-(--ui-text-muted) font-mono uppercase tracking-wider">{{ stat.label }}</div>
         </div>
       </div>
 
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
         <div v-for="(p, i) in principles" :key="i" class="principle-card">
           <div class="flex items-center gap-3 mb-3 sm:mb-4">
-            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-sky-500/10 flex items-center justify-center">
-              <UIcon :name="p.icon" class="w-4 h-4 sm:w-5 sm:h-5 text-sky-400" />
+            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center">
+              <UIcon :name="p.icon" class="w-4 h-4 sm:w-5 sm:h-5 text-(--ui-primary)" />
             </div>
           </div>
-          <h3 class="text-base sm:text-lg font-semibold mb-2 sm:mb-3 text-white">{{ p.title }}</h3>
-          <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">{{ p.description }}</p>
+          <h3 class="text-base sm:text-lg font-semibold mb-2 sm:mb-3">{{ p.title }}</h3>
+          <p class="text-(--ui-text-muted) text-xs sm:text-sm leading-relaxed">{{ p.description }}</p>
         </div>
       </div>
     </UContainer>

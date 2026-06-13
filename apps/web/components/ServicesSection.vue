@@ -28,10 +28,10 @@ const services = [
 </script>
 
 <template>
-  <section id="services" class="py-20 sm:py-32 bg-zinc-950">
+  <section id="services" class="py-20 sm:py-32 bg-(--ui-bg)">
     <UContainer>
       <div class="mb-12 sm:mb-20">
-        <p class="text-sky-400 text-xs sm:text-sm font-mono tracking-widest uppercase mb-3 sm:mb-4 service-title">
+        <p class="text-(--ui-primary) text-xs sm:text-sm font-mono tracking-widest uppercase mb-3 sm:mb-4 service-title">
           Layanan
         </p>
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold service-title leading-tight">
@@ -43,13 +43,13 @@ const services = [
         <div
           v-for="(service, i) in services"
           :key="i"
-          class="group p-6 sm:p-8 rounded-xl border border-zinc-800 hover:border-zinc-700 bg-zinc-900/50 hover:bg-zinc-900 transition-all duration-300 service-card cursor-pointer"
+          class="glass-card p-6 sm:p-8 group hover:-translate-y-1 transition-all duration-300 service-card cursor-pointer"
         >
-          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-sky-500/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-sky-500/20 transition-colors">
-            <UIcon :name="service.icon" class="w-5 h-5 sm:w-6 sm:h-6 text-sky-400" />
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-(--ui-primary)/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-(--ui-primary)/20 transition-colors">
+            <UIcon :name="service.icon" class="w-5 h-5 sm:w-6 sm:h-6 text-(--ui-primary)" />
           </div>
-          <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-white">{{ service.title }}</h3>
-          <p class="text-sm sm:text-base text-zinc-400 mb-4 sm:mb-6 leading-relaxed">{{ service.description }}</p>
+          <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{{ service.title }}</h3>
+          <p class="text-(--ui-text-muted) text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed">{{ service.description }}</p>
           <div class="flex flex-wrap gap-1.5 sm:gap-2">
             <UBadge v-for="tag in service.tags" :key="tag" variant="soft" color="primary" size="sm">
               {{ tag }}
