@@ -1,6 +1,6 @@
-ï»¿<script setup lang="ts">
+<script setup lang="ts">
 /**
- * membership-1.vue â€” Catatan Harian
+ * membership-1.vue — Catatan Harian
  * Indonesian editorial newsletter. Substack/Aeon/The Information aesthetic.
  * Lora serif. Cream paper. Terracotta accent. Slow, paper-like, not gamified.
  *
@@ -338,7 +338,7 @@ onBeforeUnmount(() => {
         'Terbit sejak November 2024',
         'Dari Jakarta, dengan kopi',
       ]"
-      separator="Â·"
+      separator="·"
       speed="slow"
       accent="var(--tmpl-accent)"
       class="catatan__marquee-top"
@@ -533,11 +533,11 @@ onBeforeUnmount(() => {
     <!-- ============================================ -->
     <!-- SECTION 8: FOOTER                            -->
     <!-- ============================================ -->
-    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Catatan Harian"
+    <TmplFooter data-reveal="fade-up" brand-name="Catatan Harian"
       variant="signoff"
       signoff="Oleh Rara Adiswara. Dari Jakarta, dengan kopi."
       :accent="tpl.accentColor"
-      signature="Â© 2024 sampai 2026 Rara Adiswara. Hak cipta dilindungi."
+      signature="© 2024 sampai 2026 Rara Adiswara. Hak cipta dilindungi."
       :links="[
         { label: 'Tentang Rara', href: '#tentang' },
         { label: 'Arsip', href: '#arsip' },
@@ -564,7 +564,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* ============================================================
-   CATATAN HARIAN â€” Editorial Newsletter Styles
+   CATATAN HARIAN — Editorial Newsletter Styles
    Cream paper, terracotta accent, Lora serif, slow and paper-like
    ============================================================ */
 
@@ -1131,7 +1131,7 @@ onBeforeUnmount(() => {
   transition: transform 200ms ease;
 }
 .catatan__faq-item[open] .catatan__faq-q::after {
-  content: 'âˆ’';
+  content: '-';
 }
 .catatan__faq-item[open] .catatan__faq-q {
   color: var(--tmpl-accent, #B85C3A);

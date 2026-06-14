@@ -1,5 +1,5 @@
-ï»¿<script setup lang="ts">
-/* wedding-2 â€” Dita & Budi. Sederhana. Bersih. Jelas. */
+<script setup lang="ts">
+/* wedding-2 — Dita & Budi. Sederhana. Bersih. Jelas. */
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 definePageMeta({ layout: false })
@@ -59,7 +59,7 @@ const banks = [
 ]
 
 // ============================================================
-// 3D â€” 1 WIREFRAME TORUS (barely visible, calm)
+// 3D — 1 WIREFRAME TORUS (barely visible, calm)
 // ============================================================
 const torusCanvasRef = ref<HTMLCanvasElement | null>(null)
 let torusGL: WebGLRenderingContext | null = null
@@ -274,7 +274,7 @@ function openLiveStream() {
     <main id="main">
 
       <!-- ============================== -->
-      <!-- OPENING â€” Bismillah + Names + 3D Torus -->
+      <!-- OPENING — Bismillah + Names + 3D Torus -->
       <!-- ============================== -->
       <section class="db-hero" :style="{ minHeight: '100dvh' }">
         <canvas ref="torusCanvasRef" class="db-hero__torus" aria-hidden="true" />
@@ -298,7 +298,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- CERITA â€” Timeline -->
+      <!-- CERITA — Timeline -->
       <!-- ============================== -->
       <section id="cerita" class="db-cerita">
         <p class="db-eyebrow db-eyebrow--left" :style="monoStyle">Tentang</p>
@@ -313,7 +313,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- ACARA â€” 3 events -->
+      <!-- ACARA — 3 events -->
       <!-- ============================== -->
       <section id="acara" class="db-acara">
         <p class="db-eyebrow db-eyebrow--left" :style="monoStyle">Acara</p>
@@ -330,7 +330,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- GALERI â€” Photos with lightbox -->
+      <!-- GALERI — Photos with lightbox -->
       <!-- ============================== -->
       <section id="galeri" class="db-galeri">
         <p class="db-eyebrow" :style="monoStyle">Galeri</p>
@@ -354,7 +354,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- RSVP â€” Working form -->
+      <!-- RSVP — Working form -->
       <!-- ============================== -->
       <section id="rsvp" class="db-rsvp">
         <p class="db-eyebrow" :style="monoStyle">Konfirmasi</p>
@@ -371,7 +371,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- AMPLOP â€” 3 banks, copy-to-clipboard -->
+      <!-- AMPLOP — 3 banks, copy-to-clipboard -->
       <!-- ============================== -->
       <section id="amplop" class="db-amplop">
         <p class="db-eyebrow" :style="monoStyle">Amplop</p>
@@ -433,7 +433,7 @@ function openLiveStream() {
       </section>
     </main>
 
-    <TmplFooter data-reveal="fade-up" data-reveal="fade-up"       :brand-name="'Dita & Budi'"
+    <TmplFooter data-reveal="fade-up"       :brand-name="'Dita & Budi'"
       :links="[
         { label: 'Cerita', href: '#cerita' },
         { label: 'Acara', href: '#acara' },
@@ -494,7 +494,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* HERO â€” names + torus                                          */
+/* HERO — names + torus                                          */
 /* ============================================================ */
 .db-hero {
   position: relative;
@@ -573,7 +573,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* CERITA â€” Timeline                                             */
+/* CERITA — Timeline                                             */
 /* ============================================================ */
 .db-cerita {
   padding: 6.25rem 1.5rem;
@@ -624,7 +624,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* ACARA â€” 3 events                                              */
+/* ACARA — 3 events                                              */
 /* ============================================================ */
 .db-acara {
   padding: 6.25rem 1.5rem;
@@ -689,7 +689,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* GALERI â€” Photos with lightbox                                 */
+/* GALERI — Photos with lightbox                                 */
 /* ============================================================ */
 .db-galeri {
   padding: 6.25rem 1.5rem;
@@ -797,7 +797,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* AMPLOP â€” Banks with copy                                      */
+/* AMPLOP — Banks with copy                                      */
 /* ============================================================ */
 .db-amplop {
   padding: 6.25rem 1.5rem;
@@ -905,7 +905,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* ACTIONS â€” Add to calendar + live stream                       */
+/* ACTIONS — Add to calendar + live stream                       */
 /* ============================================================ */
 .db-actions {
   padding: 6.25rem 1.5rem;

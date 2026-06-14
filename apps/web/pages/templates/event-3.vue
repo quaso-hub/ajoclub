@@ -1,4 +1,4 @@
-ï»¿<script setup lang="ts">
+<script setup lang="ts">
 import { getPalette, toCss } from '~/utils/palettes'
 import { getTypography } from '~/utils/typography'
 
@@ -10,7 +10,7 @@ const typo = getTypography('forumid')
 useScrollReveal('event-3')
 
 useHead({
-  title: 'ForumID 2026 â€” Festival Desain & Kreatif Indonesia',
+  title: 'ForumID 2026 — Festival Desain & Kreatif Indonesia',
   htmlAttrs: { lang: 'id' },
   link: [
     ...typo.preconnect.map((href: string) => ({ rel: 'preconnect', href })),
@@ -554,7 +554,7 @@ const openFaq = ref<number | null>(null)
                 <span :style="{ color: accent }">&#9201;</span>
                 <div>
                   <p class="text-sm font-medium">8-11 Oktober 2026</p>
-                  <p class="text-xs" :style="{ color: muted }">Kamisâ€“Minggu, 09:00â€“18:00 WIB</p>
+                  <p class="text-xs" :style="{ color: muted }">Kamis–Minggu, 09:00–18:00 WIB</p>
                 </div>
               </div>
               <div class="flex items-start gap-3">
@@ -672,7 +672,7 @@ const openFaq = ref<number | null>(null)
     </section>
 
     <!-- ============ FOOTER ============ -->
-    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="ForumID"
+    <TmplFooter data-reveal="fade-up" brand-name="ForumID"
       variant="columns"
       :accent="accent"
       :bg="fg"

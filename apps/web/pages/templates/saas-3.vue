@@ -1,6 +1,6 @@
-ï»¿<script setup lang="ts">
+<script setup lang="ts">
 /**
- * saas-3.vue â€” Lintas
+ * saas-3.vue — Lintas
  * Color-Wash SaaS Editorial. 7 OKLCH section washes. GLSL morphing blob.
  *
  * 8 sections: Hero, Marquee, Features, Pricing, Testimonials, FAQ, CTA, Footer
@@ -301,13 +301,13 @@ function initBlob() {
       <!-- 2. MARQUEE                     -->
       <!-- ============================== -->
       <section
-        class="lintas-marquee-section" data-reveal="fade-up" data-reveal="fade-up"
+        class="lintas-marquee-section" data-reveal="fade-up"
         :style="{ '--section-bg': washes.marquee, background: washes.marquee }"
       >
         <p class="lintas-label lintas-label--center" :style="monoStyle">DIPERCAYA OLEH</p>
         <TmplMarquee
           :items="klien"
-          separator="Â·"
+          separator="·"
           speed="slow"
           accent="var(--tmpl-accent)"
         />
@@ -514,7 +514,7 @@ function initBlob() {
       <!-- 7. CTA                         -->
       <!-- ============================== -->
       <section
-        class="lintas-cta-section" data-reveal="scale" data-reveal="fade-up" data-reveal="scale"
+        class="lintas-cta-section" data-reveal="scale"
         :style="{ '--section-bg': washes.cta, background: washes.cta }"
       >
         <h2 :style="h1Style" class="lintas-cta__h1 text-balance">
@@ -537,7 +537,7 @@ function initBlob() {
       <!-- ============================== -->
       <!-- 8. FOOTER                      -->
       <!-- ============================== -->
-      <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Lintas"
+      <TmplFooter data-reveal="fade-up" brand-name="Lintas"
         variant="columns"
         accent="var(--tmpl-accent)"
         :links="[
@@ -1064,7 +1064,7 @@ function initBlob() {
   }
 }
 
-/* === Color wash transitions â€” smooth fade between sections === */
+/* === Color wash transitions — smooth fade between sections === */
 .lintas-hero::after,
 .lintas-features::after,
 .lintas-pricing::after,

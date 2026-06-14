@@ -1,9 +1,9 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 /**
- * ecommerce-2.vue — SOMETHINC
+ * ecommerce-2.vue � SOMETHINC
  * DTC Brand Story. Aesop/Glossier/Allbirds aesthetic, Indonesian skincare.
  *
- * 8 sections: Hero + 3D bottle → Cerita → Produk → Bahan → Routine Finder → Testimoni → FAQ → Footer
+ * 8 sections: Hero + 3D bottle ? Cerita ? Produk ? Bahan ? Routine Finder ? Testimoni ? FAQ ? Footer
  * slug='ecommerce-2', typo='somethinc', palette='somethinc'
  * Fraunces italic H1, Inter body. Force mode: light.
  * Cream bg, forest + amber accent.
@@ -16,7 +16,7 @@ const theme = useTemplateTheme('ecommerce-2')
 const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
 useScrollReveal('ecommerce-2')
 
-// ─── Products ────────────────────────────────────────────────────
+// --- Products ----------------------------------------------------
 interface Product {
   id: string
   name: string
@@ -84,7 +84,7 @@ const products: Product[] = [
   },
 ]
 
-// ─── Cart ────────────────────────────────────────────────────────
+// --- Cart --------------------------------------------------------
 const cart = reactive<{ items: { product: Product; qty: number }[] }>({ items: [] })
 const cartOpen = ref(false)
 const toastMsg = ref('')
@@ -121,7 +121,7 @@ function showToast(msg: string) {
   setTimeout(() => { toastVisible.value = false }, 3000)
 }
 
-// ─── Quiz ────────────────────────────────────────────────────────
+// --- Quiz --------------------------------------------------------
 type QuizStep = 'idle' | 'q1' | 'q2' | 'q3' | 'q4' | 'result'
 const quizStep = ref<QuizStep>('idle')
 const quizAnswers = reactive<string[]>([])
@@ -157,7 +157,7 @@ function answerQuiz(answer: string) {
 }
 function resetQuiz() { quizStep.value = 'idle'; quizAnswers.length = 0 }
 
-// ─── Ingredients glossary ────────────────────────────────────────
+// --- Ingredients glossary ----------------------------------------
 const glossaryOpen = ref(false)
 const ingredients = [
   { name: 'Niacinamide', inci: 'Niacinamide', aka: 'Vitamin B3', benefit: 'Mencerahkan, mengontrol minyak, memperkuat skin barrier.', cocok: 'Semua jenis kulit' },
@@ -174,10 +174,10 @@ const ingredients = [
   { name: 'Peptide', inci: 'Palmitoyl Pentapeptide-4', aka: 'Matrixyl', benefit: 'Merangsang produksi kolagen, mengurangi kedalaman kerutan.', cocok: 'Penuaan, garis halus' },
 ]
 
-// ─── Refill toggle ───────────────────────────────────────────────
+// --- Refill toggle -----------------------------------------------
 const refillActive = ref(false)
 
-// ─── FAQ ─────────────────────────────────────────────────────────
+// --- FAQ ---------------------------------------------------------
 const faqOpen = ref<number | null>(null)
 const faqs = [
   { q: 'Apakah produk SOMETHINC sudah terdaftar BPOM?', a: 'Semua produk SOMETHINC sudah terdaftar di BPOM dengan nomor registrasi yang bisa kamu cek langsung di situs resmi BPOM.' },
@@ -188,7 +188,7 @@ const faqs = [
   { q: 'Apakah aman untuk ibu hamil?', a: 'Beberapa produk aman untuk ibu hamil, namun kami sarankan konsultasi dengan dokter kandungan terlebih dahulu. Hindari produk dengan Retinol dan AHA/BHA tinggi.' },
 ]
 
-// ─── 3D Bottle (client-only placeholder) ─────────────────────────
+// --- 3D Bottle (client-only placeholder) -------------------------
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const sceneReady = ref(false)
 let animFrame = 0
@@ -295,7 +295,7 @@ onBeforeUnmount(() => {
   if (animFrame) cancelAnimationFrame(animFrame)
 })
 
-// ─── Nav links ───────────────────────────────────────────────────
+// --- Nav links ---------------------------------------------------
 const navLinks = [
   { label: 'Cerita', href: '#cerita' },
   { label: 'Produk', href: '#produk' },
@@ -341,7 +341,7 @@ const navLinks = [
 
         <!-- Hero copy -->
         <div class="order-2 md:order-1 text-center md:text-left">
-          <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Skincare Indonesia · Sejak 2015</p>
+          <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Skincare Indonesia � Sejak 2015</p>
 
           <h1 :style="{ ...h1Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">
             Bahan yang jujur.<br>
@@ -368,7 +368,7 @@ const navLinks = [
           <div class="mt-6 flex flex-wrap gap-5 justify-center md:justify-start text-[11px] tracking-wide" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">
             <span>BPOM</span>
             <span>Halal MUI</span>
-            <span>Refill −20%</span>
+            <span>Refill -20%</span>
           </div>
         </div>
       </div>
@@ -382,11 +382,11 @@ const navLinks = [
         <div class="md:col-span-2">
           <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Cerita Kami</p>
           <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Dari Laboratorium ke Tangan Kamu</h2>
-          <p class="mt-6 text-sm font-medium" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">— Anne Avianti, Founder</p>
+          <p class="mt-6 text-sm font-medium" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">� Anne Avianti, Founder</p>
         </div>
 
         <div class="md:col-span-3 space-y-5 leading-[1.7] text-base" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">
-          <p>SOMETHINC dimulai di Jakarta, 2015. Satu serum niacinamide — bahan yang bisa dibaca siapa pun, harga yang jujur.</p>
+          <p>SOMETHINC dimulai di Jakarta, 2015. Satu serum niacinamide � bahan yang bisa dibaca siapa pun, harga yang jujur.</p>
           <p>Formula itu masih ada di lineup kami. Bukan nostalgia, tapi karena tetap bekerja.</p>
           <p>Tidak ada proprietary blend. Setiap konsentrasi dicantumkan. Setiap bahan punya alasan.</p>
           <p>Dua juta produk sudah terjual. Prinsipnya tetap sama: <strong :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">bahan terbuka, harga jujur.</strong></p>
@@ -510,7 +510,7 @@ const navLinks = [
               <h3 class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">{{ ing.name }}</h3>
               <span class="text-[10px] px-1.5 py-0.5 rounded" :style="{ background: `oklch(${palette.accentSoft.l}% ${palette.accentSoft.c} ${palette.accentSoft.h})`, color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">{{ ing.cocok }}</span>
             </div>
-            <p class="text-xs font-mono mb-2" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">{{ ing.inci }} · {{ ing.aka }}</p>
+            <p class="text-xs font-mono mb-2" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">{{ ing.inci }} � {{ ing.aka }}</p>
             <p class="text-sm leading-relaxed" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">{{ ing.benefit }}</p>
           </div>
         </div>
@@ -638,7 +638,7 @@ const navLinks = [
             <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Kulit berubah setelah 2 minggu. Bruntusan hilang, warna kulit lebih rata. Harganya masuk akal."</p>
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Siti Rahmawati</p>
-              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Jakarta · Pembeli Terverifikasi</p>
+              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Jakarta � Pembeli Terverifikasi</p>
             </div>
           </div>
 
@@ -650,7 +650,7 @@ const navLinks = [
             <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Harga terjangkau tapi kualitas nyata. Tekstur ringan, cepat meresap, tidak lengket."</p>
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Dinda Permata</p>
-              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Bandung · Pembeli Terverifikasi</p>
+              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Bandung � Pembeli Terverifikasi</p>
             </div>
           </div>
 
@@ -662,7 +662,7 @@ const navLinks = [
             <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Tidak whitecast, tidak berminyak. Harganya bikin tidak sayang pakai setiap hari."</p>
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Rina Wulandari</p>
-              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Surabaya · Pembeli Terverifikasi</p>
+              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Surabaya � Pembeli Terverifikasi</p>
             </div>
           </div>
         </div>
@@ -712,12 +712,12 @@ const navLinks = [
     <!-- ============================================================ -->
     <!-- SECTION 8: Footer                                             -->
     <!-- ============================================================ -->
-    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="SOMETHINC"
+    <TmplFooter data-reveal="fade-up" brand-name="SOMETHINC"
       variant="columns"
       :accent="`oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})`"
       :bg="`oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})`"
       :text="`oklch(${palette.surface.l}% ${palette.surface.c} ${palette.surface.h})`"
-      signature="Skincare Indonesia · Sejak 2015"
+      signature="Skincare Indonesia � Sejak 2015"
       :links="[
         { label: 'Produk', href: '#produk' },
         { label: 'Bahan', href: '#bahan' },
@@ -819,7 +819,7 @@ const navLinks = [
           v-if="toastVisible"
           class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-full text-sm font-medium shadow-lg"
           :style="{ background: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})`, color: `oklch(${palette.accentFg.l}% ${palette.accentFg.c} ${palette.accentFg.h})` }"
-        >✓ {{ toastMsg }}</div>
+        >? {{ toastMsg }}</div>
       </Transition>
     </Teleport>
   </div>

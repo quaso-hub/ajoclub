@@ -1,6 +1,6 @@
-ï»¿<script setup lang="ts">
+<script setup lang="ts">
 /**
- * architecture-3.vue â€” Ruang Studio
+ * architecture-3.vue — Ruang Studio
  * Interior studio. Fraunces italic H1, Inter body, JetBrains Mono metadata.
  * 8 sections: Hero+3D, Layanan, Proyek, Material, Quiz, Galeri, Kontak, Footer
  * Palette: ruang (light, terracotta accent)
@@ -40,7 +40,7 @@ const quizDone = ref(false)
 onMounted(() => { setTimeout(() => { heroLoaded.value = true }, 150) })
 
 // ============================================================
-// DATA â€” Layanan
+// DATA — Layanan
 // ============================================================
 const layanan = [
   { icon: 'i-lucide-pen-tool', title: 'Desain Interior', desc: 'Konsep hingga penataan akhir. Moodboard, denah, dan rencana pencahayaan.' },
@@ -50,7 +50,7 @@ const layanan = [
 ]
 
 // ============================================================
-// DATA â€” Proyek
+// DATA — Proyek
 // ============================================================
 const proyek = [
   { name: 'Ruang Kerja Minimalis', style: 'Minimalis', location: 'Jakarta Selatan', year: '2025', desc: 'Kantor 18 m\u00B2 dengan meja jati custom dan rak tersembunyi. Cahaya alami penuh tanpa lampu siang hari.' },
@@ -62,7 +62,7 @@ const proyek = [
 ]
 
 // ============================================================
-// DATA â€” Material (6 Indonesian materials)
+// DATA — Material (6 Indonesian materials)
 // ============================================================
 const materials = [
   { name: 'Jati Jepara', origin: 'Jepara, Jawa Tengah', desc: 'Kayu jati reclaimed dari perahu nelayan. Serat unik, tahan rayap, makin indah seiring waktu.', color: '#8B6914', category: 'Kayu' },
@@ -74,7 +74,7 @@ const materials = [
 ]
 
 // ============================================================
-// DATA â€” Quiz (5 questions, 4 options each)
+// DATA — Quiz (5 questions, 4 options each)
 // ============================================================
 const quizQuestions = [
   { q: 'Perasaan pertama saat masuk ruangan ideal?', options: ['Tenang dan rapi', 'Hangat dan penuh karakter', 'Megah dan elegan', 'Bebas dan penuh warna'] },
@@ -117,7 +117,7 @@ function resetQuiz() {
 }
 
 // ============================================================
-// DATA â€” Galeri (8 photos)
+// DATA — Galeri (8 photos)
 // ============================================================
 const galeri = [
   { label: 'Ruang Tamu', angle: 15 },
@@ -131,7 +131,7 @@ const galeri = [
 ]
 
 // ============================================================
-// DATA â€” Sample box
+// DATA — Sample box
 // ============================================================
 const sampleBoxOpen = ref(false)
 
@@ -445,7 +445,7 @@ const waUrl = computed(() => {
     </section>
 
     <!-- ===== SECTION 8: FOOTER ===== -->
-    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Ruang Studio"
+    <TmplFooter data-reveal="fade-up" brand-name="Ruang Studio"
       variant="columns"
       :accent="accentCss"
       :bg="fgCss"

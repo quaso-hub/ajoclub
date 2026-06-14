@@ -1,4 +1,4 @@
-ï»¿<script setup lang="ts">
+<script setup lang="ts">
 /**
  * event-1.vue: DevTalk 2026
  * Indonesian tech conference. Dark, kelly green accent.
@@ -49,7 +49,7 @@ const speakers = [
 ]
 
 // ============================================================
-// SCHEDULE (3 days Ã— 4 slots Ã— 3 tracks)
+// SCHEDULE (3 days × 4 slots × 3 tracks)
 // ============================================================
 const dayThemes = [
   { label: 'Hari 1', theme: 'Backend & Frontend', date: 'Sabtu, 17 September' },
@@ -636,7 +636,7 @@ const googleCalUrl = computed(() => {
     </main>
 
     <!-- Footer -->
-    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="DevTalk 2026"
+    <TmplFooter data-reveal="fade-up" brand-name="DevTalk 2026"
       variant="columns"
       :accent="tpl.accentColor"
       :links="[

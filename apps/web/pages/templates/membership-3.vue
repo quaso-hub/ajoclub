@@ -1,6 +1,6 @@
-ï»¿<script setup lang="ts">
+<script setup lang="ts">
 /**
- * membership-3.vue â€” Raka Writes
+ * membership-3.vue — Raka Writes
  * Solo creator tip/support page. Warm cream, butter yellow accent, Cardo italic H1.
  * 8 sections: Hero+3D, Tentang, Dukungan (3 tiers), Milestones, Tulisan Terbaru, Testimoni, FAQ, Footer
  */
@@ -474,7 +474,7 @@ onBeforeUnmount(() => {
     <!-- ============================================ -->
     <!-- SECTION 8: FOOTER                            -->
     <!-- ============================================ -->
-    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Raka Writes"
+    <TmplFooter data-reveal="fade-up" brand-name="Raka Writes"
       variant="signoff"
       signoff="Dari Bandung, dengan kopi, setiap Jumat."
       :accent="tpl.accentColor"
@@ -497,7 +497,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* ============================================================
-   RAKA WRITES â€” Creator Tip/Support Styles
+   RAKA WRITES — Creator Tip/Support Styles
    Warm cream, butter yellow accent, Cardo italic H1, Plus Jakarta Sans body
    ============================================================ */
 

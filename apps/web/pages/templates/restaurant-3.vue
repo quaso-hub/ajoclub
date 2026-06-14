@@ -1,7 +1,7 @@
-ï»¿<script setup lang="ts">
+<script setup lang="ts">
 /**
  * restaurant-3.vue
- * Sate Madura Pak Karto â€” Warung Hyperlocal
+ * Sate Madura Pak Karto — Warung Hyperlocal
  * slug='restaurant-3', typo='sate', palette='sate'
  * Bebas Neue H1, Inter body. Force mode: light. Burnt orange accent.
  */
@@ -248,7 +248,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
         <h2 :style="h2Style" class="sate-h2">Dari gerobak ke 4 cabang.</h2>
         <div class="sate-story">
           <p>
-            Pak Karto mulai jualan sate tahun 1998 di Bangkalan. Resep bumbu kacang turun-temurun dari almarhum bapaknya. Sekarang ada 4 cabang dan 1 dapur pusat di Ciputat â€” semua masih dibakar pakai arang batok kelapa.
+            Pak Karto mulai jualan sate tahun 1998 di Bangkalan. Resep bumbu kacang turun-temurun dari almarhum bapaknya. Sekarang ada 4 cabang dan 1 dapur pusat di Ciputat — semua masih dibakar pakai arang batok kelapa.
           </p>
           <p>
             Bumbu kacang diulek manual setiap pagi. Kecap racikan sendiri. Lontong daun pisang. Kalau habis, ya habis. Besok bakar lagi.
@@ -379,7 +379,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
     </section>
 
     <!-- ====== FOOTER ====== -->
-    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Sate Madura Pak Karto"
+    <TmplFooter data-reveal="fade-up" brand-name="Sate Madura Pak Karto"
       variant="columns"
       :accent="accentCss"
       :links="[

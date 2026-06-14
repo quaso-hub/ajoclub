@@ -1,8 +1,8 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 /**
- * ecommerce-3.vue — Bazaar Marketplace
+ * ecommerce-3.vue � Bazaar Marketplace
  * Multi-vendor marketplace. Newsreader italic H1, Inter body.
- * 8 sections: Hero+3D → Kategori → Produk → Penjual → Promo → Testimoni → FAQ → Footer
+ * 8 sections: Hero+3D ? Kategori ? Produk ? Penjual ? Promo ? Testimoni ? FAQ ? Footer
  * 3D: 60-icon category sphere morph (case-timeline, balanced)
  */
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
@@ -18,12 +18,12 @@ useScrollReveal('ecommerce-3')
 // DATA: Categories
 // ============================================================
 const categories = [
-  { id: 'pakaian', name: 'Pakaian', icon: '👔', count: 312, color: 'terracotta' },
-  { id: 'tas', name: 'Tas', icon: '👜', count: 198, color: 'mustard' },
-  { id: 'aksesori', name: 'Aksesori', icon: '💍', count: 245, color: 'sage' },
-  { id: 'rumah', name: 'Rumah', icon: '🏠', count: 487, color: 'clay' },
-  { id: 'elektronik', name: 'Elektronik', icon: '🔌', count: 134, color: 'terracotta' },
-  { id: 'makanan', name: 'Makanan', icon: '🍪', count: 276, color: 'mustard' },
+  { id: 'pakaian', name: 'Pakaian', icon: '??', count: 312, color: 'terracotta' },
+  { id: 'tas', name: 'Tas', icon: '??', count: 198, color: 'mustard' },
+  { id: 'aksesori', name: 'Aksesori', icon: '??', count: 245, color: 'sage' },
+  { id: 'rumah', name: 'Rumah', icon: '??', count: 487, color: 'clay' },
+  { id: 'elektronik', name: 'Elektronik', icon: '??', count: 134, color: 'terracotta' },
+  { id: 'makanan', name: 'Makanan', icon: '??', count: 276, color: 'mustard' },
 ]
 
 const activeCategory = ref<string | null>(null)
@@ -47,18 +47,18 @@ interface Product {
 }
 
 const products: Product[] = [
-  { id: 'p1', name: 'Batik Tulis Madura — Motif Parang', seller: 'Kain Warisan', sellerId: 'kain-warisan', price: 385000, rating: 4.9, reviewCount: 124, sold: 487, category: 'pakaian', freeShipping: true, badge: 'Terlaris', gradient: 'linear-gradient(145deg, #E8D5C0 0%, #D4B896 50%, #C09A6B 100%)' },
-  { id: 'p2', name: 'Tas Rajut Tali Kur — Cokelat Tanah', seller: 'Rajut Nusantara', sellerId: 'rajut-nusantara', price: 165000, rating: 4.8, reviewCount: 89, sold: 312, category: 'tas', freeShipping: true, gradient: 'linear-gradient(145deg, #D4C4A8 0%, #B8A88C 50%, #9C8C70 100%)' },
-  { id: 'p3', name: 'Kalung Perak Bali — Ukiran Naga', seller: 'Perak Celuk', sellerId: 'perak-celuk', price: 425000, rating: 5.0, reviewCount: 56, sold: 178, category: 'aksesori', freeShipping: false, badge: 'Verified', gradient: 'linear-gradient(145deg, #C8C8C8 0%, #A8A8A8 50%, #888888 100%)' },
-  { id: 'p4', name: 'Mangkuk Keramik Tangan — Biru Indigo', seller: 'Tanah Liat Studio', sellerId: 'tanah-liat-studio', price: 85000, rating: 4.9, reviewCount: 87, sold: 312, category: 'rumah', freeShipping: true, badge: 'Bisa Custom', gradient: 'linear-gradient(145deg, #B8C8D8 0%, #8CA0B8 50%, #607898 100%)' },
+  { id: 'p1', name: 'Batik Tulis Madura � Motif Parang', seller: 'Kain Warisan', sellerId: 'kain-warisan', price: 385000, rating: 4.9, reviewCount: 124, sold: 487, category: 'pakaian', freeShipping: true, badge: 'Terlaris', gradient: 'linear-gradient(145deg, #E8D5C0 0%, #D4B896 50%, #C09A6B 100%)' },
+  { id: 'p2', name: 'Tas Rajut Tali Kur � Cokelat Tanah', seller: 'Rajut Nusantara', sellerId: 'rajut-nusantara', price: 165000, rating: 4.8, reviewCount: 89, sold: 312, category: 'tas', freeShipping: true, gradient: 'linear-gradient(145deg, #D4C4A8 0%, #B8A88C 50%, #9C8C70 100%)' },
+  { id: 'p3', name: 'Kalung Perak Bali � Ukiran Naga', seller: 'Perak Celuk', sellerId: 'perak-celuk', price: 425000, rating: 5.0, reviewCount: 56, sold: 178, category: 'aksesori', freeShipping: false, badge: 'Verified', gradient: 'linear-gradient(145deg, #C8C8C8 0%, #A8A8A8 50%, #888888 100%)' },
+  { id: 'p4', name: 'Mangkuk Keramik Tangan � Biru Indigo', seller: 'Tanah Liat Studio', sellerId: 'tanah-liat-studio', price: 85000, rating: 4.9, reviewCount: 87, sold: 312, category: 'rumah', freeShipping: true, badge: 'Bisa Custom', gradient: 'linear-gradient(145deg, #B8C8D8 0%, #8CA0B8 50%, #607898 100%)' },
   { id: 'p5', name: 'Speaker Bluetooth Kayu Jati', seller: 'Audio Kayu', sellerId: 'audio-kayu', price: 275000, rating: 4.7, reviewCount: 43, sold: 156, category: 'elektronik', freeShipping: true, gradient: 'linear-gradient(145deg, #C8B090 0%, #A88860 50%, #886840 100%)' },
-  { id: 'p6', name: 'Kopi Gayo Arabika — Roasted Bean 250g', seller: 'Kopi Gayo Asli', sellerId: 'kopi-gayo', price: 95000, rating: 4.8, reviewCount: 201, sold: 834, category: 'makanan', freeShipping: true, badge: 'Terlaris', gradient: 'linear-gradient(145deg, #6B4226 0%, #4A2E1A 50%, #2D1B0E 100%)' },
-  { id: 'p7', name: 'Kemeja Linen — Warna Tanah Liat', seller: 'Linen Archipelago', sellerId: 'linen-archipelago', price: 320000, rating: 4.6, reviewCount: 67, sold: 203, category: 'pakaian', freeShipping: false, gradient: 'linear-gradient(145deg, #D4C0A8 0%, #B8A080 50%, #9C8060 100%)' },
-  { id: 'p8', name: 'Dompet Kulit Sapi — Cokelat Natural', seller: 'Kulit Garut', sellerId: 'kulit-garut', price: 185000, rating: 4.9, reviewCount: 112, sold: 445, category: 'aksesori', freeShipping: true, gradient: 'linear-gradient(145deg, #A07848 0%, #806030 50%, #604820 100%)' },
+  { id: 'p6', name: 'Kopi Gayo Arabika � Roasted Bean 250g', seller: 'Kopi Gayo Asli', sellerId: 'kopi-gayo', price: 95000, rating: 4.8, reviewCount: 201, sold: 834, category: 'makanan', freeShipping: true, badge: 'Terlaris', gradient: 'linear-gradient(145deg, #6B4226 0%, #4A2E1A 50%, #2D1B0E 100%)' },
+  { id: 'p7', name: 'Kemeja Linen � Warna Tanah Liat', seller: 'Linen Archipelago', sellerId: 'linen-archipelago', price: 320000, rating: 4.6, reviewCount: 67, sold: 203, category: 'pakaian', freeShipping: false, gradient: 'linear-gradient(145deg, #D4C0A8 0%, #B8A080 50%, #9C8060 100%)' },
+  { id: 'p8', name: 'Dompet Kulit Sapi � Cokelat Natural', seller: 'Kulit Garut', sellerId: 'kulit-garut', price: 185000, rating: 4.9, reviewCount: 112, sold: 445, category: 'aksesori', freeShipping: true, gradient: 'linear-gradient(145deg, #A07848 0%, #806030 50%, #604820 100%)' },
   { id: 'p9', name: 'Lilin Soya Aroma Kopi', seller: 'Api Kecil', sellerId: 'api-kecil', price: 65000, rating: 4.8, reviewCount: 134, sold: 478, category: 'rumah', freeShipping: true, gradient: 'linear-gradient(145deg, #F0E0C8 0%, #E0C8A0 50%, #D0B080 100%)' },
-  { id: 'p10', name: 'Charger USB-C Kayu — 20W Fast', seller: 'Tech Lokal', sellerId: 'tech-lokal', price: 145000, rating: 4.5, reviewCount: 38, sold: 124, category: 'elektronik', freeShipping: false, gradient: 'linear-gradient(145deg, #A89070 0%, #887050 50%, #685030 100%)' },
-  { id: 'p11', name: 'Sambal Roa Manado — Botol 200ml', seller: 'Rasa Manado', sellerId: 'rasa-manado', price: 48000, rating: 4.9, reviewCount: 178, sold: 623, category: 'makanan', freeShipping: true, badge: 'Terlaris', gradient: 'linear-gradient(145deg, #C83030 0%, #A02020 50%, #781818 100%)' },
-  { id: 'p12', name: 'Tas Tote — Canvas Polos', seller: 'Kain & Co', sellerId: 'kain-co', price: 55000, rating: 5.0, reviewCount: 203, sold: 712, category: 'tas', freeShipping: true, gradient: 'linear-gradient(145deg, #E8E0D0 0%, #D0C8B0 50%, #B8B098 100%)' },
+  { id: 'p10', name: 'Charger USB-C Kayu � 20W Fast', seller: 'Tech Lokal', sellerId: 'tech-lokal', price: 145000, rating: 4.5, reviewCount: 38, sold: 124, category: 'elektronik', freeShipping: false, gradient: 'linear-gradient(145deg, #A89070 0%, #887050 50%, #685030 100%)' },
+  { id: 'p11', name: 'Sambal Roa Manado � Botol 200ml', seller: 'Rasa Manado', sellerId: 'rasa-manado', price: 48000, rating: 4.9, reviewCount: 178, sold: 623, category: 'makanan', freeShipping: true, badge: 'Terlaris', gradient: 'linear-gradient(145deg, #C83030 0%, #A02020 50%, #781818 100%)' },
+  { id: 'p12', name: 'Tas Tote � Canvas Polos', seller: 'Kain & Co', sellerId: 'kain-co', price: 55000, rating: 5.0, reviewCount: 203, sold: 712, category: 'tas', freeShipping: true, gradient: 'linear-gradient(145deg, #E8E0D0 0%, #D0C8B0 50%, #B8B098 100%)' },
 ]
 
 const filteredProducts = computed(() => {
@@ -105,16 +105,16 @@ interface FlashDeal {
 }
 
 const flashDeals: FlashDeal[] = [
-  { id: 'fd1', name: 'Sabun Kopi & Susu — Set 3 Batang', seller: 'Sabun Desa', originalPrice: 75000, dealPrice: 45000, discount: 40, sold: 89, stock: 30, endsIn: '12:34:56', gradient: 'linear-gradient(145deg, #D4C4A8 0%, #A88860 100%)' },
-  { id: 'fd2', name: 'Notebook Kulit — 100 Halaman', seller: 'Buku Tangan', originalPrice: 120000, dealPrice: 72000, discount: 40, sold: 56, stock: 18, endsIn: '08:12:33', gradient: 'linear-gradient(145deg, #A07848 0%, #604820 100%)' },
-  { id: 'fd3', name: 'Gantungan Kunci Tembaga — Custom Nama', seller: 'Logam Studio', originalPrice: 55000, dealPrice: 35000, discount: 36, sold: 134, stock: 45, endsIn: '05:47:21', gradient: 'linear-gradient(145deg, #C8A878 0%, #886840 100%)' },
+  { id: 'fd1', name: 'Sabun Kopi & Susu � Set 3 Batang', seller: 'Sabun Desa', originalPrice: 75000, dealPrice: 45000, discount: 40, sold: 89, stock: 30, endsIn: '12:34:56', gradient: 'linear-gradient(145deg, #D4C4A8 0%, #A88860 100%)' },
+  { id: 'fd2', name: 'Notebook Kulit � 100 Halaman', seller: 'Buku Tangan', originalPrice: 120000, dealPrice: 72000, discount: 40, sold: 56, stock: 18, endsIn: '08:12:33', gradient: 'linear-gradient(145deg, #A07848 0%, #604820 100%)' },
+  { id: 'fd3', name: 'Gantungan Kunci Tembaga � Custom Nama', seller: 'Logam Studio', originalPrice: 55000, dealPrice: 35000, discount: 36, sold: 134, stock: 45, endsIn: '05:47:21', gradient: 'linear-gradient(145deg, #C8A878 0%, #886840 100%)' },
 ]
 
 // ============================================================
 // DATA: Testimonials
 // ============================================================
 const testimonials = [
-  { name: 'Rina S.', location: 'Jakarta', text: 'Batik tulis online pertama. Kualitas lebih bagus dari foto — kain tebal, warna tajam.', rating: 5, product: 'Batik Tulis Madura' },
+  { name: 'Rina S.', location: 'Jakarta', text: 'Batik tulis online pertama. Kualitas lebih bagus dari foto � kain tebal, warna tajam.', rating: 5, product: 'Batik Tulis Madura' },
   { name: 'Dimas P.', location: 'Bandung', text: 'Keramik jadi hadiah ulang tahun istri. Packaging aman, sampai utuh.', rating: 5, product: 'Mangkuk Keramik Tangan' },
   { name: 'Sari W.', location: 'Yogyakarta', text: 'Sambal roa bikin nagih. Sudah 3 kali repeat order. Pengiriman cepat.', rating: 5, product: 'Sambal Roa Manado' },
 ]
@@ -431,7 +431,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
             <!-- Image -->
             <div class="relative aspect-[3/4] rounded-lg mb-3 overflow-hidden" :style="{ background: p.gradient }">
               <div class="absolute inset-0 flex items-center justify-center opacity-20 text-6xl select-none">
-                {{ categories.find(c => c.id === p.category)?.icon || '📦' }}
+                {{ categories.find(c => c.id === p.category)?.icon || '??' }}
               </div>
               <!-- Badges -->
               <div class="absolute top-3 left-3 flex flex-col gap-1.5">
@@ -612,7 +612,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- FOOTER -->
     <!-- ============================================================ -->
-    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Bazaar"
+    <TmplFooter data-reveal="fade-up" brand-name="Bazaar"
       variant="columns"
       :accent="toCss(palette.accent)"
       :bg="toCss(palette.fg)"

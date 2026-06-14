@@ -1,6 +1,6 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 /**
- * membership-2.vue — Sinau Koding
+ * membership-2.vue � Sinau Koding
  * Indonesian developer community platform. Dark night bg, coral accent.
  * Geist + Geist Mono. 120-node 3D constellation (case-timeline, balanced).
  *
@@ -33,12 +33,12 @@ const isReducedMotion = ref(false)
 // DATA
 // ============================================================
 const spaces = [
-  { name: 'Frontend', icon: '⚡', desc: 'React, Vue, Next.js. UI dan performa.', members: 1840, color: '#38bdf8' },
-  { name: 'Backend', icon: '🔧', desc: 'Node, Go, Rust. API dan database.', members: 1520, color: '#a78bfa' },
-  { name: 'Mobile', icon: '📱', desc: 'Flutter, React Native. Cross-platform.', members: 980, color: '#34d399' },
-  { name: 'DevOps', icon: '☁️', desc: 'Docker, K8s, CI/CD. Local ke production.', members: 720, color: '#fb923c' },
-  { name: 'AI/ML', icon: '🤖', desc: 'LLM, vision, pipeline. Eksperimen ke deploy.', members: 1100, color: '#f472b6' },
-  { name: 'Desain', icon: '🎨', desc: 'UI/UX, Figma. Produk yang enak dipakai.', members: 640, color: '#fbbf24' },
+  { name: 'Frontend', icon: '?', desc: 'React, Vue, Next.js. UI dan performa.', members: 1840, color: '#38bdf8' },
+  { name: 'Backend', icon: '??', desc: 'Node, Go, Rust. API dan database.', members: 1520, color: '#a78bfa' },
+  { name: 'Mobile', icon: '??', desc: 'Flutter, React Native. Cross-platform.', members: 980, color: '#34d399' },
+  { name: 'DevOps', icon: '??', desc: 'Docker, K8s, CI/CD. Local ke production.', members: 720, color: '#fb923c' },
+  { name: 'AI/ML', icon: '??', desc: 'LLM, vision, pipeline. Eksperimen ke deploy.', members: 1100, color: '#f472b6' },
+  { name: 'Desain', icon: '??', desc: 'UI/UX, Figma. Produk yang enak dipakai.', members: 640, color: '#fbbf24' },
 ]
 
 const events = [
@@ -94,7 +94,7 @@ const team = [
 ]
 
 const faqs = [
-  { q: 'Apakah Sinau Koding gratis?', a: 'Ya. 3 space, baca thread, event publik — tanpa biaya.' },
+  { q: 'Apakah Sinau Koding gratis?', a: 'Ya. 3 space, baca thread, event publik � tanpa biaya.' },
   { q: 'Bedanya Komunitas dan Studio?', a: 'Komunitas buka semua 6 space + post. Studio tambah mentoring 1-on-1, portfolio review, job referral.' },
   { q: 'Saya pemula, cocok nggak?', a: 'Cocok. Ada thread khusus pertanyaan dasar. Tidak ada pertanyaan bodoh.' },
   { q: 'Event diadakan di mana?', a: 'Online via Zoom/Discord. Beberapa offline di Jakarta, Bandung, Surabaya.' },
@@ -538,7 +538,7 @@ onMounted(() => {
     <!-- ============================================================ -->
     <!-- 8. FOOTER -->
     <!-- ============================================================ -->
-    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Sinau Koding"
+    <TmplFooter data-reveal="fade-up" brand-name="Sinau Koding"
       variant="columns"
       :accent="toCssSafe(palette.accent)"
       :bg="toCssSafe(palette.surface)"

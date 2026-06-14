@@ -1,9 +1,9 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 /**
- * ecommerce-1.vue — Erigo Goods
+ * ecommerce-1.vue � Erigo Goods
  * Premium product e-commerce. Apple/B&O/Hermes aesthetic.
  *
- * 8 sections: Hero + 3D → Featured → Categories → Product Detail → Cart → Testimonials → FAQ → Footer
+ * 8 sections: Hero + 3D ? Featured ? Categories ? Product Detail ? Cart ? Testimonials ? FAQ ? Footer
  * 7+ working interactions: category filter, cart add/remove/qty, variant selector, color picker, 3D drag, TmplForm, WhatsApp checkout
  */
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
@@ -507,7 +507,7 @@ function showToast(msg: string) {
       <!-- ============================== -->
       <!-- 7. FOOTER (signoff)            -->
       <!-- ============================== -->
-      <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Erigo Goods"
+      <TmplFooter data-reveal="fade-up" brand-name="Erigo Goods"
         variant="signoff"
         signoff="Objek yang tenang, dari Bandung."
         signature="Dibuat di Bandung"
