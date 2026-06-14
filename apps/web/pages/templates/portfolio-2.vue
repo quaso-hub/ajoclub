@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * portfolio-2.vue — Studio Daida: Light Editorial Studio
  * slug='portfolio-2', typo='daida', palette='daida'
@@ -9,6 +9,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('portfolio-2')
 const { styles, h1Style, h2Style, monoStyle, tpl, palette, typography } = theme
+useScrollReveal('portfolio-2')
 
 const isLoaded = ref(false)
 onMounted(() => { setTimeout(() => { isLoaded.value = true }, 400) })
@@ -185,7 +186,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
           </button>
         </div>
 
-        <div class="daida-cases-grid">
+        <div class="daida-cases-grid" data-reveal="stagger-children">
           <article
             v-for="(cs, i) in filteredCases"
             :key="cs.id"
@@ -222,7 +223,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
           <h2 :style="h2Style" class="daida-section__title">Apa yang kami kerjakan</h2>
         </div>
 
-        <div class="daida-services-grid">
+        <div class="daida-services-grid" data-reveal="stagger-children">
           <div v-for="svc in services" :key="svc.num" class="daida-service">
             <span :style="monoStyle" class="daida-service__num">{{ svc.num }}</span>
             <h3 class="daida-service__title">{{ svc.title }}</h3>
@@ -240,7 +241,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
           <h2 :style="h2Style" class="daida-section__title">Bagaimana kami bekerja</h2>
         </div>
 
-        <div class="daida-process-grid">
+        <div class="daida-process-grid" data-reveal="stagger-children">
           <div v-for="step in processSteps" :key="step.num" class="daida-step">
             <span :style="monoStyle" class="daida-step__num">{{ step.num }}</span>
             <div class="daida-step__line" :style="{ background: accentHex }" />
@@ -259,7 +260,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
           <h2 :style="h2Style" class="daida-section__title">Dari studio</h2>
         </div>
 
-        <div class="daida-conversations-grid">
+        <div class="daida-conversations-grid" data-reveal="stagger-children">
           <article v-for="conv in conversations" :key="conv.name" class="daida-conversation">
             <div class="daida-conversation__header">
               <div class="daida-conversation__avatar" :style="{ background: accentSoftHex, color: accentHex }">
@@ -332,7 +333,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
     <!-- ============ 8. KONTAK / FOOTER ============ -->
     <section id="kontak" class="daida-section daida-section--contact">
       <div class="daida-container">
-        <div class="daida-contact-grid">
+        <div class="daida-contact-grid" data-reveal="stagger-children">
           <div class="daida-contact__info">
             <p :style="monoStyle" class="daida-label">07 &mdash; Hubungi Kami</p>
             <h2 :style="h2Style" class="daida-section__title">Ceritakan proyek Anda</h2>
@@ -363,8 +364,7 @@ const waUrl = 'https://wa.me/62227204321?text=' + encodeURIComponent('Halo, saya
       </div>
     </section>
 
-    <TmplFooter
-      brand-name="Studio Daida"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Studio Daida"
       variant="columns"
       :links="[
         { label: 'Karya', href: '#karya' },

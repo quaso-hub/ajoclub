@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * event-1.vue: DevTalk 2026
  * Indonesian tech conference. Dark, kelly green accent.
@@ -11,6 +11,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('event-1')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('event-1')
 const { buildUrl } = useWhatsApp()
 
 // ============================================================
@@ -324,7 +325,7 @@ const googleCalUrl = computed(() => {
       <!-- ============================== -->
       <!-- 2. COUNTDOWN                    -->
       <!-- ============================== -->
-      <section class="devtalk-countdown-section">
+      <section class="devtalk-countdown-section" data-reveal="fade-up">
         <TmplCountdown
           target="2026-09-17T09:00:00+07:00"
           label="Pintu dibuka dalam"
@@ -347,7 +348,7 @@ const googleCalUrl = computed(() => {
           </p>
         </div>
 
-        <div class="devtalk-speakers-grid">
+        <div class="devtalk-speakers-grid" data-reveal="stagger-children">
           <div
             v-for="sp in speakers"
             :key="sp.id"
@@ -403,7 +404,7 @@ const googleCalUrl = computed(() => {
         </p>
 
         <!-- Schedule grid -->
-        <div class="devtalk-schedule-grid">
+        <div class="devtalk-schedule-grid" data-reveal="stagger-children">
           <!-- Header row -->
           <div class="devtalk-schedule-header" :style="monoStyle">
             <span class="devtalk-schedule-time-label">Waktu</span>
@@ -529,7 +530,7 @@ const googleCalUrl = computed(() => {
       <!-- ============================== -->
       <!-- 8. ADD TO CALENDAR              -->
       <!-- ============================== -->
-      <section class="devtalk-section devtalk-calendar-section">
+      <section class="devtalk-section devtalk-calendar-section" data-reveal="fade-up">
         <div class="devtalk-calendar">
           <p class="devtalk-eyebrow" :style="monoStyle">TAMBAH KE KALENDER</p>
           <p class="devtalk-calendar__dates" :style="monoStyle">2026-09-17 &rarr; 2026-09-19, WIB</p>
@@ -549,7 +550,7 @@ const googleCalUrl = computed(() => {
       <!-- ============================== -->
       <!-- 9. SPONSORS (5 tiers)           -->
       <!-- ============================== -->
-      <section class="devtalk-section devtalk-sponsors-section">
+      <section class="devtalk-section devtalk-sponsors-section" data-reveal="fade-up">
         <div class="devtalk-section__head">
           <p class="devtalk-eyebrow" :style="monoStyle">MITRA</p>
           <h2 :style="h2Style" class="text-balance">
@@ -589,7 +590,7 @@ const googleCalUrl = computed(() => {
           </h2>
         </div>
 
-        <div class="devtalk-location-grid">
+        <div class="devtalk-location-grid" data-reveal="stagger-children">
           <TmplMap
             label="JIExpo Kemayoran"
             address="Jl. Benyamin Suaeb, Kemayoran"
@@ -635,8 +636,7 @@ const googleCalUrl = computed(() => {
     </main>
 
     <!-- Footer -->
-    <TmplFooter
-      brand-name="DevTalk 2026"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="DevTalk 2026"
       variant="columns"
       :accent="tpl.accentColor"
       :links="[

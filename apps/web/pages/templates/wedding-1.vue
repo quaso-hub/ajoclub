@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * wedding-1.vue — Anindya & Rama
  * Luxury Romantic Wedding. Hand-bound book layout.
@@ -11,6 +11,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('wedding-1')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('wedding-1')
 
 // ============================================================
 // STATE
@@ -340,7 +341,7 @@ function openLiveStream() {
         <p class="ar-eyebrow" :style="monoStyle">Galeri</p>
         <h2 :style="h1Style" class="ar-galeri__title text-balance">Momen yang ingin kami ingat.</h2>
 
-        <div class="ar-galeri__grid">
+        <div class="ar-galeri__grid" data-reveal="stagger-children">
           <button
             v-for="(img, i) in galleryImages"
             :key="i"
@@ -406,7 +407,7 @@ function openLiveStream() {
       <!-- 7. ADD TO CALENDAR + LIVE STREAM -->
       <!-- ============================== -->
       <section class="ar-actions">
-        <div class="ar-actions__grid">
+        <div class="ar-actions__grid" data-reveal="stagger-children">
           <div class="ar-action">
             <p class="ar-eyebrow" :style="monoStyle">Kalender</p>
             <button type="button" class="ar-action__btn" @click="downloadICS">
@@ -435,8 +436,7 @@ function openLiveStream() {
       </section>
     </main>
 
-    <TmplFooter
-      :brand-name="'Anindya & Rama'"
+    <TmplFooter data-reveal="fade-up" data-reveal="fade-up"       :brand-name="'Anindya & Rama'"
       :links="[
         { label: 'Cerita', href: '#cerita' },
         { label: 'Acara', href: '#acara' },

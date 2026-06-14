@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * restaurant-2.vue — Kopi Rumah
  * Modern cafe. Pilot Coffee / Blue Bottle style. Space Grotesk bold, warm cream, sun accent.
@@ -12,6 +12,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('restaurant-2')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('restaurant-2')
 
 // ============================================================
 // STATE
@@ -489,7 +490,7 @@ function handleNavClick(e: MouseEvent, href: string) {
       <!-- SECTION 02 — MENU (8 items)     -->
       <!-- ============================== -->
       <section id="menu" class="kopi-menu">
-        <div class="kopi-section-head">
+        <div class="kopi-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Menu.</h2>
           <p class="kopi-section-sub" :style="monoStyle">8 pilihan · Kopi · Makanan · Roti</p>
         </div>
@@ -517,13 +518,13 @@ function handleNavClick(e: MouseEvent, href: string) {
             :key="item.id"
             class="kopi-menu-card"
           >
-            <div class="kopi-menu-card__head">
+            <div class="kopi-menu-card__head" data-reveal="fade-up" data-reveal-delay="0.1">
               <span class="kopi-menu-card__cat" :style="monoStyle">{{ item.category.toUpperCase() }}</span>
               <span v-if="item.tag" class="kopi-menu-card__tag">{{ item.tag }}</span>
             </div>
             <h3 class="kopi-menu-card__name">{{ item.name }}</h3>
             <p class="kopi-menu-card__desc">{{ item.description }}</p>
-            <div class="kopi-menu-card__foot">
+            <div class="kopi-menu-card__foot" data-reveal="fade-up" data-reveal-delay="0.1">
               <span class="kopi-menu-card__price">{{ fmtRp(item.price) }}</span>
               <button
                 type="button"
@@ -549,12 +550,12 @@ function handleNavClick(e: MouseEvent, href: string) {
       <!-- SECTION 03 — TENTANG            -->
       <!-- ============================== -->
       <section id="tentang" class="kopi-tentang">
-        <div class="kopi-section-head">
+        <div class="kopi-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Cerita kami.</h2>
           <p class="kopi-section-sub" :style="monoStyle">Sejak 2019 · Kemang, Jakarta</p>
         </div>
 
-        <div class="kopi-tentang__grid">
+        <div class="kopi-tentang__grid" data-reveal="stagger-children">
           <div class="kopi-tentang__text">
             <p class="kopi-tentang__lead">
               Kopi yang baik, dari biji yang baik.
@@ -591,12 +592,12 @@ function handleNavClick(e: MouseEvent, href: string) {
       <!-- SECTION 04 — LOKASI + JAM       -->
       <!-- ============================== -->
       <section id="lokasi" class="kopi-lokasi">
-        <div class="kopi-section-head">
+        <div class="kopi-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Datang ngopi.</h2>
           <p class="kopi-section-sub" :style="monoStyle">4 lokasi + 1 roastery</p>
         </div>
 
-        <div class="kopi-lokasi__grid">
+        <div class="kopi-lokasi__grid" data-reveal="stagger-children">
           <TmplMap
             label="Kopi Rumah Kemang"
             address="Jl. Kemang Selatan IX No. 42"
@@ -642,12 +643,12 @@ function handleNavClick(e: MouseEvent, href: string) {
       <!-- SECTION 05 — GALERI             -->
       <!-- ============================== -->
       <section id="galeri" class="kopi-galeri">
-        <div class="kopi-section-head">
+        <div class="kopi-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Suasana.</h2>
           <p class="kopi-section-sub" :style="monoStyle">Foto dari kedai kami</p>
         </div>
 
-        <div class="kopi-galeri__grid">
+        <div class="kopi-galeri__grid" data-reveal="stagger-children">
           <div
             v-for="(g, i) in galeriItems"
             :key="i"
@@ -671,12 +672,12 @@ function handleNavClick(e: MouseEvent, href: string) {
       <!-- SECTION 06 — RESERVASI          -->
       <!-- ============================== -->
       <section id="reservasi" class="kopi-reservasi">
-        <div class="kopi-section-head">
+        <div class="kopi-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Reservasi.</h2>
           <p class="kopi-section-sub" :style="monoStyle">1-20 orang · Kursi kerja & meeting</p>
         </div>
 
-        <div class="kopi-reservasi__grid">
+        <div class="kopi-reservasi__grid" data-reveal="stagger-children">
           <form class="kopi-form" novalidate @submit.prevent="submitReservation">
             <div class="kopi-form__row">
               <div class="kopi-form__field">
@@ -753,8 +754,7 @@ function handleNavClick(e: MouseEvent, href: string) {
       <!-- ============================== -->
       <!-- SECTION 07 — FOOTER             -->
       <!-- ============================== -->
-      <TmplFooter
-        brand-name="kopi rumah."
+      <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="kopi rumah."
         variant="signoff"
         signoff="Dari rumah kami, ke cangkir anda."
         signature="Dirancang di Jakarta, dibuat untuk UMKM Indonesia"

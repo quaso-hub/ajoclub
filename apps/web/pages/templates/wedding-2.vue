@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /* wedding-2 — Dita & Budi. Sederhana. Bersih. Jelas. */
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
@@ -6,6 +6,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('wedding-2')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('wedding-2')
 
 const isLoaded = ref(false)
 const isReducedMotion = ref(false)
@@ -335,7 +336,7 @@ function openLiveStream() {
         <p class="db-eyebrow" :style="monoStyle">Galeri</p>
         <h2 :style="h1Style" class="db-galeri__title text-balance">Momen kami.</h2>
 
-        <div class="db-galeri__grid">
+        <div class="db-galeri__grid" data-reveal="stagger-children">
           <button
             v-for="(img, i) in galleryImages"
             :key="i"
@@ -401,7 +402,7 @@ function openLiveStream() {
       <!-- ADD TO CALENDAR + LIVE STREAM -->
       <!-- ============================== -->
       <section class="db-actions">
-        <div class="db-actions__grid">
+        <div class="db-actions__grid" data-reveal="stagger-children">
           <div class="db-action">
             <p class="db-eyebrow" :style="monoStyle">Kalender</p>
             <p class="db-action__sub">Simpan tanggal acaranya.</p>
@@ -432,8 +433,7 @@ function openLiveStream() {
       </section>
     </main>
 
-    <TmplFooter
-      :brand-name="'Dita & Budi'"
+    <TmplFooter data-reveal="fade-up" data-reveal="fade-up"       :brand-name="'Dita & Budi'"
       :links="[
         { label: 'Cerita', href: '#cerita' },
         { label: 'Acara', href: '#acara' },

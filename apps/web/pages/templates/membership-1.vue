@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * membership-1.vue — Catatan Harian
  * Indonesian editorial newsletter. Substack/Aeon/The Information aesthetic.
@@ -13,6 +13,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('membership-1')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('membership-1')
 const { buildUrl } = useWhatsApp()
 
 // ============================================================
@@ -328,7 +329,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- Marquee: what people say -->
-    <TmplMarquee
+    data-reveal="fade-up" <TmplMarquee
       :items="[
         '2.400 pembaca setiap Kamis',
         'Tidak ada iklan',
@@ -348,7 +349,7 @@ onBeforeUnmount(() => {
       <!-- SECTION 2: TENTANG PENULIS                   -->
       <!-- ============================================ -->
       <section id="tentang" class="catatan__section">
-        <div class="catatan__section-inner">
+        <div class="catatan__section-inner" data-reveal="fade-up">
           <p class="catatan__eyebrow" :style="monoStyle">TENTANG PENULIS</p>
           <h2 :style="h2Style" class="catatan__section-title">Tentang Rara</h2>
 
@@ -380,7 +381,7 @@ onBeforeUnmount(() => {
       <!-- SECTION 3: TULISAN TERBARU (7 articles)      -->
       <!-- ============================================ -->
       <section id="tulisan" class="catatan__section">
-        <div class="catatan__section-inner catatan__section-inner--wide">
+        <div class="catatan__section-inner catatan__section-inner--wide" data-reveal="fade-up">
           <p class="catatan__eyebrow" :style="monoStyle">TULISAN TERBARU</p>
           <h2 :style="h2Style" class="catatan__section-title">Yang sudah terbit</h2>
 
@@ -412,7 +413,7 @@ onBeforeUnmount(() => {
       <!-- SECTION 4: ARSIP (filtered list)             -->
       <!-- ============================================ -->
       <section id="arsip" class="catatan__section catatan__section--warm">
-        <div class="catatan__section-inner catatan__section-inner--wide">
+        <div class="catatan__section-inner catatan__section-inner--wide" data-reveal="fade-up">
           <p class="catatan__eyebrow" :style="monoStyle">ARSIP</p>
           <h2 :style="h2Style" class="catatan__section-title">Semua tulisan</h2>
 
@@ -455,7 +456,7 @@ onBeforeUnmount(() => {
       <!-- SECTION 5: BERLANGGANAN (subscribe form)     -->
       <!-- ============================================ -->
       <section id="berlangganan" class="catatan__section catatan__section--subscribe">
-        <div class="catatan__section-inner catatan__section-inner--narrow">
+        <div class="catatan__section-inner catatan__section-inner--narrow" data-reveal="fade-up">
           <p class="catatan__eyebrow" :style="monoStyle">BERLANGGANAN</p>
           <h2 :style="h2Style" class="catatan__section-title">Tetap terhubung</h2>
           <p class="catatan__subscribe-intro">
@@ -483,7 +484,7 @@ onBeforeUnmount(() => {
       <!-- SECTION 6: TESTIMONI (3 cards)               -->
       <!-- ============================================ -->
       <section id="testimoni" class="catatan__section">
-        <div class="catatan__section-inner catatan__section-inner--narrow">
+        <div class="catatan__section-inner catatan__section-inner--narrow" data-reveal="fade-up">
           <p class="catatan__eyebrow" :style="monoStyle">APA KATA MEREKA</p>
           <h2 :style="h2Style" class="catatan__section-title">Tentang Catatan Harian</h2>
 
@@ -511,7 +512,7 @@ onBeforeUnmount(() => {
       <!-- SECTION 7: PERTANYAAN (FAQ)                  -->
       <!-- ============================================ -->
       <section id="pertanyaan" class="catatan__section">
-        <div class="catatan__section-inner catatan__section-inner--narrow">
+        <div class="catatan__section-inner catatan__section-inner--narrow" data-reveal="fade-up">
           <p class="catatan__eyebrow" :style="monoStyle">PERTANYAAN</p>
           <h2 :style="h2Style" class="catatan__section-title">Yang sering ditanyakan</h2>
 
@@ -532,8 +533,7 @@ onBeforeUnmount(() => {
     <!-- ============================================ -->
     <!-- SECTION 8: FOOTER                            -->
     <!-- ============================================ -->
-    <TmplFooter
-      brand-name="Catatan Harian"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Catatan Harian"
       variant="signoff"
       signoff="Oleh Rara Adiswara. Dari Jakarta, dengan kopi."
       :accent="tpl.accentColor"

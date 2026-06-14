@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * architecture-1.vue — Archiry
  * Architecture firm. BIG/OMA/Snohetta restraint. Cormorant Garamond italic.
@@ -15,6 +15,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('architecture-1')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('architecture-1')
 
 // ============================================================
 // STATE
@@ -454,7 +455,7 @@ const navLinks = [
             </p>
             <h3 class="archiry-project-card__name">{{ p.name }}</h3>
             <p class="archiry-project-card__desc">{{ p.desc }}</p>
-            <div class="archiry-project-card__divider" />
+            <div class="archiry-project-card__divider" data-reveal="fade-up" data-reveal-delay="0.1" />
             <p class="archiry-project-card__info" :style="monoStyle">
               {{ p.location }} &middot; {{ p.area }} &middot; <span :style="{ color: statusColor(p.status) }">{{ p.status }}</span>
             </p>
@@ -534,7 +535,7 @@ const navLinks = [
           10 orang.<br />Bandung.<br />Bukan 50. Bukan 5.
         </h2>
 
-        <div class="archiry-team-grid">
+        <div class="archiry-team-grid" data-reveal="stagger-children">
           <div
             v-for="(member, i) in team"
             :key="member.name"
@@ -571,7 +572,7 @@ const navLinks = [
           Diterima oleh<br />publikasi yang<br />kami hormati.
         </h2>
 
-        <div class="archiry-recog-grid">
+        <div class="archiry-recog-grid" data-reveal="stagger-children">
           <div
             v-for="(r, i) in recognition"
             :key="`${r.pub}-${r.year}`"
@@ -615,7 +616,7 @@ const navLinks = [
           Balas dalam 48 jam. WhatsApp, email, atau ketemu langsung di studio. Konsultasi pertama gratis.
         </p>
 
-        <div class="archiry-contact-grid">
+        <div class="archiry-contact-grid" data-reveal="stagger-children">
           <!-- Form -->
           <div class="archiry-contact-form">
             <TmplForm
@@ -672,8 +673,7 @@ const navLinks = [
     </main>
 
     <!-- Footer -->
-    <TmplFooter
-      brand-name="Archiry"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Archiry"
       variant="signoff"
       signoff="Arsitektur yang menghormati tempatnya."
       accent="var(--tmpl-accent)"

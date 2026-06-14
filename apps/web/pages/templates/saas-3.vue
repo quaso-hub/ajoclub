@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * saas-3.vue — Lintas
  * Color-Wash SaaS Editorial. 7 OKLCH section washes. GLSL morphing blob.
@@ -12,6 +12,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('saas-3')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('saas-3')
 
 // ============================================================
 // STATE
@@ -300,7 +301,7 @@ function initBlob() {
       <!-- 2. MARQUEE                     -->
       <!-- ============================== -->
       <section
-        class="lintas-marquee-section"
+        class="lintas-marquee-section" data-reveal="fade-up" data-reveal="fade-up"
         :style="{ '--section-bg': washes.marquee, background: washes.marquee }"
       >
         <p class="lintas-label lintas-label--center" :style="monoStyle">DIPERCAYA OLEH</p>
@@ -320,14 +321,14 @@ function initBlob() {
         class="lintas-features"
         :style="{ '--section-bg': washes.features, background: washes.features }"
       >
-        <div class="lintas-section-head">
+        <div class="lintas-section-head" data-reveal="fade-up">
           <p class="lintas-label" :style="monoStyle">FITUR</p>
           <h2 :style="h2Style" class="text-balance">
             Enam hal yang membuat tim Anda pulang lebih awal.
           </h2>
         </div>
 
-        <div class="lintas-features__grid">
+        <div class="lintas-features__grid" data-reveal="stagger-children">
           <div
             v-for="(f, i) in features"
             :key="i"
@@ -350,7 +351,7 @@ function initBlob() {
         class="lintas-pricing"
         :style="{ '--section-bg': washes.pricing, background: washes.pricing }"
       >
-        <div class="lintas-section-head">
+        <div class="lintas-section-head" data-reveal="fade-up">
           <p class="lintas-label" :style="monoStyle">HARGA</p>
           <h2 :style="h2Style" class="text-balance">
             Harga yang jujur. Tanpa kejutan.
@@ -435,21 +436,21 @@ function initBlob() {
         class="lintas-testimonials"
         :style="{ '--section-bg': washes.testimonials, background: washes.testimonials }"
       >
-        <div class="lintas-section-head">
+        <div class="lintas-section-head" data-reveal="fade-up">
           <p class="lintas-label" :style="monoStyle">TESTIMONI</p>
           <h2 :style="h2Style" class="text-balance">
             Tim yang sudah pindah ke Lintas.
           </h2>
         </div>
 
-        <div class="lintas-testimonials__grid">
+        <div class="lintas-testimonials__grid" data-reveal="stagger-children">
           <blockquote
             v-for="(t, i) in testimonials"
             :key="i"
             class="lintas-testimonial"
           >
             <p class="lintas-testimonial__quote">"{{ t.quote }}"</p>
-            <footer class="lintas-testimonial__footer">
+            <footer class="lintas-testimonial__footer" data-reveal="fade-up">
               <p class="lintas-testimonial__name">{{ t.name }}</p>
               <p class="lintas-testimonial__role" :style="monoStyle">{{ t.role }}</p>
             </footer>
@@ -465,7 +466,7 @@ function initBlob() {
         class="lintas-faq-section"
         :style="{ '--section-bg': washes.faq, background: washes.faq }"
       >
-        <div class="lintas-section-head">
+        <div class="lintas-section-head" data-reveal="fade-up">
           <p class="lintas-label" :style="monoStyle">FAQ</p>
           <h2 :style="h2Style" class="text-balance">
             Pertanyaan yang sering ditanya.
@@ -513,7 +514,7 @@ function initBlob() {
       <!-- 7. CTA                         -->
       <!-- ============================== -->
       <section
-        class="lintas-cta-section"
+        class="lintas-cta-section" data-reveal="scale" data-reveal="fade-up" data-reveal="scale"
         :style="{ '--section-bg': washes.cta, background: washes.cta }"
       >
         <h2 :style="h1Style" class="lintas-cta__h1 text-balance">
@@ -536,8 +537,7 @@ function initBlob() {
       <!-- ============================== -->
       <!-- 8. FOOTER                      -->
       <!-- ============================== -->
-      <TmplFooter
-        brand-name="Lintas"
+      <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Lintas"
         variant="columns"
         accent="var(--tmpl-accent)"
         :links="[

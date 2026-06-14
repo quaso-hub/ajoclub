@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import { getPalette, toCss } from '~/utils/palettes'
 import { getTypography } from '~/utils/typography'
 
@@ -7,6 +7,7 @@ definePageMeta({ layout: false })
 const slug = 'event-3'
 const palette = getPalette('forumid')
 const typo = getTypography('forumid')
+useScrollReveal('event-3')
 
 useHead({
   title: 'ForumID 2026 — Festival Desain & Kreatif Indonesia',
@@ -194,7 +195,7 @@ const openFaq = ref<number | null>(null)
       <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 24px 24px;" />
 
       <div class="relative w-full max-w-[1440px] mx-auto px-6 md:px-16 py-32 md:py-0">
-        <div class="grid md:grid-cols-12 gap-8 items-center">
+        <div class="grid md:grid-cols-12 gap-8 items-center" data-reveal="stagger-children">
           <!-- Left: year + copy -->
           <div class="md:col-span-7">
             <template v-if="!isLoaded">
@@ -360,7 +361,7 @@ const openFaq = ref<number | null>(null)
         </div>
 
         <!-- Speaker grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[1px]" :style="{ background: border }">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[1px]" data-reveal="stagger-children" :style="{ background: border }">
           <article
             v-for="(s, si) in filteredSpeakers"
             :key="s.name"
@@ -484,7 +485,7 @@ const openFaq = ref<number | null>(null)
           Semua tiket mencakup akses 4 hari, makan siang, dan sertifikat.
         </p>
 
-        <div class="grid md:grid-cols-3 gap-6 items-start">
+        <div class="grid md:grid-cols-3 gap-6 items-start" data-reveal="stagger-children">
           <div
             v-for="tier in ticketTiers"
             :key="tier.name"
@@ -539,7 +540,7 @@ const openFaq = ref<number | null>(null)
     <!-- ============ VENUE ============ -->
     <section id="venue" class="py-20 md:py-28" :style="{ borderTop: `1px solid ${border}`, background: surface }">
       <div class="max-w-[1440px] mx-auto px-6 md:px-16">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="grid md:grid-cols-2 gap-12 items-center" data-reveal="stagger-children">
           <div>
             <p class="text-xs tracking-[0.35em] uppercase mb-3" :style="{ color: accent, fontFamily: typo.mono }">Venue</p>
             <h2 :style="{ fontFamily: typo.display, fontSize: typo.h2, fontWeight: 700, lineHeight: '1.05', letterSpacing: '-0.02em', fontStyle: 'italic' }">
@@ -597,7 +598,7 @@ const openFaq = ref<number | null>(null)
           Setiap tahun punya tema dan identitas visual sendiri.
         </p>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-[1px]" :style="{ background: border }">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-[1px]" data-reveal="stagger-children" :style="{ background: border }">
           <div
             v-for="y in archiveYears"
             :key="y.year"
@@ -671,8 +672,7 @@ const openFaq = ref<number | null>(null)
     </section>
 
     <!-- ============ FOOTER ============ -->
-    <TmplFooter
-      brand-name="ForumID"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="ForumID"
       variant="columns"
       :accent="accent"
       :bg="fg"

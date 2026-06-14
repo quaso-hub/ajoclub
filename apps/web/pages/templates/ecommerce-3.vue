@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * ecommerce-3.vue — Bazaar Marketplace
  * Multi-vendor marketplace. Newsreader italic H1, Inter body.
@@ -12,6 +12,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('ecommerce-3')
 const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
+useScrollReveal('ecommerce-3')
 
 // ============================================================
 // DATA: Categories
@@ -291,7 +292,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <section class="pt-24 pb-20 md:pt-32 md:pb-28">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center" data-reveal="stagger-children">
           <!-- Left: Copy -->
           <div class="lg:col-span-3">
             <p class="text-[11px] tracking-[0.14em] uppercase font-medium mb-4" :style="{ color: toCss(palette.accent) }">Temukan kerajinan dari 38 kota</p>
@@ -387,7 +388,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
           </button>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" data-reveal="stagger-children">
           <button
             v-for="cat in categories"
             :key="cat.id"
@@ -420,7 +421,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
           <p class="text-sm" :style="{ color: toCss(palette.muted) }">{{ filteredProducts.length }} produk</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6" data-reveal="stagger-children">
           <article
             v-for="(p, i) in filteredProducts"
             :key="p.id"
@@ -480,7 +481,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
           <h2 :style="{ ...h2Style, color: toCss(palette.fg) }">Penjual Teratas</h2>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" data-reveal="stagger-children">
           <article v-for="s in sellers" :key="s.id" class="group rounded-lg border overflow-hidden transition-all hover:shadow-lg cursor-pointer" :style="{ borderColor: toCss(palette.border) }">
             <!-- Banner -->
             <div class="h-28 relative" :style="{ background: s.gradient }">
@@ -523,7 +524,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
           <TmplCountdown target="2026-06-15T23:59:59" variant="inline" label="" expired-message="Promo berakhir" />
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5" data-reveal="stagger-children">
           <article v-for="d in flashDeals" :key="d.id" class="group rounded-lg border overflow-hidden cursor-pointer transition-all hover:shadow-lg" :style="{ borderColor: toCss(palette.border) }">
             <!-- Image -->
             <div class="aspect-[16/9] relative" :style="{ background: d.gradient }">
@@ -559,7 +560,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
           <h2 :style="{ ...h2Style, color: toCss(palette.fg) }">Kata Pembeli</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-5" data-reveal="stagger-children">
           <article v-for="(t, i) in testimonials" :key="i" class="rounded-lg border p-6" :class="{ 'md:col-span-3': i === 0, 'md:col-span-2': i === 1, 'md:col-span-5 md:grid md:grid-cols-2 md:gap-5': i === 2 }" :style="{ borderColor: toCss(palette.border), background: toCss(palette.surface) }">
             <!-- Stars -->
             <div class="flex gap-0.5 mb-4">
@@ -611,8 +612,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- FOOTER -->
     <!-- ============================================================ -->
-    <TmplFooter
-      brand-name="Bazaar"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Bazaar"
       variant="columns"
       :accent="toCss(palette.accent)"
       :bg="toCss(palette.fg)"

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * event-2.vue: NadaFest 2026
  * The Sound of the Archipelago.
@@ -12,6 +12,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('event-2')
 const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
+useScrollReveal('event-2')
 const { buildUrl } = useWhatsApp()
 
 const ACCENT = 'oklch(68% 0.28 350)'
@@ -426,7 +427,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
         <div class="overflow-x-auto -mx-6 px-6">
           <div class="min-w-[640px]">
             <!-- Header row -->
-            <div class="grid gap-2 mb-2" style="grid-template-columns: 72px repeat(4, 1fr);">
+            <div class="grid gap-2 mb-2" data-reveal="stagger-children" style="grid-template-columns: 72px repeat(4, 1fr);">
               <div />
               <div
                 v-for="stage in stages"
@@ -486,7 +487,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
           Semua tier akses semua panggung. Yang beda pengalamannya.
         </p>
 
-        <div class="grid md:grid-cols-2 gap-4">
+        <div class="grid md:grid-cols-2 gap-4" data-reveal="stagger-children">
           <div
             v-for="tier in tiers"
             :key="tier.id"
@@ -555,7 +556,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
           60 hektar di Jimbaran. 4 panggung terbuka dengan patung GWK setinggi 121m.
         </p>
 
-        <div class="grid md:grid-cols-[3fr_2fr] gap-8">
+        <div class="grid md:grid-cols-[3fr_2fr] gap-8" data-reveal="stagger-children">
           <!-- Map placeholder -->
           <div class="aspect-[4/3] rounded-lg overflow-hidden" style="background: color-mix(in srgb, var(--tmpl-fg) 5%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 10%, transparent);">
             <div class="w-full h-full flex items-center justify-center">
@@ -592,7 +593,7 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
         </div>
 
         <!-- Practical info -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12" data-reveal="stagger-children">
           <div class="p-4 rounded-lg text-center" style="background: color-mix(in srgb, var(--tmpl-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
             <p class="text-2xl font-bold" style="color: var(--tmpl-accent); font-family: var(--tmpl-font-mono);">16.00</p>
             <p class="text-[10px] tracking-[0.15em] uppercase mt-1" style="color: var(--tmpl-muted);">Gates buka (WITA)</p>
@@ -714,9 +715,9 @@ const waUrl = buildUrl('Halo, saya mau tanya soal NadaFest 2026.')
     <!-- ============================================================
          SECTION 8 — FOOTER
     ============================================================ -->
-    <footer class="py-16 border-t" style="border-color: color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
+    <footer class="py-16 border-t" data-reveal="fade-up" style="border-color: color-mix(in srgb, var(--tmpl-fg) 8%, transparent);">
       <div class="max-w-6xl mx-auto px-6">
-        <div class="grid md:grid-cols-3 gap-10 mb-12">
+        <div class="grid md:grid-cols-3 gap-10 mb-12" data-reveal="stagger-children">
           <!-- Brand -->
           <div>
             <p class="text-2xl font-bold mb-3" style="font-family: var(--tmpl-font-display); color: var(--tmpl-fg);">NadaFest</p>

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * membership-3.vue — Raka Writes
  * Solo creator tip/support page. Warm cream, butter yellow accent, Cardo italic H1.
@@ -10,6 +10,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('membership-3')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('membership-3')
 const { buildUrl } = useWhatsApp()
 
 // ============================================================
@@ -266,7 +267,7 @@ onBeforeUnmount(() => {
     <!-- SECTION 2: TENTANG (creator bio)             -->
     <!-- ============================================ -->
     <section id="tentang" class="raka__section">
-      <div class="raka__section-inner">
+      <div class="raka__section-inner" data-reveal="fade-up">
         <p class="raka__eyebrow" :style="monoStyle">TENTANG PENULIS</p>
         <h2 :style="h2Style" class="raka__section-title">Siapa itu Raka</h2>
 
@@ -287,7 +288,7 @@ onBeforeUnmount(() => {
     <!-- SECTION 3: DUKUNGAN (3 tier cards)           -->
     <!-- ============================================ -->
     <section id="dukungan" class="raka__section raka__section--warm">
-      <div class="raka__section-inner">
+      <div class="raka__section-inner" data-reveal="fade-up">
         <p class="raka__eyebrow" :style="monoStyle">DUKUNG KARYA RAKA</p>
         <h2 :style="h2Style" class="raka__section-title">Pilih cara mendukung</h2>
         <p class="raka__section-desc">
@@ -350,7 +351,7 @@ onBeforeUnmount(() => {
     <!-- SECTION 4: MILESTONES (4 goals + progress)   -->
     <!-- ============================================ -->
     <section id="milestones" class="raka__section">
-      <div class="raka__section-inner">
+      <div class="raka__section-inner" data-reveal="fade-up">
         <p class="raka__eyebrow" :style="monoStyle">TARGET BERSAMA</p>
         <h2 :style="h2Style" class="raka__section-title">Ke mana dukunganmu pergi</h2>
         <p class="raka__section-desc">
@@ -393,7 +394,7 @@ onBeforeUnmount(() => {
     <!-- SECTION 5: TULISAN TERBARU (6 posts)         -->
     <!-- ============================================ -->
     <section id="tulisan" class="raka__section raka__section--warm">
-      <div class="raka__section-inner raka__section-inner--wide">
+      <div class="raka__section-inner raka__section-inner--wide" data-reveal="fade-up">
         <p class="raka__eyebrow" :style="monoStyle">TULISAN TERBARU</p>
         <h2 :style="h2Style" class="raka__section-title">Yang sudah terbit</h2>
 
@@ -418,7 +419,7 @@ onBeforeUnmount(() => {
     <!-- SECTION 6: TESTIMONI (3 supporters)          -->
     <!-- ============================================ -->
     <section id="testimoni" class="raka__section">
-      <div class="raka__section-inner">
+      <div class="raka__section-inner" data-reveal="fade-up">
         <p class="raka__eyebrow" :style="monoStyle">KATA MEREKA</p>
         <h2 :style="h2Style" class="raka__section-title">Kenapa mereka dukung Raka</h2>
 
@@ -440,7 +441,7 @@ onBeforeUnmount(() => {
     <!-- SECTION 7: FAQ                               -->
     <!-- ============================================ -->
     <section id="faq" class="raka__section raka__section--warm">
-      <div class="raka__section-inner">
+      <div class="raka__section-inner" data-reveal="fade-up">
         <p class="raka__eyebrow" :style="monoStyle">PERTANYAAN</p>
         <h2 :style="h2Style" class="raka__section-title">Yang sering ditanyakan</h2>
 
@@ -473,8 +474,7 @@ onBeforeUnmount(() => {
     <!-- ============================================ -->
     <!-- SECTION 8: FOOTER                            -->
     <!-- ============================================ -->
-    <TmplFooter
-      brand-name="Raka Writes"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Raka Writes"
       variant="signoff"
       signoff="Dari Bandung, dengan kopi, setiap Jumat."
       :accent="tpl.accentColor"

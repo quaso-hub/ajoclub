@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * restaurant-1.vue — Sasana
  * Fine dining editorial. Noma/EMP style. White space, Cormorant italic, scroll photo essay.
@@ -13,6 +13,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('restaurant-1')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('restaurant-1')
 
 // ============================================================
 // STATE
@@ -417,12 +418,12 @@ function fmtRp(n: number) {
       <!-- SECTION 02 — CERITA             -->
       <!-- ============================== -->
       <section id="cerita" class="sasana-cerita">
-        <div class="sasana-section-head">
+        <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Surat dari dapur.</h2>
           <p class="sasana-section-sub" :style="monoStyle">oleh Aria Pratama · Kepala Dapur</p>
         </div>
 
-        <div class="sasana-cerita__grid">
+        <div class="sasana-cerita__grid" data-reveal="stagger-children">
           <div class="sasana-cerita__letter">
             <p class="sasana-cerita__dropcap">
               Dapur ini lahir dari makan siang di rumah nenek di Bukittinggi — sayur baru dipetik, ikan baru ditangkap. Tidak istimewa, selalu cukup. Itu yang ingin saya bawa ke Sasana.
@@ -451,7 +452,7 @@ function fmtRp(n: number) {
       <!-- SECTION 03 — MENU               -->
       <!-- ============================== -->
       <section id="menu" class="sasana-menu">
-        <div class="sasana-section-head">
+        <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Hidangan.</h2>
           <p class="sasana-section-sub" :style="monoStyle">8 sajian · musiman</p>
         </div>
@@ -479,7 +480,7 @@ function fmtRp(n: number) {
             :key="dish.id"
             class="sasana-dish"
           >
-            <div class="sasana-dish__head">
+            <div class="sasana-dish__head" data-reveal="fade-up" data-reveal-delay="0.1">
               <span class="sasana-dish__num" :style="monoStyle">{{ String(dish.id).padStart(2, '0') }} — {{ dish.category.toUpperCase() }}</span>
               <span class="sasana-dish__price">{{ dish.price }}</span>
             </div>
@@ -498,12 +499,12 @@ function fmtRp(n: number) {
       <!-- SECTION 04 — RESERVASI           -->
       <!-- ============================== -->
       <section id="reservasi" class="sasana-reservasi">
-        <div class="sasana-section-head">
+        <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Cadangan.</h2>
           <p class="sasana-section-sub" :style="monoStyle">2–12 orang · H-7</p>
         </div>
 
-        <div class="sasana-reservasi__grid">
+        <div class="sasana-reservasi__grid" data-reveal="stagger-children">
           <!-- Form -->
           <form class="sasana-form" novalidate @submit.prevent="submitReservation">
             <div class="sasana-form__field">
@@ -590,12 +591,12 @@ function fmtRp(n: number) {
       <!-- SECTION 05 — ACARA              -->
       <!-- ============================== -->
       <section id="acara" class="sasana-acara">
-        <div class="sasana-section-head">
+        <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Acara.</h2>
           <p class="sasana-section-sub" :style="monoStyle">6–24 orang · Selasa – Sabtu</p>
         </div>
 
-        <div class="sasana-acara__grid">
+        <div class="sasana-acara__grid" data-reveal="stagger-children">
           <div v-for="(evt, i) in events" :key="evt.id" class="sasana-event-card">
             <span class="sasana-event-card__tag" :style="monoStyle">ACARA 0{{ i + 1 }} — 03</span>
             <h3 class="sasana-event-card__name">{{ evt.name }}</h3>
@@ -610,12 +611,12 @@ function fmtRp(n: number) {
       <!-- SECTION 06 — LOKASI             -->
       <!-- ============================== -->
       <section id="lokasi" class="sasana-lokasi">
-        <div class="sasana-section-head">
+        <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Lokasi.</h2>
           <p class="sasana-section-sub" :style="monoStyle">Tebet, Jakarta Selatan · since 2024</p>
         </div>
 
-        <div class="sasana-lokasi__grid">
+        <div class="sasana-lokasi__grid" data-reveal="stagger-children">
           <TmplMap
             label="Sasana"
             address="Jl. Tebet Barat Dalam IV No. 17"
@@ -652,7 +653,7 @@ function fmtRp(n: number) {
       <!-- SECTION 07 — PRESS              -->
       <!-- ============================== -->
       <section id="press" class="sasana-press">
-        <div class="sasana-section-head">
+        <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Disebut di.</h2>
           <p class="sasana-section-sub" :style="monoStyle">Liputan editorial · 2022–2024</p>
         </div>
@@ -670,8 +671,7 @@ function fmtRp(n: number) {
       <!-- ============================== -->
       <!-- SECTION 08 — FOOTER             -->
       <!-- ============================== -->
-      <TmplFooter
-        brand-name="Sasana"
+      <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Sasana"
         variant="signoff"
         signoff="Bahan lokal. Musiman. Tidak dilebih-lebihkan."
         signature="Dirancang di Jakarta, dibuat untuk UMKM Indonesia"

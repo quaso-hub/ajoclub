@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * wedding-3.vue — Sarah & Kevin
  * Destination Wedding. Sand/sunset/sea palette.
@@ -12,6 +12,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('wedding-3')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('wedding-3')
 
 const isLoaded = ref(false)
 const isReducedMotion = ref(false)
@@ -388,7 +389,7 @@ function openLiveStream() {
           </div>
         </div>
 
-        <div class="sk-travel__grid">
+        <div class="sk-travel__grid" data-reveal="stagger-children">
           <article v-for="t in travel" :key="t.label" class="sk-travel__card">
             <span class="sk-travel__icon">
               <UIcon :name="t.icon" class="w-5 h-5" />
@@ -408,7 +409,7 @@ function openLiveStream() {
         <p class="sk-eyebrow" :style="monoStyle">Galeri</p>
         <h2 :style="h2Style" class="sk-galeri__title text-balance">Tempat yang membawa kami ke sini.</h2>
 
-        <div class="sk-galeri__grid">
+        <div class="sk-galeri__grid" data-reveal="stagger-children">
           <button
             v-for="(img, i) in galleryImages"
             :key="i"
@@ -474,7 +475,7 @@ function openLiveStream() {
       <!-- 10. ADD TO CALENDAR -->
       <!-- ============================== -->
       <section class="sk-actions">
-        <div class="sk-actions__grid">
+        <div class="sk-actions__grid" data-reveal="stagger-children">
           <div class="sk-action">
             <p class="sk-eyebrow" :style="monoStyle">Tambah ke kalender</p>
             <p class="sk-action__sub">Simpan tanggalnya.</p>
@@ -509,8 +510,7 @@ function openLiveStream() {
       </section>
     </main>
 
-    <TmplFooter
-      brand-name="Sarah & Kevin"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Sarah & Kevin"
       :links="[
         { label: 'Cerita', href: '#cerita' },
         { label: 'Acara', href: '#acara' },

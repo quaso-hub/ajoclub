@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * membership-2.vue — Sinau Koding
  * Indonesian developer community platform. Dark night bg, coral accent.
@@ -12,6 +12,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('membership-2')
 const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
+useScrollReveal('membership-2')
 
 const toCssSafe = (t: { l: number, c: number, h: number }, alpha = 1) => {
   if (alpha < 1) return `oklch(${t.l}% ${t.c} ${t.h} / ${alpha})`
@@ -254,7 +255,7 @@ onMounted(() => {
         <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Tempat ngobrol.</h2>
         <p class="mb-16" :style="{ color: toCssSafe(palette.muted) }">Pilih topik, gabung.</p>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" data-reveal="stagger-children">
           <article
             v-for="space in spaces"
             :key="space.name"
@@ -406,7 +407,7 @@ onMounted(() => {
         <h2 :style="{ ...h2Style, marginBottom: '0.5rem', textAlign: 'center' }">Pilih yang cocok.</h2>
         <p class="mb-16 text-center" :style="{ color: toCssSafe(palette.muted) }">Mulai gratis. Upgrade kapan saja.</p>
 
-        <div class="grid md:grid-cols-3 gap-4">
+        <div class="grid md:grid-cols-3 gap-4" data-reveal="stagger-children">
           <div
             v-for="tier in tiers"
             :key="tier.name"
@@ -471,7 +472,7 @@ onMounted(() => {
         <h2 :style="{ ...h2Style, marginBottom: '0.5rem' }">Yang menggerakkan.</h2>
         <p class="mb-16" :style="{ color: toCssSafe(palette.muted) }">Volunteer yang menjaga komunitas.</p>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4" data-reveal="stagger-children">
           <article
             v-for="person in team"
             :key="person.name"
@@ -537,8 +538,7 @@ onMounted(() => {
     <!-- ============================================================ -->
     <!-- 8. FOOTER -->
     <!-- ============================================================ -->
-    <TmplFooter
-      brand-name="Sinau Koding"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Sinau Koding"
       variant="columns"
       :accent="toCssSafe(palette.accent)"
       :bg="toCssSafe(palette.surface)"

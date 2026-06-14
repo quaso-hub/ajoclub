@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * architecture-2.vue — Bukit Hijau
  * Real estate developer. Inter Tight Black H1, Inter body, JetBrains Mono for data.
@@ -16,6 +16,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('architecture-2')
 const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
+useScrollReveal('architecture-2')
 
 // ============================================================
 // STATE
@@ -265,7 +266,7 @@ const waUrl = computed(() => {
         <h2 :style="h2Style" class="bh-h2">6 Cluster, 6 Lokasi</h2>
         <p class="bh-section__desc">Legalitas jelas, akses tol dekat, fasilitas lengkap.</p>
 
-        <div class="bh-project-grid">
+        <div class="bh-project-grid" data-reveal="stagger-children">
           <article
             v-for="p in projects" :key="p.id"
             class="bh-card"
@@ -313,7 +314,7 @@ const waUrl = computed(() => {
           <p class="bh-section__hint">Klik unit untuk pilih. Pilih hingga 3 unit untuk dibandingkan.</p>
         </div>
 
-        <div class="bh-unit-grid">
+        <div class="bh-unit-grid" data-reveal="stagger-children">
           <div
             v-for="u in unitTypes" :key="u.id"
             class="bh-unit-card"
@@ -456,7 +457,7 @@ const waUrl = computed(() => {
         <p class="bh-mono-label">Fasilitas Cluster</p>
         <h2 :style="h2Style" class="bh-h2">Lengkap untuk Keluarga</h2>
         <p class="bh-section__desc">Fasilitas untuk kenyamanan penghuni sehari-hari.</p>
-        <div class="bh-amenity-grid">
+        <div class="bh-amenity-grid" data-reveal="stagger-children">
           <div v-for="a in amenities" :key="a.name" class="bh-amenity">
             <UIcon :name="a.icon" class="bh-amenity__icon" />
             <h4 class="bh-amenity__name">{{ a.name }}</h4>
@@ -570,9 +571,9 @@ const waUrl = computed(() => {
     <!-- ============================================================ -->
     <!-- SECTION 8: FOOTER -->
     <!-- ============================================================ -->
-    <footer class="bh-footer">
+    <footer class="bh-footer" data-reveal="fade-up">
       <div class="bh-container">
-        <div class="bh-footer__grid">
+        <div class="bh-footer__grid" data-reveal="stagger-children">
           <div>
             <p class="bh-footer__brand">Bukit Hijau</p>
             <p class="bh-footer__about">Developer properti sejak 1989. 12.000+ unit di 15 kota. Legalitas jelas, after-sales terjamin.</p>

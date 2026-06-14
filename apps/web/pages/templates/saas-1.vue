@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * saas-1.vue — Atur
  * Anti-SaaS Editorial SaaS. Magazine layout. Awwwards target.
@@ -13,6 +13,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('saas-1')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+const { isReducedMotion: revealReduced } = useScrollReveal('saas-1')
 
 // ============================================================
 // STATE
@@ -469,7 +470,7 @@ const minDate = today.toISOString().slice(0, 10)
       <!-- SPREAD 1 — SAMPUL (Cover)      -->
       <!-- ============================== -->
       <section id="sampul" class="atur-sampul" data-spread="1" :style="{ minHeight: '100dvh' }">
-        <div class="atur-sampul__grid">
+        <div class="atur-sampul__grid" data-reveal="stagger-children">
 
           <!-- Main column -->
           <div class="atur-sampul__main">
@@ -512,7 +513,7 @@ const minDate = today.toISOString().slice(0, 10)
       <!-- ============================== -->
       <!-- SPREAD 2 — LEDE (no visuals)  -->
       <!-- ============================== -->
-      <section class="atur-lede-section" data-spread="2">
+      <section class="atur-lede-section" data-reveal="fade-up" data-spread="2">
         <div class="atur-lede-wrap">
           <p class="atur-lede-large">
             Kami membuat Atur karena kami juga bagian dari tim kecil &mdash; dan muak dengan software korporasi 500 orang. Trial 14 hari, tanpa kartu kredit.
@@ -523,7 +524,7 @@ const minDate = today.toISOString().slice(0, 10)
       <!-- ============================== -->
       <!-- SPREAD 3 — PULL-QUOTE          -->
       <!-- ============================== -->
-      <section class="atur-pullquote-section" data-spread="3">
+      <section class="atur-pullquote-section" data-reveal="fade-up" data-spread="3">
         <blockquote class="atur-pullquote" :style="h1Style">
           &ldquo;Aplikasi yang baik adalah aplikasi yang tidak kamu sadari sedang kamu pakai.&rdquo;
         </blockquote>
@@ -536,7 +537,7 @@ const minDate = today.toISOString().slice(0, 10)
       <!-- SPREAD 4 — DAFTAR ISI (TOC)     -->
       <!-- ============================== -->
       <section id="daftar-isi" class="atur-toc-section" data-spread="4">
-        <div class="atur-section-head">
+        <div class="atur-section-head" data-reveal="fade-up">
           <p class="atur-eyebrow" :style="monoStyle">04 / DAFTAR ISI</p>
           <h2 :style="h2Style" class="text-balance">
             Apa yang ada di Atur: <em>enam modul</em>, satu aplikasi.
@@ -562,7 +563,7 @@ const minDate = today.toISOString().slice(0, 10)
       <!-- SPREAD 5 — KOLOM (Pricing)     -->
       <!-- ============================== -->
       <section id="kolom" class="atur-kolom-section" data-spread="5">
-        <div class="atur-section-head">
+        <div class="atur-section-head" data-reveal="fade-up">
           <p class="atur-eyebrow" :style="monoStyle">05 / KOLOM &middot; HARGA</p>
           <h2 :style="h2Style" class="text-balance">
             Tiga paket, <em>tanpa tier gratis</em>. Gratis bukan strategi.
@@ -659,7 +660,7 @@ const minDate = today.toISOString().slice(0, 10)
       <!-- SPREAD 7 — KOLOFON (FAQ + colophon) -->
       <!-- ============================== -->
       <section id="kolofon" class="atur-kolofon-section" data-spread="7">
-        <div class="atur-section-head">
+        <div class="atur-section-head" data-reveal="fade-up">
           <p class="atur-eyebrow" :style="monoStyle">07 / KOLOFON</p>
           <h2 :style="h2Style" class="text-balance">
             Pertanyaan sebelum <em>daftar</em>.
@@ -710,10 +711,10 @@ const minDate = today.toISOString().slice(0, 10)
         </div>
 
         <!-- Klien marquee -->
-        <div class="atur-marquee-section">
+        <div class="atur-marquee-section" data-reveal="fade-up">
           <p class="atur-eyebrow atur-eyebrow--center" :style="monoStyle">Dipakai oleh</p>
-          <div class="atur-marquee">
-            <div class="atur-marquee__track">
+          <div class="atur-marquee" data-reveal="fade-up">
+            <div class="atur-marquee__track" data-reveal="fade-up">
               <div v-for="(k, i) in [...klien, ...klien]" :key="i" class="atur-marquee__item">
                 <p class="atur-marquee__name">{{ k.name }}</p>
                 <p :style="monoStyle" class="atur-marquee__city">{{ k.city }}</p>
@@ -735,7 +736,7 @@ const minDate = today.toISOString().slice(0, 10)
         </div>
 
         <!-- Colophon footer (editorial signature) -->
-        <footer class="atur-colophon">
+        <footer class="atur-colophon" data-reveal="fade-up">
           <p :style="monoStyle">
             &copy; 2026 &nbsp;·&nbsp; ATUR STUDIO &nbsp;·&nbsp; DIBUAT DI JAKARTA, UNTUK UMKM INDONESIA &nbsp;·&nbsp; VERSI 0.4.2
           </p>

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * ecommerce-2.vue — SOMETHINC
  * DTC Brand Story. Aesop/Glossier/Allbirds aesthetic, Indonesian skincare.
@@ -14,6 +14,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('ecommerce-2')
 const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
+useScrollReveal('ecommerce-2')
 
 // ─── Products ────────────────────────────────────────────────────
 interface Product {
@@ -323,7 +324,7 @@ const navLinks = [
     <!-- SECTION 1: Hero + 3D Bottle                                   -->
     <!-- ============================================================ -->
     <section id="top" class="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
-      <div class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center w-full">
+      <div class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center w-full" data-reveal="stagger-children">
         <!-- 3D Bottle -->
         <div class="flex justify-center order-1 md:order-2">
           <div class="relative w-[320px] h-[400px]">
@@ -377,7 +378,7 @@ const navLinks = [
     <!-- SECTION 2: Cerita (Brand Story)                                -->
     <!-- ============================================================ -->
     <section id="cerita" class="py-24 md:py-32 border-t" :style="{ borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
-      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-5 gap-12 items-start">
+      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-5 gap-12 items-start" data-reveal="stagger-children">
         <div class="md:col-span-2">
           <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Cerita Kami</p>
           <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Dari Laboratorium ke Tangan Kamu</h2>
@@ -424,7 +425,7 @@ const navLinks = [
         </div>
 
         <!-- Product grid -->
-        <div class="grid md:grid-cols-3 gap-5">
+        <div class="grid md:grid-cols-3 gap-5" data-reveal="stagger-children">
           <article
             v-for="product in products"
             :key="product.id"
@@ -498,7 +499,7 @@ const navLinks = [
         </div>
 
         <!-- Ingredient cards grid -->
-        <div class="grid md:grid-cols-3 gap-4">
+        <div class="grid md:grid-cols-3 gap-4" data-reveal="stagger-children">
           <div
             v-for="ing in ingredients"
             :key="ing.inci"
@@ -628,7 +629,7 @@ const navLinks = [
           <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Kata mereka yang sudah coba</h2>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-5">
+        <div class="grid md:grid-cols-3 gap-5" data-reveal="stagger-children">
           <!-- Review 1 -->
           <div class="p-6 rounded-lg border" :style="{ background: `oklch(${palette.surfaceElevated.l}% ${palette.surfaceElevated.c} ${palette.surfaceElevated.h})`, borderColor: `oklch(${palette.border.l}% ${palette.border.c} ${palette.border.h})` }">
             <div class="flex gap-0.5 mb-3">
@@ -711,8 +712,7 @@ const navLinks = [
     <!-- ============================================================ -->
     <!-- SECTION 8: Footer                                             -->
     <!-- ============================================================ -->
-    <TmplFooter
-      brand-name="SOMETHINC"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="SOMETHINC"
       variant="columns"
       :accent="`oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})`"
       :bg="`oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})`"

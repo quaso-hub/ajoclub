@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * architecture-3.vue — Ruang Studio
  * Interior studio. Fraunces italic H1, Inter body, JetBrains Mono metadata.
@@ -13,6 +13,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('architecture-3')
 const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
+useScrollReveal('architecture-3')
 
 const accentCss = toCss(palette.accent)
 const accentSoftCss = toCss(palette.accentSoft)
@@ -216,7 +217,7 @@ const waUrl = computed(() => {
       <div class="ruang-container">
         <p class="ruang-label" :style="monoStyle">Layanan</p>
         <h2 :style="h2Style" class="ruang-h2">Empat cara kami membantu.</h2>
-        <div class="ruang-layanan-grid">
+        <div class="ruang-layanan-grid" data-reveal="stagger-children">
           <article
             v-for="(s, i) in layanan"
             :key="s.title"
@@ -239,7 +240,7 @@ const waUrl = computed(() => {
       <div class="ruang-container">
         <p class="ruang-label" :style="monoStyle">Proyek</p>
         <h2 :style="h2Style" class="ruang-h2">Enam ruangan, enam cerita.</h2>
-        <div class="ruang-proyek-grid">
+        <div class="ruang-proyek-grid" data-reveal="stagger-children">
           <article
             v-for="(p, i) in proyek"
             :key="p.name"
@@ -273,7 +274,7 @@ const waUrl = computed(() => {
         <p class="ruang-label" :style="monoStyle">Material</p>
         <h2 :style="h2Style" class="ruang-h2">Material Indonesia yang kami pakai.</h2>
         <p class="ruang-section-sub">Radius 300 km dari lokasi proyek. Tahan lama, mudah dirawat.</p>
-        <div class="ruang-material-grid">
+        <div class="ruang-material-grid" data-reveal="stagger-children">
           <article
             v-for="m in materials"
             :key="m.name"
@@ -366,7 +367,7 @@ const waUrl = computed(() => {
       <div class="ruang-container">
         <p class="ruang-label" :style="monoStyle">Galeri</p>
         <h2 :style="h2Style" class="ruang-h2">Potongan dari ruangan yang sudah hidup.</h2>
-        <div class="ruang-galeri-grid">
+        <div class="ruang-galeri-grid" data-reveal="stagger-children">
           <button
             v-for="(g, i) in galeri"
             :key="g.label"
@@ -396,7 +397,7 @@ const waUrl = computed(() => {
     <!-- ===== SECTION 7: KONTAK ===== -->
     <section id="kontak" class="ruang-section ruang-section--alt" :style="{ background: surfaceCss }" data-section>
       <div class="ruang-container">
-        <div class="ruang-kontak-grid">
+        <div class="ruang-kontak-grid" data-reveal="stagger-children">
           <div class="ruang-kontak-info">
             <p class="ruang-label" :style="monoStyle">Kontak</p>
             <h2 :style="h2Style" class="ruang-h2">Mulai proyek Anda.</h2>
@@ -444,8 +445,7 @@ const waUrl = computed(() => {
     </section>
 
     <!-- ===== SECTION 8: FOOTER ===== -->
-    <TmplFooter
-      brand-name="Ruang Studio"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Ruang Studio"
       variant="columns"
       :accent="accentCss"
       :bg="fgCss"

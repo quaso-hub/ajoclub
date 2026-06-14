@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * portfolio-1.vue — Grapiku
  * Dark immersive agency portfolio. Awwwards target.
@@ -13,6 +13,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('portfolio-1')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('portfolio-1')
 
 // ============================================================
 // STATE
@@ -414,7 +415,7 @@ const navLinks = [
       <!-- ============================== -->
       <!-- 6. KLIEN MARQUEE — 16 names    -->
       <!-- ============================== -->
-      <section class="gp-section gp-klien">
+      <section class="gp-section gp-klien" data-reveal="fade-up">
         <div class="gp-section__head">
           <p class="gp-meta" :style="monoStyle">Klien</p>
           <h2 :style="h2Style" class="text-balance">
@@ -422,7 +423,7 @@ const navLinks = [
           </h2>
         </div>
 
-        <div class="gp-marquee-wrap">
+        <div class="gp-marquee-wrap" data-reveal="fade-up">
           <TmplMarquee
             :items="klienRow1"
             separator="·"
@@ -430,7 +431,7 @@ const navLinks = [
             speed="slow"
             accent="var(--tmpl-accent)"
           />
-          <div class="gp-marquee-gap" />
+          <div class="gp-marquee-gap" data-reveal="fade-up" />
           <TmplMarquee
             :items="klienRow2"
             separator="·"
@@ -467,7 +468,7 @@ const navLinks = [
       <!-- ============================== -->
       <!-- 8. PENGHARGAAN — 12 grid       -->
       <!-- ============================== -->
-      <section class="gp-section">
+      <section class="gp-section" data-reveal="fade-up">
         <div class="gp-section__head">
           <p class="gp-meta" :style="monoStyle">Penghargaan</p>
           <h2 :style="h2Style" class="text-balance">
@@ -489,7 +490,7 @@ const navLinks = [
       <!-- 9. TULIS KE KAMI — Contact     -->
       <!-- ============================== -->
       <section id="kontak" class="gp-section gp-section--alt gp-contact">
-        <div class="gp-contact__grid">
+        <div class="gp-contact__grid" data-reveal="stagger-children">
           <div class="gp-contact__form-side">
             <p class="gp-meta" :style="monoStyle">Tulis ke kami</p>
             <h2 :style="h2Style" class="text-balance">Mau mulai?</h2>
@@ -533,8 +534,7 @@ const navLinks = [
     </main>
 
     <!-- FOOTER -->
-    <TmplFooter
-      brand-name="Grapiku"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Grapiku"
       variant="columns"
       :links="navLinks"
       :marquee-items="['Grapiku', 'Bandung', '2021', 'Brand', 'Web', 'Dashboard', 'Mobile', '3D']"

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * ecommerce-1.vue — Erigo Goods
  * Premium product e-commerce. Apple/B&O/Hermes aesthetic.
@@ -13,6 +13,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('ecommerce-1')
 const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
+useScrollReveal('ecommerce-1')
 
 // ============================================================
 // PRODUCTS
@@ -292,7 +293,7 @@ function showToast(msg: string) {
       <!-- 3. KATEGORI (filter chips)     -->
       <!-- ============================== -->
       <section id="kategori" class="erigo-section erigo-categories">
-        <div class="erigo-section-head">
+        <div class="erigo-section-head" data-reveal="fade-up">
           <p class="erigo-eyebrow" :style="monoStyle">01 / KATEGORI</p>
           <h2 :style="h2Style" class="text-balance">Tiga kategori.</h2>
         </div>
@@ -323,12 +324,12 @@ function showToast(msg: string) {
       <!-- 4. PRODUK (grid)               -->
       <!-- ============================== -->
       <section id="produk" class="erigo-section erigo-products">
-        <div class="erigo-section-head">
+        <div class="erigo-section-head" data-reveal="fade-up">
           <p class="erigo-eyebrow" :style="monoStyle">02 / PRODUK</p>
           <h2 :style="h2Style" class="text-balance">Yang kami <em>pakai.</em></h2>
         </div>
 
-        <div class="erigo-product-grid">
+        <div class="erigo-product-grid" data-reveal="stagger-children">
           <article
             v-for="product in filteredProducts"
             :key="product.id"
@@ -336,11 +337,11 @@ function showToast(msg: string) {
             @click="selectedProduct = selectedProduct?.id === product.id ? null : product"
           >
             <!-- Image placeholder -->
-            <div class="erigo-product-card__img" :style="{ background: product.gradient }">
+            <div class="erigo-product-card__img" data-reveal="fade-up" data-reveal-delay="0.1" :style="{ background: product.gradient }">
               <span class="erigo-product-card__tag" :style="monoStyle">{{ product.categoryTag }}</span>
             </div>
 
-            <div class="erigo-product-card__body">
+            <div class="erigo-product-card__body" data-reveal="fade-up" data-reveal-delay="0.1">
               <p class="erigo-product-card__name">{{ product.name }}</p>
               <p class="erigo-product-card__price" :style="monoStyle">{{ fmtRp(product.price) }}</p>
             </div>
@@ -414,17 +415,17 @@ function showToast(msg: string) {
       <!-- 5. TESTIMONI                   -->
       <!-- ============================== -->
       <section id="testimoni" class="erigo-section erigo-testimonials">
-        <div class="erigo-section-head">
+        <div class="erigo-section-head" data-reveal="fade-up">
           <p class="erigo-eyebrow" :style="monoStyle">03 / DARI PEMBELI</p>
           <h2 :style="h2Style" class="text-balance">Yang mereka <em>rasakan.</em></h2>
         </div>
 
-        <div class="erigo-testimonial-grid">
+        <div class="erigo-testimonial-grid" data-reveal="stagger-children">
           <blockquote class="erigo-testimonial">
             <p class="erigo-testimonial__text">
               "Tote kanvas dan selempang kulit, sampai sebelum puasa. Jahitan bagus, strap tidak tipis. Pakai tiap hari ke kantor."
             </p>
-            <footer class="erigo-testimonial__footer">
+            <footer class="erigo-testimonial__footer" data-reveal="fade-up">
               <div>
                 <cite class="erigo-testimonial__name">Putri Larasati</cite>
                 <p class="erigo-testimonial__loc" :style="monoStyle">Jakarta</p>
@@ -436,7 +437,7 @@ function showToast(msg: string) {
             <p class="erigo-testimonial__text">
               "Hoodie tebal tapi breathable. Beli tiga warna setelah coba satu."
             </p>
-            <footer class="erigo-testimonial__footer">
+            <footer class="erigo-testimonial__footer" data-reveal="fade-up">
               <div>
                 <cite class="erigo-testimonial__name">Bima A. Wicaksono</cite>
                 <p class="erigo-testimonial__loc" :style="monoStyle">Bandung</p>
@@ -448,7 +449,7 @@ function showToast(msg: string) {
             <p class="erigo-testimonial__text">
               "Detail kecil yang terasa 'dirancang', bukan 'dibuat'. Klaim 'made in Indonesia' sering dilebih-lebihkan, tapi Erigo bener-bener."
             </p>
-            <footer class="erigo-testimonial__footer">
+            <footer class="erigo-testimonial__footer" data-reveal="fade-up">
               <div>
                 <cite class="erigo-testimonial__name">Ratna Kusuma</cite>
                 <p class="erigo-testimonial__loc" :style="monoStyle">Yogyakarta</p>
@@ -462,7 +463,7 @@ function showToast(msg: string) {
       <!-- 6. FAQ                         -->
       <!-- ============================== -->
       <section id="faq" class="erigo-section erigo-faq-section">
-        <div class="erigo-section-head">
+        <div class="erigo-section-head" data-reveal="fade-up">
           <p class="erigo-eyebrow" :style="monoStyle">04 / PERTANYAAN</p>
           <h2 :style="h2Style" class="text-balance">Yang sering <em>ditanya.</em></h2>
         </div>
@@ -506,8 +507,7 @@ function showToast(msg: string) {
       <!-- ============================== -->
       <!-- 7. FOOTER (signoff)            -->
       <!-- ============================== -->
-      <TmplFooter
-        brand-name="Erigo Goods"
+      <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Erigo Goods"
         variant="signoff"
         signoff="Objek yang tenang, dari Bandung."
         signature="Dibuat di Bandung"

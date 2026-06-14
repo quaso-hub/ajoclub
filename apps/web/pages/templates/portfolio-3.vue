@@ -13,6 +13,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('portfolio-3')
 const { tpl, styles, h1Style, h2Style, monoStyle } = theme
+useScrollReveal('portfolio-3')
 
 const ACCENT = '#FF0000'
 
@@ -447,10 +448,10 @@ onBeforeUnmount(() => {
     <!-- ============================================================ -->
     <!-- 2. STUDI KASUS — 8 cards, flat grid -->
     <!-- ============================================================ -->
-    <section id="karya" style="border-top: 2px solid var(--idx-fg);">
+    <section id="karya" style="border-top: 2px solid var(--idx-fg);" data-reveal="fade-up">
       <div style="padding: 5rem 2rem;">
         <!-- Section header -->
-        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;" data-reveal="fade-up">
           <div>
             <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">01</span>
             <h2 :style="h2Style" style="margin-top: 0.5rem; font-family: var(--idx-display); font-weight: 900;">Studi Kasus</h2>
@@ -480,7 +481,7 @@ onBeforeUnmount(() => {
         </div>
 
         <!-- Case grid — 2-col desktop, 1-col mobile -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr)); gap: 0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr)); gap: 0;" data-reveal="stagger-children">
           <article
             v-for="c in filteredCases"
             :key="c.num"
@@ -542,12 +543,12 @@ onBeforeUnmount(() => {
     <!-- ============================================================ -->
     <!-- 3. LAYANAN — 4 items -->
     <!-- ============================================================ -->
-    <section id="layanan" style="border-top: 2px solid var(--idx-fg);">
+    <section id="layanan" style="border-top: 2px solid var(--idx-fg);" data-reveal="fade-up">
       <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">02</span>
         <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem; font-family: var(--idx-display); font-weight: 900;">Layanan</h2>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0;" data-reveal="stagger-children">
           <div
             v-for="s in services"
             :key="s.num"
@@ -572,7 +573,7 @@ onBeforeUnmount(() => {
     <!-- ============================================================ -->
     <!-- 4. MANIFESTO — 4 paragraphs -->
     <!-- ============================================================ -->
-    <section id="manifesto" style="border-top: 2px solid var(--idx-fg); background: var(--idx-fg); color: var(--idx-bg);">
+    <section id="manifesto" style="border-top: 2px solid var(--idx-fg); background: var(--idx-fg); color: var(--idx-bg);" data-reveal="fade-up">
       <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">03</span>
         <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem; font-family: var(--idx-display); font-weight: 900;">Manifesto</h2>
@@ -591,7 +592,7 @@ onBeforeUnmount(() => {
     <!-- ============================================================ -->
     <!-- 5. KLIEN — flat list -->
     <!-- ============================================================ -->
-    <section style="border-top: 2px solid var(--idx-fg);">
+    <section style="border-top: 2px solid var(--idx-fg);" data-reveal="fade-up">
       <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">04</span>
         <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem; font-family: var(--idx-display); font-weight: 900;">Klien</h2>
@@ -613,12 +614,12 @@ onBeforeUnmount(() => {
     <!-- ============================================================ -->
     <!-- 6. TIM — 4 founders -->
     <!-- ============================================================ -->
-    <section id="tim" style="border-top: 2px solid var(--idx-fg);">
+    <section id="tim" style="border-top: 2px solid var(--idx-fg);" data-reveal="fade-up">
       <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">05</span>
         <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 3rem; font-family: var(--idx-display); font-weight: 900;">Tim</h2>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0;" data-reveal="stagger-children">
           <div
             v-for="(m, i) in team"
             :key="i"
@@ -647,7 +648,7 @@ onBeforeUnmount(() => {
     <!-- ============================================================ -->
     <!-- 7. KONTAK -->
     <!-- ============================================================ -->
-    <section id="kontak" style="border-top: 2px solid var(--idx-fg);">
+    <section id="kontak" style="border-top: 2px solid var(--idx-fg);" data-reveal="scale">
       <div style="padding: 5rem 2rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--idx-accent);">06</span>
         <h2 :style="h2Style" style="margin-top: 0.5rem; margin-bottom: 2rem; font-family: var(--idx-display); font-weight: 900;">Kontak</h2>
@@ -684,7 +685,7 @@ onBeforeUnmount(() => {
     <!-- ============================================================ -->
     <!-- 8. FOOTER -->
     <!-- ============================================================ -->
-    <footer style="border-top: 2px solid var(--idx-fg); padding: 2rem 2rem;">
+    <footer style="border-top: 2px solid var(--idx-fg); padding: 2rem 2rem;" data-reveal="fade-up">
       <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
         <span :style="monoStyle" style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--idx-muted);">
           &copy; {{ currentYear }} INDEKS &middot; Yogyakarta

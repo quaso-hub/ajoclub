@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * saas-2.vue — Kas
  * Dashboard-First SaaS. Linear/Vercel/Stripe aesthetic.
@@ -13,6 +13,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('saas-2')
 const { tpl, styles, h1Style, h2Style, monoStyle, palette } = theme
+useScrollReveal('saas-2')
 
 const accentColor = computed(() => {
   const a = palette.accent
@@ -725,7 +726,7 @@ watch(activeTimeRange, () => {
     <!-- ============================== -->
     <!-- SECTION 3 — FEATURES           -->
     <!-- ============================== -->
-    <section class="kas-section">
+    <section class="kas-section" data-reveal="fade-up">
       <div class="kas-section__inner">
         <p class="kas-eyebrow" :style="monoStyle">FITUR</p>
         <h2 :style="h2Style" class="kas-section__h2">Real product, not a marketing page.</h2>
@@ -852,7 +853,7 @@ watch(activeTimeRange, () => {
     <!-- ============================== -->
     <!-- SECTION 4 — KENAPA KAS         -->
     <!-- ============================== -->
-    <section class="kas-section">
+    <section class="kas-section" data-reveal="fade-up">
       <div class="kas-section__inner">
         <p class="kas-eyebrow" :style="monoStyle">KENAPA KAS</p>
         <h2 :style="h2Style" class="kas-section__h2">Dari warung kopi sampai agency Jakarta.</h2>
@@ -878,7 +879,7 @@ watch(activeTimeRange, () => {
     <!-- ============================== -->
     <!-- SECTION 5 — INTEGRATIONS       -->
     <!-- ============================== -->
-    <section class="kas-section">
+    <section class="kas-section" data-reveal="fade-up">
       <div class="kas-section__inner">
         <p class="kas-eyebrow" :style="monoStyle">INTEGRASI</p>
         <h2 :style="h2Style" class="kas-section__h2">Terhubung dengan yang Anda sudah pakai.</h2>
@@ -898,7 +899,7 @@ watch(activeTimeRange, () => {
     <!-- ============================== -->
     <!-- SECTION 6 — FAQ                -->
     <!-- ============================== -->
-    <section class="kas-section">
+    <section class="kas-section" data-reveal="fade-up">
       <div class="kas-section__inner">
         <p class="kas-eyebrow" :style="monoStyle">FAQ</p>
         <h2 :style="h2Style" class="kas-section__h2">Pertanyaan yang sering ditanya.</h2>
@@ -927,7 +928,7 @@ watch(activeTimeRange, () => {
     <!-- ============================== -->
     <!-- SECTION 7 — FINAL CTA          -->
     <!-- ============================== -->
-    <section class="kas-cta-section">
+    <section class="kas-cta-section" data-reveal="scale" data-reveal="fade-up" data-reveal="scale">
       <div class="kas-cta-section__inner">
         <h2 :style="h1Style" class="kas-cta-section__h2">Cukup lihat. Coba langsung.</h2>
         <p class="kas-cta-section__sub">Tanpa kartu kredit. Setup 7 menit.</p>
@@ -943,8 +944,7 @@ watch(activeTimeRange, () => {
     <!-- ============================== -->
     <!-- SECTION 8 — FOOTER             -->
     <!-- ============================== -->
-    <TmplFooter
-      :brand-name="tpl.brand"
+    <TmplFooter data-reveal="fade-up" data-reveal="fade-up"       :brand-name="tpl.brand"
       variant="columns"
       :accent="accentColor"
       :bg="'var(--kas-surface)'"

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * restaurant-3.vue
  * Sate Madura Pak Karto — Warung Hyperlocal
@@ -9,6 +9,7 @@ definePageMeta({ layout: false })
 
 const theme = useTemplateTheme('restaurant-3')
 const { tpl, palette, styles, h1Style, h2Style } = theme
+useScrollReveal('restaurant-3')
 const { buildUrl } = useWhatsApp()
 
 const isLoaded = ref(false)
@@ -189,18 +190,18 @@ const isOpen = currentHour >= 10 && currentHour < 22
           </button>
         </div>
 
-        <div class="sate-menu-grid">
+        <div class="sate-menu-grid" data-reveal="stagger-children">
           <div
             v-for="item in filteredMenu"
             :key="item.name"
             class="sate-menu-card"
           >
-            <div class="sate-menu-card__body">
+            <div class="sate-menu-card__body" data-reveal="fade-up" data-reveal-delay="0.1">
               <h3 class="sate-menu-card__name">{{ item.name }}</h3>
               <p class="sate-menu-card__desc">{{ item.desc }}</p>
-              <div class="sate-menu-card__bottom">
+              <div class="sate-menu-card__bottom" data-reveal="fade-up" data-reveal-delay="0.1">
                 <span class="sate-menu-card__price">{{ item.price }}</span>
-                <div class="sate-menu-card__actions">
+                <div class="sate-menu-card__actions" data-reveal="fade-up" data-reveal-delay="0.1">
                   <button
                     v-if="cartItems[item.name]"
                     type="button"
@@ -257,11 +258,11 @@ const isOpen = currentHour >= 10 && currentHour < 22
     </section>
 
     <!-- ====== JAM BUKA ====== -->
-    <section class="sate-section">
+    <section class="sate-section" data-reveal="fade-up">
       <div class="sate-container">
         <p class="sate-label">Jam Buka</p>
         <h2 :style="h2Style" class="sate-h2">Buka setiap hari.</h2>
-        <div class="sate-hours-grid">
+        <div class="sate-hours-grid" data-reveal="stagger-children">
           <div class="sate-hours-card">
             <span class="sate-hours-card__day">Senin - Jumat</span>
             <span class="sate-hours-card__time">10:00 - 22:00</span>
@@ -300,12 +301,12 @@ const isOpen = currentHour >= 10 && currentHour < 22
           </button>
         </div>
 
-        <div class="sate-branch-detail">
-          <div class="sate-branch-info">
+        <div class="sate-branch-detail" data-reveal="fade-up">
+          <div class="sate-branch-info" data-reveal="fade-up">
             <h3 class="sate-branch-info__name">{{ branches[activeBranch].name }}</h3>
             <p class="sate-branch-info__addr">{{ branches[activeBranch].address }}</p>
             <p class="sate-branch-info__hours">Buka: {{ branches[activeBranch].hours }}</p>
-            <div class="sate-branch-info__actions">
+            <div class="sate-branch-info__actions" data-reveal="fade-up">
               <a
                 :href="`tel:${branches[activeBranch].phone.replace(/-/g, '')}`"
                 class="sate-btn sate-btn--outline sate-btn--sm"
@@ -378,8 +379,7 @@ const isOpen = currentHour >= 10 && currentHour < 22
     </section>
 
     <!-- ====== FOOTER ====== -->
-    <TmplFooter
-      brand-name="Sate Madura Pak Karto"
+    <TmplFooter data-reveal="fade-up" <TmplFooter data-reveal="fade-up" brand-name="Sate Madura Pak Karto"
       variant="columns"
       :accent="accentCss"
       :links="[
