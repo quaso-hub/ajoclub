@@ -47,18 +47,18 @@ onBeforeUnmount(() => {
     <div ref="heroContent" class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl pt-20">
         <p class="text-sky-500 dark:text-sky-400 text-xs sm:text-sm font-mono tracking-widest uppercase mb-4 sm:mb-6 hero-text">
-          AjoClub / Digital Agency
+          AjoClub / Digital Agency / 24 Template
         </p>
         <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.95] mb-6 sm:mb-8 hero-text text-balance">
-          Kami bikin website<br class="hidden sm:block" />
-          <span class="text-(--ui-text-muted)">yang selesai.</span>
+          24 pintu.<br class="hidden sm:block" />
+          <span class="text-(--ui-text-muted)">Pilih yang cocok.</span>
         </h1>
         <p class="text-base sm:text-lg md:text-xl text-(--ui-text-muted) max-w-xl mb-8 sm:mb-10 hero-text leading-relaxed">
-          Landing page, company profile, SaaS, atau dashboard. Dari diskusi pertama sampai online — satu tim, satu stack.
+          Setiap template adalah website lengkap. Bukan variasi dari satu desain. Klik salah satu, rasakan perbedaannya.
         </p>
         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 hero-text">
           <UButton size="xl" class="w-full sm:w-auto justify-center" @click="scrollTo('#showcase')">
-            Lihat template
+            Lihat 24 template
             <template #trailing>
               <UIcon name="i-lucide-arrow-right" />
             </template>
