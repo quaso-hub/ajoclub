@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * membership-2.vue — Sinau Koding
+ * membership-2.vue ï¿½ Sinau Koding
  * Indonesian developer community platform. Dark night bg, coral accent.
  * Geist + Geist Mono. 120-node 3D constellation (case-timeline, balanced).
  *
@@ -94,7 +94,7 @@ const team = [
 ]
 
 const faqs = [
-  { q: 'Apakah Sinau Koding gratis?', a: 'Ya. 3 space, baca thread, event publik — tanpa biaya.' },
+  { q: 'Apakah Sinau Koding gratis?', a: 'Ya. 3 space, baca thread, event publik ï¿½ tanpa biaya.' },
   { q: 'Bedanya Komunitas dan Studio?', a: 'Komunitas buka semua 6 space + post. Studio tambah mentoring 1-on-1, portfolio review, job referral.' },
   { q: 'Saya pemula, cocok nggak?', a: 'Cocok. Ada thread khusus pertanyaan dasar. Tidak ada pertanyaan bodoh.' },
   { q: 'Event diadakan di mana?', a: 'Online via Zoom/Discord. Beberapa offline di Jakarta, Bandung, Surabaya.' },

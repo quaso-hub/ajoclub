@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * portfolio-1.vue — Grapiku
+ * portfolio-1.vue ï¿½ Grapiku
  * Dark immersive agency portfolio. Awwwards target.
  *
  * 8 sections, 8 case studies, 6 services, 4-step process,
@@ -32,7 +32,7 @@ const contactFields = [
 ]
 
 // ============================================================
-// CASE STUDIES — 8 Indonesian brands
+// CASE STUDIES ï¿½ 8 Indonesian brands
 // ============================================================
 const cases = [
   {
@@ -42,7 +42,7 @@ const cases = [
     discipline: 'Produk',
     tag: 'Produk',
     color: 'var(--t-brand)',
-    desc: 'Redesign app mobile ordering—250+ outlet.',
+    desc: 'Redesign app mobile orderingï¿½250+ outlet.',
     outcome: '+24% repeat order dalam 3 bulan.',
   },
   {
@@ -52,7 +52,7 @@ const cases = [
     discipline: 'Brand',
     tag: 'Brand',
     color: 'var(--t-brand)',
-    desc: 'Refresh logo dan visual system—apparel lokal Bandung.',
+    desc: 'Refresh logo dan visual systemï¿½apparel lokal Bandung.',
     outcome: '18 social mentions dalam minggu pertama.',
   },
   {
@@ -62,7 +62,7 @@ const cases = [
     discipline: 'Brand',
     tag: 'Brand',
     color: 'var(--t-brand)',
-    desc: 'Packaging refresh—50 SKU kopi kemasan.',
+    desc: 'Packaging refreshï¿½50 SKU kopi kemasan.',
     outcome: 'Distribusi ke 200+ retail.',
   },
   {
@@ -72,7 +72,7 @@ const cases = [
     discipline: 'Web',
     tag: 'Web',
     color: 'var(--t-web)',
-    desc: 'E-commerce redesign—fashion modest wear.',
+    desc: 'E-commerce redesignï¿½fashion modest wear.',
     outcome: '-38% cart abandonment.',
   },
   {
@@ -82,7 +82,7 @@ const cases = [
     discipline: 'UX',
     tag: 'UX',
     color: 'var(--t-dash)',
-    desc: 'Dashboard redesign—developer portal payment gateway.',
+    desc: 'Dashboard redesignï¿½developer portal payment gateway.',
     outcome: '-22% support tickets.',
   },
   {
@@ -92,7 +92,7 @@ const cases = [
     discipline: 'Brand',
     tag: 'Brand',
     color: 'var(--t-brand)',
-    desc: 'Naming dan identity—sepatu lokal Bandung.',
+    desc: 'Naming dan identityï¿½sepatu lokal Bandung.',
     outcome: 'Diliput 6 media dalam sebulan.',
   },
   {
@@ -102,7 +102,7 @@ const cases = [
     discipline: 'Produk',
     tag: 'Produk',
     color: 'var(--t-brand)',
-    desc: 'App tracking logistik—brand beauty.',
+    desc: 'App tracking logistikï¿½brand beauty.',
     outcome: 'Dipakai 15 cabang.',
   },
   {
@@ -112,7 +112,7 @@ const cases = [
     discipline: 'UX',
     tag: 'UX',
     color: 'var(--t-dash)',
-    desc: 'Redesign flow e-signature—startup B2B.',
+    desc: 'Redesign flow e-signatureï¿½startup B2B.',
     outcome: 'Completion rate 71% menjadi 89%.',
   },
 ]
@@ -127,7 +127,7 @@ const filteredCases = computed(() => {
 const filterCount = computed(() => filteredCases.value.length)
 
 // ============================================================
-// SERVICES — 6
+// SERVICES ï¿½ 6
 // ============================================================
 const services = [
   { num: '01', title: 'Riset Pengguna', desc: 'Wawancara, journey mapping, usability testing.', cta: 'Lihat 3 riset ?' },
@@ -139,7 +139,7 @@ const services = [
 ]
 
 // ============================================================
-// PROCESS — 4 steps
+// PROCESS ï¿½ 4 steps
 // ============================================================
 const processSteps = [
   { step: '01', title: 'Riset', weeks: '3 minggu', desc: 'Wawancara user, journey mapping, competitive audit.' },
@@ -149,13 +149,13 @@ const processSteps = [
 ]
 
 // ============================================================
-// KLIEN MARQUEE — 16
+// KLIEN MARQUEE ï¿½ 16
 // ============================================================
 const klienRow1 = ['Fore Coffee', 'Erigo', 'Xendit', 'Brodo', 'Bittersweet by Najla', 'Privy', 'Hijack', 'SASC']
 const klienRow2 = ['Janji Jiwa', 'Cottonink', 'Mekari', 'Kaum', 'Otten', 'AMUZ', 'BukuKas', 'Spike']
 
 // ============================================================
-// FOUNDERS — 4
+// FOUNDERS ï¿½ 4
 // ============================================================
 const founders = [
   { name: 'Maya Kusuma', role: 'Founder, design lead', bio: 'Ex Tokopedia.', handle: '@mayakusuma', gradient: 'linear-gradient(135deg, #4A8CFF 0%, #2563EB 100%)' },
@@ -165,7 +165,7 @@ const founders = [
 ]
 
 // ============================================================
-// AWARDS — 12
+// AWARDS ï¿½ 12
 // ============================================================
 const awards = [
   { pub: 'Awwwards', award: 'SOTD', year: 2024, project: 'Fore Coffee' },
@@ -279,7 +279,7 @@ const navLinks = [
     <main id="main">
 
       <!-- ============================== -->
-      <!-- 1. HERO — Particle-morph 3D    -->
+      <!-- 1. HERO ï¿½ Particle-morph 3D    -->
       <!-- ============================== -->
       <section id="grapiku-hero" class="gp-hero">
         <ClientOnly>
@@ -294,14 +294,14 @@ const navLinks = [
         <div class="gp-hero__gradient" aria-hidden="true" />
 
         <div class="gp-hero__content">
-          <p class="gp-meta" :style="monoStyle">Studio desain · Bandung · 2021-</p>
+          <p class="gp-meta" :style="monoStyle">Studio desain ï¿½ Bandung ï¿½ 2021-</p>
           <h1 :style="h1Style" class="gp-h1 text-balance">
             Bikin brand<br />yang jalan.
           </h1>
           <p class="gp-hero__sub">
             4 orang. Brand, web, dashboard.
           </p>
-          <p class="gp-hero__badge" :style="monoStyle">47 proyek · 38 klien · 6 industri · 5 tahun</p>
+          <p class="gp-hero__badge" :style="monoStyle">47 proyek ï¿½ 38 klien ï¿½ 6 industri ï¿½ 5 tahun</p>
           <div class="gp-hero__ctas">
             <a href="#karya" class="gp-btn gp-btn--primary">Lihat studi kasus</a>
             <a href="#kontak" class="gp-btn gp-btn--ghost">Bicara langsung</a>
@@ -317,7 +317,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- 2. STATS — Counter animation   -->
+      <!-- 2. STATS ï¿½ Counter animation   -->
       <!-- ============================== -->
       <section id="grapiku-stats" class="gp-stats">
         <div v-for="s in animatedStats" :key="s.label" class="gp-stat">
@@ -327,7 +327,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- 3. STUDI KASUS — 8 cards       -->
+      <!-- 3. STUDI KASUS ï¿½ 8 cards       -->
       <!-- ============================== -->
       <section id="karya" class="gp-section">
         <div class="gp-section__head">
@@ -375,7 +375,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- 4. LAYANAN — 6 cards           -->
+      <!-- 4. LAYANAN ï¿½ 6 cards           -->
       <!-- ============================== -->
       <section id="layanan" class="gp-section gp-section--alt">
         <div class="gp-section__head">
@@ -394,7 +394,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- 5. CARA KERJA — 4 steps        -->
+      <!-- 5. CARA KERJA ï¿½ 4 steps        -->
       <!-- ============================== -->
       <section id="proses" class="gp-section">
         <div class="gp-section__head">
@@ -413,7 +413,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- 6. KLIEN MARQUEE — 16 names    -->
+      <!-- 6. KLIEN MARQUEE ï¿½ 16 names    -->
       <!-- ============================== -->
       <section class="gp-section gp-klien" data-reveal="fade-up">
         <div class="gp-section__head">
@@ -426,7 +426,7 @@ const navLinks = [
         <div class="gp-marquee-wrap" data-reveal="fade-up">
           <TmplMarquee
             :items="klienRow1"
-            separator="·"
+            separator="ï¿½"
             direction="left"
             speed="slow"
             accent="var(--tmpl-accent)"
@@ -434,7 +434,7 @@ const navLinks = [
           <div class="gp-marquee-gap" data-reveal="fade-up" />
           <TmplMarquee
             :items="klienRow2"
-            separator="·"
+            separator="ï¿½"
             direction="right"
             speed="slow"
             accent="var(--tmpl-accent)"
@@ -443,7 +443,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- 7. TIM — 4 founders            -->
+      <!-- 7. TIM ï¿½ 4 founders            -->
       <!-- ============================== -->
       <section id="tim" class="gp-section gp-section--alt">
         <div class="gp-section__head">
@@ -466,7 +466,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- 8. PENGHARGAAN — 12 grid       -->
+      <!-- 8. PENGHARGAAN ï¿½ 12 grid       -->
       <!-- ============================== -->
       <section class="gp-section" data-reveal="fade-up">
         <div class="gp-section__head">
@@ -487,7 +487,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- 9. TULIS KE KAMI — Contact     -->
+      <!-- 9. TULIS KE KAMI ï¿½ Contact     -->
       <!-- ============================== -->
       <section id="kontak" class="gp-section gp-section--alt gp-contact">
         <div class="gp-contact__grid" data-reveal="stagger-children">
@@ -538,7 +538,7 @@ const navLinks = [
       variant="columns"
       :links="navLinks"
       :marquee-items="['Grapiku', 'Bandung', '2021', 'Brand', 'Web', 'Dashboard', 'Mobile', '3D']"
-      signature="© 2021-2026 Grapiku Studio. Buat orang yang serius sama brand-nya."
+      signature="ï¿½ 2021-2026 Grapiku Studio. Buat orang yang serius sama brand-nya."
       :accent="tpl.accentColor"
     />
 

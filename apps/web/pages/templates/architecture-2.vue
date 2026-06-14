@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 /**
  * architecture-2.vue — Bukit Hijau
  * Real estate developer. Inter Tight Black H1, Inter body, JetBrains Mono for data.

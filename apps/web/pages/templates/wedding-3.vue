@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * wedding-3.vue — Sarah & Kevin
+ * wedding-3.vue ï¿½ Sarah & Kevin
  * Destination Wedding. Sand/sunset/sea palette.
  *
  * 12 sections. SUBTLE 3D: slow wireframe wave (cinematic-scroll, calm).
@@ -83,7 +83,7 @@ const weather = {
 }
 
 // ============================================================
-// 3D — SUBTLE WIREFRAME WAVE (cinematic-scroll, calm)
+// 3D ï¿½ SUBTLE WIREFRAME WAVE (cinematic-scroll, calm)
 // ============================================================
 const waveCanvasRef = ref<HTMLCanvasElement | null>(null)
 let waveGL: WebGLRenderingContext | null = null
@@ -296,7 +296,7 @@ function openLiveStream() {
     <main id="main">
 
       <!-- ============================== -->
-      <!-- 1. OPENING — Bismillah + 3D Wave -->
+      <!-- 1. OPENING ï¿½ Bismillah + 3D Wave -->
       <!-- ============================== -->
       <section class="sk-hero" :style="{ minHeight: '100dvh' }">
         <canvas ref="waveCanvasRef" class="sk-hero__wave" aria-hidden="true" />
@@ -329,7 +329,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- 4. CERITA — 4 milestones -->
+      <!-- 4. CERITA ï¿½ 4 milestones -->
       <!-- ============================== -->
       <section id="cerita" class="sk-cerita">
         <p class="sk-eyebrow" :style="monoStyle">Perjalanan Kami</p>
@@ -347,7 +347,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- 5. ACARA — 3 events -->
+      <!-- 5. ACARA ï¿½ 3 events -->
       <!-- ============================== -->
       <section id="acara" class="sk-acara">
         <p class="sk-eyebrow" :style="monoStyle">Detail Acara</p>
@@ -403,7 +403,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- 7. GALERI — 8 photos -->
+      <!-- 7. GALERI ï¿½ 8 photos -->
       <!-- ============================== -->
       <section id="galeri" class="sk-galeri">
         <p class="sk-eyebrow" :style="monoStyle">Galeri</p>
@@ -444,7 +444,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- 9. AMPLOP — 3 banks -->
+      <!-- 9. AMPLOP ï¿½ 3 banks -->
       <!-- ============================== -->
       <section id="amplop" class="sk-amplop">
         <p class="sk-eyebrow" :style="monoStyle">Amplop</p>
@@ -569,7 +569,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* 1. HERO — Opening + 3D wave                                   */
+/* 1. HERO ï¿½ Opening + 3D wave                                   */
 /* ============================================================ */
 .sk-hero {
   position: relative;

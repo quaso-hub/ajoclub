@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * membership-3.vue — Raka Writes
+ * membership-3.vue ï¿½ Raka Writes
  * Solo creator tip/support page. Warm cream, butter yellow accent, Cardo italic H1.
  * 8 sections: Hero+3D, Tentang, Dukungan (3 tiers), Milestones, Tulisan Terbaru, Testimoni, FAQ, Footer
  */
@@ -497,7 +497,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* ============================================================
-   RAKA WRITES — Creator Tip/Support Styles
+   RAKA WRITES ï¿½ Creator Tip/Support Styles
    Warm cream, butter yellow accent, Cardo italic H1, Plus Jakarta Sans body
    ============================================================ */
 

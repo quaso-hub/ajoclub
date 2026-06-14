@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * architecture-1.vue — Archiry
+ * architecture-1.vue ï¿½ Archiry
  * Architecture firm. BIG/OMA/Snohetta restraint. Cormorant Garamond italic.
  *
  * 10 sections: 3D Hero, Hero, About, Projects (3-axis filter), Process (5 stages),
@@ -127,7 +127,7 @@ const process = [
     step: '01',
     title: 'Brief',
     weeks: 'Minggu 1\u20133',
-    desc: 'Kami tidak gambar dulu. Kami datang ke tempat, berjalan keliling, bicara dengan penghuni — menggali rutinitas, bukan selera.',
+    desc: 'Kami tidak gambar dulu. Kami datang ke tempat, berjalan keliling, bicara dengan penghuni ï¿½ menggali rutinitas, bukan selera.',
     deliverables: ['Site visit 2\u20133x', 'Wawancara penghuni', 'Dokumen brief', 'Kajian tapak awal'],
   },
   {
@@ -307,7 +307,7 @@ const navLinks = [
     <main id="main">
 
       <!-- ============================== -->
-      <!-- SECTION 1 — 3D + HERO          -->
+      <!-- SECTION 1 ï¿½ 3D + HERO          -->
       <!-- ============================== -->
       <section id="hero" data-section class="archiry-hero" :style="{ minHeight: '100dvh' }">
         <!-- 3D Canvas (background, pointer-events none) -->
@@ -365,7 +365,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 2 — ABOUT              -->
+      <!-- SECTION 2 ï¿½ ABOUT              -->
       <!-- ============================== -->
       <section id="studi" data-section class="archiry-about">
         <p class="archiry-section-label" :style="monoStyle">01 / 06 &middot; Studio</p>
@@ -373,14 +373,14 @@ const navLinks = [
           Arsitektur<br />yang tumbuh<br />dari tempat.
         </h2>
         <div class="archiry-about__body">
-          <p>Arsitektur yang baik tumbuh dari tempat, iklim, dan cara penghuninya hidup. Bentuk bangunan mengikuti matahari, angin, dan kemiringan tanah — bukan estetika dari majalah luar negeri.</p>
+          <p>Arsitektur yang baik tumbuh dari tempat, iklim, dan cara penghuninya hidup. Bentuk bangunan mengikuti matahari, angin, dan kemiringan tanah ï¿½ bukan estetika dari majalah luar negeri.</p>
           <p>Material lokal bukan gimmick. Batu paras Jawa Tengah, kayu jati Jepara, bambu petung Sumatera. Dipilih karena tahan lama, tersedia di tempat, dan punya cerita.</p>
-          <p>Kami menolak 80% klien. Bukan sombong — tapi tidak semua proyek cocok dengan cara kami kerja. Yang kami ambil, kami kerjakan penuh sampai serah terima.</p>
+          <p>Kami menolak 80% klien. Bukan sombong ï¿½ tapi tidak semua proyek cocok dengan cara kami kerja. Yang kami ambil, kami kerjakan penuh sampai serah terima.</p>
         </div>
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 3 — PROJECTS           -->
+      <!-- SECTION 3 ï¿½ PROJECTS           -->
       <!-- ============================== -->
       <section id="proyek" data-section class="archiry-projects">
         <p class="archiry-section-label" :style="monoStyle">02 / 06 &middot; Proyek</p>
@@ -480,7 +480,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 4 — PROCESS            -->
+      <!-- SECTION 4 ï¿½ PROCESS            -->
       <!-- ============================== -->
       <section id="proses" data-section class="archiry-process" ref="processSection">
         <p class="archiry-section-label" :style="monoStyle">03 / 06 &middot; Proses</p>
@@ -527,7 +527,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 5 — TEAM               -->
+      <!-- SECTION 5 ï¿½ TEAM               -->
       <!-- ============================== -->
       <section id="tim" data-section class="archiry-team">
         <p class="archiry-section-label" :style="monoStyle">04 / 06 &middot; Tim</p>
@@ -564,7 +564,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 6 — RECOGNITION        -->
+      <!-- SECTION 6 ï¿½ RECOGNITION        -->
       <!-- ============================== -->
       <section id="pengakuan" data-section class="archiry-recognition">
         <p class="archiry-section-label" :style="monoStyle">05 / 06 &middot; Pengakuan</p>
@@ -590,7 +590,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 7 — PRESS              -->
+      <!-- SECTION 7 ï¿½ PRESS              -->
       <!-- ============================== -->
       <section class="archiry-press">
         <p class="archiry-section-label" :style="monoStyle">Liputan dan tulisan</p>
@@ -605,7 +605,7 @@ const navLinks = [
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 8 — CONTACT            -->
+      <!-- SECTION 8 ï¿½ CONTACT            -->
       <!-- ============================== -->
       <section id="kontak" data-section class="archiry-contact">
         <p class="archiry-section-label" :style="monoStyle">06 / 06 &middot; Kontak</p>

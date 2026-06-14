@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * portfolio-2.vue — Studio Daida: Light Editorial Studio
+ * portfolio-2.vue ï¿½ Studio Daida: Light Editorial Studio
  * slug='portfolio-2', typo='daida', palette='daida'
  * Fraunces italic H1, Lora body, JetBrains Mono labels
  * Force mode: light. Paper bg, magenta accent.
@@ -54,7 +54,7 @@ const services = [
 
 const processSteps = [
   { num: '01', title: 'Percakapan', desc: 'Kami mulai dengan mendengar. Apa yang ingin Anda sampaikan, kepada siapa.' },
-  { num: '02', title: 'Riset & Arah', desc: 'Kami pelajari konteks Anda — pesaing, audiens, budaya. Lalu tentukan arah.' },
+  { num: '02', title: 'Riset & Arah', desc: 'Kami pelajari konteks Anda ï¿½ pesaing, audiens, budaya. Lalu tentukan arah.' },
   { num: '03', title: 'Desain & Iterasi', desc: 'Konsep dipresentasikan, masukan didengar. Dua sampai tiga putaran revisi.' },
   { num: '04', title: 'Serah Terima', desc: 'File final, pedoman, dan panduan produksi. Kami bantu koordinasi vendor.' },
 ]
@@ -77,7 +77,7 @@ const conversations = [
   {
     name: 'Bagas Satrio',
     role: 'Tipografer',
-    excerpt: 'Setiap brand punya ritme tersendiri. Typeface yang baik harus menangkap ritme itu — huruf yang terasa benar saat dibaca.',
+    excerpt: 'Setiap brand punya ritme tersendiri. Typeface yang baik harus menangkap ritme itu ï¿½ huruf yang terasa benar saat dibaca.',
     topic: 'Typeface untuk Brand Budaya',
     readTime: '8 menit',
   },
@@ -91,7 +91,7 @@ const klienNames = [
 ]
 
 const faqItems = [
-  { q: 'Berapa lama proyek biasanya selesai?', a: 'Identitas 8–12 minggu. Editorial 4–6 minggu. Estimasi pasti setelah percakapan awal.' },
+  { q: 'Berapa lama proyek biasanya selesai?', a: 'Identitas 8ï¿½12 minggu. Editorial 4ï¿½6 minggu. Estimasi pasti setelah percakapan awal.' },
   { q: 'Apakah Anda hanya mengerjakan proyek budaya?', a: 'Tidak. Meskipun banyak klien kami berasal dari sektor budaya dan hospitality, kami juga mengerjakan proyek untuk brand komersial, institusi keuangan, dan perusahaan teknologi.' },
   { q: 'Bagaimana cara memulai?', a: 'Kirim email ke hello@daida.id dengan deskripsi singkat tentang proyek Anda. Kami akan merespons dalam 48 jam dan menjadwalkan percakapan.' },
   { q: 'Apakah Anda mengerjakan proyek di luar Bandung?', a: 'Ya. Kami mengerjakan proyek di seluruh Indonesia dan sesekali di luar negeri. Sebagian besar proses bisa dilakukan secara remote.' },

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * restaurant-2.vue — Kopi Rumah
+ * restaurant-2.vue ï¿½ Kopi Rumah
  * Modern cafe. Pilot Coffee / Blue Bottle style. Space Grotesk bold, warm cream, sun accent.
  *
  * 8 sections: Hero+3D, Menu, Tentang, Lokasi+Jam, Galeri, Reservasi, Footer
@@ -136,12 +136,12 @@ function submitReservation() {
 // BREW TICKER (today's brew)
 // ============================================================
 const brews = [
-  'Gayo Wine Process · Aceh · 1450m',
-  'Toraja Sapan · Sulawesi · 1700m',
-  'Mandailing Lintong · Sumatera · 1300m',
-  'Kintamani Bali · 1200m',
-  'Java Estate Blawan · 1500m',
-  'Flores Bajawa · 1250m',
+  'Gayo Wine Process ï¿½ Aceh ï¿½ 1450m',
+  'Toraja Sapan ï¿½ Sulawesi ï¿½ 1700m',
+  'Mandailing Lintong ï¿½ Sumatera ï¿½ 1300m',
+  'Kintamani Bali ï¿½ 1200m',
+  'Java Estate Blawan ï¿½ 1500m',
+  'Flores Bajawa ï¿½ 1250m',
 ]
 const todayBrew = computed(() => {
   const idx = new Date().getDay() % brews.length
@@ -161,10 +161,10 @@ function updateHours() {
 
   if (mins >= openMin && mins < closeMin) {
     hoursOpen.value = true
-    hoursLabel.value = 'Buka · tutup 22.00'
+    hoursLabel.value = 'Buka ï¿½ tutup 22.00'
   } else {
     hoursOpen.value = false
-    hoursLabel.value = 'Tutup · buka 07.00'
+    hoursLabel.value = 'Tutup ï¿½ buka 07.00'
   }
 }
 
@@ -175,13 +175,13 @@ const galeriItems = [
   { label: 'Suasana pagi', caption: 'Sinar matahari dari jendela besar.' },
   { label: 'Kopi susu', caption: 'Menu paling dicari. Gula aren.' },
   { label: 'Dapur kami', caption: 'Roti fresh jam 5 pagi.' },
-  { label: 'Barista at work', caption: 'Latte art — seni yang bisa diminum.' },
+  { label: 'Barista at work', caption: 'Latte art ï¿½ seni yang bisa diminum.' },
   { label: 'Corner seat', caption: 'Favorit untuk kerja atau baca.' },
   { label: 'Croissant', caption: '72 lapis butter. Renyah, lembut.' },
 ]
 
 // ============================================================
-// 3D CUP — raw WebGL canvas, cursor-following lathe cup + steam
+// 3D CUP ï¿½ raw WebGL canvas, cursor-following lathe cup + steam
 // ============================================================
 const cupCanvasRef = ref<HTMLCanvasElement | null>(null)
 let cupGL: WebGLRenderingContext | null = null
@@ -442,7 +442,7 @@ function handleNavClick(e: MouseEvent, href: string) {
     <main id="main">
 
       <!-- ============================== -->
-      <!-- SECTION 01 — HERO + 3D          -->
+      <!-- SECTION 01 ï¿½ HERO + 3D          -->
       <!-- ============================== -->
       <section id="hero" class="kopi-hero" @mousemove="onMouseMove">
         <!-- Today's brew ticker -->
@@ -450,7 +450,7 @@ function handleNavClick(e: MouseEvent, href: string) {
           <div class="kopi-ticker__track">
             <span v-for="n in 4" :key="n" class="kopi-ticker__item">
               <span class="kopi-ticker__dot" />
-              Hari ini brew: {{ todayBrew }} · Roasted fresh · Est. 2019
+              Hari ini brew: {{ todayBrew }} ï¿½ Roasted fresh ï¿½ Est. 2019
             </span>
           </div>
         </div>
@@ -474,7 +474,7 @@ function handleNavClick(e: MouseEvent, href: string) {
             </div>
 
             <div class="kopi-hero__meta" :style="monoStyle">
-              Kemang, Jakarta · 07.00 – 22.00 · 4 lokasi
+              Kemang, Jakarta ï¿½ 07.00 ï¿½ 22.00 ï¿½ 4 lokasi
             </div>
           </div>
 
@@ -487,12 +487,12 @@ function handleNavClick(e: MouseEvent, href: string) {
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 02 — MENU (8 items)     -->
+      <!-- SECTION 02 ï¿½ MENU (8 items)     -->
       <!-- ============================== -->
       <section id="menu" class="kopi-menu">
         <div class="kopi-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Menu.</h2>
-          <p class="kopi-section-sub" :style="monoStyle">8 pilihan · Kopi · Makanan · Roti</p>
+          <p class="kopi-section-sub" :style="monoStyle">8 pilihan ï¿½ Kopi ï¿½ Makanan ï¿½ Roti</p>
         </div>
 
         <!-- Filter pills -->
@@ -539,7 +539,7 @@ function handleNavClick(e: MouseEvent, href: string) {
         </TransitionGroup>
 
         <div v-if="cartCount > 0" class="kopi-menu__cart-bar">
-          <span>{{ cartCount }} item · {{ fmtRp(cartTotal) }}</span>
+          <span>{{ cartCount }} item ï¿½ {{ fmtRp(cartTotal) }}</span>
           <button type="button" class="kopi-btn kopi-btn--primary kopi-btn--sm" @click="checkoutWhatsApp">
             Pesan via WhatsApp
           </button>
@@ -547,12 +547,12 @@ function handleNavClick(e: MouseEvent, href: string) {
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 03 — TENTANG            -->
+      <!-- SECTION 03 ï¿½ TENTANG            -->
       <!-- ============================== -->
       <section id="tentang" class="kopi-tentang">
         <div class="kopi-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Cerita kami.</h2>
-          <p class="kopi-section-sub" :style="monoStyle">Sejak 2019 · Kemang, Jakarta</p>
+          <p class="kopi-section-sub" :style="monoStyle">Sejak 2019 ï¿½ Kemang, Jakarta</p>
         </div>
 
         <div class="kopi-tentang__grid" data-reveal="stagger-children">
@@ -561,7 +561,7 @@ function handleNavClick(e: MouseEvent, href: string) {
               Kopi yang baik, dari biji yang baik.
             </p>
             <p>
-              2019, dari garasi di Kemang. Dua mesin espresso, satu grinder, kopi Gayo dari petani langsung. Sekarang 4 kedai, 1 roastery. Biji dari Aceh, Toraja, Mandailing, Kintamani, Flores — sangrai sendiri setiap minggu.
+              2019, dari garasi di Kemang. Dua mesin espresso, satu grinder, kopi Gayo dari petani langsung. Sekarang 4 kedai, 1 roastery. Biji dari Aceh, Toraja, Mandailing, Kintamani, Flores ï¿½ sangrai sendiri setiap minggu.
             </p>
             <p>
               Datang, duduk, pesan. Kursi pojok untuk kerja seharian selalu siap.
@@ -589,7 +589,7 @@ function handleNavClick(e: MouseEvent, href: string) {
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 04 — LOKASI + JAM       -->
+      <!-- SECTION 04 ï¿½ LOKASI + JAM       -->
       <!-- ============================== -->
       <section id="lokasi" class="kopi-lokasi">
         <div class="kopi-section-head" data-reveal="fade-up">
@@ -615,7 +615,7 @@ function handleNavClick(e: MouseEvent, href: string) {
             </div>
             <div class="kopi-lokasi__item">
               <span class="kopi-lokasi__label" :style="monoStyle">Jam buka</span>
-              <p>Senin - Minggu · 07.00 - 22.00</p>
+              <p>Senin - Minggu ï¿½ 07.00 - 22.00</p>
               <p class="kopi-lokasi__hours-live" :style="monoStyle">
                 <span class="kopi-nav-dot" :class="hoursOpen ? 'kopi-nav-dot--open' : 'kopi-nav-dot--closed'" />
                 {{ hoursLabel }}
@@ -629,7 +629,7 @@ function handleNavClick(e: MouseEvent, href: string) {
             </div>
             <div class="kopi-lokasi__item">
               <span class="kopi-lokasi__label" :style="monoStyle">WiFi</span>
-              <p>Gratis — password di struk.</p>
+              <p>Gratis ï¿½ password di struk.</p>
             </div>
             <div class="kopi-lokasi__item">
               <span class="kopi-lokasi__label" :style="monoStyle">Parkir</span>
@@ -640,7 +640,7 @@ function handleNavClick(e: MouseEvent, href: string) {
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 05 — GALERI             -->
+      <!-- SECTION 05 ï¿½ GALERI             -->
       <!-- ============================== -->
       <section id="galeri" class="kopi-galeri">
         <div class="kopi-section-head" data-reveal="fade-up">
@@ -669,12 +669,12 @@ function handleNavClick(e: MouseEvent, href: string) {
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 06 — RESERVASI          -->
+      <!-- SECTION 06 ï¿½ RESERVASI          -->
       <!-- ============================== -->
       <section id="reservasi" class="kopi-reservasi">
         <div class="kopi-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Reservasi.</h2>
-          <p class="kopi-section-sub" :style="monoStyle">1-20 orang · Kursi kerja & meeting</p>
+          <p class="kopi-section-sub" :style="monoStyle">1-20 orang ï¿½ Kursi kerja & meeting</p>
         </div>
 
         <div class="kopi-reservasi__grid" data-reveal="stagger-children">
@@ -752,7 +752,7 @@ function handleNavClick(e: MouseEvent, href: string) {
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 07 — FOOTER             -->
+      <!-- SECTION 07 ï¿½ FOOTER             -->
       <!-- ============================== -->
       <TmplFooter data-reveal="fade-up" brand-name="kopi rumah."
         variant="signoff"

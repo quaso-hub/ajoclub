@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 /**
  * saas-1.vue — Atur
  * Anti-SaaS Editorial SaaS. Magazine layout. Awwwards target.

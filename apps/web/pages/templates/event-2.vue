@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 /**
  * event-2.vue: NadaFest 2026
  * The Sound of the Archipelago.

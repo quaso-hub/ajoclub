@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * saas-2.vue — Kas
+ * saas-2.vue ï¿½ Kas
  * Dashboard-First SaaS. Linear/Vercel/Stripe aesthetic.
  * Interactive product UI as hero. Dark theme, electric blue.
  *
@@ -302,7 +302,7 @@ const faqs = [
   { q: 'Bisa coba gratis?', a: 'Ya. Semua paket 14 hari gratis, tanpa kartu kredit.' },
   { q: 'Bagaimana dengan data saya?', a: 'Server Jakarta. TLS 1.3. Backup harian. Tidak dijual, tidak dipakai training AI.' },
   { q: 'Bisa integrasi dengan Tokopedia/Shopee?', a: 'Ya. Berkembang: 2 integrasi marketplace. Skala: unlimited.' },
-  { q: 'Kalau saya non-teknis?', a: 'Setup 7 menit via WhatsApp. Atau telepon — manusia, bukan chatbot.' },
+  { q: 'Kalau saya non-teknis?', a: 'Setup 7 menit via WhatsApp. Atau telepon ï¿½ manusia, bukan chatbot.' },
 ]
 
 // ============================================================
@@ -471,7 +471,7 @@ watch(activeTimeRange, () => {
     <TmplBack accent="var(--kas-accent)" />
 
     <!-- ============================== -->
-    <!-- SECTION 1 — HERO (Dashboard)   -->
+    <!-- SECTION 1 ï¿½ HERO (Dashboard)   -->
     <!-- ============================== -->
     <section class="kas-hero" id="top">
       <!-- 3D Particles behind dashboard -->
@@ -486,7 +486,7 @@ watch(activeTimeRange, () => {
           Kelola bisnis tanpa spreadsheet.<br>
           <span class="kas-h1__accent">5 menit setup.</span>
         </h1>
-        <p class="kas-hero__sub">Kasir, faktur, inventori, laporan — semua terhubung.</p>
+        <p class="kas-hero__sub">Kasir, faktur, inventori, laporan ï¿½ semua terhubung.</p>
         <div class="kas-hero__ctas">
           <a href="#kas-pricing" class="kas-btn kas-btn--primary">Buka Dashboard</a>
           <a :href="buildUrl('Halo, saya mau lihat demo Kas.')" target="_blank" rel="noopener" class="kas-btn kas-btn--ghost">
@@ -686,7 +686,7 @@ watch(activeTimeRange, () => {
     </section>
 
     <!-- ============================== -->
-    <!-- SECTION 2 — PRICING            -->
+    <!-- SECTION 2 ï¿½ PRICING            -->
     <!-- ============================== -->
     <section id="kas-pricing" class="kas-section">
       <div class="kas-section__inner">
@@ -724,7 +724,7 @@ watch(activeTimeRange, () => {
     </section>
 
     <!-- ============================== -->
-    <!-- SECTION 3 — FEATURES           -->
+    <!-- SECTION 3 ï¿½ FEATURES           -->
     <!-- ============================== -->
     <section class="kas-section" data-reveal="fade-up">
       <div class="kas-section__inner">
@@ -851,7 +851,7 @@ watch(activeTimeRange, () => {
     </section>
 
     <!-- ============================== -->
-    <!-- SECTION 4 — KENAPA KAS         -->
+    <!-- SECTION 4 ï¿½ KENAPA KAS         -->
     <!-- ============================== -->
     <section class="kas-section" data-reveal="fade-up">
       <div class="kas-section__inner">
@@ -877,13 +877,13 @@ watch(activeTimeRange, () => {
     </section>
 
     <!-- ============================== -->
-    <!-- SECTION 5 — INTEGRATIONS       -->
+    <!-- SECTION 5 ï¿½ INTEGRATIONS       -->
     <!-- ============================== -->
     <section class="kas-section" data-reveal="fade-up">
       <div class="kas-section__inner">
         <p class="kas-eyebrow" :style="monoStyle">INTEGRASI</p>
         <h2 :style="h2Style" class="kas-section__h2">Terhubung dengan yang Anda sudah pakai.</h2>
-        <p class="kas-section__sub">QRIS, BI-FAST, marketplace, payment gateway — otomatis.</p>
+        <p class="kas-section__sub">QRIS, BI-FAST, marketplace, payment gateway ï¿½ otomatis.</p>
 
         <div class="kas-integrations">
           <div v-for="integ in ['QRIS', 'BI-FAST', 'BCA', 'Mandiri', 'BRI', 'GoPay', 'OVO', 'DANA', 'ShopeePay', 'Tokopedia', 'Shopee', 'WhatsApp']" :key="integ"
@@ -897,7 +897,7 @@ watch(activeTimeRange, () => {
     </section>
 
     <!-- ============================== -->
-    <!-- SECTION 6 — FAQ                -->
+    <!-- SECTION 6 ï¿½ FAQ                -->
     <!-- ============================== -->
     <section class="kas-section" data-reveal="fade-up">
       <div class="kas-section__inner">
@@ -926,7 +926,7 @@ watch(activeTimeRange, () => {
     </section>
 
     <!-- ============================== -->
-    <!-- SECTION 7 — FINAL CTA          -->
+    <!-- SECTION 7 ï¿½ FINAL CTA          -->
     <!-- ============================== -->
     <section class="kas-cta-section" data-reveal="scale">
       <div class="kas-cta-section__inner">
@@ -942,7 +942,7 @@ watch(activeTimeRange, () => {
     </section>
 
     <!-- ============================== -->
-    <!-- SECTION 8 — FOOTER             -->
+    <!-- SECTION 8 ï¿½ FOOTER             -->
     <!-- ============================== -->
     <TmplFooter data-reveal="fade-up"       :brand-name="tpl.brand"
       variant="columns"
@@ -1010,7 +1010,7 @@ watch(activeTimeRange, () => {
 
 <style scoped>
 /* ============================================================
-   KAS — Dashboard-First SaaS Template
+   KAS ï¿½ Dashboard-First SaaS Template
    Dark theme, electric blue accent, OKLCH
    ============================================================ */
 

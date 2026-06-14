@@ -1,5 +1,5 @@
 <script setup lang="ts">
-/* wedding-2 — Dita & Budi. Sederhana. Bersih. Jelas. */
+/* wedding-2 ï¿½ Dita & Budi. Sederhana. Bersih. Jelas. */
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 definePageMeta({ layout: false })
@@ -59,7 +59,7 @@ const banks = [
 ]
 
 // ============================================================
-// 3D — 1 WIREFRAME TORUS (barely visible, calm)
+// 3D ï¿½ 1 WIREFRAME TORUS (barely visible, calm)
 // ============================================================
 const torusCanvasRef = ref<HTMLCanvasElement | null>(null)
 let torusGL: WebGLRenderingContext | null = null
@@ -274,7 +274,7 @@ function openLiveStream() {
     <main id="main">
 
       <!-- ============================== -->
-      <!-- OPENING — Bismillah + Names + 3D Torus -->
+      <!-- OPENING ï¿½ Bismillah + Names + 3D Torus -->
       <!-- ============================== -->
       <section class="db-hero" :style="{ minHeight: '100dvh' }">
         <canvas ref="torusCanvasRef" class="db-hero__torus" aria-hidden="true" />
@@ -298,7 +298,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- CERITA — Timeline -->
+      <!-- CERITA ï¿½ Timeline -->
       <!-- ============================== -->
       <section id="cerita" class="db-cerita">
         <p class="db-eyebrow db-eyebrow--left" :style="monoStyle">Tentang</p>
@@ -313,7 +313,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- ACARA — 3 events -->
+      <!-- ACARA ï¿½ 3 events -->
       <!-- ============================== -->
       <section id="acara" class="db-acara">
         <p class="db-eyebrow db-eyebrow--left" :style="monoStyle">Acara</p>
@@ -330,7 +330,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- GALERI — Photos with lightbox -->
+      <!-- GALERI ï¿½ Photos with lightbox -->
       <!-- ============================== -->
       <section id="galeri" class="db-galeri">
         <p class="db-eyebrow" :style="monoStyle">Galeri</p>
@@ -354,7 +354,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- RSVP — Working form -->
+      <!-- RSVP ï¿½ Working form -->
       <!-- ============================== -->
       <section id="rsvp" class="db-rsvp">
         <p class="db-eyebrow" :style="monoStyle">Konfirmasi</p>
@@ -371,7 +371,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- AMPLOP — 3 banks, copy-to-clipboard -->
+      <!-- AMPLOP ï¿½ 3 banks, copy-to-clipboard -->
       <!-- ============================== -->
       <section id="amplop" class="db-amplop">
         <p class="db-eyebrow" :style="monoStyle">Amplop</p>
@@ -494,7 +494,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* HERO — names + torus                                          */
+/* HERO ï¿½ names + torus                                          */
 /* ============================================================ */
 .db-hero {
   position: relative;
@@ -573,7 +573,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* CERITA — Timeline                                             */
+/* CERITA ï¿½ Timeline                                             */
 /* ============================================================ */
 .db-cerita {
   padding: 6.25rem 1.5rem;
@@ -624,7 +624,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* ACARA — 3 events                                              */
+/* ACARA ï¿½ 3 events                                              */
 /* ============================================================ */
 .db-acara {
   padding: 6.25rem 1.5rem;
@@ -689,7 +689,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* GALERI — Photos with lightbox                                 */
+/* GALERI ï¿½ Photos with lightbox                                 */
 /* ============================================================ */
 .db-galeri {
   padding: 6.25rem 1.5rem;
@@ -797,7 +797,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* AMPLOP — Banks with copy                                      */
+/* AMPLOP ï¿½ Banks with copy                                      */
 /* ============================================================ */
 .db-amplop {
   padding: 6.25rem 1.5rem;
@@ -905,7 +905,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* ACTIONS — Add to calendar + live stream                       */
+/* ACTIONS ï¿½ Add to calendar + live stream                       */
 /* ============================================================ */
 .db-actions {
   padding: 6.25rem 1.5rem;

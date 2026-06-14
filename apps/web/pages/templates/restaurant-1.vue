@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * restaurant-1.vue — Sasana
+ * restaurant-1.vue ï¿½ Sasana
  * Fine dining editorial. Noma/EMP style. White space, Cormorant italic, scroll photo essay.
  *
  * 8 sections: Hero, Cerita, Menu, Reservasi, Acara, Lokasi, Press, Footer
@@ -55,9 +55,9 @@ const filteredCount = computed(() => filteredMenu.value.length)
 // PRIVATE EVENTS (3)
 // ============================================================
 const events = [
-  { id: 1, name: 'Wine Pairing Dinner', format: '4 jam · 8 sajian · dari Rp 18.000.000 / grup', description: 'Sommelier memandu anggur natural Indonesia dan import dari kebun kecil. Kamis atau Jumat malam.' },
-  { id: 2, name: "Chef's Table di Dapur", format: '4 jam · 8 sajian · dari Rp 12.000.000 / grup', description: 'Empat kursi di tengah dapur. Aria menjelaskan setiap sajian: ritme, suhu, kenapa rempah ini.' },
-  { id: 3, name: 'Garden Brunch Ahad', format: '4 jam · 5 sajian · dari Rp 8.500.000 / grup', description: 'Minggu pertama bulan. Taman belakang, 12 kursi, cahaya pagi tanpa filter.' },
+  { id: 1, name: 'Wine Pairing Dinner', format: '4 jam ï¿½ 8 sajian ï¿½ dari Rp 18.000.000 / grup', description: 'Sommelier memandu anggur natural Indonesia dan import dari kebun kecil. Kamis atau Jumat malam.' },
+  { id: 2, name: "Chef's Table di Dapur", format: '4 jam ï¿½ 8 sajian ï¿½ dari Rp 12.000.000 / grup', description: 'Empat kursi di tengah dapur. Aria menjelaskan setiap sajian: ritme, suhu, kenapa rempah ini.' },
+  { id: 3, name: 'Garden Brunch Ahad', format: '4 jam ï¿½ 5 sajian ï¿½ dari Rp 8.500.000 / grup', description: 'Minggu pertama bulan. Taman belakang, 12 kursi, cahaya pagi tanpa filter.' },
 ]
 
 // ============================================================
@@ -149,17 +149,17 @@ function updateHours() {
 
   if (day === 0) {
     hoursOpen.value = false
-    hoursLabel.value = 'Tutup · buka Selasa 18.00'
+    hoursLabel.value = 'Tutup ï¿½ buka Selasa 18.00'
   } else if (day === 1) {
     hoursOpen.value = false
-    hoursLabel.value = 'Tutup · buka besok 18.00'
+    hoursLabel.value = 'Tutup ï¿½ buka besok 18.00'
   } else if (currentMinutes >= openTime && currentMinutes < closeTime) {
     hoursOpen.value = true
-    hoursLabel.value = 'Buka · last seating 21.00'
+    hoursLabel.value = 'Buka ï¿½ last seating 21.00'
   } else {
     hoursOpen.value = false
-    if (day === 6) hoursLabel.value = 'Tutup · buka Selasa 18.00'
-    else hoursLabel.value = 'Tutup · buka besok 18.00'
+    if (day === 6) hoursLabel.value = 'Tutup ï¿½ buka Selasa 18.00'
+    else hoursLabel.value = 'Tutup ï¿½ buka besok 18.00'
   }
 }
 
@@ -187,7 +187,7 @@ function initScrollSpy() {
 }
 
 // ============================================================
-// 3D PARTICLES — 6 ambient forest-green WebGL points
+// 3D PARTICLES ï¿½ 6 ambient forest-green WebGL points
 // ============================================================
 const particleCanvasRef = ref<HTMLCanvasElement | null>(null)
 let particleGL: WebGLRenderingContext | null = null
@@ -384,14 +384,14 @@ function fmtRp(n: number) {
     <main id="main">
 
       <!-- ============================== -->
-      <!-- SECTION 01 — HERO               -->
+      <!-- SECTION 01 ï¿½ HERO               -->
       <!-- ============================== -->
       <section id="hero" class="sasana-hero">
         <!-- 3D Particles -->
         <canvas ref="particleCanvasRef" class="sasana-hero__particles" />
 
         <div class="sasana-hero__content">
-          <p class="sasana-hero__eyebrow" :style="monoStyle">Musim 12 · Jakarta · 2026</p>
+          <p class="sasana-hero__eyebrow" :style="monoStyle">Musim 12 ï¿½ Jakarta ï¿½ 2026</p>
 
           <h1 :style="{ ...h1Style, fontSize: 'clamp(4.5rem, 11vw, 11rem)', lineHeight: '0.92', letterSpacing: '-0.025em' }" class="sasana-hero__h1">
             Tujuh kursi.<br />Satu chef.
@@ -407,7 +407,7 @@ function fmtRp(n: number) {
           </div>
 
           <div class="sasana-hero__meta" :style="monoStyle">
-            7 kursi · 8 sajian · Reservasi H-7
+            7 kursi ï¿½ 8 sajian ï¿½ Reservasi H-7
           </div>
         </div>
 
@@ -415,18 +415,18 @@ function fmtRp(n: number) {
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 02 — CERITA             -->
+      <!-- SECTION 02 ï¿½ CERITA             -->
       <!-- ============================== -->
       <section id="cerita" class="sasana-cerita">
         <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Surat dari dapur.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">oleh Aria Pratama · Kepala Dapur</p>
+          <p class="sasana-section-sub" :style="monoStyle">oleh Aria Pratama ï¿½ Kepala Dapur</p>
         </div>
 
         <div class="sasana-cerita__grid" data-reveal="stagger-children">
           <div class="sasana-cerita__letter">
             <p class="sasana-cerita__dropcap">
-              Dapur ini lahir dari makan siang di rumah nenek di Bukittinggi — sayur baru dipetik, ikan baru ditangkap. Tidak istimewa, selalu cukup. Itu yang ingin saya bawa ke Sasana.
+              Dapur ini lahir dari makan siang di rumah nenek di Bukittinggi ï¿½ sayur baru dipetik, ikan baru ditangkap. Tidak istimewa, selalu cukup. Itu yang ingin saya bawa ke Sasana.
             </p>
             <p>
               Saya tidak mengejar teknik. Saya mengejar rasa yang jujur. Setiap piring melewati pasar pagi, tangan supplier yang sama selama belasan tahun, kompor yang tidak tidur sebelum sebelas malam.
@@ -440,21 +440,21 @@ function fmtRp(n: number) {
           </div>
 
           <aside class="sasana-cerita__meta" :style="monoStyle">
-            <p>Bali · 2018–2020</p>
-            <p>Singapura · 2021–2022</p>
-            <p>Kopenhagen · 2023</p>
-            <p>Jakarta · 2024–sekarang</p>
+            <p>Bali ï¿½ 2018ï¿½2020</p>
+            <p>Singapura ï¿½ 2021ï¿½2022</p>
+            <p>Kopenhagen ï¿½ 2023</p>
+            <p>Jakarta ï¿½ 2024ï¿½sekarang</p>
           </aside>
         </div>
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 03 — MENU               -->
+      <!-- SECTION 03 ï¿½ MENU               -->
       <!-- ============================== -->
       <section id="menu" class="sasana-menu">
         <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Hidangan.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">8 sajian · musiman</p>
+          <p class="sasana-section-sub" :style="monoStyle">8 sajian ï¿½ musiman</p>
         </div>
 
         <!-- Filter pills -->
@@ -481,7 +481,7 @@ function fmtRp(n: number) {
             class="sasana-dish"
           >
             <div class="sasana-dish__head" data-reveal="fade-up" data-reveal-delay="0.1">
-              <span class="sasana-dish__num" :style="monoStyle">{{ String(dish.id).padStart(2, '0') }} — {{ dish.category.toUpperCase() }}</span>
+              <span class="sasana-dish__num" :style="monoStyle">{{ String(dish.id).padStart(2, '0') }} ï¿½ {{ dish.category.toUpperCase() }}</span>
               <span class="sasana-dish__price">{{ dish.price }}</span>
             </div>
             <h3 class="sasana-dish__name">{{ dish.name }}</h3>
@@ -496,12 +496,12 @@ function fmtRp(n: number) {
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 04 — RESERVASI           -->
+      <!-- SECTION 04 ï¿½ RESERVASI           -->
       <!-- ============================== -->
       <section id="reservasi" class="sasana-reservasi">
         <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Cadangan.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">2–12 orang · H-7</p>
+          <p class="sasana-section-sub" :style="monoStyle">2ï¿½12 orang ï¿½ H-7</p>
         </div>
 
         <div class="sasana-reservasi__grid" data-reveal="stagger-children">
@@ -576,29 +576,29 @@ function fmtRp(n: number) {
               <span v-else>Kirim permintaan ?</span>
             </button>
 
-            <p class="sasana-form__disclaimer" :style="monoStyle">DP 10% via QRIS · tidak refund dalam 48 jam</p>
+            <p class="sasana-form__disclaimer" :style="monoStyle">DP 10% via QRIS ï¿½ tidak refund dalam 48 jam</p>
           </form>
 
           <!-- Essay -->
           <div class="sasana-reservasi__essay">
-            <p>Dua belas kursi. Tasting menu 8 sajian, tanpa a la carte. Menu dirancang sebagai satu arc — kami tidak masak untuk permintaan khusus di luar alergi.</p>
+            <p>Dua belas kursi. Tasting menu 8 sajian, tanpa a la carte. Menu dirancang sebagai satu arc ï¿½ kami tidak masak untuk permintaan khusus di luar alergi.</p>
             <p>Konfirmasi H-1 via WhatsApp. DP 10% via QRIS. Lebih dari 15 menit dari slot, kami tidak bisa jamin suhu makanan Anda.</p>
           </div>
         </div>
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 05 — ACARA              -->
+      <!-- SECTION 05 ï¿½ ACARA              -->
       <!-- ============================== -->
       <section id="acara" class="sasana-acara">
         <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Acara.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">6–24 orang · Selasa – Sabtu</p>
+          <p class="sasana-section-sub" :style="monoStyle">6ï¿½24 orang ï¿½ Selasa ï¿½ Sabtu</p>
         </div>
 
         <div class="sasana-acara__grid" data-reveal="stagger-children">
           <div v-for="(evt, i) in events" :key="evt.id" class="sasana-event-card">
-            <span class="sasana-event-card__tag" :style="monoStyle">ACARA 0{{ i + 1 }} — 03</span>
+            <span class="sasana-event-card__tag" :style="monoStyle">ACARA 0{{ i + 1 }} ï¿½ 03</span>
             <h3 class="sasana-event-card__name">{{ evt.name }}</h3>
             <p class="sasana-event-card__format" :style="monoStyle">{{ evt.format }}</p>
             <p class="sasana-event-card__desc">{{ evt.description }}</p>
@@ -608,12 +608,12 @@ function fmtRp(n: number) {
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 06 — LOKASI             -->
+      <!-- SECTION 06 ï¿½ LOKASI             -->
       <!-- ============================== -->
       <section id="lokasi" class="sasana-lokasi">
         <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Lokasi.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">Tebet, Jakarta Selatan · since 2024</p>
+          <p class="sasana-section-sub" :style="monoStyle">Tebet, Jakarta Selatan ï¿½ since 2024</p>
         </div>
 
         <div class="sasana-lokasi__grid" data-reveal="stagger-children">
@@ -634,42 +634,42 @@ function fmtRp(n: number) {
             </div>
             <div class="sasana-lokasi__item">
               <span class="sasana-lokasi__label" :style="monoStyle">Jam buka</span>
-              <p>Selasa – Sabtu · 18.00 – 22.30 · Last seating 21.00</p>
+              <p>Selasa ï¿½ Sabtu ï¿½ 18.00 ï¿½ 22.30 ï¿½ Last seating 21.00</p>
             </div>
             <div class="sasana-lokasi__item">
               <span class="sasana-lokasi__label" :style="monoStyle">Kontak</span>
-              <p><a href="tel:+622183594421" class="sasana-link">+62 21 8359 4421</a> · <a href="mailto:halo@sasana.id" class="sasana-link">halo@sasana.id</a></p>
+              <p><a href="tel:+622183594421" class="sasana-link">+62 21 8359 4421</a> ï¿½ <a href="mailto:halo@sasana.id" class="sasana-link">halo@sasana.id</a></p>
               <p><a href="https://instagram.com/sasana.jkt" target="_blank" rel="noopener" class="sasana-link">@sasana.jkt</a></p>
             </div>
             <div class="sasana-lokasi__item">
               <span class="sasana-lokasi__label" :style="monoStyle">Parkir & Akses</span>
-              <p>4 mobil · valet gratis · MRT Tebet 8 mnt · TransJakarta 3 mnt</p>
+              <p>4 mobil ï¿½ valet gratis ï¿½ MRT Tebet 8 mnt ï¿½ TransJakarta 3 mnt</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 07 — PRESS              -->
+      <!-- SECTION 07 ï¿½ PRESS              -->
       <!-- ============================== -->
       <section id="press" class="sasana-press">
         <div class="sasana-section-head" data-reveal="fade-up">
           <h2 :style="h2Style">Disebut di.</h2>
-          <p class="sasana-section-sub" :style="monoStyle">Liputan editorial · 2022–2024</p>
+          <p class="sasana-section-sub" :style="monoStyle">Liputan editorial ï¿½ 2022ï¿½2024</p>
         </div>
 
         <TmplMarquee
           :items="pressItems.map(p => `${p.name} ${p.year}`)"
-          separator="·"
+          separator="ï¿½"
           speed="slow"
           accent="var(--tmpl-accent)"
         />
 
-        <p class="sasana-press__footnote" :style="monoStyle">2026 · Daftar lengkap menyusul.</p>
+        <p class="sasana-press__footnote" :style="monoStyle">2026 ï¿½ Daftar lengkap menyusul.</p>
       </section>
 
       <!-- ============================== -->
-      <!-- SECTION 08 — FOOTER             -->
+      <!-- SECTION 08 ï¿½ FOOTER             -->
       <!-- ============================== -->
       <TmplFooter data-reveal="fade-up" brand-name="Sasana"
         variant="signoff"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * ecommerce-2.vue — SOMETHINC
+ * ecommerce-2.vue ï¿½ SOMETHINC
  * DTC Brand Story. Aesop/Glossier/Allbirds aesthetic, Indonesian skincare.
  *
  * 8 sections: Hero + 3D bottle ? Cerita ? Produk ? Bahan ? Routine Finder ? Testimoni ? FAQ ? Footer
@@ -341,7 +341,7 @@ const navLinks = [
 
         <!-- Hero copy -->
         <div class="order-2 md:order-1 text-center md:text-left">
-          <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Skincare Indonesia · Sejak 2015</p>
+          <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Skincare Indonesia ï¿½ Sejak 2015</p>
 
           <h1 :style="{ ...h1Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">
             Bahan yang jujur.<br>
@@ -382,11 +382,11 @@ const navLinks = [
         <div class="md:col-span-2">
           <p class="text-[11px] tracking-[0.18em] uppercase font-medium mb-5" :style="{ color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">Cerita Kami</p>
           <h2 :style="{ ...h2Style, fontStyle: 'italic', color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Dari Laboratorium ke Tangan Kamu</h2>
-          <p class="mt-6 text-sm font-medium" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">— Anne Avianti, Founder</p>
+          <p class="mt-6 text-sm font-medium" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">ï¿½ Anne Avianti, Founder</p>
         </div>
 
         <div class="md:col-span-3 space-y-5 leading-[1.7] text-base" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">
-          <p>SOMETHINC dimulai di Jakarta, 2015. Satu serum niacinamide — bahan yang bisa dibaca siapa pun, harga yang jujur.</p>
+          <p>SOMETHINC dimulai di Jakarta, 2015. Satu serum niacinamide ï¿½ bahan yang bisa dibaca siapa pun, harga yang jujur.</p>
           <p>Formula itu masih ada di lineup kami. Bukan nostalgia, tapi karena tetap bekerja.</p>
           <p>Tidak ada proprietary blend. Setiap konsentrasi dicantumkan. Setiap bahan punya alasan.</p>
           <p>Dua juta produk sudah terjual. Prinsipnya tetap sama: <strong :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">bahan terbuka, harga jujur.</strong></p>
@@ -510,7 +510,7 @@ const navLinks = [
               <h3 class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">{{ ing.name }}</h3>
               <span class="text-[10px] px-1.5 py-0.5 rounded" :style="{ background: `oklch(${palette.accentSoft.l}% ${palette.accentSoft.c} ${palette.accentSoft.h})`, color: `oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})` }">{{ ing.cocok }}</span>
             </div>
-            <p class="text-xs font-mono mb-2" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">{{ ing.inci }} · {{ ing.aka }}</p>
+            <p class="text-xs font-mono mb-2" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">{{ ing.inci }} ï¿½ {{ ing.aka }}</p>
             <p class="text-sm leading-relaxed" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">{{ ing.benefit }}</p>
           </div>
         </div>
@@ -638,7 +638,7 @@ const navLinks = [
             <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Kulit berubah setelah 2 minggu. Bruntusan hilang, warna kulit lebih rata. Harganya masuk akal."</p>
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Siti Rahmawati</p>
-              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Jakarta · Pembeli Terverifikasi</p>
+              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Jakarta ï¿½ Pembeli Terverifikasi</p>
             </div>
           </div>
 
@@ -650,7 +650,7 @@ const navLinks = [
             <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Harga terjangkau tapi kualitas nyata. Tekstur ringan, cepat meresap, tidak lengket."</p>
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Dinda Permata</p>
-              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Bandung · Pembeli Terverifikasi</p>
+              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Bandung ï¿½ Pembeli Terverifikasi</p>
             </div>
           </div>
 
@@ -662,7 +662,7 @@ const navLinks = [
             <p class="text-sm leading-relaxed mb-4" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">"Tidak whitecast, tidak berminyak. Harganya bikin tidak sayang pakai setiap hari."</p>
             <div>
               <p class="text-sm font-semibold" :style="{ color: `oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})` }">Rina Wulandari</p>
-              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Surabaya · Pembeli Terverifikasi</p>
+              <p class="text-xs" :style="{ color: `oklch(${palette.muted.l}% ${palette.muted.c} ${palette.muted.h})` }">Surabaya ï¿½ Pembeli Terverifikasi</p>
             </div>
           </div>
         </div>
@@ -717,7 +717,7 @@ const navLinks = [
       :accent="`oklch(${palette.accent.l}% ${palette.accent.c} ${palette.accent.h})`"
       :bg="`oklch(${palette.fg.l}% ${palette.fg.c} ${palette.fg.h})`"
       :text="`oklch(${palette.surface.l}% ${palette.surface.c} ${palette.surface.h})`"
-      signature="Skincare Indonesia · Sejak 2015"
+      signature="Skincare Indonesia ï¿½ Sejak 2015"
       :links="[
         { label: 'Produk', href: '#produk' },
         { label: 'Bahan', href: '#bahan' },

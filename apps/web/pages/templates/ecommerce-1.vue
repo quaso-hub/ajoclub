@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * ecommerce-1.vue — Erigo Goods
+ * ecommerce-1.vue ï¿½ Erigo Goods
  * Premium product e-commerce. Apple/B&O/Hermes aesthetic.
  *
  * 8 sections: Hero + 3D ? Featured ? Categories ? Product Detail ? Cart ? Testimonials ? FAQ ? Footer

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * saas-3.vue — Lintas
+ * saas-3.vue ï¿½ Lintas
  * Color-Wash SaaS Editorial. 7 OKLCH section washes. GLSL morphing blob.
  *
  * 8 sections: Hero, Marquee, Features, Pricing, Testimonials, FAQ, CTA, Footer
@@ -307,7 +307,7 @@ function initBlob() {
         <p class="lintas-label lintas-label--center" :style="monoStyle">DIPERCAYA OLEH</p>
         <TmplMarquee
           :items="klien"
-          separator="·"
+          separator="ï¿½"
           speed="slow"
           accent="var(--tmpl-accent)"
         />
@@ -1064,7 +1064,7 @@ function initBlob() {
   }
 }
 
-/* === Color wash transitions — smooth fade between sections === */
+/* === Color wash transitions ï¿½ smooth fade between sections === */
 .lintas-hero::after,
 .lintas-features::after,
 .lintas-pricing::after,

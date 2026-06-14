@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * wedding-1.vue — Anindya & Rama
+ * wedding-1.vue ï¿½ Anindya & Rama
  * Luxury Romantic Wedding. Hand-bound book layout.
  *
  * 12 sections. 7+ working interactions. SUBTLE 3D (5-7 dust-mote particles).
@@ -69,7 +69,7 @@ const banks = [
 ]
 
 // ============================================================
-// 3D — 5-7 DUST MOTE PARTICLES (raw WebGL, very subtle)
+// 3D ï¿½ 5-7 DUST MOTE PARTICLES (raw WebGL, very subtle)
 // ============================================================
 const dustCanvasRef = ref<HTMLCanvasElement | null>(null)
 let dustGL: WebGLRenderingContext | null = null
@@ -245,7 +245,7 @@ function downloadICS() {
 }
 
 function openLiveStream() {
-  // Mock — would open YouTube live in real
+  // Mock ï¿½ would open YouTube live in real
   window.open(buildUrl('Halo, saya mau link live streaming pernikahan Anindya & Rama.'), '_blank', 'noopener,noreferrer')
 }
 </script>
@@ -280,7 +280,7 @@ function openLiveStream() {
     <main id="main">
 
       <!-- ============================== -->
-      <!-- 1. HERO — Names + Date + 3D Dust -->
+      <!-- 1. HERO ï¿½ Names + Date + 3D Dust -->
       <!-- ============================== -->
       <section class="ar-hero" :style="{ minHeight: '100dvh' }">
         <canvas ref="dustCanvasRef" class="ar-hero__dust" aria-hidden="true" />
@@ -303,7 +303,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- 2. CERITA — Love story timeline -->
+      <!-- 2. CERITA ï¿½ Love story timeline -->
       <!-- ============================== -->
       <section id="cerita" class="ar-cerita">
         <p class="ar-eyebrow" :style="monoStyle">Cerita Kami</p>
@@ -318,7 +318,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- 3. ACARA — 3 events -->
+      <!-- 3. ACARA ï¿½ 3 events -->
       <!-- ============================== -->
       <section id="acara" class="ar-acara">
         <p class="ar-eyebrow" :style="monoStyle">Detail Acara</p>
@@ -335,7 +335,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- 4. GALERI — Photos with lightbox -->
+      <!-- 4. GALERI ï¿½ Photos with lightbox -->
       <!-- ============================== -->
       <section id="galeri" class="ar-galeri">
         <p class="ar-eyebrow" :style="monoStyle">Galeri</p>
@@ -359,7 +359,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- 5. RSVP — Working form -->
+      <!-- 5. RSVP ï¿½ Working form -->
       <!-- ============================== -->
       <section id="rsvp" class="ar-rsvp">
         <p class="ar-eyebrow" :style="monoStyle">Konfirmasi</p>
@@ -376,7 +376,7 @@ function openLiveStream() {
       </section>
 
       <!-- ============================== -->
-      <!-- 6. AMPLOP — 3 banks, copy-to-clipboard -->
+      <!-- 6. AMPLOP ï¿½ 3 banks, copy-to-clipboard -->
       <!-- ============================== -->
       <section id="amplop" class="ar-amplop">
         <p class="ar-eyebrow" :style="monoStyle">Amplop</p>
@@ -494,7 +494,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* HERO — names + dust                                           */
+/* HERO ï¿½ names + dust                                           */
 /* ============================================================ */
 .ar-hero {
   position: relative;
@@ -562,7 +562,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* CERITA — Love story timeline                                  */
+/* CERITA ï¿½ Love story timeline                                  */
 /* ============================================================ */
 .ar-cerita {
   padding: 10rem 1.5rem;
@@ -614,7 +614,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* ACARA — 3 events                                              */
+/* ACARA ï¿½ 3 events                                              */
 /* ============================================================ */
 .ar-acara {
   padding: 10rem 1.5rem;
@@ -682,7 +682,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* GALERI — Photos with lightbox                                 */
+/* GALERI ï¿½ Photos with lightbox                                 */
 /* ============================================================ */
 .ar-galeri {
   padding: 10rem 1.5rem;
@@ -790,7 +790,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* AMPLOP — Banks with copy                                      */
+/* AMPLOP ï¿½ Banks with copy                                      */
 /* ============================================================ */
 .ar-amplop {
   padding: 10rem 1.5rem;
@@ -898,7 +898,7 @@ function openLiveStream() {
 }
 
 /* ============================================================ */
-/* ACTIONS — Add to calendar + live stream                       */
+/* ACTIONS ï¿½ Add to calendar + live stream                       */
 /* ============================================================ */
 .ar-actions {
   padding: 10rem 1.5rem;

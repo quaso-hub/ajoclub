@@ -49,7 +49,7 @@ const speakers = [
 ]
 
 // ============================================================
-// SCHEDULE (3 days × 4 slots × 3 tracks)
+// SCHEDULE (3 days ï¿½ 4 slots ï¿½ 3 tracks)
 // ============================================================
 const dayThemes = [
   { label: 'Hari 1', theme: 'Backend & Frontend', date: 'Sabtu, 17 September' },
