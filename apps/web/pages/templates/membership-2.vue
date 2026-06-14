@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
- * membership-2.vue � Sinau Koding
+ * membership-2.vue ï¿½ Sinau Koding
  * Indonesian developer community platform. Dark night bg, coral accent.
  * Geist + Geist Mono. 120-node 3D constellation (case-timeline, balanced).
  *
@@ -49,7 +49,7 @@ const events = [
 ]
 
 const threads = [
-  { author: 'Hasan Fadilah', avatar: 'H', time: '12 menit lalu', title: 'State management terbaik untuk Nuxt 3 di 2026?', replies: 23, reactions: 45, space: 'Frontend' },
+  { author: 'Hasan Fadilah', avatar: 'H', time: '12 menit lalu', title: 'State management untuk Nuxt 3 di 2026?', replies: 23, reactions: 45, space: 'Frontend' },
   { author: 'Rina Maharani', avatar: 'R', time: '1 jam lalu', title: 'Pengalaman migrasi dari REST ke tRPC di production', replies: 18, reactions: 32, space: 'Backend' },
   { author: 'Budi Santoso', avatar: 'B', time: '2 jam lalu', title: 'Tips hemat cost AWS untuk side project', replies: 31, reactions: 67, space: 'DevOps' },
   { author: 'Sinta Dewi', avatar: 'S', time: '3 jam lalu', title: 'Fine-tuning Llama 3 di dataset lokal bahasa Indonesia', replies: 14, reactions: 28, space: 'AI/ML' },
@@ -94,7 +94,7 @@ const team = [
 ]
 
 const faqs = [
-  { q: 'Apakah Sinau Koding gratis?', a: 'Ya. 3 space, baca thread, event publik � tanpa biaya.' },
+  { q: 'Apakah Sinau Koding gratis?', a: 'Ya. 3 space, baca thread, event publik ï¿½ tanpa biaya.' },
   { q: 'Bedanya Komunitas dan Studio?', a: 'Komunitas buka semua 6 space + post. Studio tambah mentoring 1-on-1, portfolio review, job referral.' },
   { q: 'Saya pemula, cocok nggak?', a: 'Cocok. Ada thread khusus pertanyaan dasar. Tidak ada pertanyaan bodoh.' },
   { q: 'Event diadakan di mana?', a: 'Online via Zoom/Discord. Beberapa offline di Jakarta, Bandung, Surabaya.' },

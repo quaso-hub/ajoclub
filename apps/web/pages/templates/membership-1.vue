@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
- * membership-1.vue � Catatan Harian
+ * membership-1.vue ï¿½ Catatan Harian
  * Indonesian editorial newsletter. Substack/Aeon/The Information aesthetic.
  * Lora serif. Cream paper. Terracotta accent. Slow, paper-like, not gamified.
  *
@@ -147,7 +147,7 @@ const faqs = [
   },
   {
     q: 'Apakah ini newsletter gratis atau berbayar?',
-    a: 'Gratis. Selamanya. Tidak ada tier premium, tidak ada paywall.',
+    a: 'Gratis. Selamanya. Tidak ada tier berbayar, tidak ada paywall.',
   },
   {
     q: 'Bisa saya menerima edisi sebelumnya?',
@@ -338,7 +338,7 @@ onBeforeUnmount(() => {
         'Terbit sejak November 2024',
         'Dari Jakarta, dengan kopi',
       ]"
-      separator="�"
+      separator="ï¿½"
       speed="slow"
       accent="var(--tmpl-accent)"
       class="catatan__marquee-top"
@@ -537,7 +537,7 @@ onBeforeUnmount(() => {
       variant="signoff"
       signoff="Oleh Rara Adiswara. Dari Jakarta, dengan kopi."
       :accent="tpl.accentColor"
-      signature="� 2024 sampai 2026 Rara Adiswara. Hak cipta dilindungi."
+      signature="ï¿½ 2024 sampai 2026 Rara Adiswara. Hak cipta dilindungi."
       :links="[
         { label: 'Tentang Rara', href: '#tentang' },
         { label: 'Arsip', href: '#arsip' },
@@ -564,7 +564,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* ============================================================
-   CATATAN HARIAN � Editorial Newsletter Styles
+   CATATAN HARIAN ï¿½ Editorial Newsletter Styles
    Cream paper, terracotta accent, Lora serif, slow and paper-like
    ============================================================ */
 

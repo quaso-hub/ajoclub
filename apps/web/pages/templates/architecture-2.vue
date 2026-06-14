@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
- * architecture-2.vue — Bukit Hijau
+ * architecture-2.vue â€” Bukit Hijau
  * Real estate developer. Inter Tight Black H1, Inter body, JetBrains Mono for data.
  *
  * 8 sections: Hero+3D, Proyek (6), Unit (grid+floor plan), KPR Calculator,
@@ -28,7 +28,7 @@ const compareUnits = ref<number[]>([])
 onMounted(() => { setTimeout(() => { heroLoaded.value = true }, 120) })
 
 // ============================================================
-// DATA — 6 Property Projects
+// DATA â€” 6 Property Projects
 // ============================================================
 const projects = [
   {
@@ -36,7 +36,7 @@ const projects = [
     type: 'Rumah', price: 1850000000, priceLabel: 'Rp 1,85 Miliar',
     sqm: 108, bedrooms: 3, bathrooms: 2,
     status: 'Tersedia', statusClass: 'bh-status--available',
-    desc: 'Cluster premium BSD City. 8 menit ke AEON Mall, 12 menit ke Stasiun KRL. SHM lengkap.',
+    desc: 'Cluster BSD City. 8 menit ke AEON Mall, 12 menit ke Stasiun KRL. SHM lengkap.',
     units: 48, unitsLeft: 12,
   },
   {
@@ -44,7 +44,7 @@ const projects = [
     type: 'Rumah', price: 2400000000, priceLabel: 'Rp 2,4 Miliar',
     sqm: 140, bedrooms: 4, bathrooms: 3,
     status: 'Tersedia', statusClass: 'bh-status--available',
-    desc: 'Townhouse 2 lantai premium. 5 menit ke IKEA, akses langsung Tol Jakarta-Serpong.',
+    desc: 'Townhouse 2 lantai. 5 menit ke IKEA, akses langsung Tol Jakarta-Serpong.',
     units: 32, unitsLeft: 8,
   },
   {
@@ -82,7 +82,7 @@ const projects = [
 ]
 
 // ============================================================
-// DATA — Unit Types
+// DATA â€” Unit Types
 // ============================================================
 const unitTypes = [
   { id: 0, name: 'Tipe 36/72', building: 36, land: 72, bedrooms: 2, bathrooms: 1, price: 'Rp 480 Jt', priceNum: 480000000, carport: 1, cluster: 'Cibubur' },
@@ -617,7 +617,7 @@ const waUrl = computed(() => {
 
 <style scoped>
 /* ============================================================
-   BUKIT HIJAU — Scoped styles
+   BUKIT HIJAU â€” Scoped styles
    ============================================================ */
 .bh { min-height: 100vh; }
 
@@ -634,7 +634,7 @@ const waUrl = computed(() => {
 /* Mono label */
 .bh-mono-label { font-family: var(--tmpl-font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; color: var(--tmpl-accent); }
 
-/* Headings — Inter Tight Black, 3 sizes max */
+/* Headings â€” Inter Tight Black, 3 sizes max */
 .bh-h1 { margin-bottom: 1.5rem; font-family: var(--tmpl-font-heading, 'Inter Tight', sans-serif); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; }
 .bh-h2 { margin-bottom: 1rem; font-family: var(--tmpl-font-heading, 'Inter Tight', sans-serif); font-weight: 900; letter-spacing: -0.02em; line-height: 1.2; }
 
@@ -658,7 +658,7 @@ const waUrl = computed(() => {
 .bh-btn--sm { height: 2.25rem; padding: 0 1rem; font-size: 0.75rem; }
 .bh-form__submit { width: 100%; }
 
-/* Project grid — asymmetric: 1fr 1.4fr on desktop */
+/* Project grid â€” asymmetric: 1fr 1.4fr on desktop */
 .bh-project-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
 @media (min-width: 768px) { .bh-project-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1024px) { .bh-project-grid { grid-template-columns: 1fr 1.4fr 1fr; } }
@@ -686,7 +686,7 @@ const waUrl = computed(() => {
 .bh-status--selling { background: oklch(94% 0.06 60); color: oklch(50% 0.16 60); }
 .bh-status--coming { background: oklch(94% 0.01 240); color: oklch(50% 0.04 240); }
 
-/* Unit grid — asymmetric 1fr 1.2fr on desktop */
+/* Unit grid â€” asymmetric 1fr 1.2fr on desktop */
 .bh-unit-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
 @media (min-width: 768px) { .bh-unit-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1024px) { .bh-unit-grid { grid-template-columns: 1fr 1.2fr; } }
@@ -711,7 +711,7 @@ const waUrl = computed(() => {
 .bh-compare__bold { font-weight: 700; color: var(--tmpl-fg); }
 .bh-compare__actions { display: flex; gap: 0.75rem; margin-top: 1rem; }
 
-/* KPR — asymmetric 1.2fr 1fr */
+/* KPR â€” asymmetric 1.2fr 1fr */
 .bh-kpr { display: grid; grid-template-columns: 1fr; gap: 2rem; }
 @media (min-width: 1024px) { .bh-kpr { grid-template-columns: 1.2fr 1fr; } }
 .bh-kpr__input { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -743,7 +743,7 @@ const waUrl = computed(() => {
 .bh-kpr__big-sub { font-family: var(--tmpl-font-mono); font-size: 11px; margin-top: 0.25rem; color: var(--tmpl-muted); }
 .bh-kpr__cta { width: 100%; margin-top: 1.5rem; }
 
-/* Amenities — 2col → 3col → 6col asymmetric */
+/* Amenities â€” 2col â†’ 3col â†’ 6col asymmetric */
 .bh-amenity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 @media (min-width: 768px) { .bh-amenity-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1024px) { .bh-amenity-grid { grid-template-columns: repeat(6, 1fr); } }
@@ -753,7 +753,7 @@ const waUrl = computed(() => {
 .bh-amenity__name { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; color: var(--tmpl-fg); }
 .bh-amenity__desc { font-size: 0.75rem; line-height: 1.5; color: var(--tmpl-muted); }
 
-/* Location — asymmetric 1.2fr 1fr */
+/* Location â€” asymmetric 1.2fr 1fr */
 .bh-location { display: grid; grid-template-columns: 1fr; gap: 2rem; }
 @media (min-width: 768px) { .bh-location { grid-template-columns: 1.2fr 1fr; } }
 .bh-location__map { border-radius: 8px; overflow: hidden; border: 1px solid var(--tmpl-border); }
@@ -764,7 +764,7 @@ const waUrl = computed(() => {
 .bh-location__name { font-size: 0.875rem; font-weight: 600; color: var(--tmpl-fg); }
 .bh-location__addr { font-size: 0.75rem; color: var(--tmpl-muted); }
 
-/* Contact — asymmetric 1.3fr 1fr */
+/* Contact â€” asymmetric 1.3fr 1fr */
 .bh-contact { display: grid; grid-template-columns: 1fr; gap: 3rem; }
 @media (min-width: 768px) { .bh-contact { grid-template-columns: 1.3fr 1fr; } }
 

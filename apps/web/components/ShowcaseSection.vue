@@ -11,30 +11,30 @@ const filteredTemplates = computed(() => {
 
 // Brand stories per template — what each template pitches to the client
 const brandStories: Record<string, string> = {
-  'saas-1': 'Seperti majalah, bukan dashboard.',
-  'saas-2': 'Real product, bukan marketing page.',
-  'saas-3': 'Setiap section warna berbeda. Setiap warna mood berbeda.',
-  'restaurant-1': '7 kursi. 1 chef. 1 filosofi.',
-  'restaurant-2': 'Kopi yang baik, dari biji yang baik.',
-  'restaurant-3': 'Sate ayam bumbu kacang khas Madura.',
-  'event-1': '3 hari. 1 ruangan. 14 pembicara.',
-  'event-2': 'Musik yang tidak bisa dideskripsikan.',
-  'event-3': 'Desain bukan hanya visual. Desain adalah keputusan.',
-  'membership-1': 'Tulisan yang layak dibaca.',
-  'membership-2': 'Belajar bareng, tumbuh bareng.',
-  'membership-3': 'Dukung tulisan yang kamu suka.',
-  'portfolio-1': 'Bikin brand yang jalan.',
-  'portfolio-2': 'Desain yang bercerita.',
-  'portfolio-3': 'Ini bukan portofolio. Ini manifesto.',
-  'ecommerce-1': 'Objek yang tenang.',
-  'ecommerce-2': 'Bahan yang jujur. Harga yang jujur.',
-  'ecommerce-3': 'Semua ada. Dari semua penjual.',
-  'wedding-1': 'Sabtu · 14 Maret 2026 · Bandung',
-  'wedding-2': 'Sederhana. Bersih. Jelas.',
-  'wedding-3': 'Bali. Pantai. Sunset.',
-  'architecture-1': 'Rumah yang menghormati tempatnya.',
-  'architecture-2': 'Properti yang layak dihuni.',
-  'architecture-3': 'Ruang yang bercerita.',
+  'saas-1': 'SaaS untuk tim kecil. Pembukuan, stok, multi-cabang.',
+  'saas-2': 'Dashboard UMKM. Kasir, faktur, inventori, laporan.',
+  'saas-3': 'SaaS editorial. Setiap section beda warna.',
+  'restaurant-1': 'Fine dining. 7 kursi, 1 chef, reservasi online.',
+  'restaurant-2': 'Kafe modern. Menu, lokasi, jam buka, reservasi.',
+  'restaurant-3': 'Warung sate. Menu, harga, pesan via WhatsApp.',
+  'event-1': 'Konferensi tech. 3 hari, 14 pembicara, tiket online.',
+  'event-2': 'Festival musik. Lineup, jadwal, tiket, venue.',
+  'event-3': 'Festival desain. 4 hari, 16 pembicara, arsip.',
+  'membership-1': 'Newsletter. Tulisan, arsip, langganan.',
+  'membership-2': 'Komunitas dev. 6 space, event, diskusi.',
+  'membership-3': 'Creator support. Dukung tulisan, traktir kopi.',
+  'portfolio-1': 'Agensi. 8 studi kasus, layanan, tim.',
+  'portfolio-2': 'Studio desain. 12 studi kasus, editorial.',
+  'portfolio-3': 'Manifesto. 8 proyek, layanan, kontak.',
+  'ecommerce-1': 'Produk premium. 6 produk, keranjang, checkout.',
+  'ecommerce-2': 'Skincare DTC. 6 produk, quiz, langganan.',
+  'ecommerce-3': 'Marketplace. 12 produk, 4 penjual, filter.',
+  'wedding-1': 'Undangan nikah. Cerita, galeri, RSVP, amplop.',
+  'wedding-2': 'Undangan minimal. Cerita, galeri, RSVP.',
+  'wedding-3': 'Undangan Bali. Cerita, travel info, RSVP.',
+  'architecture-1': 'Firma arsitektur. 6 proyek, layanan, tim.',
+  'architecture-2': 'Developer properti. 6 proyek, KPR, unit.',
+  'architecture-3': 'Studio interior. 6 proyek, material, quiz.',
 }
 </script>
 
@@ -44,9 +44,9 @@ const brandStories: Record<string, string> = {
 
     <UContainer class="relative">
       <div class="mb-12 sm:mb-16 max-w-2xl">
-        <p class="text-(--ui-primary) text-xs sm:text-sm font-mono tracking-widest uppercase mb-3 sm:mb-4">24 Pintu</p>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">Pilih yang cocok. Masuk ke dunianya.</h2>
-        <p class="text-(--ui-text-muted) mt-3 sm:mt-4 text-sm sm:text-base">Setiap template adalah website lengkap dengan style, tipografi, dan 3D sendiri. Bukan variasi dari satu desain. Klik salah satu, rasakan perbedaannya.</p>
+        <p class="text-(--ui-primary) text-xs sm:text-sm font-mono tracking-widest uppercase mb-3 sm:mb-4">Contoh kerja</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">24 template. Klik, lihat hasilnya.</h2>
+        <p class="text-(--ui-text-muted) mt-3 sm:mt-4 text-sm sm:text-base">Setiap template punya style, font, dan 3D sendiri. Bukan satu desain yang diulang. Klik salah satu, lihat isinya.</p>
       </div>
 
       <div class="flex flex-wrap gap-2 mb-8 sm:mb-12">
@@ -83,10 +83,10 @@ const brandStories: Record<string, string> = {
                 <UIcon :name="template.icon" class="w-4 h-4" :style="{ color: template.accentColor }" />
               </div>
             </div>
-            <!-- Hover overlay: "Masuk" -->
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-              <span class="text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                Masuk →
+            <!-- Hover overlay -->
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+              <span class="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300">
+                Lihat →
               </span>
             </div>
           </div>
@@ -102,7 +102,7 @@ const brandStories: Record<string, string> = {
       </div>
 
       <div class="text-center mt-12 sm:mt-16">
-        <p class="text-(--ui-text-muted) mb-4 sm:mb-6 text-sm sm:text-base">Tidak menemukan yang cocok?</p>
+        <p class="text-(--ui-text-muted) mb-4 sm:mb-6 text-sm sm:text-base">Tidak ada yang pas? Kami bisa bikin dari nol.</p>
         <UButton size="lg" @click="scrollTo('#contact')">Chat WhatsApp</UButton>
       </div>
     </UContainer>
