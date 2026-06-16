@@ -273,7 +273,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
       :accent="toCss(palette.accent)"
       :bg="toCss(palette.bg)"
       :text="toCss(palette.fg)"
-      style="glass"
+      variant="glass"
       :show-theme-toggle="false"
       force-mode="light"
     />
@@ -290,7 +290,7 @@ const waUrl = 'https://wa.me/6285188627365?text=' + encodeURIComponent('Halo, sa
     <!-- ============================================================ -->
     <!-- HERO + 3D SPHERE -->
     <!-- ============================================================ -->
-    <section class="pt-24 pb-20 md:pt-32 md:pb-28">
+    <section class="pt-24 pb-20 md:pt-32 md:pb-28" :style="{ 'view-transition-name': 'hero-ecommerce-3' }">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center" data-reveal="stagger-children">
           <!-- Left: Copy -->

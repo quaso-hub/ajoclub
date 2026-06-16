@@ -142,7 +142,7 @@ function reset() {
         rows="3"
         :placeholder="field.placeholder"
         :aria-invalid="!!errors[field.key]"
-        class="tmpl-form__input tmpl-form__input--textarea"
+        class="tmpl-form__input tmpl-form__input--textarea micro-focus"
         @blur="onBlur(field.key, field)"
       />
 
@@ -151,7 +151,7 @@ function reset() {
         :id="`tf-${field.key}`"
         v-model="values[field.key]"
         :aria-invalid="!!errors[field.key]"
-        class="tmpl-form__input tmpl-form__input--select"
+        class="tmpl-form__input tmpl-form__input--select micro-focus"
         @blur="onBlur(field.key, field)"
       >
         <option value="">{{ field.placeholder || 'Pilih salah satu' }}</option>
@@ -166,7 +166,7 @@ function reset() {
         :placeholder="field.placeholder"
         :aria-invalid="!!errors[field.key]"
         :inputmode="field.type === 'tel' ? 'tel' : field.type === 'email' ? 'email' : 'text'"
-        class="tmpl-form__input"
+        class="tmpl-form__input micro-focus"
         @blur="onBlur(field.key, field)"
       >
 
@@ -186,15 +186,17 @@ function reset() {
       <button
         type="submit"
         :disabled="submitting"
-        class="tmpl-form__submit"
+        class="tmpl-form__submit micro-press micro-glow micro-shine"
         :style="{ background: accent }"
+        data-micro="ripple"
       >
         <span v-if="submitting">Mengirim…</span>
         <span v-else>{{ submitLabel }}</span>
       </button>
       <button
         type="button"
-        class="tmpl-form__reset"
+        class="tmpl-form__reset micro-press micro-focus"
+        data-micro="ripple"
         @click="reset"
       >
         Reset

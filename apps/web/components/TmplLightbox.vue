@@ -132,8 +132,9 @@ function onTouchEnd() {
       >
         <button
           type="button"
-          class="tmpl-lb__close"
+          class="tmpl-lb__close micro-press micro-focus"
           aria-label="Tutup"
+          data-micro="ripple"
           @click="close"
         >
           <UIcon name="i-lucide-x" class="w-5 h-5" />
@@ -142,8 +143,9 @@ function onTouchEnd() {
         <button
           v-if="!isFirst"
           type="button"
-          class="tmpl-lb__nav tmpl-lb__nav--prev"
+          class="tmpl-lb__nav tmpl-lb__nav--prev micro-press micro-focus"
           aria-label="Gambar sebelumnya"
+          data-micro="ripple"
           @click.stop="prev"
         >
           <UIcon name="i-lucide-chevron-left" class="w-6 h-6" />
@@ -151,8 +153,9 @@ function onTouchEnd() {
         <button
           v-if="!isLast"
           type="button"
-          class="tmpl-lb__nav tmpl-lb__nav--next"
+          class="tmpl-lb__nav tmpl-lb__nav--next micro-press micro-focus"
           aria-label="Gambar berikutnya"
+          data-micro="ripple"
           @click.stop="next"
         >
           <UIcon name="i-lucide-chevron-right" class="w-6 h-6" />

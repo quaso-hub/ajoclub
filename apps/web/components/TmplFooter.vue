@@ -81,7 +81,7 @@ const props = withDefaults(defineProps<{
         <p class="tmpl-footer__col-title">{{ group.label }}</p>
         <ul class="tmpl-footer__col-list">
           <li v-for="link in group.items" :key="link.href">
-            <a :href="link.href" :style="{ '--accent': accent }" class="tmpl-footer__col-link">
+            <a :href="link.href" :style="{ '--accent': accent }" class="tmpl-footer__col-link micro-underline">
               {{ link.label }}
             </a>
           </li>
@@ -93,8 +93,9 @@ const props = withDefaults(defineProps<{
           href="https://wa.me/6285188627365"
           target="_blank"
           rel="noopener"
-          class="tmpl-footer__col-link tmpl-footer__cta"
+          class="tmpl-footer__col-link tmpl-footer__cta micro-press micro-shine"
           :style="{ '--accent': accent, color: accent }"
+          data-micro="ripple"
         >
           WhatsApp →
         </a>
@@ -123,7 +124,7 @@ const props = withDefaults(defineProps<{
           :key="link.href"
           :href="link.href"
           :style="{ '--accent': accent }"
-          class="tmpl-footer__plain-link"
+          class="tmpl-footer__plain-link micro-underline"
         >
           {{ link.label }}
         </a>
@@ -132,8 +133,9 @@ const props = withDefaults(defineProps<{
         href="https://wa.me/6285188627365"
         target="_blank"
         rel="noopener"
-        class="tmpl-footer__plain-cta"
+        class="tmpl-footer__plain-cta micro-press micro-shine"
         :style="{ color: accent }"
+        data-micro="ripple"
       >
         WhatsApp →
       </a>

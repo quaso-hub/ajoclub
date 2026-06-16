@@ -180,9 +180,10 @@ onBeforeUnmount(() => {
 
       <button
         type="button"
-        class="tmpl-fab__trigger"
+        class="tmpl-fab__trigger micro-press micro-glow"
         :aria-expanded="isOpen"
         :aria-label="isOpen ? 'Tutup pilihan chat' : 'Buka pilihan chat WhatsApp'"
+        data-micro="ripple"
         @click="isOpen = !isOpen"
       >
         <Transition

@@ -8,7 +8,9 @@
  *  - accent (CSS color)
  *  - bg (background color)
  *  - text (text color)
- *  - style: 'transparent' | 'solid' | 'glass'
+ *  - variant: 'transparent' | 'solid' | 'glass' (renamed from 'style' to avoid
+ *    collision with the HTML 'style' attribute, which Vue 3 was treating
+ *    as an object via inheritAttrs + :style on the root <nav>)
  *  - position: 'fixed' | 'absolute' | 'static'
  *
  * Includes:
@@ -24,8 +26,8 @@ const props = withDefaults(defineProps<{
   accent?: string
   bg?: string
   text?: string
-  /** Visual style: solid, transparent (scroll), glass */
-  style?: 'solid' | 'transparent' | 'glass'
+  /** Visual variant: solid, transparent (scroll), glass */
+  variant?: 'solid' | 'transparent' | 'glass'
   /** Use 2-letter wordmark or full brand */
   wordmark?: string
   /** Whether to show theme toggle */
@@ -37,7 +39,7 @@ const props = withDefaults(defineProps<{
   forceMode?: 'dark' | 'light'
 }>(), {
   links: () => [],
-  style: 'transparent',
+  variant: 'transparent',
   showThemeToggle: true,
   showWhatsappCta: false,
   forceMode: undefined,
@@ -47,6 +49,9 @@ const route = useRoute()
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 const colorMode = useColorMode()
+
+// Computed for brand color — was undefined before, now resolves to accent
+const brandStyle = computed(() => ({ color: props.accent }))
 
 const showToggle = computed(() => {
   if (!props.showThemeToggle) return false
@@ -115,7 +120,7 @@ onBeforeUnmount(() => {
 <template>
   <nav
     class="tmpl-nav"
-    :class="[`tmpl-nav--${style}`, { 'tmpl-nav--scrolled': isScrolled }]"
+    :class="[`tmpl-nav--${variant}`, { 'tmpl-nav--scrolled': isScrolled }]"
     :style="navStyle"
     role="navigation"
   >
@@ -149,8 +154,9 @@ onBeforeUnmount(() => {
       <button
         v-if="showToggle"
         type="button"
-        class="tmpl-nav__theme"
+        class="tmpl-nav__theme micro-press micro-focus"
         :aria-label="`Ganti ke mode ${colorMode.value === 'dark' ? 'terang' : 'gelap'}`"
+        data-micro="ripple"
         @click="colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'"
       >
         <ClientOnly>
@@ -166,17 +172,19 @@ onBeforeUnmount(() => {
         :href="whatsappHref"
         target="_blank"
         rel="noopener"
-        class="tmpl-nav__cta"
+        class="tmpl-nav__cta micro-press micro-shine"
         :style="{ background: accent, color: '#fff' }"
+        data-micro="ripple"
       >
         WhatsApp
       </a>
 
       <button
         type="button"
-        class="tmpl-nav__burger md:hidden"
+        class="tmpl-nav__burger md:hidden micro-press"
         :aria-expanded="isMobileMenuOpen"
         aria-label="Buka menu"
+        data-micro="ripple"
         @click="isMobileMenuOpen = !isMobileMenuOpen"
       >
         <UIcon

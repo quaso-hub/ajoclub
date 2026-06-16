@@ -164,7 +164,7 @@ onMounted(() => {
     <!-- ============================================================ -->
     <!-- 1. HERO + 3D CONSTELLATION -->
     <!-- ============================================================ -->
-    <section class="relative pt-24 pb-24 overflow-hidden">
+    <section class="relative pt-24 pb-24 overflow-hidden" :style="{ 'view-transition-name': 'hero-membership-2' }">
       <!-- 3D Canvas Background -->
       <div class="absolute inset-0 z-0 opacity-60">
         <TmplExperienceCanvas

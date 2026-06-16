@@ -339,3 +339,221 @@ html {
   color: color-mix(in srgb, currentColor 50%, transparent);
   font-family: var(--font-mono);
 }
+
+/* ============================================================ */
+/* Phase 4.2 — View Transitions API                            */
+/* Smooth cross-page nav via @view-transition.                  */
+/* Browser-native; no-op on unsupported browsers.               */
+/* Names match app.pageTransition.name + app.layoutTransition  */
+/* in nuxt.config.ts.                                            */
+/* ============================================================ */
+
+/* Default page-to-page: crossfade with a tiny vertical shift */
+::view-transition-old(page),
+::view-transition-old(layout) {
+  animation: 240ms cubic-bezier(0.4, 0, 0.2, 1) both fade-out-up;
+}
+::view-transition-new(page),
+::view-transition-new(layout) {
+  animation: 320ms cubic-bezier(0.4, 0, 0.2, 1) 40ms both fade-in-up;
+}
+
+@keyframes fade-out-up {
+  to { opacity: 0; transform: translate3d(0, -8px, 0); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+}
+
+/* Slow down for users who don't want motion */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(page),
+  ::view-transition-old(layout),
+  ::view-transition-new(page),
+  ::view-transition-new(layout) {
+    animation: none !important;
+  }
+}
+
+/* ============================================================ */
+/* Micro-interactions — AjoClub feel (Phase 4)                   */
+/* Goal: every interactive surface should RESPOND to cursor/key  */
+/* without depending on JS. All opt-in via class, all a11y-safe.  */
+/* ============================================================ */
+
+/* --- Cursor baseline — pointer for all interactive surfaces --- */
+a, button, [role="button"], summary, label[for], .micro-interactive {
+  cursor: pointer;
+}
+
+/* --- Lift: cards/links float up 2-4px with soft shadow --- */
+.micro-lift {
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 220ms ease;
+  will-change: transform;
+}
+.micro-lift:hover {
+  transform: translate3d(0, -3px, 0);
+  box-shadow:
+    0 8px 20px -8px color-mix(in srgb, var(--tmpl-accent, currentColor) 32%, transparent),
+    0 2px 6px -2px color-mix(in srgb, currentColor 8%, transparent);
+}
+.micro-lift:active {
+  transform: translate3d(0, -1px, 0);
+  transition-duration: 80ms;
+}
+
+/* --- Press: tactile click feedback (subtle scale-down) --- */
+.micro-press {
+  transition: transform 120ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+.micro-press:hover { transform: scale(1.015); }
+.micro-press:active { transform: scale(0.97); transition-duration: 60ms; }
+
+/* --- Tilt: subtle 3D tilt on hover (mouse-position aware via CSS) --- */
+.micro-tilt {
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .micro-tilt:hover {
+    transform: perspective(900px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg)) translateZ(0);
+  }
+}
+
+/* --- Glow: accent halo on hover, useful for primary CTAs --- */
+.micro-glow {
+  position: relative;
+  transition: color 200ms ease, background-color 200ms ease, box-shadow 240ms ease;
+}
+.micro-glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(circle at center, color-mix(in srgb, var(--tmpl-accent, #fb7185) 28%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity 280ms ease;
+  z-index: -1;
+  pointer-events: none;
+}
+.micro-glow:hover::before { opacity: 1; }
+
+/* --- Shine: light sweep across surface on hover (CTA buttons) --- */
+.micro-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.micro-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    color-mix(in srgb, white 32%, transparent) 50%,
+    transparent 70%
+  );
+  transform: translateX(-110%);
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+.micro-shine:hover::after { transform: translateX(110%); }
+
+/* --- Nudge: arrow/chevron inside a hoverable parent slides --- */
+.micro-nudge > .micro-nudge__arrow,
+.micro-nudge-arrow {
+  display: inline-block;
+  transition: transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+.micro-nudge:hover > .micro-nudge__arrow,
+.micro-nudge:hover .micro-nudge-arrow,
+a:hover .micro-nudge-arrow,
+button:hover .micro-nudge-arrow {
+  transform: translateX(4px);
+}
+
+/* --- Underline grow: animated underline for text links --- */
+.micro-underline {
+  position: relative;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  padding-bottom: 2px;
+}
+.micro-underline:hover,
+a:hover .micro-underline,
+button:hover .micro-underline {
+  background-size: 100% 1px;
+}
+
+/* --- Image zoom: child image scales 1.04 on parent hover (used in cards) --- */
+.micro-zoom {
+  overflow: hidden;
+  isolation: isolate;
+}
+.micro-zoom > img,
+.micro-zoom > .micro-zoom__target {
+  transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 320ms ease;
+  will-change: transform;
+}
+.micro-zoom:hover > img,
+.micro-zoom:hover > .micro-zoom__target {
+  transform: scale(1.04);
+  filter: saturate(1.08);
+}
+
+/* --- Focus ring: stronger than browser default, accent-tinted --- */
+.micro-focus {
+  transition: box-shadow 180ms ease;
+}
+.micro-focus:focus-visible,
+button.micro-focus:focus-visible,
+a.micro-focus:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--tmpl-bg, white),
+    0 0 0 4px var(--tmpl-accent, currentColor);
+  border-radius: 4px;
+}
+
+/* --- Tactile row: list rows get subtle bg + nudge-x on hover --- */
+.micro-row {
+  transition: background-color 160ms ease, padding-left 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.micro-row:hover {
+  background-color: color-mix(in srgb, var(--tmpl-accent, currentColor) 6%, transparent);
+  padding-left: 0.5rem;
+}
+
+/* --- Reduced motion: kill all transforms, keep color transitions --- */
+@media (prefers-reduced-motion: reduce) {
+  .micro-lift,
+  .micro-press,
+  .micro-tilt,
+  .micro-glow::before,
+  .micro-shine::after,
+  .micro-nudge > .micro-nudge__arrow,
+  .micro-nudge-arrow,
+  .micro-zoom > img,
+  .micro-zoom > .micro-zoom__target {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .micro-glow:hover::before { opacity: 0.6; }
+  .micro-shine:hover::after { transform: translateX(0); }
+  .micro-underline { background-size: 100% 1px; }
+  .micro-zoom:hover > img,
+  .micro-zoom:hover > .micro-zoom__target { transform: none; }
+  .micro-row:hover { padding-left: 0; }
+}

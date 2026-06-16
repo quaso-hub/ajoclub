@@ -8,6 +8,13 @@ export default defineNuxtConfig({
     '@nuxt/ui',
   ],
 
+  // Phase 4.2 — enable View Transitions API for smooth page nav.
+  // Browsers without support fall back to default no-transition behavior
+  // (no JS error, no broken UX). Modern Chrome/Edge/Safari support natively.
+  experimental: {
+    viewTransition: true,
+  },
+
   colorMode: {
     preference: 'system',
     fallback: 'light',
@@ -32,6 +39,9 @@ export default defineNuxtConfig({
         },
       ],
     },
+    // Phase 4.2 — named page transitions so CSS can target by name
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
   },
 
   routeRules: {

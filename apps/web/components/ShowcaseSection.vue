@@ -68,14 +68,17 @@ const brandStories: Record<string, string> = {
           v-for="template in filteredTemplates"
           :key="template.slug"
           :to="`/templates/${template.slug}`"
-          class="group rounded-xl border border-(--ui-border) bg-(--ui-bg) overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 block"
+          class="group micro-lift micro-zoom rounded-xl border border-(--ui-border) bg-(--ui-bg) overflow-hidden block"
         >
-          <div class="h-40 sm:h-44 relative overflow-hidden" :style="{ '--accent': template.accentColor }">
+          <div
+            class="h-40 sm:h-44 relative overflow-hidden"
+            :style="{ '--accent': template.accentColor, 'view-transition-name': `hero-${template.slug}` }"
+          >
             <ScenePreview
               :preset="template.scenePreset"
               :accent="template.accentColor"
               :label="`${template.title} preview`"
-              class="absolute inset-0"
+              class="absolute inset-0 micro-zoom__target"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-(--ui-bg) via-transparent to-transparent" />
             <div class="absolute left-3 top-3">

@@ -258,7 +258,7 @@ function initBlob() {
         { label: 'FAQ', href: '#faq' },
       ]"
       accent="var(--tmpl-accent)"
-      style="glass"
+      variant="glass"
       :show-theme-toggle="false"
       force-mode="light"
     />
@@ -270,7 +270,7 @@ function initBlob() {
       <!-- ============================== -->
       <section
         class="lintas-hero"
-        :style="{ '--section-bg': washes.hero, background: washes.hero }"
+        :style="{ '--section-bg': washes.hero, background: washes.hero, 'view-transition-name': 'hero-saas-3' }"
       >
         <canvas ref="blobCanvasRef" class="lintas-hero__blob" />
         <div class="lintas-hero__content">

@@ -148,8 +148,9 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
           <h3 class="tmpl-cart__title">Keranjang</h3>
           <button
             type="button"
-            class="tmpl-cart__close"
+            class="tmpl-cart__close micro-press micro-focus"
             aria-label="Tutup keranjang"
+            data-micro="ripple"
             @click="close"
           >
             <UIcon name="i-lucide-x" class="w-5 h-5" />
@@ -170,14 +171,14 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
               <p v-if="it.variant" class="tmpl-cart__item-variant">{{ it.variant }}</p>
               <p class="tmpl-cart__item-price">{{ currency }}{{ formatRp(it.price * it.qty) }}</p>
               <div class="tmpl-cart__item-qty">
-                <button type="button" class="tmpl-cart__qty-btn" aria-label="Kurangi" @click="setQty(it.id, it.qty - 1)">
+                <button type="button" class="tmpl-cart__qty-btn micro-press" aria-label="Kurangi" data-micro="ripple" @click="setQty(it.id, it.qty - 1)">
                   <UIcon name="i-lucide-minus" class="w-3 h-3" />
                 </button>
                 <span class="tmpl-cart__qty-val">{{ it.qty }}</span>
-                <button type="button" class="tmpl-cart__qty-btn" aria-label="Tambah" @click="setQty(it.id, it.qty + 1)">
+                <button type="button" class="tmpl-cart__qty-btn micro-press" aria-label="Tambah" data-micro="ripple" @click="setQty(it.id, it.qty + 1)">
                   <UIcon name="i-lucide-plus" class="w-3 h-3" />
                 </button>
-                <button type="button" class="tmpl-cart__item-remove" aria-label="Hapus" @click="removeItem(it.id)">
+                <button type="button" class="tmpl-cart__item-remove micro-press" aria-label="Hapus" data-micro="ripple" @click="removeItem(it.id)">
                   Hapus
                 </button>
               </div>
@@ -200,15 +201,17 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
           </div>
           <button
             type="button"
-            class="tmpl-cart__checkout"
+            class="tmpl-cart__checkout micro-press micro-glow micro-shine"
             :style="{ background: accent }"
+            data-micro="ripple"
             @click="checkout"
           >
             Lanjut ke WhatsApp
           </button>
           <button
             type="button"
-            class="tmpl-cart__clear"
+            class="tmpl-cart__clear micro-press"
+            data-micro="ripple"
             @click="clear"
           >
             Kosongkan keranjang

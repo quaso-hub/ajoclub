@@ -88,8 +88,9 @@ function fmtPrice(n: number) {
     <div class="tmpl-filter__bar">
       <button
         type="button"
-        class="tmpl-filter__toggle"
+        class="tmpl-filter__toggle micro-press micro-focus"
         :aria-expanded="isOpen"
+        data-micro="ripple"
         @click="isOpen = !isOpen"
       >
         <UIcon name="i-lucide-sliders-horizontal" class="w-4 h-4" />
@@ -103,7 +104,7 @@ function fmtPrice(n: number) {
       <select
         v-if="showSort"
         :value="modelValue.sort"
-        class="tmpl-filter__sort"
+        class="tmpl-filter__sort micro-focus"
         @change="setSort(($event.target as HTMLSelectElement).value as FilterState['sort'])"
       >
         <option value="newest">Terbaru</option>
@@ -131,8 +132,9 @@ function fmtPrice(n: number) {
               v-for="option in group.options"
               :key="option"
               type="button"
-              class="tmpl-filter__chip"
+              class="tmpl-filter__chip micro-press micro-focus"
               :class="{ 'tmpl-filter__chip--active': (modelValue.groups[group.key] || []).includes(option) }"
+              data-micro="ripple"
               @click="toggleOption(group.key, option)"
             >
               {{ option }}
@@ -153,8 +155,8 @@ function fmtPrice(n: number) {
               :max="priceMax"
               :step="priceStep"
               :value="modelValue.priceMin ?? priceMin"
-              class="tmpl-filter__range-input"
-              @input="setPrice(Number(($event.target as HTMLInputElement).value), modelValue.priceMax ?? priceMax)"
+              class="tmpl-filter__range-input micro-focus"
+              @input="setPrice(Number(($event.target as HTMLSelectElement).value), modelValue.priceMax ?? priceMax)"
             />
             <label class="tmpl-filter__range-label">
               <span>Max</span>
@@ -166,15 +168,16 @@ function fmtPrice(n: number) {
               :max="priceMax"
               :step="priceStep"
               :value="modelValue.priceMax ?? priceMax"
-              class="tmpl-filter__range-input"
-              @input="setPrice(modelValue.priceMin ?? priceMin, Number(($event.target as HTMLInputElement).value))"
+              class="tmpl-filter__range-input micro-focus"
+              @input="setPrice(modelValue.priceMin ?? priceMin, Number(($event.target as HTMLSelectElement).value))"
             />
           </div>
         </section>
 
         <button
           type="button"
-          class="tmpl-filter__reset"
+          class="tmpl-filter__reset micro-press micro-focus"
+          data-micro="ripple"
           @click="reset"
         >
           Reset filter
